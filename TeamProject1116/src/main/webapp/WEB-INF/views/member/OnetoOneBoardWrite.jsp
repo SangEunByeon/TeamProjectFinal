@@ -7,75 +7,71 @@
     <title>1:1문의작성</title> 
 </head>
 <body> 
-      
-<!-- 메인헤더 -->
+  <!-- 메인헤더 -->
 <jsp:include page="/WEB-INF/views/MainHeader.jsp"/>
   
-       <!-- 마이페이지 -->
+  		<!-- 글쓰기 -->
         <div id="main">
             <div class="MyPage_Form">  
-                 <table>
+                <table>
                     <tr>
-                    <td>
-                        <div class="aside">
-                            <table  cellpadding="10px" cellspaing="10px">
-                                <p>마이페이지</p> 
-                            <tr>
-                                <td>
-                                    <div class="orderlist">
-                                    <a href="OrderList">주문내역</a> 
-                                    <span>&gt</span> 
-                                    </div>
-                                </td> 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="basket">
-                                    <a href="Basket">장바구니</a>
-    
-                                     <span>&gt</span> 
-                                    </div>
-                                </td> 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="review">
-                                    <a href="ProductReivew">상품후기</a>
+                    <td> 
+                        <div class="section">
+                            <div class="aside">
+                                <table  cellpadding="10px" cellspaing="10px">
+                                    <p>마이페이지</p> 
+                                <tr>
+                                    <td>
+                                        <div class="orderlist">
+                                        <a href="OrderList">주문내역</a> 
+                                        <span>&gt</span> 
+                                        </div>
+                                    </td> 
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="basket">
+                                        <a href="Basket">장바구니</a>
+        
+                                         <span>&gt</span> 
+                                        </div>
+                                    </td> 
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="review">
+                                        <a href="ProductReivew">상품후기</a>
+                                          <span>&gt</span> 
+                                        </div>
+                                    </td> 
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="point">
+                                        <a href="PointInfo">적립금</a>
+                                           <span>&gt</span> 
+                                        </div>
+                                    </td> 
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="ask">
+                                        <a href="OnetoOneBoard">1:1문의</a>
+                                         <span>&gt</span> 
+                                        </div>
+                                    </td> 
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <div class="my_info">
+                                    <a href="MyInfo">내정보</a>
                                       <span>&gt</span> 
                                     </div>
-                                </td> 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="point">
-                                    <a href="#">적립금</a>
-                                       <span>&gt</span> 
-                                    </div>
-                                </td> 
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="ask">
-                                    <a href="OnetoOneBoard">1:1문의</a>
-                                     <span>&gt</span> 
-                                    </div>
-                                </td> 
-                            </tr>
-                            <tr>
-                                <td>
-                                <div class="my_info">
-                                <a href="MyInfo">내정보</a>
-                                  <span>&gt</span> 
-                                </div>
-                                </td>
-                            </tr>
-                            </table>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="section">
-
-                            <div class="head_orderlist"> 
+                                    </td>
+                                </tr>
+                                </table>
+                            </div>
+                        <div class="head_orderlist"> 
                                 <h4>1:1문의</h4>   
                                 
                                 <!-- 상품명 -->  
@@ -105,7 +101,7 @@
                                             <div class="input-group review-id" >
                                                 <span>아이디</span> 
                                             <div class="select-box"> 
-                                            <input class="form-control" type="text" name="user_id" value="<%=session.getAttribute("sessionID")%>" readonly>    
+                                            <input class="form-control" type="text" name="user_id">    
                                             </div>
                                             </div>
                                         </td> 
@@ -153,14 +149,14 @@
                                     </tr> 
                             </table>
                             </form>
-   							</div>
-                            </div>
-                    	</td>
-                	</tr>
-               	</table> 
-            </div> 
-        </div>    
-        
+   							</div> 
+	                    </div>
+	                    </td>
+	                </tr>
+	               </table> 
+	        </div> 
+	    </div>     
+    
 <!-- 메인푸터 -->
 <jsp:include page="/WEB-INF/views/MainFooter.jsp"/>
  

@@ -1,0 +1,168 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+  
+<html>
+<head> 
+<link rel="stylesheet" href="css/member/onetooneboardwrite.css">
+    <title>1:1문의작성</title> 
+</head>
+<body> 
+      
+<!-- 메인헤더 -->
+<jsp:include page="/WEB-INF/views/MainHeader.jsp"/>
+  
+       <!-- 마이페이지 -->
+        <div id="main">
+            <div class="MyPage_Form">  
+                 <table>
+                    <tr>
+                    <td>
+                        <div class="aside">
+                            <table  cellpadding="10px" cellspaing="10px">
+                                <p>마이페이지</p> 
+                            <tr>
+                                <td>
+                                    <div class="orderlist">
+                                    <a href="OrderList">주문내역</a> 
+                                    <span>&gt</span> 
+                                    </div>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="basket">
+                                    <a href="Basket">장바구니</a>
+    
+                                     <span>&gt</span> 
+                                    </div>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="review">
+                                    <a href="ProductReivew">상품후기</a>
+                                      <span>&gt</span> 
+                                    </div>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="point">
+                                    <a href="#">적립금</a>
+                                       <span>&gt</span> 
+                                    </div>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="ask">
+                                    <a href="OnetoOneBoard">1:1문의</a>
+                                     <span>&gt</span> 
+                                    </div>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                <div class="my_info">
+                                <a href="MyInfo">내정보</a>
+                                  <span>&gt</span> 
+                                </div>
+                                </td>
+                            </tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="section">
+
+                            <div class="head_orderlist"> 
+                                <h4>1:1문의</h4>   
+                                
+                                <!-- 상품명 -->  
+                                <form action="OnetoOnewriteAction" method="post" name="onewrite">
+                                <table>
+                               			 <input type="hidden" name="o_ans_check2" value="${dto.o_ans_check}" >
+                                		  <input type="hidden" name="o_ans_check" value="미등록" >
+                                    <tr>
+                                        <td> 
+                                        <div class="input-group choose-product">  
+                                            <span>문의유형</span>
+                                        <div class="select-box-type"> 
+                                        <select class="custom-select" id="inputGroupSelect04" name="o_type">
+                                        <option selected value="배송지연/불만">배송지연/불만</option>
+                                        <option value="교환문의">교환문의</option>
+                                        <option value="반품문의">반품문의</option>
+                                        <option value="상품손상">상품손상</option>
+                                        <option value="주문/결제 문의">주문/결제 문의</option>
+                                        <option value="입고 문의">입고 문의</option>
+                                        <option value="기타">기타</option> 
+                                        </select> 
+                                        </div>
+                                        </td> 
+                                    </tr>
+                                    <tr>
+                                        <td> 
+                                            <div class="input-group review-id" >
+                                                <span>아이디</span> 
+                                            <div class="select-box"> 
+                                            <input class="form-control" type="text" name="user_id" value="<%=session.getAttribute("sessionID")%>" readonly>    
+                                            </div>
+                                            </div>
+                                        </td> 
+                                    </tr>
+                                    <tr>
+                                        <td> 
+                                            <div class="input-group phone-num" >
+                                                <span>휴대폰</span>   
+                                            <div class="select-box"> 
+                                            <input class="form-control" type="text" name="o_phone" >    
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                <label class="form-check-label" for="exampleCheck1">휴대폰으로 알림받기</label>
+                                              </div>
+                                            </div>
+                                        </td> 
+                                    </tr>
+                                       <tr>
+                                        <td> 
+                                            <div class="input-group o_title">
+                                                <span>제목</span> 
+                                            <div class="select-box o_title_box"> 
+                                            <input class="form-control" type="text" name="o_title" >    
+                                            </div>
+                                            </div>
+                                        </td> 
+                                     </tr>
+                                    <tr>
+                                        <td> 
+                                            <div class="input-group phone-num">
+                                                <span>내용</span> 
+                                                <div class="text-box"> 
+                                                <textarea name="o_content_Q" cols="75" rows="10" placeholder="상품, 서비스에 대한 이용 후기를 남겨주세요" style="border: 1px solid rgb(206, 206, 206);"></textarea>
+                                            </div>
+                                            </div>
+                                        </td> 
+                                    </tr>
+                                    <tr>
+                                        <td> 
+                                            <div class="product-review-save">
+                                            <button type="submit" class="btn btn-secondary">완료</button>
+                                            </div>
+                                        </td> 
+                                    </tr> 
+                            </table>
+                            </form>
+   							</div>
+                            </div>
+                    	</td>
+                	</tr>
+               	</table> 
+            </div> 
+        </div>    
+        
+<!-- 메인푸터 -->
+<jsp:include page="/WEB-INF/views/MainFooter.jsp"/>
+ 
+</body>
+</html>

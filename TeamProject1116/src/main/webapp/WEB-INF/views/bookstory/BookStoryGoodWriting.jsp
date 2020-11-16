@@ -44,19 +44,7 @@
                            <td class="text_p"><span>${count}</span></td>
                        </tr> 
                    </table>
-               	</div>
-                <div class="info-text">
-                   <table>
-                       <tr class="aside_box"> 
-                           <td class="text_p"><span style="text-align: center">로그인을해주세요</span></td>
-                       </tr>
-                       <tr class="aside_box2">
-                           <td class="text_p"><span>회원수</span></td>
-                           <td class="text_p"><span>${count}</span></td>
-                       </tr> 
-                   </table>
-               	</div>
-                 
+               	</div>  
                 <div>
                     <input type="button" class="btn btn-warning" value="글쓰기" name="write" onclick="writeReturn()"> 
                 </div> 

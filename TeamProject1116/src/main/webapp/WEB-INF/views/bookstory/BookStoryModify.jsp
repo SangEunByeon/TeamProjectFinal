@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>
+<%@ page import="com.study.springboot.dto.BookStoryBoardDto" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%
+	BookStoryBoardDto content_view=(BookStoryBoardDto)session.getAttribute("content_view"); 
+%>
    
 <!DOCTYPE html>
 <html>
@@ -12,7 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
  
-    <title>북스토리 글쓰기</title> 
+    <title>북스토리 글수정</title> 
 	 
 <style> 
 .note-modal-backdrop{
@@ -115,8 +120,8 @@ position:relative;}
         <div id="main">
             <div class="write_box" id="pannel1">
             <div style="width: 60%; margin: auto;">
-                <form method="post" action="BookStoryWriteAction" name="write" onsubmit="return checkValue()"> 
-                    <input type="hidden" name="profile_img" value="${dto.book_profile}"> 
+                <form method="post" action="BookStoryModifyAction" name="modify" onsubmit="return checkValue()"> 
+                 	<input type="hidden" name="idx" value="${content_view.idx}"> 
                 <br/>
                 <br/>
                     <table>
@@ -124,15 +129,17 @@ position:relative;}
                             <td class="title_2">
                                 <span>카테고리</span>
                             </td>
-                            <td>
-                            <div class="form-group board_category text_form"> 
-                                <select class="form-control" id="bs_category" name="bs_category">
-                                <option selected>북스토리,소통</option>
-                                <option>한줄서평</option>
-                                <option>책읽고,리뷰남기기</option>
-                                <option>좋은글귀 남기기</option>
-                                </select>
-                            </div>
+                            <td> 
+                            <!-- 중복된 이름 제거 -->
+                            <div class="form-group board_category text_form" >  
+                                <select class="form-control" id="bs_category" name="bs_category">    
+                                 <option value="${content_view.bs_category}"></option>
+                                <option value="${content_view.bs_category}">북스토리</option>
+                                <option value="${content_view.bs_category}">한줄서평</option>
+                                <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
+                                <option value="${content_view.bs_category}">좋은글귀 남기기</option>  
+                                </select> 
+                            </div>  
                             </td>
                         </tr>  
                         <tr>
@@ -140,14 +147,14 @@ position:relative;}
                                 <span>제목</span>
                             </td> 
                             <td class="text_form2">  
-                            <input class="form-control form-control-lg" type="text" placeholder="제목을 입력해주세요" name="bs_title">
+                            <input class="form-control form-control-lg" type="text" value="${content_view.bs_title}" name="bs_title">
                             </td>
                         </tr> 
                     </table> 
                     <br/><br/>
-                    <textarea id="summernote" name="bs_content" style="z-index: 1;"></textarea> 
+                    <textarea id="summernote" name="bs_content" style="z-index: 1;">${content_view.bs_content}</textarea> 
                     <div  style="margin-top:10px; float:right"> 
-                    <input type="submit" class="btn btn-secondary" value="글작성" data-toggle="modal" data-target="#basicModal" >
+                    <input type="submit" class="btn btn-secondary" value="수정하기" data-toggle="modal" data-target="#basicModal" >
                     <input type="button" class="btn btn-secondary" value="취소" onclick="goMain()"> 
                     </div>
                 </form>
@@ -161,7 +168,9 @@ position:relative;}
 	</div>     
 
     <script>
-		function goMain(){location.href="BookStoryMain"}  
+		function goMain(){location.href="BookStoryView"}   
+		$("#bs_category option:selected").text("${content_view.bs_category}") 
+		
     </script>
 </body>
 </html>

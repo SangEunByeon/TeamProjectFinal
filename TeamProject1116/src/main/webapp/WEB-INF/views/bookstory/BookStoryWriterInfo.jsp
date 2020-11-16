@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
  <%
  String id = (String) session.getAttribute("sessionID"); 
@@ -155,8 +154,7 @@
                  <table id="member_list"  class="table table-striped view_box "> 
                      <tr class="one-list-title ">
                          <th scope="col" style="width: 5%;" >번호</th> 
-                         <th scope="col" style="width: 10%;" >이미지</th> 
-                         <th scope="col" style="width: 40%;" >제목</th>
+                         <th scope="col" style="width: 50%;" >제목</th>
                          <th scope="col" style="width: 10%;" >작성자</th> 
                          <th scope="col"  style="width: 10%;">작성일</th> 
                          <th scope="col"  style="width: 5%;">조회수</th> 
@@ -164,19 +162,6 @@
                      <c:forEach var="dto" items="${ list }" > 
                      <tr class="view_box_1">  
                          <td>${dto.idx}</td>
-                         
-                         
-                       <c:set var="string1" value="${dto.bs_content}" /> 
-					   <c:forEach items="${fn:split(string1,'>')}" var="item">
-					   <c:if test="${fn:contains(item,'img')}">
-					   <c:set var="string2" value="${fn:substringAfter(item,'style')}" />
-					   <c:set var="string3" value='=width:200px;height:300px;"' />
-					   <c:set var="image" value="${fn:replace(item,string2,string3) }" />
-					   <td><a href="BookStoryView?idx=${dto.idx}" >${image}</a></td>
-					   </c:if>
-					   </c:forEach>
-					   
-                         
                          <td><a href="BookStoryView?idx=${dto.idx}">${dto.bs_title}</a></td>
                          <td>${dto.bs_user_id}</td>
                            <fmt:formatDate var="reg" value="${dto.reg}"  pattern="yyyy.MM.dd"/>
@@ -194,27 +179,12 @@
 	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>
      
  	<!-- 글쓰기  -->
-     <script type="text/javascript"> 
+     <script> 
       function writeReturn() {
    		alert("로그인해주세요");
    		location.href="LoginForm"
    	 }
       function writeReview() {location.href="BookStoryWrite"} 
-      function goList(){   
-          var category_list = document.getElementById("category").text;
-           console.log(category_list);
-          if(category_list == '북스토리,소통'){ 
-               location.href="BookStoryCommunication";
-          }else if(category_list == '좋은글귀 남기기'){
-             location.href="BookStoryGoodWriting";
-          }else if(category_list == '한줄서평'){
-             location.href="BookStoryOneLineReivew";
-              }else if(category_list == '책읽고,리뷰남기기'){
-                   location.href="BookStoryReadReivew"
-              }else if(category_list == '작가정보'){
-                  location.href="BookStoryWriterInfo"}
-        }     
-      
     </script>
 </body>
 </html>

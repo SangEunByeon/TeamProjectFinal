@@ -56,5 +56,14 @@
     </update> 
     
     
+   <update id="BookstoryRelpyDao" parameterType="com.study.springboot.dto.BookStoryBoardDto">
+       update bookstory_board set reply=#{reply} where idx=#{idx}
+   </update>
+   
+    <select id="bookstoryReplyViewDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
+            select * from bookstory_board where bs_user_id=#{bs_user_id} 
+     </select>  
+   
+    
       
 </mapper>

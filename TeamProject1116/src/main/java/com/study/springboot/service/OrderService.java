@@ -62,11 +62,13 @@ public class OrderService implements IOrderService{
 	}
 	
 	@Override
-	public List<OrderDto> listbyUser(HttpServletRequest request) {
+	public List<OrderDto> listbyUser(HttpServletRequest request,Criteria cri) {
 		HttpSession session = request.getSession();
+		HashMap <String,Object> map = new HashMap <String,Object>();
 		String sessionID = (String)session.getAttribute("sessionID");
-		List<OrderDto> list = dao.listbyUserDao(sessionID);
-		return list;
+		map.put("id",sessionID);
+		map.put("cri",cri);
+		return dao.listbyUserDao(map);
 	}
 	
 	@Override
@@ -118,6 +120,13 @@ public class OrderService implements IOrderService{
 		@Override
 		public List<OrderDto> getList(Criteria cri) {
 			return dao.getListWithPaging(cri);
+		}
+
+		@Override
+		public int countMemberOrder(HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String sessionID = (String)session.getAttribute("sessionID");
+			return dao.countMemberOrderDao(sessionID);
 		}
 		
 	

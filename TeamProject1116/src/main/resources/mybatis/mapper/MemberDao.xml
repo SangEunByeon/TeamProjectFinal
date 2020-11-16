@@ -10,8 +10,8 @@
 	  	<selectKey keyProperty="idx" resultType="int" order="BEFORE">
            select book_member_seq.nextval FROM DUAL
      	</selectKey>
-	      insert into book_member (idx, id, password, name, phone, mail1, mail2, address1, address2, address3, address4, book_profile, reg)
-	           values (#{idx}, #{id}, #{password}, #{name}, #{phone}, #{mail1}, #{mail2}, #{address1},#{address2},#{address3},#{address4},#{book_profile}, #{reg})
+	      insert into book_member (idx, id, password, name, phone, mail1, mail2, address1, address2, address3, address4, book_profile,point, reg)
+	           values (#{idx}, #{id}, #{password}, #{name}, #{phone}, #{mail1}, #{mail2}, #{address1},#{address2},#{address3},#{address4},#{book_profile},#{point},#{reg})
 	</insert>
 	
 	<select id="idCheckDao" resultType="String" >

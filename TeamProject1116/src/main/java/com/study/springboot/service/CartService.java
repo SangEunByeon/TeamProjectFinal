@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.study.springboot.dao.IProductDao;
 import com.study.springboot.dto.CartDto;
+import com.study.springboot.dto.Criteria;
 
 @Primary
 @Service
@@ -53,7 +54,7 @@ public class CartService implements ICartService{
 	}
 
 	@Override
-	public List<CartDto> getCart(HttpServletRequest request) {
+	public List<CartDto> getCart(HttpServletRequest request,Criteria cri) {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("sessionID");
 		List<CartDto> list = dao.getCartDao(user_id);

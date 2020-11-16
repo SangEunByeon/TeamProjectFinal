@@ -314,8 +314,18 @@ public class MyController_Y {
 	//주문목록 폼
 	@RequestMapping("/OrderList")
 	public String OrderList(HttpServletRequest request,Model model) {
-		List<OrderDto> list = order_service.listbyUser(request);
-		model.addAttribute("list",list);
+		Criteria cri = new Criteria(1,7);
+		int bookcnt=order_service.countMemberOrder(request);
+		int allPageNum; 
+		if(bookcnt%7==0) {
+			allPageNum =bookcnt/7;
+		}else {
+			allPageNum =bookcnt/7+1; 
+		}
+		request.setAttribute("list",order_service.listbyUser(request, cri));
+		cri.setAllPageNum(allPageNum);
+		request.setAttribute("allPageNum", allPageNum);
+		
 		return "member/OrderList";} 
 	
 	//주문 기간 검색 로직
@@ -340,7 +350,8 @@ public class MyController_Y {
 	//장바구니 폼
 	@RequestMapping("/Basket")
 	public String Basket(HttpServletRequest request,Model model) {
-		List<CartDto> list = cart_service.getCart(request);
+		Criteria cri = new Criteria(1,1);
+		List<CartDto> list = cart_service.getCart(request,cri);
 		model.addAttribute("list",list);
 		return "member/Basket";
 	}
@@ -788,8 +799,18 @@ public class MyController_Y {
 	@RequestMapping("/OnetoOneBoard")
 	public String OneBoard(HttpServletRequest request) {
 		String user_id=(String)request.getSession().getAttribute("sessionID");//세션아이디가 유저아이디랑 동일
-		ArrayList<OnetoOneBoardDto> list=oneBoardservice.list(user_id);
-		request.getSession().setAttribute("list", list); 
+		Criteria cri = new Criteria(1,7);
+		int bookcnt=oneBoardservice.countMember(user_id);
+		int allPageNum; 
+		if(bookcnt%7==0) {
+			allPageNum =bookcnt/7;
+		}else {
+			allPageNum =bookcnt/7+1; 
+		}
+		request.setAttribute("list",oneBoardservice.list(user_id,cri));
+		cri.setAllPageNum(allPageNum);
+		request.setAttribute("allPageNum", allPageNum);
+		
  
 	return "member/OnetoOneBoard";
 	}  
@@ -1150,6 +1171,80 @@ public class MyController_Y {
 			request.setAttribute("allPageNum", allPageNum);
 			return "admin/WithdrawMember";
 		}
+		//사용자 폼 >  주문목록 페이징
+		@RequestMapping("/page10")
+		public String OrderListpaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,7);
+			request.setAttribute("list",order_service.listbyUser(request, cri));
+			int bookcnt=order_service.countMemberOrder(request);
+			int allPageNum; 
+			if(bookcnt%7==0) {
+				allPageNum =bookcnt/7;
+			}else {
+				allPageNum =bookcnt/7+1; 
+			}
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/OrderList";
+		}
+		//사용자 폼 >  장바구니 페이징
+		@RequestMapping("/page11")
+		public String Basketpaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,7);
+			request.setAttribute("list",order_service.listbyUser(request, cri));
+			int bookcnt=order_service.countMemberOrder(request);
+			int allPageNum; 
+			if(bookcnt%7==0) {
+				allPageNum =bookcnt/7;
+			}else {
+				allPageNum =bookcnt/7+1; 
+			}
+			
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/OrderList";
+		}
+		//사용자 폼 >  포인트 페이징
+				@RequestMapping("/page12")
+				public String PointInfopaging(HttpServletRequest request,Model model) {
+					String s_no=request.getParameter("no");
+					 HttpSession session = request.getSession();
+				     String id = (String)session.getAttribute("sessionID");
+					int no = Integer.parseInt(s_no);
+					Criteria cri = new Criteria(no,10);
+					request.setAttribute("list",point_service.pointList(id, cri));
+					int bookcnt=point_service.count(id);
+					int allPageNum; 
+					if(bookcnt%10==0) {
+						allPageNum =bookcnt/10;
+					}else {
+						allPageNum =bookcnt/10+1; 
+					}
+					model.addAttribute("point",member_service.getUserInfo(id));
+					request.setAttribute("allPageNum", allPageNum);
+					return "member/PointInfo";
+				}
+				//사용자 폼 >  1:1문의 페이징
+				@RequestMapping("/page13")
+				public String OnetoOneBoardpaging(HttpServletRequest request,Model model) {
+					String s_no=request.getParameter("no");
+					HttpSession session = request.getSession();
+					String id = (String)session.getAttribute("sessionID");
+					int no = Integer.parseInt(s_no);
+					Criteria cri = new Criteria(no,7);
+					request.setAttribute("list",oneBoardservice.list(id, cri));
+					int bookcnt=oneBoardservice.countMember(id);
+					int allPageNum; 
+					if(bookcnt%7==0) {
+						allPageNum =bookcnt/7;
+					}else {
+						allPageNum =bookcnt/7+1; 
+					}
+					request.setAttribute("allPageNum", allPageNum);
+					return "member/OnetoOneBoard";
+				}
 	//관리자 폼 > 상품관리 화면 > 상품 검색
 	@RequestMapping("/SearchProduct")
 	public String SearchProduct(HttpServletRequest request,Model model) {
@@ -1313,7 +1408,15 @@ public class MyController_Y {
 		model.addAttribute("list",list);
 	return "admin/OnetoOneBoard_A";
 	}	
-		
+	  @RequestMapping("/NoAnswer_user") 
+	   public String NoAnswer_user(HttpServletRequest request,Model model,OnetoOneBoardDto oneboardDto) { 
+	      String check="미등록";
+	      HttpSession session=request.getSession();
+	      String user_id=(String)session.getAttribute("sessionID"); 
+	      List<OnetoOneBoardDto> list=oneBoardservice.noanswer_userlist(check,user_id);
+	      model.addAttribute("list",list);
+	      return "member/OnetoOneBoard"; 
+	   }    
     //관리자  > 1:1문의 리스트 > 1:1문의 글보기
  	@RequestMapping("/OnetoOneBoardView_A")
  	public String OnetoOneBoardView_A(HttpServletRequest request) {    
@@ -1387,9 +1490,11 @@ public class MyController_Y {
 	//관리자 폼 > 게시판 > 검색 기능
 	@RequestMapping("/board_search")
 	public String board_search(HttpServletRequest request,Model model){
-	System.out.println(request.getParameter("check_category"));
+
 	String category=(request.getParameter("check_category"));
 	String keyword=request.getParameter("keyword"); 
+	int allPageNum =0;	
+	request.setAttribute("allPageNum", allPageNum);
 	request.setAttribute("list",oneBoardservice.search(category,keyword));
 	return "admin/OnetoOneBoard_A"; }
 	
@@ -1772,8 +1877,18 @@ public String stateAlign(HttpServletRequest request,Model model){
 	public String PointInfo(HttpServletRequest request,Model model) throws Exception{
 	 HttpSession session = request.getSession();
       String id = (String)session.getAttribute("sessionID");
+      Criteria cri = new Criteria(1,10);
+		int bookcnt=point_service.count(id);
+		int allPageNum; 
+		if(bookcnt%10==0) {
+			allPageNum =bookcnt/10;
+		}else {
+			allPageNum =bookcnt/10+1; 
+		}
+		request.setAttribute("list",point_service.pointList(id,cri));
+		cri.setAllPageNum(allPageNum);
+		request.setAttribute("allPageNum", allPageNum);
       model.addAttribute("point",member_service.getUserInfo(id));
-	  model.addAttribute("list",point_service.pointList(id));
 	 return"member/PointInfo";
 	 }
 	 
@@ -1804,6 +1919,18 @@ public String stateAlign(HttpServletRequest request,Model model){
 		model.addAttribute("url","ManageMember");
 		return "redirect";  
 	}
+	//1:1 문의 사용자 검색 폼
+    @RequestMapping("/complain")
+    public String complain(HttpServletRequest request,Model model){  
+       HttpSession session=request.getSession();
+     String user_id=(String)session.getAttribute("sessionID");
+       String category=request.getParameter("category");
+       String keyword=request.getParameter("keyword");
+       request.setAttribute("list",oneBoardservice.search_user(user_id,category, keyword));
+       System.out.println("user_id"+user_id);
+       return "member/OnetoOneBoard"; 
+    }  
+
 	//책 검색
 	@RequestMapping("/bookSearch")
 	public String bookSearch(HttpServletRequest request,Model model){

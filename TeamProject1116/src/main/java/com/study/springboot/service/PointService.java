@@ -1,6 +1,7 @@
 package com.study.springboot.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.study.springboot.dao.IMemberDao;
 import com.study.springboot.dao.IOrderDao;
 import com.study.springboot.dao.IPointDao;
+import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.PointDto;
@@ -55,9 +57,11 @@ public class PointService implements IPointService{
 
 	}
 	@Override 
-	public List<PointDto> pointList(String id) {
-		
-		return PointDao.pointListDao(id);
+	public List<PointDto> pointList(String id,Criteria cri) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		map.put("id",id);
+		map.put("cri",cri);
+		return PointDao.pointListDao(map);
 	}
 	@Override 
 	public int cancelPoint(HttpServletRequest request) {
@@ -79,6 +83,10 @@ public class PointService implements IPointService{
 		PointDto.setReg(new Date());
 		int nResult = PointDao.cancelPointDao(PointDto); 
 		return nResult; 
+	}
+	@Override
+	public int count(String id) {
+		return PointDao.countDao(id);
 	}
 
 } 

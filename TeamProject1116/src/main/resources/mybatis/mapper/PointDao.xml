@@ -21,7 +21,20 @@
 	           values (#{idx}, #{id_member}, #{pt_content}, #{pt_move}, #{pt_result},#{reg})
 	</insert>
 	
-	<select id="pointListDao" resultType="com.study.springboot.dto.PointDto"> 
-		select * from POINT where id_member = #{param1} order by idx desc
+	<select id="countDao" resultType="int">
+    select count(*) from POINT where id_member=#{param1}
+    </select>
+    
+    <select id="pointListDao" resultType="com.study.springboot.dto.PointDto">
+	   <![CDATA[ 
+     select idx,pt_move,id_member,pt_content,pt_result,reg
+     from ( 
+     select 
+     rownum rn, idx,pt_move,id_member,pt_content,pt_result,reg
+     from POINT
+     where rownum <= #{cri.pageNum} * #{cri.amount} AND id_member=#{id} 
+     order by reg desc) 
+     where rn > (#{cri.pageNum} -1) * #{cri.amount} AND id_member=#{id} 
+     ]]>
 	</select>
 </mapper>

@@ -525,7 +525,7 @@
 				</table>
 				
 				</div>
-					<div>
+					<div style="float:left; width:100%;">
 				<h3>
 					<strong>개인정보 수집/ 제공 *</strong>
 					
@@ -596,5 +596,4 @@
 	<jsp:include page="/WEB-INF/views/MainFooter.jsp" />
 
 </body>
->>>>>>> Stashed changes
 </html>

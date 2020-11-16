@@ -151,8 +151,19 @@ font-size: 1.5ch;
                                      <input type="hidden" id="o_number" value="${list.o_number}">
                                 </tr> 
                                 </c:forEach>
-                                </table>
-                               
+                                </table>                     
+                               <nav aria-label="Page navigation example">
+			   <ul class="pagination justify-content-center">
+			    <%
+			    int allPageNum=(Integer)request.getAttribute("allPageNum");
+			    for(int i=1; i<=allPageNum; i++){
+   		    	   %>
+			     <li class="page-item"><a href="page10?no=<%=i%>" class="page-link"><%=i%></a></li>
+			       <%
+			     }
+			    %>    
+			  </ul> 
+			</nav>    
                              </div>    
                         </div>
                     </td>

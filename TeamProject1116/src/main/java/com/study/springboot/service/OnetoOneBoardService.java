@@ -1,6 +1,7 @@
 package com.study.springboot.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,11 @@ public class OnetoOneBoardService implements IOnetoOneBoardService{
 	}
 
 	@Override
-	public ArrayList<OnetoOneBoardDto> list(String user_id) {
-		ArrayList<OnetoOneBoardDto> list= oneBoardDao.listDao(user_id);
-		return list;
+	public List<OnetoOneBoardDto> list(String id,Criteria cri) {
+		HashMap <String,Object> map = new HashMap <String,Object>();
+		map.put("id",id);
+		map.put("cri",cri);
+		return oneBoardDao.listDao(map);
 	}
  
 	@Override
@@ -90,6 +93,11 @@ public class OnetoOneBoardService implements IOnetoOneBoardService{
 	@Override
 	public int count() {
 		return oneBoardDao.countDao();
+	}
+
+	@Override
+	public int countMember(String id) {
+		return oneBoardDao.countMemberDao(id);
 	}
 
 	

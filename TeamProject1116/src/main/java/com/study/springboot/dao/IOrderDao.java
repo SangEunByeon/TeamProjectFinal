@@ -13,12 +13,13 @@ public interface IOrderDao {
 	public int orderwriteDao(OrderDto dto);
 	public OrderDto orderlistDao(int o_number);
 	public List<OrderDto> listDao();
-	public List<OrderDto> listbyUserDao(String sessionID);
+	public List<OrderDto> listbyUserDao(HashMap <String,Object> map);
 	public List<OrderDto> stateviewDao(String o_state);
 	public int stateDao(String o_number,String o_state);
 	public int cancelOrderDao(int o_number);
 	public List<OrderDto> reviewToWriteListDao(String o_orderID, int review_state, int o_state);
 	public int countOrderDao();
+	public int countMemberOrderDao(String sessionID);
 	public int countstateOrderDao(String state);
 	public List<OrderDto> getListWithPaging(Criteria cri);
 	

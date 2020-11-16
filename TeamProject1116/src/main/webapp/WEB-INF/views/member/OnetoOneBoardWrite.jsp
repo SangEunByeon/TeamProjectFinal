@@ -144,7 +144,7 @@
                                         <div class="input-group review-id" >
                                                 <span>아이디</span> 
                                             <div class="select-box"> 
-                                            <input class="form-control" type="text" name="user_id"  id="user_id" onchange="check_id()">    
+                                            <input class="form-control" type="text" name="user_id"  id="user_id" onchange="check_id()" value="<%= session_id%>" readonly>    
                                             <span id="check"></span>
                                             </div>
                                             </div>

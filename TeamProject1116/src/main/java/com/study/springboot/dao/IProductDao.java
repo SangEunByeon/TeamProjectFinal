@@ -47,4 +47,11 @@ public interface IProductDao {
 	public List<ProductDto> BookSearchDao(String keyword);
 	public int CountSearchProductDao(String check_category, String searchName);
 	
+	
+	
+	//1116
+	public List<Product_QnA_Board_Dto> myProductQnAListDao(String sessionID);
+	public List<Product_QnA_Board_Dto> SearchmyProductQnADao(String category,String keyword);
+	public List<Product_QnA_Board_Dto> noAnswerQnADao(String id,String answerCheck);
+	
 } 

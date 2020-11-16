@@ -15,4 +15,10 @@ public interface IProductQnABoardService {
 	public ProductDto viewProductInfo(int p_number);
 	public int AnswerProductQuestion(HttpServletRequest request);
 	public int ProductAnswerDelete(HttpServletRequest request);
+	
+	
+	//1116 productQnA 목록
+	public List<Product_QnA_Board_Dto> myProductQnAList(HttpServletRequest request);
+	public List<Product_QnA_Board_Dto> SearchmyProductQnA(HttpServletRequest request);
+	public List<Product_QnA_Board_Dto> noAnswerQnA(HttpServletRequest request);
 }

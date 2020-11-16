@@ -171,6 +171,8 @@ display: inline;
 			<div class="maincontentswrapper3bottom">
 				<form action="ProductQnABoard">
 				  <table class="table table-striped">
+				  <input type="hidden" name="p_title" value="${dto.p_title}">
+				  <input type="hidden" name="p_writer" value="${dto.p_writer}">
 				  <input type="hidden" name="p_number" value="${dto.p_number}" >
 				  <input type="hidden" name="p_answer_state" value="미등록" >
 				  <td><textarea name="p_content" cols="70" rows="4" placeholder="내용을 입력하세요." style="font-size: 16px;"></textarea></td>

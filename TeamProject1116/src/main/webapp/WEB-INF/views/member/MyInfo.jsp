@@ -70,6 +70,14 @@
                                 </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                <div class="my_info">
+                                <a href="MyProductQnA">상품문의</a>
+                                  <span>&gt</span> 
+                                </div>
+                                </td>
+                            </tr>
                             </table>
                         </div>
                    <div class="head_orderlist"> 

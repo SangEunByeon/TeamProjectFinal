@@ -30,6 +30,8 @@ public class ProductQnABoardService implements IProductQnABoardService{
 		int p_number = Integer.parseInt(p_num);
 		String p_answer_state = request.getParameter("p_answer_state");
 		String p_content = request.getParameter("p_content");  //질문 내용
+		String p_title = request.getParameter("p_title");
+		String p_writer = request.getParameter("p_writer");
 		HttpSession session = request.getSession();
 		String sessionID=(String)session.getAttribute("sessionID");
 		Date date= new Date();
@@ -38,6 +40,8 @@ public class ProductQnABoardService implements IProductQnABoardService{
 			x=1;
 		}else if(sessionID!=null){
 		dto.setP_number(p_number);
+		dto.setP_title(p_title);
+		dto.setP_writer(p_writer);
 		dto.setP_content(p_content);
 		dto.setP_answer_state(p_answer_state);
 		dto.setId(sessionID);
@@ -86,6 +90,31 @@ public class ProductQnABoardService implements IProductQnABoardService{
 		 String p_answer_state="미등록";
 		 dao.ProductAnswerDeleteDao(idx, p_answer_state);
 		return 0;
+	}
+
+	
+	
+	
+	@Override
+	public List<Product_QnA_Board_Dto> myProductQnAList(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String sessionID=(String)session.getAttribute("sessionID");
+		return dao.myProductQnAListDao(sessionID);
+	}
+
+	@Override
+	public List<Product_QnA_Board_Dto> SearchmyProductQnA(HttpServletRequest request) {
+		String category = request.getParameter("category");
+		String keyword = request.getParameter("keyword");
+		return dao.SearchmyProductQnADao(category, keyword);
+	}
+
+	@Override
+	public List<Product_QnA_Board_Dto> noAnswerQnA(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String sessionID=(String)session.getAttribute("sessionID");
+		String answerCheck="미등록";
+		return dao.noAnswerQnADao(sessionID,answerCheck);
 	}
 	
 	

@@ -57,8 +57,8 @@ import com.study.springboot.service.IReviewBoardService;
 import com.study.springboot.service.MailService;
 
 import lombok.AllArgsConstructor;
-//@AllArgsConstructor
-//@Controller
+@AllArgsConstructor
+@Controller
 public class MyController_S {
 	@Autowired
 	FileUploadService fileUploadService;
@@ -90,6 +90,10 @@ public class MyController_S {
 	IReviewBoardService review_service;
 	@Autowired
 	IPointService point_service;
+	
+	
+	
+	
 	
 	/////구매프로세스//////
    @RequestMapping("/purchase")
@@ -776,6 +780,27 @@ public class MyController_S {
       	 } 
         return "redirect"; 
  	} 
+ 
+     @RequestMapping("/complain")
+     public String complain(HttpServletRequest request,Model model){  
+        HttpSession session=request.getSession();
+      String user_id=(String)session.getAttribute("sessionID");
+        String category=request.getParameter("category");
+        String keyword=request.getParameter("keyword");
+        request.setAttribute("list",oneBoardservice.search_user(user_id,category, keyword));
+        System.out.println("user_id"+user_id);
+        return "member/OnetoOneBoard"; 
+     }  
+
+   @RequestMapping("/NoAnswer_user") 
+   public String NoAnswer_user(HttpServletRequest request,Model model,OnetoOneBoardDto oneboardDto) { 
+      String check="미등록";
+      HttpSession session=request.getSession();
+      String user_id=(String)session.getAttribute("sessionID"); 
+      List<OnetoOneBoardDto> list=oneBoardservice.noanswer_userlist(check,user_id);
+      model.addAttribute("list",list);
+      return "member/OnetoOneBoard"; 
+   }    
         
     //1:1문의 폼
 	@RequestMapping("/OnetoOneBoard")
@@ -1803,6 +1828,30 @@ public String stateAlign(HttpServletRequest request,Model model){
 	request.setAttribute("list",product_service.BookSearch(request));
 	return "category/SearchBook"; }
 			
+	
+	//1116 마이큐엔에이
+	@RequestMapping("/MyProductQnA")
+	public String MyProductQnA(HttpServletRequest request,Model model) {
+		List<Product_QnA_Board_Dto> list=pro_qna_service.myProductQnAList(request);
+		model.addAttribute("list",list);
+		return "member/MyProductQnA";
+	}
+	
+	//1116 마이큐엔에이 search 기능
+	@RequestMapping("/SearchmyProductQnA")
+	public String SearchmyProductQnA(HttpServletRequest request,Model model) {
+		List<Product_QnA_Board_Dto> list=pro_qna_service.SearchmyProductQnA(request);
+		model.addAttribute("list",list);
+		return "member/MyProductQnA";
+	}
+	
+	//1116 마이큐엔에이 답변없는 문의 기능
+   @RequestMapping("/NoAnswer_qna") 
+   public String NoAnswer_qna(HttpServletRequest request,Model model) { 
+	  List<Product_QnA_Board_Dto> list=pro_qna_service.noAnswerQnA(request);
+	  model.addAttribute("list",list);
+      return "member/MyProductQnA"; 
+   }
 	
 
 

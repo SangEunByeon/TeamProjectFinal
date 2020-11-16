@@ -53,8 +53,9 @@
      <selectKey keyProperty="idx" resultType="int" order="BEFORE">
 	        select book_qna_seq.nextval FROM DUAL
 	 </selectKey>
-     insert into book_product_qna (idx, p_number, id, p_content, p_answer_state, reg) 
-     values(#{idx}, #{p_number}, #{id}, #{p_content}, #{p_answer_state}, #{reg})
+     insert into book_product_qna (idx, p_number, p_title, p_writer, id, p_content, p_answer_state, reg) 
+     values(#{idx}, #{p_number}, #{p_title}, #{p_writer}, #{id}, #{p_content}, #{p_answer_state}, #{reg})
+  
    </insert>
    
    <select id="viewProductQnABoardDao" parameterType="int" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
@@ -140,7 +141,7 @@
     	</choose>
     </select>
     
-	 <select id="BookSearchDao" resultType="com.study.springboot.dto.ProductDto">
+	<select id="BookSearchDao" resultType="com.study.springboot.dto.ProductDto">
     select * from book_product where p_writer like '%'||#{param1}||'%' or p_title like '%'||#{param1}||'%' order by p_title desc
     </select>
    
@@ -156,6 +157,31 @@
 	 ]]>
 	
 	</select>
+	
+	<select id="myProductQnAListDao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
+	select * from book_product_qna where id = #{param1} order by idx desc
+	</select>
+	
+	<select id="SearchmyProductQnADao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
+    select * from book_product_qna
+    	<choose>
+    	<when test='param1.equals("p_writer")'>
+    	where p_writer like '%'||#{param2}||'%' order by idx desc
+    	</when>
+    	<when test='param1.equals("p_title")'>
+    	where p_title like '%'||#{param2}||'%' order by idx desc
+    	</when>
+    	<when test='param1.equals("p_content")'>
+    	where p_content like '%'||#{param2}||'%' order by idx desc
+    	</when>
+    	</choose>
+    </select>
+    
+     <select id="noAnswerQnADao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
+  	      select * from book_product_qna where id = #{param1} and p_answer_state=#{param2} order by idx desc
+  	 </select>
+	
+	
    
    
 </mapper> 

@@ -64,8 +64,8 @@ import com.study.springboot.service.MailService;
 
 import lombok.AllArgsConstructor;
  
-@AllArgsConstructor
-@Controller
+//@AllArgsConstructor
+//@Controller
 public class MyController_M {
 	@Autowired
 	FileUploadService fileUploadService;
@@ -1799,7 +1799,7 @@ public String stateAlign(HttpServletRequest request,Model model){
 				 
 				
 				bookstoryDto.setIdx(idx);
-				bookstoryDto.setReply(reply);
+				//bookstoryDto.setReply(reply);
 				int nResult=bookstory_service.BookstoryRelpy(bookstoryDto); 
 				
 				

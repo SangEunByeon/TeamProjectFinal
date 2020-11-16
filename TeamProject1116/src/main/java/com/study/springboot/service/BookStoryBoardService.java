@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.springboot.FileUploadService;
 import com.study.springboot.dao.IBookStoryBoardDao;
 import com.study.springboot.dto.BookStoryBoardDto;
+import com.study.springboot.dto.BookStoryBoardReplyDto;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.ProductDto;
  
@@ -23,6 +24,9 @@ import com.study.springboot.dto.ProductDto;
 @Primary
 @Service
 public class BookStoryBoardService implements IBookStoryBoardService { 
+	
+	@Autowired
+	BookStoryBoardReplyDto replyDto;
 	
 	@Autowired
 	IBookStoryBoardDao bookstoryDao; 
@@ -80,6 +84,17 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		String bs_user_id=(String)session.getAttribute("sessionID");
 		String bs_category=request.getParameter("bs_category");
 		
+//		String eng_category="";
+//		if(bs_category.equals("북스토리,소통")) {
+//			eng_category="BookStoryCommunication";
+//		}else if(bs_category.equals("한줄서평")) {
+//			eng_category="BookStoryOneLineReivew";
+//		}else if(bs_category.equals("책읽고,리뷰남기기")) {
+//			eng_category="BookStoryReadReivew";
+//		}else if(bs_category.equals("좋은글귀 남기기")){
+//			eng_category="BookStoryGoodWriting";
+//		}
+		
 		String bs_title=request.getParameter("bs_title");
 		String bs_content=request.getParameter("bs_content");
 		String profile_img=request.getParameter("profile_img");
@@ -131,6 +146,18 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 	@Override
 	public int bookstoryLike_check(int idx) throws Exception { 
 		return bookstoryDao.bookstoryLike_checkDao(idx);
+	}
+
+	@Override
+	public int BookstoryRelpy(BookStoryBoardDto bookstoryDto) {
+		int nResult=bookstoryDao.BookstoryRelpyDao(bookstoryDto);
+		return nResult;
+	}
+
+	@Override
+	public List<BookStoryBoardDto> bookstoryReplyView(String bs_user_id) {
+		List<BookStoryBoardDto> list=bookstoryDao.bookstoryReplyViewDao(bs_user_id);
+		return list;
 	}
 	  
 	 

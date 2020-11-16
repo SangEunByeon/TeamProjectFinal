@@ -19,6 +19,8 @@ public interface IBookStoryBoardDao {
 	public List<MemberDto> getMainfileDao(); //메인 프로필- 아이디,회원수  
 	public int bookstoryHitDao(int idx) throws Exception; //조회수
 	public int bookstoryLike_checkDao(int idx) throws Exception; //좋아요기능 
+	public int BookstoryRelpyDao(BookStoryBoardDto bookstoryDto);//댓글달기
+	public List<BookStoryBoardDto> bookstoryReplyViewDao(String bs_user_id); //댓글보기
 	
 	public ArrayList<BookStoryBoardDto> bookstoryListDao(); //메인 전체 글목록 
 	public List<BookStoryBoardDto> bookStoryCategoryDao(String bs_category); //카테고리별 글 목록 

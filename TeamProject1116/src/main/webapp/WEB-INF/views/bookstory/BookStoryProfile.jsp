@@ -78,7 +78,7 @@ setTimeout(updateImage, 1000);
       function writeReturn() {
    		alert("로그인해주세요");
    	 }
-      function writeReview() {location.href="BookStoryWrite"} 
+      function goMain() {location.href="BookStoryMain"} 
     </script> 
 </body>
 </html>

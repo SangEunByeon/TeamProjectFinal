@@ -5,11 +5,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
     
 <%
-	 BookStoryBoardDto content_view=(BookStoryBoardDto)session.getAttribute("content_view");   
+	 BookStoryBoardDto content_view_bookstory=(BookStoryBoardDto)session.getAttribute("content_view_bookstory");   
+		System.out.println("bookstory content_view"+content_view_bookstory);
 	 String id = (String) session.getAttribute("sessionID"); 
 	 MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
+	 System.out.println("memberDto"+memberDto); 
 %>  
   
 <html>
@@ -22,9 +25,8 @@
 <!-- 북스토리메인헤더 -->
 <jsp:include page="/WEB-INF/views/BookStoryMainHeader.jsp"/>
 
+  <div id="main">
 
-   <div id="main">
-		
             <aside>
                 <div class="hr"></div>
                 <div class="info_head">
@@ -152,23 +154,19 @@
             </aside> 
             <section> 
              
-             <input type="hidden" name="idx" value="${content_view.idx}">
+             <input type="hidden" name="idx" value="${content_view_bookstory.idx}"> 
                 <div class="content_box">
                     <div class="category_text"> 
                     
-                    <a href="#" id="category" value="${content_view.bs_category}">${content_view.bs_category}</a>                   
+                    <a href="#" id="category" value="category">${content_view_bookstory.bs_category}</a>                   
                   
                      <div class="list_box">
                      <button type="button" class="btn btn-light">이전글</button>
                      <button type="button" class="btn btn-light">다음글</button>
                      <a name="top"></a><button type="button" class="btn btn-light" onclick="goList()">목록</button>
-                     <%if(id.equals("admin")){ %>
-                     <button type="button" class="btn btn-light" onclick="rewrite()">수정</button>
-                     <button type="button" class="btn btn-light" onclick="delete()">삭제</button>
-                     <%} %>
                     </div>
                         <div class="title_text" >
-                            <span>${content_view.bs_title}</span>
+                            <span>${content_view_bookstory.bs_title}</span>
                         </div>
                         
                         <table class="reply_box">
@@ -187,41 +185,52 @@
                                 <tr>
                                     <td>
                                         <div>
-                                            <img id="img" src="../uploadPro3_bookstory/${content_view.profile_img}" width="50px" height="50px">	
+                                            <img id="img" src="../uploadPro3_bookstory/${content_view_bookstory.profile_img}" width="50px" height="50px">	
                                         </div> 
                                     </td>
                                     <td>
                                         <td class="myinfo_box">
                                          <div class="id my_info_text"><span>아이디</span>
-                                            <span class="my_info_text2">${content_view.bs_user_id }</span>
+                                            <span class="my_info_text2">${content_view_bookstory.bs_user_id}</span>
                                         </div>  
-                                        <fmt:formatDate var="reg" value="${content_view.reg}"  pattern="yyyy.MM.dd HH:mm"/>
+                                        <fmt:formatDate var="reg" value="${content_view_bookstory.reg}"  pattern="yyyy.MM.dd HH:mm"/>
                                          <div  class="upload_content my_info_text"><span>등록일</span><span class="my_info_text2">${reg}</span></div> 
-                                         <div  class="upload_content hit_count"><span>조회수</span><span class="hit_count2">${content_view.hit}</span> </div>
-                                         </td>  
+                                         <div  class="upload_content hit_count"><span>조회수</span><span class="hit_count2">${content_view_bookstory.hit}</span> </div>
+                                    </td>  
                                 </tr>
                                 </table>
+                                
+                                
                                 <br />
                                 <hr />
                                 <!-- 콘텐츠 -->
                                 <div class="main_content_box">  
-									     <span class="content_view_m">${content_view.bs_content}</span>
+									     <span class="content_view_m">${content_view_bookstory.bs_content}</span>
                                 </div>
                            
                                 <!-- 댓글기능 -->  
-                                <div class="reply_bottom_box">
-                                    <span class="heart_img"><img src="image/bookstory/heart.png" width="30" height="30"></span> 
-                                        <a href=""><span class="heart_text">좋아요</span></a><span class="heart_text2">10</span>
+                                <div class="reply_bottom_box"> 
+
+                                    <span class="heart_img"><img src="image/bookstory/blankheart.png" width="30" height="30"></span> 
+                                   <a href="like_check"><span class="heart_text">좋아요</span></a><span class="heart_text2">${like_check}</span>
+                                       
+                                       
+                                        <a class="btn btn-outline-dark heart">
+								           <img id="heart" src="">
+								       </a>
+                                        
                                     <span class="reply_img2"><img src="image/bookstory/reply.png" width="30" height="30" ><a name="reply_start"></a></span> 
                                     <a href=""><span class="reply_text">댓글</span></a><span class="reply_text2">10</span>
                                 </div>
                                  <hr />
+                                 
+                               
                                  <div class='reply_bottom_box2'>
                                     <span class="reply_text3">댓글</span>
                                     <span class="reply_date">등록순</span>
                                     <span class="reply_f_upload">최신순</span>
                                  </div>
-
+								  
                                  <!-- 댓글 반복구간 -->
                                  <div class="reply_content">
                                      <table>
@@ -230,16 +239,19 @@
                                                 <div class="myInfo_img"><img src="https://placehold.it/80x80"></div> 
                                             </td>
                                             <td>
-                                                <span style="font-weight: 800;">닉네임</span>
+                                                <span style="font-weight: 800;">${list_bookstory.bs_user_id}</span>
                                               
                                                 <div class=" content_text">
-                                                    과연 죽음의 진실은 어떻게 될까?
+                                                    ${list_bookstory.reply}
                                                 </div>
                                                
                                             </td>
                                          </tr>
                                      </table>  
                                  </div>
+                                 
+                                 <form action="replyAction" method="post" name="reply">
+                                <input type="hidden" name="idx" value="${content_view_bookstory.idx}">
                                  <table>
                                     <tr>
                                         <td style="padding-top: 20px;">
@@ -251,42 +263,64 @@
                                         </td>
                                     </tr>
                                 </table>
+                                </form> 
                         </div> 
-                    </div>  
+                    </div> 
+                    
+                     
+                    <%
+                    String sessionID=(String)session.getAttribute("sessionID");
+                    if(content_view_bookstory.getBs_user_id().equals(sessionID) && sessionID!=null){
+                    %>
                     <div class="list_box2"> 
-                        <button type="button" class="btn btn-light" onclick="return goList()" >목록</button>
-                       <a href="#top"> <button type="button" class="btn btn-light">TOP</button></a>
-                    </div>
-                </div>  
+                      	<button type="button" class="btn btn-light"><a href="BookStoryModify?idx=${content_view.idx}">수정<a></button>
+                   		<button type="button" class="btn btn-light"><a href="BoardStoryDeleteAction?idx=${content_view.idx}">삭제<a></button>
+                        <button type="button" class="btn btn-light" onclick="goList()">목록</button>
+                       	<a href="#top"> <button type="button" class="btn btn-light">TOP</button></a>
+                    </div> 
+                    <%
+                    }else{
+                 	%>
+                 	<div class="list_box2"> 
+                      	<button type="button" class="btn btn-light" onclick="goList()">목록</button>
+                       	<a href="#top"> <button type="button" class="btn btn-light">TOP</button></a>
+                    </div>  
+					<%
+					}
+                    %>
+ 
+                </div>   
+                
             </section>   
         </div>   
         
-     <script type="text/javascript" > 
-       function goList() {
-    		alert("로그인해주세요");
-    		location.href="LoginForm"
-    	}
-       function writeReview() {location.href="BookStoryWrite";}
-       function writeReturn() {location.href="BookStoryWrite";}
-       
-       function goList(){   
-           var category_list = document.getElementById("category").text;
-            console.log(category_list);
-           if(category_list == '북스토리,소통'){ 
-               location.href="BookStoryCommunication";
-           }else if(category_list == '좋은글귀 남기기'){
-               location.href="BookStoryGoodWriting";
-           }else if(category_list == '한줄서평'){
-           location.href="BookStoryOneLineReivew";
-           }else if(category_list == '책읽고,리뷰남기기'){
-               location.href="BookStoryReadReivew";
-           }else if(category_list == '작가정보'){
-               location.href="BookStoryWriterInfo";
-           }
-         }  
-       function rewrite(){
-    	   location.href="BookStory";
-           }       
+        
+     <script> 
+     function writeReturn() {
+   		alert("로그인해주세요");
+   		location.href="LoginForm";
+   	  }
+
+   	function goModify(){
+		console.log("수정하기");
+       	location.href="BookStoryModify";  
+   	} 
+
+    function writeReview() {location.href="BookStoryWrite"} 
+      
+ 	   function goList(){   
+  		 var category_list = document.getElementById("category").text;
+ 			console.log(category_list);
+			if(category_list == '북스토리,소통'){ 
+				  location.href="BookStoryCommunication";
+			}else if(category_list == '좋은글귀 남기기'){
+				location.href="BookStoryGoodWriting";
+			}else if(category_list == '한줄서평'){
+				location.href="BookStoryOneLineReivew";
+  	  	   }else if(category_list == '책읽고,리뷰남기기'){
+  	  	  	   location.href="BookStoryReadReivew"
+  	  	   }
+	 	}	  
 
     </script>
         

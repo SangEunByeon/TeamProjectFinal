@@ -49,6 +49,17 @@ public class OnetoOneBoardService implements IOnetoOneBoardService{
 	public int boardDelete(int idx) {
 		return oneBoardDao.boardDeleteDao(idx);
 	}
+	
+	public List<OnetoOneBoardDto> search_user(String category,String keyword,String user_id){
+		
+		return oneBoardDao.search_userDao(category, keyword, user_id);
+	}
+	
+	@Override
+	public List<OnetoOneBoardDto> noanswer_userlist(String check,String user_id) {
+		List<OnetoOneBoardDto> list=oneBoardDao.noanswer_userlistDao(check,user_id);
+		return list;
+	}
 
 	
 ////	관리자페이지-1:1문의   

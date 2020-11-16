@@ -1,10 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  
+<%@ page import="com.study.springboot.dto.MemberDto" %> 
+ <% 
+ String session_id = (String) session.getAttribute("sessionID"); 
+ 	System.out.println("아이디찍기"+session_id);
+ %>
 <html>
 <head> 
 <link rel="stylesheet" href="css/member/onetooneboardwrite.css">
     <title>1:1문의작성</title> 
+    <script>
+    /*비밀번호, 비밀번호 확인 일치 여부*/
+    function check_id(){ 
+           if(document.getElementById('session_id').text !='' && document.getElementById('user_id').text!=''){
+              if(document.getElementById('session_id').text==document.getElementById('user_id').text){
+                  document.getElementById('check').innerHTML='아이디가 일치합니다'
+                  document.getElementById('check').style.color='blue';
+                  document.getElementById('check').style.fontSize="12px";
+              }
+              else{
+                  document.getElementById('check').innerHTML='아이디가 불일치합니다';
+                  document.getElementById('check').style.color='red';
+                  document.getElementById('check').style.fontSize="12px";
+              }
+          }
+      }
+
+    function checkValue(){
+		if(!document.onewrite.user_id.value){
+			alert("아이디를 입력해주세요");
+			return false;
+			}
+		if(!document.onewrite.o_phone.value){
+			alert("전화번호를 입력해주세요");
+			return false;
+			}
+		if(!document.onewrite.o_title.value){
+			alert("제목을 입력해주세요");
+			return false;
+			}
+		if(!document.onewrite.o_content_Q.value){
+			alert("내용을 입력해주세요");
+			return false;
+			}
+        }
+ 
+    
+    </script>
 </head>
 <body> 
   <!-- 메인헤더 -->
@@ -75,7 +117,7 @@
                                 <h4>1:1문의</h4>   
                                 
                                 <!-- 상품명 -->  
-                                <form action="OnetoOnewriteAction" method="post" name="onewrite">
+                                <form action="OnetoOnewriteAction" method="post" name="onewrite" onsubmit="return checkValue()">
                                 <table>
                                			 <input type="hidden" name="o_ans_check2" value="${dto.o_ans_check}" >
                                 		  <input type="hidden" name="o_ans_check" value="미등록" >
@@ -98,10 +140,12 @@
                                     </tr>
                                     <tr>
                                         <td> 
-                                            <div class="input-group review-id" >
+                                        <input type="hidden" name="session_id"  id="session_id" value="${dto.session_id}" onchange="check_id()">                                   
+                                        <div class="input-group review-id" >
                                                 <span>아이디</span> 
                                             <div class="select-box"> 
-                                            <input class="form-control" type="text" name="user_id">    
+                                            <input class="form-control" type="text" name="user_id"  id="user_id" onchange="check_id()">    
+                                            <span id="check"></span>
                                             </div>
                                             </div>
                                         </td> 
@@ -112,12 +156,7 @@
                                                 <span>휴대폰</span>   
                                             <div class="select-box"> 
                                             <input class="form-control" type="text" name="o_phone" >    
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                <label class="form-check-label" for="exampleCheck1">휴대폰으로 알림받기</label>
-                                              </div>
-                                            </div>
+                                            </div>  
                                         </td> 
                                     </tr>
                                        <tr>
@@ -125,7 +164,7 @@
                                             <div class="input-group o_title">
                                                 <span>제목</span> 
                                             <div class="select-box o_title_box"> 
-                                            <input class="form-control" type="text" name="o_title" >    
+                                            <input class="form-control" type="text" name="o_title" > 
                                             </div>
                                             </div>
                                         </td> 

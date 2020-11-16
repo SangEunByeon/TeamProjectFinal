@@ -3,15 +3,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.OnetoOneBoardDto" %> 
+<%@ page import="com.study.springboot.dto.MemberDto" %>
 
 <%
-String id = (String) session.getAttribute("sessionID");
+String id = (String) session.getAttribute("sessionID"); 
 %>
   
 <html>
 <head> 
 <link rel="stylesheet" href="css/member/onetooneboard.css">
-    <title>1:1문의게시판</title> 
+    <title>1:1문의게시판</title>  
 </head>
 <body> 
       
@@ -81,30 +82,38 @@ String id = (String) session.getAttribute("sessionID");
                             </div>
                         <div class="head_orderlist"> 
                             <h4>1:1문의게시판</h4>     
-                                <div class="form-row align-items-center">
-                                    <p style="padding-top:30px;">답변 없는 문의만 보기</p>
-
+                                <div class="form-row align-items-center">              
+                                   <form action="complain" method="post" class="complain_form"> 
                                     <table style="margin-left:200px;">
+                                    
+                                              <p style="padding-top:30px;">  <input type="button" class="btn btn-outline-secondary reply_no" value="답변 없는 문의만 보기" style="width:170px;height:40px;"onclick="ChangeForm()"  /> </p>
+									
                                         <tr>
                                             <td>
                                             <div class="col-auto my-1 search-text-form"> 
-                                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                  <option selected>Choose...</option>
-                                                  <option value="1">One</option>
-                                                  <option value="2">Two</option>
-                                                  <option value="3">Three</option>
+                                               
+                                                <select class="custom-select mr-sm-2 searchform" id="complian_search" name="category">
+                                                  <option selected value="배송지연/불만">배송지연/불만</option>
+                                                  <option value="교환문의">교환문의</option>
+                                                  <option value="반품문의">반품문의</option>
+                                                  <option value="상품손상">상품손상</option>
+                                                  <option value="주문/결제 문의">주문/결제 문의</option>
+                                                  <option value="입고 문의">입고 문의</option>
+                                                   <option value="기타">기타</option>
+                                                     
                                                 </select>
                                                 
                                     		</div> 
-                                            </td>
+                                            </td> 
                                             <td>
-                                                <input class="form-control search-text" type="search-1" placeholder="Search" aria-label="Search">
+                                                <input class="form-control search-text" type="search-1" placeholder="Search" aria-label="Search"  name="keyword">
                                             </td>
                                             <td>
                                                 <button class="btn btn-secondary" type="submit">검색</button> 
                                             </td> 
                                         </tr>  
                                     </table>
+                                    </form>
                                 </div>  
                                 <table id="member_list"  class="table table-striped order-list ">
 		                            <tr class="one-list-title">
@@ -115,21 +124,22 @@ String id = (String) session.getAttribute("sessionID");
 		                                <th scope="col"  style="width: 10%;">답변상태</th> 
 		                                <th scope="col"  style="width: 10%;">작성일</th> 
 		                            </tr>
-		                             <c:forEach var="dto" items="${ list }" >
+		                             <c:forEach var="list" items="${ list }" >
 		                             
 		                            <tr class="one-list-text">
-		                            <fmt:formatDate var="reg" value="${dto.reg}"  pattern="yyyy.MM.dd"/>
-		                                <td>${dto.idx}</td>
-		                                <td>${dto.o_type}</td>
-		                                <td><a href="OnetoOneBoardView?idx=${dto.idx}">${dto.o_title}</a></td>
-		                                <td>${dto.user_id}</td>
+		                            <fmt:formatDate var="reg" value="${list.reg}"  pattern="yyyy.MM.dd"/>
+		                                <td>${list.idx}</td>
+		                                <td>${list.o_type}</td>
+		                                <td><a href="OnetoOneBoardView?idx=${list.idx}">${list.o_title}</a></td>
+		                                <td id="user_id" value="user_id"  onchange="check_id()" >${list.user_id}</td>
+		                                 <div id="check"></div>
 		                               	<!-- 미등록, 답변완료 --> 
-		                                  <c:set var = "o_ans_check" scope = "session" value ="${dto.o_ans_check}"/>
+		                                  <c:set var = "o_ans_check" scope = "session" value ="${list.o_ans_check}"/>
 									      <c:if test = "${o_ans_check eq '미등록'}">
-										  <td style="color:red;"><c:out value = "${dto.o_ans_check}"/></td>
+										  <td style="color:red;"><c:out value = "${list.o_ans_check}"/></td>
 									      </c:if>
 								          <c:if test = "${o_ans_check eq '답변완료'}">
-									      <td style="color:blue;"><c:out value = "${dto.o_ans_check}"/></td>
+									      <td style="color:blue;"><c:out value = "${list.o_ans_check}"/></td>
 								          </c:if>
 								           
 		                                <td>${reg}</td>  
@@ -165,10 +175,14 @@ String id = (String) session.getAttribute("sessionID");
 
 
 	<script type="text/javascript"> 
-	function goOnetoOneBoardWirte(){location.href="OnetoOneBoardWrite";}
+	function ChangeForm(){ location.href="NoAnswer_user"; }
+	function goOnetoOneBoardWirte(){ location.href="OnetoOneBoardWrite";  }
 	function ProductReview(){location.href="ProductReivew";}
 	function ReviewWrite() { location.href="ProductReviewWrite"; } 
 	function completePage(){ location.href="ProductReviewComplete";}
+
+	 
+    
 	</script> 
  
 </body>

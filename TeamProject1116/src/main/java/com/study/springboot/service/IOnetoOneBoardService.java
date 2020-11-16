@@ -13,11 +13,12 @@ public interface IOnetoOneBoardService {
  	public int boardModify(OnetoOneBoardDto oneBoardDto);//유저아이디와 연결된 글 수정
 	public int boardDelete(int idx);  //글삭제
 	public OnetoOneBoardDto content_reply(int idx); //관리자답변가져오기
-	public List<OnetoOneBoardDto> search(String category,String keyword);
+	public List<OnetoOneBoardDto> search_user(String category, String keyword, String user_id); //검색기능
+	public List<OnetoOneBoardDto> noanswer_userlist(String check, String user_id);//답변없는글목록_사용자
 //	관리자페이지- 1:1문의  
 	public List<OnetoOneBoardDto> noanswerlist(String check); //답변없는글목록
 	public int adminwrite(int idx,String admin_id,String o_content_A,String o_ans_check); //글쓰기 & 답변 상태 변경
 	public int count();
 	public List<OnetoOneBoardDto> adminlist(Criteria cri); //글목록
-	
+	public List<OnetoOneBoardDto> search(String category,String keyword); 
 }

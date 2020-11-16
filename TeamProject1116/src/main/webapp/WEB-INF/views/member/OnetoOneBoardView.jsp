@@ -118,11 +118,7 @@
                                                 <span>휴대폰</span>   
                                             <div class="select-box"> 
                                               <input class="form-control" type="text" name="o_phone" value="${content_view.o_phone}" >                                 
-                                            </div>
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                <label class="form-check-label" for="exampleCheck1">이메일로 알림받기</label>
-                                              </div>
+                                            </div> 
                                             </div>
                                         </td> 
                                     </tr>

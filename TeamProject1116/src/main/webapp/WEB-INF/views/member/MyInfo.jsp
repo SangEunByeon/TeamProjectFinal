@@ -10,14 +10,14 @@
       
 <!-- 메인헤더 -->
 <jsp:include page="/WEB-INF/views/MainHeader.jsp"/>
- 
-             
-         <!-- 마이페이지 -->
+  
+  		<!-- 내정보 -->
         <div id="main">
             <div class="MyPage_Form">  
-                 <table>
+                <table>
                     <tr>
-                    <td>
+                    <td> 
+                        <div class="section">
                         <div class="aside">
                             <table  cellpadding="10px" cellspaing="10px">
                                 <p>마이페이지</p> 
@@ -72,45 +72,41 @@
                             </tr>
                             </table>
                         </div>
+                   <div class="head_orderlist"> 
+                           <h4>내정보</h4>   
+                        
+                       <form name="loginInfocheck" method="post" action="MyInfoAction" onsubmit="return checkMyInfo()">   
+                         <!-- 개인정보수정 -->
+                       <div class="check-pw">
+                       <span>비밀번호 재확인</span><br />
+                       <span style="font-size: 8px;">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</span>
+                       </div>
+                       <hr style="border: 1px solid black;" />
+
+                        
+                               <div class="id-text">아이디</div>
+                               <div class="id">  
+                               <input class="form-control login" name="id" type="text">    
+                               </div> 
+                               <div class="pw-text">비밀번호<span style="color:red">*</span></div>
+                               <div class="pw"> 
+                                <input class="form-control login" name="password" type="password">  
+                               </div>  
+                           
+
+                       <hr style="border: 1px solid black;" />
+                       <div class="button_check">
+                           <button type="submit" class="login_btn_again">확인</button><br> 
+                       </div> 
+                       </form>
+                    </div> 
+                    </div>
                     </td>
-                    <td>
-                        <div class="section">
-						
-                            <div class="head_orderlist"> 
-                                <h4>내정보</h4>   
-                             
-                            <form name="loginInfocheck" method="post" action="MyInfoAction" onsubmit="return checkMyInfo()">   
-                              <!-- 개인정보수정 -->
-                            <div class="check-pw">
-                            <span>비밀번호 재확인</span><br />
-                            <span style="font-size: 8px;">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</span>
-                            </div>
-                            <hr style="border: 1px solid black;" />
-
-                             
-                                    <div class="id-text">아이디</div>
-                                    <div class="id">  
-                                    <input class="form-control login" name="id" type="text" value="<%= session.getAttribute("sessionID")   %>" readonly >    
-                                    </div> 
-                                    <div class="pw-text">비밀번호<span style="color:red">*</span></div>
-                                    <div class="pw"> 
-                                     <input class="form-control login" name="password" type="password">  
-                                    </div>  
-                                
-
-                            <hr style="border: 1px solid black;" />
-                            <div class="button_check">
-                                <button type="submit" class="login_btn_again">확인</button><br> 
-                            </div> 
-                            </form>
-                            </div> 
-                        </div>
-                  	</td>
-                	</tr>
-               	</table> 
-            </div> 
-        </div>   
-        
+                </tr>
+               </table> 
+        </div> 
+    </div>     
+    
 <!-- 메인푸터 -->
 <jsp:include page="/WEB-INF/views/MainFooter.jsp"/>
 

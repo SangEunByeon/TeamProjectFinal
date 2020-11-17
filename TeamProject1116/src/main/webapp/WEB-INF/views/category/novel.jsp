@@ -38,20 +38,6 @@
                                 <img src="${dto.p_filename}" alt="" width="200px" height="300px">    
                             </div>
                             </c:forEach>
-                          
-
-                    <!-- 페이지 이동 -->
-                    <div class="number_button"> 
-                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                           <button type="button" class="btn btn-secondary" style="opacity: 0.7;"> <a href="#">&lt</a></button>
-                            <button type="button" class="btn btn-secondary" style="opacity: 0.7;"><a href="#">1</a></button>
-                            <button type="button" class="btn btn-secondary" style="opacity: 0.7;"><a href="#">2</a></button>
-                            <button type="button" class="btn btn-secondary" style="opacity: 0.7;"><a href="#">3</a></button>
-                            <button type="button" class="btn btn-secondary" style="opacity: 0.7;"><a href="#">4</a></button>
-                            <button type="button" class="btn btn-secondary" style="opacity: 0.7;"><a href="#">&gt</a></button>
-                             
-                        </div>
-                    </div> 
 
                 </div> 
             </div> 

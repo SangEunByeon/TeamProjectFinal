@@ -49,7 +49,7 @@
                             </a>
                             </div>
                             </div>   
-                    <img src="${dto.p_filename}"> 
+                    <img src="${dto.p_filename}" height="220px"> 
                 </a>
             </div>
             </c:forEach>
@@ -77,7 +77,7 @@
                             </a>
                             </div>
                             </div>   
-                    <img src="${dto2.p_filename}"> 
+                    <img src="${dto2.p_filename}" height="220px"> 
                 </a>
             </div>
             </c:forEach>
@@ -106,7 +106,7 @@
                             </a>
                             </div>
                             </div>   
-                    <img src="${dto3.p_filename}"> 
+                    <img src="${dto3.p_filename}" height="220px" > 
                 </a>
             </div>
             </c:forEach>

@@ -151,12 +151,6 @@
 	</div>  <!-- AdminWrapper1 -->
  <!-- 메인 컨텐츠  -->
  
- <!-- 푸터  -->
-	 <div class="container">
-	       <footer>
-	           <p>Copyright (c) 2015 <a href="http://markgoodyear.com">Mark Goodyear</a><span class="top"><a href="#top">#top</a></span></p>
-	       </footer>
-       </div>
 	<jsp:include page="/WEB-INF/views/AdminFooter.jsp"/>
 	
 	 <!-- jQuery first, then Popper.js, then Bootstrap JS -->  

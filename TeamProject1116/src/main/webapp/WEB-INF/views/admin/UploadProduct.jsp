@@ -27,6 +27,10 @@
     text-decoration:none;
     color: rgb(40, 40, 40);
     }
+    textarea{
+    height: 200px;
+    resize: none;
+    }
     /* 사이드바 메인컨텐츠 기본양식 끝 */
 	</style>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

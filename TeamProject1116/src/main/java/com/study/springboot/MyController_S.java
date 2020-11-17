@@ -35,6 +35,7 @@ import com.google.gson.JsonObject;
 import com.study.springboot.dao.IMemberDao;
 import com.study.springboot.dao.INoticeDao;
 import com.study.springboot.dto.BookStoryBoardDto;
+import com.study.springboot.dto.BookStoryBoardReplyDto;
 import com.study.springboot.dto.CartDto;
 import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.MailDto;
@@ -1773,11 +1774,11 @@ public String stateAlign(HttpServletRequest request,Model model){
 		}else {
 			System.out.println("글 작성을 성공하였습니다.");  
 			model.addAttribute("msg","글 작성을 성공하였습니다.");
-			model.addAttribute("url","BookStoryMain");
-		}
+			model.addAttribute("url","BookStoryMain"); 
+			}
 		return "redirect";
 		}
-	
+	 
 	//글보기, 조회수 증가
 	@RequestMapping("/BookStoryView")
 	public String BookStoryview(HttpServletRequest request,Model model) throws Exception{
@@ -1793,21 +1794,20 @@ public String stateAlign(HttpServletRequest request,Model model){
 		String idx2=request.getParameter("idx");
 			int idx=Integer.parseInt(idx2);
 			BookStoryBoardDto dto=bookstory_service.bookstoryView(idx);
+			session.setAttribute("BookStoryDto", dto);
 			session.setAttribute("content_view_bookstory",dto); 
-			System.out.println("북스토리글 보기"+dto);  
+			System.out.println("북스토리글 보기"+dto); 
+		
 			
-			
-			//조회수증가
+		//조회수증가
 		int hit=bookstory_service.bookstoryHit(idx); 
 		model.addAttribute("hit",hit); 
 		
-	//	String bs_user_id=request.getParameter("bs_user_id");
-	//	System.out.println("유저아이디"+bs_user_id);
-
-	//	 //댓글보기
-	//	List <BookStoryBoardDto> list=bookstory_service.bookstoryReplyView(bs_user_id);
-	//	model.addAttribute("list_bookstory",list);
-		
+		  
+		 //댓글보기
+		BookStoryBoardReplyDto replyDto=bookstory_service.bookstoryReplyView(idx);
+		request.getSession().setAttribute("reply_view_bookstory", replyDto); 
+		System.out.println("한번보기"+replyDto);
 		return "bookstory/BookStoryView";  
 	} 
 	
@@ -1882,16 +1882,21 @@ public String stateAlign(HttpServletRequest request,Model model){
 		
 	//댓글 쓰기
 		@RequestMapping(value="/replyAction", method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
-		public String replyAction(HttpServletRequest request, Model model,BookStoryBoardDto bookstoryDto){
+		public String replyAction(HttpSession session, HttpServletRequest request, Model model){
+			
 			String idx2=request.getParameter("idx");
-			int idx=Integer.parseInt(idx2);
-			String reply=request.getParameter("reply");
+			int idx=Integer.parseInt(idx2); 
 			 
-			
-			bookstoryDto.setIdx(idx);
-			//bookstoryDto.setReply(reply);
-			int nResult=bookstory_service.BookstoryRelpy(bookstoryDto); 
-			
+			BookStoryBoardReplyDto replyDto=new BookStoryBoardReplyDto();
+			replyDto.setIdx(idx);  
+			replyDto.setReply_profile(request.getParameter("reply_profile"));
+			replyDto.setReply_category(request.getParameter("reply_category"));
+			replyDto.setReply_writer(request.getParameter("reply_writer"));
+			replyDto.setReply_content(request.getParameter("reply_content"));
+			replyDto.setReg(new Date()); 
+			System.out.println("replyDto"+replyDto);
+			int nResult=bookstory_service.bookstoryRelpyWrite(replyDto);
+			System.out.println("글쓰기 "+nResult);
 			
 			if(nResult<1) {
 				System.out.println("댓글쓰기를 실패하였습니다.");
@@ -1953,6 +1958,7 @@ public String stateAlign(HttpServletRequest request,Model model){
 			nextUrl = "bookstory/BookStoryReadReivew"; }
 		return nextUrl;
 		}	
+				  
 		  
 			  
 
@@ -2060,6 +2066,11 @@ public String stateAlign(HttpServletRequest request,Model model){
 	   System.out.println("마이큐엔에이 리스트: "+dto);
 	   model.addAttribute("dto",dto);
 	   return "member/MyProductQnAView";
+   }
+   
+   @RequestMapping("/MyPageMain")
+   public String MyPageMain() {
+	   return "member/MyPageMain";
    }
 	
 

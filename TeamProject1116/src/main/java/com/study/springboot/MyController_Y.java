@@ -440,8 +440,17 @@ public class MyController_Y {
 	//상품완료후기 폼
 	@RequestMapping("/ProductReviewComplete")
 	public String ProductReviewComplete(HttpServletRequest request, Model model) {	
-		List<Review_Board_Dto> list=.viewWrittenReview(request);
-		model.addAttribute("list",list);
+		Criteria cri = new Criteria(1,7);
+		int bookcnt=review_service.countReviewComplete(request);
+		int allPageNum; 
+		if(bookcnt%7==0) {
+			allPageNum =bookcnt/7;
+		}else {
+			allPageNum =bookcnt/7+1; 
+		}
+		request.setAttribute("list",review_service.viewWrittenReview(request, cri));
+		cri.setAllPageNum(allPageNum);
+		request.setAttribute("allPageNum", allPageNum);
 		return "member/ProductReviewComplete";}
 	
 	@RequestMapping("/deleteReview")
@@ -1127,6 +1136,24 @@ public class MyController_Y {
 		request.setAttribute("allPageNum", allPageNum);
 		return "admin/ManageMember";
 	}
+	//사용자 폼 > 상품문의 페이징
+	@RequestMapping("/page4")
+	public String MyProductQnApaging(HttpServletRequest request,Model model) {
+		String s_no=request.getParameter("no");
+		int no = Integer.parseInt(s_no);
+		Criteria cri = new Criteria(no,10);
+		request.setAttribute("list",pro_qna_service.myProductQnAList(request,cri));
+		
+		int bookcnt=pro_qna_service.countMyProductQnA(request);
+		int allPageNum; 
+		if(bookcnt%10==0) {
+			allPageNum =bookcnt/10;
+		}else {
+			allPageNum =bookcnt/10+1; 
+		}
+		request.setAttribute("allPageNum", allPageNum);
+		return "member/MyProductQnA";
+	}
 	//공지사항 페이징
 		@RequestMapping("/page5")
 		public String Noticepaging(HttpServletRequest request,Model model) {
@@ -1311,8 +1338,8 @@ public class MyController_Y {
 							String s_no=request.getParameter("no");
 							int no = Integer.parseInt(s_no);
 							Criteria cri = new Criteria(no,7);
-							request.setAttribute("list",.(id, cri));
-							int bookcnt=.(id);
+							request.setAttribute("list",review_service.viewWrittenReview(request, cri));
+							int bookcnt=review_service.countReviewComplete(request);
 							int allPageNum; 
 							if(bookcnt%7==0) {
 								allPageNum =bookcnt/7;
@@ -1320,7 +1347,7 @@ public class MyController_Y {
 								allPageNum =bookcnt/7+1; 
 							}
 							request.setAttribute("allPageNum", allPageNum);
-							return "member/OnetoOneBoard";
+							return "member/ProductReviewComplete";
 						}
 	//관리자 폼 > 상품관리 화면 > 상품 검색
 	@RequestMapping("/SearchProduct")
@@ -1775,105 +1802,107 @@ public String stateAlign(HttpServletRequest request,Model model){
 	
 
 	//북스토리 게시판
-	//북스토리-메인
+			//북스토리-메인
 
-	//메인- 아이디,회원수 가져오기
-	@RequestMapping("/BookStoryMain")
-		public String BookStoryMain(HttpServletRequest request,Model model) throws Exception{
-		int count=bookstory_service.getMainProfile(request);
-		model.addAttribute("count",count);
-		System.out.println("회원수:"+count);
-		 
-		ArrayList<BookStoryBoardDto> list=bookstory_service.bookstoryList(request);
-		System.out.println("전체글보기:"+list);
-		model.addAttribute("list", list);
-	
-		return "BookStoryMain";
-	} 
-	 
-	@RequestMapping("/BookStoryProfile")
-	public String BookStoryProfile(){return "bookstory/BookStoryProfile";}  
-	//글쓰기 폼
-	@RequestMapping("/BookStoryWrite")
-	public String BookStoryWrite(HttpServletRequest request, Model model){  
-		MemberDto dto=bookstory_service.getProfile(request); 
-		System.out.println("글쓰기폼"+dto);
-		model.addAttribute("dto",dto); 
-		return "bookstory/BookStoryWrite";
-		}      
-	  
-	//프로필 이미지등록 
-	@RequestMapping(value = "/ProfileRegister",  method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
-	public String ProfileRegister(Model model, HttpServletRequest request, @RequestParam("profile_img") MultipartFile file) {
-		String filename=bookstory_service.uploadProfile(request, file, model);
-		System.out.println("파일명:"+filename); 
-		 
-		MemberDto dto=bookstory_service.getProfile(request);   
-		System.out.println("이미지 업로드:"+dto);
-		if(dto==null) {
-			System.out.println("이미지 등록실패"); 
-			model.addAttribute("msg","이미지업로드를 실패하였습니다");
-			model.addAttribute("url","BookStoryProfile");
-		}else {
-			System.out.println("이미지 등록성공");  
-			request.getSession().setAttribute("book_img", dto);
-			model.addAttribute("msg","이미지업로드를 성공하였습니다.");
-			model.addAttribute("url","BookStoryProfile");
-		}
-		 
-		 return "redirect"; 
-	}   
-	
-	//글쓰기
-	@RequestMapping(value = "/BookStoryWriteAction",  method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
-	public String BookStoryWriteAction(HttpServletRequest request,Model model,HttpSession session){  
-		int nResult=bookstory_service.bookstoryWrite(request);	
-		if(nResult<1) {
-			System.out.println("글 작성을 실패하였습니다."); 
-			model.addAttribute("msg","글 작성을 실패하였습니다.");
-			model.addAttribute("url","BookStoryWrite");
-		}else {
-			System.out.println("글 작성을 성공하였습니다.");  
-			model.addAttribute("msg","글 작성을 성공하였습니다.");
-			model.addAttribute("url","BookStoryMain");
-		}
-		return "redirect";
-		}
-	
-	//글보기, 조회수 증가
-	@RequestMapping("/BookStoryView")
-	public String BookStoryview(HttpServletRequest request,Model model) throws Exception{
-		//회원수
-		int count=bookstory_service.getMainProfile(request);
-		model.addAttribute("count",count);
-		System.out.println("회원수:"+count);
-		HttpSession session = request.getSession();
-		String sessionID = (String)session.getAttribute("sessionID");
-		model.addAttribute("sessionID",sessionID);
-		  
-		//글보기+이미지보기
-		String idx2=request.getParameter("idx");
-			int idx=Integer.parseInt(idx2);
-			BookStoryBoardDto dto=bookstory_service.bookstoryView(idx);
-			session.setAttribute("BookStoryDto", dto);
-			session.setAttribute("content_view_bookstory",dto); 
-			System.out.println("북스토리글 보기"+dto); 
-		
+			//메인- 아이디,회원수 가져오기
+			@RequestMapping("/BookStoryMain")
+				public String BookStoryMain(HttpServletRequest request,Model model) throws Exception{
+				int count=bookstory_service.getMainProfile(request);
+				model.addAttribute("count",count);
+				System.out.println("회원수:"+count);
+				 
+				ArrayList<BookStoryBoardDto> list=bookstory_service.bookstoryList(request);
+				System.out.println("전체글보기:"+list);
+				model.addAttribute("list", list);
 			
-		//조회수증가
-		int hit=bookstory_service.bookstoryHit(idx); 
-		model.addAttribute("hit",hit); 
-		
-		  
-		 //댓글보기
-		BookStoryBoardReplyDto replyDto=bookstory_service.bookstoryReplyView(idx);
-		request.getSession().setAttribute("reply_view_bookstory", replyDto); 
-		System.out.println("한번보기"+replyDto);
-		return "bookstory/BookStoryView";  
-	} 
-	
-	
-	//글보기> 수정폼
+				return "BookStoryMain";
+			} 
+			 
+			@RequestMapping("/BookStoryProfile")
+			public String BookStoryProfile(){return "bookstory/BookStoryProfile";}  
+			//글쓰기 폼
+			@RequestMapping("/BookStoryWrite")
+			public String BookStoryWrite(HttpServletRequest request, Model model){  
+				MemberDto dto=bookstory_service.getProfile(request); 
+				System.out.println("글쓰기폼"+dto);
+				model.addAttribute("dto",dto); 
+				return "bookstory/BookStoryWrite";
+				}      
+			  
+			//프로필 이미지등록 
+			@RequestMapping(value = "/ProfileRegister",  method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
+			public String ProfileRegister(Model model, HttpServletRequest request, @RequestParam("profile_img") MultipartFile file) {
+				String filename=bookstory_service.uploadProfile(request, file, model);
+				System.out.println("파일명:"+filename); 
+				 
+				MemberDto dto=bookstory_service.getProfile(request);   
+				System.out.println("이미지 업로드:"+dto);
+				if(dto==null) {
+					System.out.println("이미지 등록실패"); 
+					model.addAttribute("msg","이미지업로드를 실패하였습니다");
+					model.addAttribute("url","BookStoryProfile");
+				}else {
+					System.out.println("이미지 등록성공");  
+					request.getSession().setAttribute("book_img", dto);
+					model.addAttribute("msg","이미지업로드를 성공하였습니다.");
+					model.addAttribute("url","BookStoryProfile");
+				}
+				 
+				 return "redirect"; 
+			}   
+			
+			//글쓰기
+			@RequestMapping(value = "/BookStoryWriteAction",  method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
+			public String BookStoryWriteAction(HttpServletRequest request,Model model,HttpSession session){  
+				int nResult=bookstory_service.bookstoryWrite(request);	
+				if(nResult<1) {
+					System.out.println("글 작성을 실패하였습니다."); 
+					model.addAttribute("msg","글 작성을 실패하였습니다.");
+					model.addAttribute("url","BookStoryWrite");
+				}else {
+					System.out.println("글 작성을 성공하였습니다.");  
+					model.addAttribute("msg","글 작성을 성공하였습니다.");
+					model.addAttribute("url","BookStoryMain"); 
+					}
+				return "redirect";
+				}
+			 
+			//글보기, 조회수 증가
+			@RequestMapping("/BookStoryView")
+			public String BookStoryview(HttpServletRequest request,Model model) throws Exception{
+				//회원수
+				int count=bookstory_service.getMainProfile(request);
+				model.addAttribute("count",count);
+				System.out.println("회원수:"+count);
+				HttpSession session = request.getSession();
+				String sessionID = (String)session.getAttribute("sessionID");
+				model.addAttribute("sessionID",sessionID);
+				  
+				//글보기+이미지보기
+				String idx2=request.getParameter("idx");
+					int idx=Integer.parseInt(idx2);
+					BookStoryBoardDto dto=bookstory_service.bookstoryView(idx);
+					session.setAttribute("BookStoryDto", dto);
+					session.setAttribute("content_view_bookstory",dto); 
+					System.out.println("북스토리글 보기"+dto); 
+				
+					
+				//조회수증가
+				int hit=bookstory_service.bookstoryHit(idx); 
+				model.addAttribute("hit",hit); 
+				
+				  
+				 //댓글보기
+				List<BookStoryBoardReplyDto> replyDto=bookstory_service.bookstoryReplyView(idx);
+				request.getSession().setAttribute("reply_view_bookstory", replyDto); 
+				System.out.println("한번보기"+replyDto);
+				return "bookstory/BookStoryView";  
+			} 
+			
+			
+			
+			
+			//글보기> 수정폼
 			@RequestMapping("/BookStoryModify")
 				public String BookStoryModify(HttpServletRequest request,Model model){   
 				String idx2=request.getParameter("idx");
@@ -1883,144 +1912,159 @@ public String stateAlign(HttpServletRequest request,Model model){
 					System.out.println(dto);
 				return "bookstory/BookStoryModify";
 			} 
-	
-	//글보기> 수정하기
-	@RequestMapping(value="/BookStoryModifyAction", method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
-		public String BookStoryModifyAction(HttpServletRequest request,Model model, BookStoryBoardDto bookstoryDto) throws Exception{ 
-		request.setCharacterEncoding("UTF-8");
+			
+			//글보기> 수정하기
+			@RequestMapping(value="/BookStoryModifyAction", method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
+				public String BookStoryModifyAction(HttpServletRequest request,Model model, BookStoryBoardDto bookstoryDto) throws Exception{ 
+				request.setCharacterEncoding("UTF-8");
+				
+				String idx2=request.getParameter("idx");
+				int idx=Integer.parseInt(idx2); 
+				
+				String bs_category=request.getParameter("bs_category");
+				String bs_title=request.getParameter("bs_title");
+				String bs_content=request.getParameter("bs_content");
+				 
+				bookstoryDto.setBs_category(bs_category);
+				bookstoryDto.setBs_title(bs_title);
+				bookstoryDto.setBs_content(bs_content);  
+				
+				int nResult=bookstory_service.bookStoryUpdate(bookstoryDto);
+				
+				
+				if(nResult<1) {
+					System.out.println(nResult);
+					System.out.println("글 수정을 실패하였습니다.");
+					model.addAttribute("msg","글 수정을 실패하였습니다.");
+					model.addAttribute("url","BookStoryModify");
+				}else {
+					System.out.println("글 수정을 성공하였습니다.");
+					model.addAttribute("msg","글 수정을 성공하였습니다.");
+					model.addAttribute("url","BookStoryView?idx="+idx);
+				}
+				
+				return "redirect";
+			} 
+			 
+			
+			//글보기> 삭제
+			@RequestMapping("/BoardStoryDeleteAction")
+				public String BoardStoryDeleteAction(HttpServletRequest request,Model model, HttpSession session)throws Exception{
+				String idx2=request.getParameter("idx");
+				int idx=Integer.parseInt(idx2);
+				 
+				 int nResult=bookstory_service.bookstoryDelete(idx);
+				System.out.println("nResult"+nResult);
+				 
+				 if(nResult<0) {
+					 System.out.println("삭제를 실패하였습니다");
+					 model.addAttribute("msg","BoardStoryDeleteAction?idx="+idx);
+					 model.addAttribute("url","BookStoryView");
+				 }else {
+					 System.out.println("삭제를 성공하였습니다");
+					 model.addAttribute("msg","삭제를 성공하였습니다.");
+					 model.addAttribute("url","BookStoryMain");
+				 }
+			
+				return "redirect";
+			} 
+				
+				
+			//댓글 쓰기
+			@RequestMapping(value="/replyAction", method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
+			public String replyAction(HttpSession session, HttpServletRequest request, Model model){
+				
+				String idx2=request.getParameter("idx");
+				int idx=Integer.parseInt(idx2); 
+				 
+				BookStoryBoardReplyDto replyDto=new BookStoryBoardReplyDto();
+				replyDto.setIdx(idx);  
+				replyDto.setReply_profile(request.getParameter("reply_profile"));
+				replyDto.setReply_category(request.getParameter("reply_category"));
+				replyDto.setReply_writer(request.getParameter("reply_writer"));
+				replyDto.setReply_content(request.getParameter("reply_content"));
+				replyDto.setReg(new Date()); 
+				System.out.println("replyDto"+replyDto);
+				int nResult=bookstory_service.bookstoryRelpyWrite(replyDto);
+				System.out.println("글쓰기 "+nResult);
+				
+				if(nResult<1) {
+					System.out.println("댓글쓰기를 실패하였습니다.");
+					model.addAttribute("msg","댓글쓰기를 실패하였습니다.");
+					model.addAttribute("url","BookStoryView?idx="+idx);
+				}else {
+					System.out.println("댓글쓰기를 성공하였습니다.");
+					model.addAttribute("msg","댓글쓰기를 성공하였습니다.");
+					model.addAttribute("url","BookStoryView?idx="+idx); 
+				} 
+				return "redirect";
+		    }  
 		
-		String idx2=request.getParameter("idx");
-		int idx=Integer.parseInt(idx2); 
-		
-		String bs_category=request.getParameter("bs_category");
-		String bs_title=request.getParameter("bs_title");
-		String bs_content=request.getParameter("bs_content");
-		 
-		bookstoryDto.setBs_category(bs_category);
-		bookstoryDto.setBs_title(bs_title);
-		bookstoryDto.setBs_content(bs_content);  
-		
-		int nResult=bookstory_service.bookStoryUpdate(bookstoryDto);
-		
-		
-		if(nResult<1) {
-			System.out.println(nResult);
-			System.out.println("글 수정을 실패하였습니다.");
-			model.addAttribute("msg","글 수정을 실패하였습니다.");
-			model.addAttribute("url","BookStoryModify");
-		}else {
-			System.out.println("글 수정을 성공하였습니다.");
-			model.addAttribute("msg","글 수정을 성공하였습니다.");
-			model.addAttribute("url","BookStoryView?idx="+idx);
-		}
-		
-		return "redirect";
-	} 
-	 
-	
-	//글보기> 삭제
-	@RequestMapping("/BoardStoryDeleteAction")
-		public String BoardStoryDeleteAction(HttpServletRequest request,Model model, HttpSession session)throws Exception{
-		String idx2=request.getParameter("idx");
-		int idx=Integer.parseInt(idx2);
-		 
-		 int nResult=bookstory_service.bookstoryDelete(idx);
-		System.out.println("nResult"+nResult);
-		 
-		 if(nResult<0) {
-			 System.out.println("삭제를 실패하였습니다");
-			 model.addAttribute("msg","BoardStoryDeleteAction?idx="+idx);
-			 model.addAttribute("url","BookStoryView");
-		 }else {
-			 System.out.println("삭제를 성공하였습니다");
-			 model.addAttribute("msg","삭제를 성공하였습니다.");
-			 model.addAttribute("url","BookStoryMain");
-		 }
-	
-		return "redirect";
-	} 
-		
-		
-	//댓글 쓰기
-	@RequestMapping(value="/replyAction", method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
-	public String replyAction(HttpSession session, HttpServletRequest request, Model model){
-		
-		String idx2=request.getParameter("idx");
-		int idx=Integer.parseInt(idx2); 
-		 
-		BookStoryBoardReplyDto replyDto=new BookStoryBoardReplyDto();
-		replyDto.setIdx(idx);  
-		replyDto.setReply_profile(request.getParameter("reply_profile"));
-		replyDto.setReply_category(request.getParameter("reply_category"));
-		replyDto.setReply_writer(request.getParameter("reply_writer"));
-		replyDto.setReply_content(request.getParameter("reply_content"));
-		replyDto.setReg(new Date()); 
-		System.out.println("replyDto"+replyDto);
-		int nResult=bookstory_service.bookstoryRelpyWrite(replyDto);
-		System.out.println("글쓰기 "+nResult);
-		
-		if(nResult<1) {
-			System.out.println("댓글쓰기를 실패하였습니다.");
-			model.addAttribute("msg","댓글쓰기를 실패하였습니다.");
-			model.addAttribute("url","BookStoryView?idx="+idx);
-		}else {
-			System.out.println("댓글쓰기를 성공하였습니다.");
-			model.addAttribute("msg","댓글쓰기를 성공하였습니다.");
-			model.addAttribute("url","BookStoryView?idx="+idx); 
-		} 
-		return "redirect";
-    }  
-	
-	
-	
-	//전체 글보기 > 전체 글 목록
-	@RequestMapping("/BookStoryAllList")
-	public String BookStoryAllList(HttpServletRequest request, Model model){
-		//회원수
-		int count=bookstory_service.getMainProfile(request);
-		model.addAttribute("count",count);
-		System.out.println("회원수:"+count);
-		
-		
-		ArrayList<BookStoryBoardDto> list=bookstory_service.bookstoryList(request);
-		System.out.println("전체글보기:"+list);
-		model.addAttribute("list", list);
-	
-		return "bookstory/BookStoryAllList";
-		}  
-	
-	//카테고리  
-	@RequestMapping(value = {"/BookStoryCommunication","/BookStoryGoodWriting", "/BookStoryOneLineReivew","/BookStoryReadReivew"})
-	public String bookStoryCategory(HttpServletRequest request, Model model) {
-		String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		
-		//회원수
-		int count=bookstory_service.getMainProfile(request);
-		model.addAttribute("count",count);
-		System.out.println("회원수:"+count);
-		
-		
-		System.out.println("requestURL"+requestUrl);
-		String nextUrl = "";
-		if (requestUrl.equals("/BookStoryCommunication")) {
-			model.addAttribute("list",bookstory_service.bookStoryCategory("북스토리,소통"));
-			nextUrl = "bookstory/BookStoryCommunication"; }
-		
-		else if (requestUrl.equals("/BookStoryGoodWriting")) {
-			model.addAttribute("list",bookstory_service.bookStoryCategory("좋은글귀 남기기"));
-			nextUrl = "bookstory/BookStoryGoodWriting"; }
-		
-		else if (requestUrl.equals("/BookStoryOneLineReivew")) {
-			model.addAttribute("list",bookstory_service.bookStoryCategory("한줄서평"));  
-			nextUrl = "bookstory/BookStoryOneLineReivew"; }
-		
-		else if (requestUrl.equals("/BookStoryReadReivew")) {
-			model.addAttribute("list",bookstory_service.bookStoryCategory("책읽고,리뷰남기기"));
-			nextUrl = "bookstory/BookStoryReadReivew"; }
-		return nextUrl;
-		}	
-		  
-			  
+//			//댓글 삭제
+//			@RequestMapping("/bookStoryReplyDeleteAction")
+//			public String bookStoryReplyDeleteAction(HttpServletRequest request,Model model){   
+//			String idx2=request.getParameter("idx");
+//				int idx=Integer.parseInt(idx2);
+//				int nResult=bookstory_service.bookStoryReplyDelete(idx,reply_no);
+//				
+//				
+//				if(nResult>1) {
+//					System.out.println("댓글이 삭제되었습니다.");
+//					model.addAttribute("msg","댓글이 삭제되었습니다");
+//					model.addAttribute("url","BookStoryView");
+//				}
+//				
+//				
+//			return "redirect";
+//		} 
+
+			
+			//전체 글보기 > 전체 글 목록
+			@RequestMapping("/BookStoryAllList")
+			public String BookStoryAllList(HttpServletRequest request, Model model){
+				//회원수
+				int count=bookstory_service.getMainProfile(request);
+				model.addAttribute("count",count);
+				System.out.println("회원수:"+count);
+				
+				
+				ArrayList<BookStoryBoardDto> list=bookstory_service.bookstoryList(request);
+				System.out.println("전체글보기:"+list);
+				model.addAttribute("list", list);
+			
+				return "bookstory/BookStoryAllList";
+				}  
+			
+			//카테고리  
+			@RequestMapping(value = {"/BookStoryCommunication","/BookStoryGoodWriting", "/BookStoryOneLineReivew","/BookStoryReadReivew"})
+			public String bookStoryCategory(HttpServletRequest request, Model model) {
+				String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+				
+				//회원수
+				int count=bookstory_service.getMainProfile(request);
+				model.addAttribute("count",count);
+				System.out.println("회원수:"+count);
+				
+				
+				System.out.println("requestURL"+requestUrl);
+				String nextUrl = "";
+				if (requestUrl.equals("/BookStoryCommunication")) {
+					model.addAttribute("list",bookstory_service.bookStoryCategory("북스토리,소통"));
+					nextUrl = "bookstory/BookStoryCommunication"; }
+				
+				else if (requestUrl.equals("/BookStoryGoodWriting")) {
+					model.addAttribute("list",bookstory_service.bookStoryCategory("좋은글귀 남기기"));
+					nextUrl = "bookstory/BookStoryGoodWriting"; }
+				
+				else if (requestUrl.equals("/BookStoryOneLineReivew")) {
+					model.addAttribute("list",bookstory_service.bookStoryCategory("한줄서평"));  
+					nextUrl = "bookstory/BookStoryOneLineReivew"; }
+				
+				else if (requestUrl.equals("/BookStoryReadReivew")) {
+					model.addAttribute("list",bookstory_service.bookStoryCategory("책읽고,리뷰남기기"));
+					nextUrl = "bookstory/BookStoryReadReivew"; }
+				return nextUrl;
+				}	
 
 
 	//마일리지 적립 
@@ -2097,8 +2141,17 @@ public String stateAlign(HttpServletRequest request,Model model){
 	//1116 마이큐엔에이
 	@RequestMapping("/MyProductQnA")
 	public String MyProductQnA(HttpServletRequest request,Model model) {
-		List<Product_QnA_Board_Dto> list=pro_qna_service.myProductQnAList(request);
-		model.addAttribute("list",list);
+		Criteria cri = new Criteria(1,10);
+		int bookcnt=pro_qna_service.countMyProductQnA(request);
+		int allPageNum; 
+		if(bookcnt%10==0) {
+			allPageNum =bookcnt/10;
+		}else {
+			allPageNum =bookcnt/10+1; 
+		}
+		request.setAttribute("list",pro_qna_service.myProductQnAList(request,cri));
+		cri.setAllPageNum(allPageNum);
+		request.setAttribute("allPageNum", allPageNum);	
 		return "member/MyProductQnA";
 	}
 	
@@ -2106,6 +2159,8 @@ public String stateAlign(HttpServletRequest request,Model model){
 	@RequestMapping("/SearchmyProductQnA")
 	public String SearchmyProductQnA(HttpServletRequest request,Model model) {
 		List<Product_QnA_Board_Dto> list=pro_qna_service.SearchmyProductQnA(request);
+		int allPageNum =0;	
+		request.setAttribute("allPageNum", allPageNum);
 		model.addAttribute("list",list);
 		return "member/MyProductQnA";
 	}
@@ -2114,6 +2169,8 @@ public String stateAlign(HttpServletRequest request,Model model){
    @RequestMapping("/NoAnswer_qna") 
    public String NoAnswer_qna(HttpServletRequest request,Model model) { 
 	  List<Product_QnA_Board_Dto> list=pro_qna_service.noAnswerQnA(request);
+	  int allPageNum =0;	
+	request.setAttribute("allPageNum", allPageNum);
 	  model.addAttribute("list",list);
       return "member/MyProductQnA"; 
    }

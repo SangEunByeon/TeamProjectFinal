@@ -1,6 +1,7 @@
 package com.study.springboot.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.springboot.FileUploadService;
 import com.study.springboot.dao.IMemberDao;
 import com.study.springboot.dao.IProductDao;
+import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.Review_Board_Dto;
 
 @Primary
@@ -79,11 +81,13 @@ public class ReviewBoardService implements IReviewBoardService{
 	}
 
 	@Override
-	public List<Review_Board_Dto> viewWrittenReview(HttpServletRequest request) {
+	public List<Review_Board_Dto> viewWrittenReview(HttpServletRequest request,Criteria cri) {
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("sessionID");
-		List<Review_Board_Dto> list=dao.viewWrittenReviewDao(sessionID);
-		return list;
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("id", sessionID);
+		map.put("cri",cri);
+		return dao.viewWrittenReviewDao(map);
 	}
 
 	@Override
@@ -114,7 +118,12 @@ public class ReviewBoardService implements IReviewBoardService{
 		dao.changeReviewState(o_number);
 		return 0;
 	}
-	
+	@Override
+	public int countReviewComplete(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("sessionID");
+		return dao.countReviewCompleteDao(id);
+	}
 	
 	
 	

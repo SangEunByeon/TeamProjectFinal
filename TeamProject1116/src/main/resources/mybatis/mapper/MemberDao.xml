@@ -71,9 +71,20 @@
 	   insert into book_review (idx, o_orderid, o_number, p_title, p_writer, p_number, description, p_filename, rate, reg) 
 	   values (#{idx}, #{o_orderid},#{o_number}, #{p_title}, #{p_writer}, #{p_number}, #{description}, #{p_filename}, #{rate}, #{reg}) 
 	</insert>
-	
+	<select id="countReviewCompleteDao" resultType="int">
+      select count(*) from book_review where o_orderid=#{param1}
+   </select>
 	<select id="viewWrittenReviewDao" resultType="com.study.springboot.dto.Review_Board_Dto">
-		select * from book_review where o_orderid = #{param1}
+		  <![CDATA[ 
+     select *
+     from ( 
+     select 
+     rownum rn,idx,description,p_title,rate,reg,o_orderid,p_number,o_number
+     from book_review
+     where rownum <= #{cri.pageNum} * #{cri.amount} AND o_orderid=#{id}
+     order by idx desc) 
+     where rn > (#{cri.pageNum} -1) * #{cri.amount} AND o_orderid=#{id}
+     ]]>
 	</select>
 	
 	<select id="reviewlistDao" resultType="com.study.springboot.dto.Review_Board_Dto">

@@ -35,12 +35,26 @@
 		delete From book_order where o_number = #{param1}
 	</delete>
 	
-	 <select id="reviewToWriteListDao" resultType="com.study.springboot.dto.OrderDto">
-      select * from book_order where o_orderid=#{param1} and review_state=#{param2} and o_state=#{param3}
+	 <select id="countReviewDao" resultType="int">
+      select count(*) from book_order where o_orderid=#{param1} and review_state=#{param2} and o_state=#{param3}
    </select>
+	<select id="reviewToWriteListDao" resultType="com.study.springboot.dto.OrderDto">
+	   <![CDATA[ 
+     select *
+     from ( 
+     select 
+     rownum rn,p_number, p_title,p_writer,o_orderid,reg,o_state,p_filename,review_state
+     from book_order
+     where rownum <= #{cri.pageNum} * #{cri.amount} AND o_orderid=#{id} AND review_state=#{r_state}  AND o_state=#{o_state} 
+     order by reg desc) 
+     where rn > (#{cri.pageNum} -1) * #{cri.amount} AND o_orderid=#{id} AND review_state=#{r_state}  AND o_state=#{o_state}
+     ]]>
+	</select>
+	
 	<select id="countOrderDao" resultType="int">
     select count(*) from book_order
     </select>
+	
 	<select id="countMemberOrderDao" resultType="int">
     select count(*) from book_order where o_orderid=#{param1}
     </select>

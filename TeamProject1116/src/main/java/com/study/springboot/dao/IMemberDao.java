@@ -30,8 +30,8 @@ public interface IMemberDao {
 	public List<MemberDto> listDao();
 	public int pointUpdateDao(int point,String id);
 	public int writeReviewDao(Review_Board_Dto dto);
-	public List<Review_Board_Dto> viewWrittenReviewDao(HashMap <String,Object> map);// 상품후기 완료리스트
-	public int countReviewCompleteDao(String id,String r_state); // 상품후기완료 수
+	public List<Review_Board_Dto> viewWrittenReviewDao(HashMap<String,Object> map);// 상품후기 완료리스트
+	public int countReviewCompleteDao(String id); // 상품후기완료 수
 	public List<Review_Board_Dto> reviewlistDao();
 	public int changeReviewStateDao(int i,int o_number);
 	public int deleteReviewDao(int idx);

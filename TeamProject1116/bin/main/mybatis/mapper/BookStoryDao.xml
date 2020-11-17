@@ -56,11 +56,8 @@
      </update> 
       
      <insert id="bookstoryRelpyWriteDao" parameterType="com.study.springboot.dto.BookStoryBoardReplyDto">
-       <selectKey keyProperty="reply_no" resultType="int" order="BEFORE">
-          select bookstoryboard_reply_seq.nextval FROM DUAL
-       </selectKey>
-        insert into bookstoryboard_reply (idx, reply_no, reply_category, reply_writer, reply_content,reply_profile, reg)
-             values (#{idx},#{reply_no}, #{reply_category}, #{reply_writer}, #{reply_content}, #{reply_profile}, #{reg})
+        insert into bookstoryboard_reply ( reply_no,  idx, reply_category, reply_writer, reply_content,reply_profile, reg)
+             values (bookstoryboard_reply_seq.nextval, #{idx}, #{reply_category}, #{reply_writer}, #{reply_content}, #{reply_profile}, #{reg})
      </insert>
   
    	 <select id="bookstoryReplyViewDao" resultType="com.study.springboot.dto.BookStoryBoardReplyDto">

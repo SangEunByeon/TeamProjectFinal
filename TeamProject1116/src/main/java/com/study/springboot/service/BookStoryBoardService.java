@@ -154,9 +154,9 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 	}
  
 	@Override
-	public BookStoryBoardReplyDto bookstoryReplyView(int idx) {
-		BookStoryBoardReplyDto dto=bookstoryDao.bookstoryReplyViewDao(idx);
-		return dto;
+	public List<BookStoryBoardReplyDto> bookstoryReplyView(int idx) {
+		List<BookStoryBoardReplyDto> list=bookstoryDao.bookstoryReplyViewDao(idx);
+		return list;
 	}
 	 
  

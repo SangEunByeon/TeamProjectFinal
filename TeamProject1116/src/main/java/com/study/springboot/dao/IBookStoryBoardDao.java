@@ -21,7 +21,8 @@ public interface IBookStoryBoardDao {
 	public int bookstoryHitDao(int idx) throws Exception; //조회수
 	public int bookstoryLike_checkDao(int idx) throws Exception; //좋아요기능  
 	public int bookstoryRelpyWriteDao(BookStoryBoardReplyDto replyDto);//댓글달기 
-	public BookStoryBoardReplyDto bookstoryReplyViewDao(int idx);  //댓글보기
+	public List<BookStoryBoardReplyDto> bookstoryReplyViewDao(int idx);  //댓글보기
+	public int bookStoryReplyDelete(int idx, int reply_no);
 	
 	
 	public ArrayList<BookStoryBoardDto> bookstoryListDao(); //메인 전체 글목록 

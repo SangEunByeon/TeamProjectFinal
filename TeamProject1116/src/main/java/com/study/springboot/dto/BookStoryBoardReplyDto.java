@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class BookStoryBoardReplyDto {
 	private int idx;
+	private int reply_no;
 	private String reply_profile;
 	private String reply_category;
 	private String reply_writer;

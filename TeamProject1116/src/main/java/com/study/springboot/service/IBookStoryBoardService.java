@@ -26,6 +26,6 @@ public interface IBookStoryBoardService {
 	public int bookStoryUpdate(BookStoryBoardDto dto);
 	public int bookstoryLike_check(int idx) throws Exception;    
 	public int bookstoryRelpyWrite(BookStoryBoardReplyDto replyDto); 
-	public BookStoryBoardReplyDto bookstoryReplyView(int idx);  
+	public List<BookStoryBoardReplyDto> bookstoryReplyView(int idx);  
 	
 }

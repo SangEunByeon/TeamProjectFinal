@@ -1732,11 +1732,13 @@ public String stateAlign(HttpServletRequest request,Model model){
 			
 			  
 			 //댓글보기
-			BookStoryBoardReplyDto replyDto=bookstory_service.bookstoryReplyView(idx);
+			List<BookStoryBoardReplyDto> replyDto=bookstory_service.bookstoryReplyView(idx);
 			request.getSession().setAttribute("reply_view_bookstory", replyDto); 
 			System.out.println("한번보기"+replyDto);
 			return "bookstory/BookStoryView";  
 		} 
+		
+		
 		
 		
 		//글보기> 수정폼
@@ -1808,36 +1810,53 @@ public String stateAlign(HttpServletRequest request,Model model){
 			
 			
 		//댓글 쓰기
-			@RequestMapping(value="/replyAction", method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
-			public String replyAction(HttpSession session, HttpServletRequest request, Model model){
-				
-				String idx2=request.getParameter("idx");
-				int idx=Integer.parseInt(idx2); 
-				 
-				BookStoryBoardReplyDto replyDto=new BookStoryBoardReplyDto();
-				replyDto.setIdx(idx);  
-				replyDto.setReply_profile(request.getParameter("reply_profile"));
-				replyDto.setReply_category(request.getParameter("reply_category"));
-				replyDto.setReply_writer(request.getParameter("reply_writer"));
-				replyDto.setReply_content(request.getParameter("reply_content"));
-				replyDto.setReg(new Date()); 
-				System.out.println("replyDto"+replyDto);
-				int nResult=bookstory_service.bookstoryRelpyWrite(replyDto);
-				System.out.println("글쓰기 "+nResult);
-				
-				if(nResult<1) {
-					System.out.println("댓글쓰기를 실패하였습니다.");
-					model.addAttribute("msg","댓글쓰기를 실패하였습니다.");
-					model.addAttribute("url","BookStoryView?idx="+idx);
-				}else {
-					System.out.println("댓글쓰기를 성공하였습니다.");
-					model.addAttribute("msg","댓글쓰기를 성공하였습니다.");
-					model.addAttribute("url","BookStoryView?idx="+idx); 
-				} 
-				return "redirect";
-		    }  
-		
-		
+		@RequestMapping(value="/replyAction", method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
+		public String replyAction(HttpSession session, HttpServletRequest request, Model model){
+			
+			String idx2=request.getParameter("idx");
+			int idx=Integer.parseInt(idx2); 
+			 
+			BookStoryBoardReplyDto replyDto=new BookStoryBoardReplyDto();
+			replyDto.setIdx(idx);  
+			replyDto.setReply_profile(request.getParameter("reply_profile"));
+			replyDto.setReply_category(request.getParameter("reply_category"));
+			replyDto.setReply_writer(request.getParameter("reply_writer"));
+			replyDto.setReply_content(request.getParameter("reply_content"));
+			replyDto.setReg(new Date()); 
+			System.out.println("replyDto"+replyDto);
+			int nResult=bookstory_service.bookstoryRelpyWrite(replyDto);
+			System.out.println("글쓰기 "+nResult);
+			
+			if(nResult<1) {
+				System.out.println("댓글쓰기를 실패하였습니다.");
+				model.addAttribute("msg","댓글쓰기를 실패하였습니다.");
+				model.addAttribute("url","BookStoryView?idx="+idx);
+			}else {
+				System.out.println("댓글쓰기를 성공하였습니다.");
+				model.addAttribute("msg","댓글쓰기를 성공하였습니다.");
+				model.addAttribute("url","BookStoryView?idx="+idx); 
+			} 
+			return "redirect";
+	    }  
+	
+//		//댓글 삭제
+//		@RequestMapping("/bookStoryReplyDeleteAction")
+//		public String bookStoryReplyDeleteAction(HttpServletRequest request,Model model){   
+//		String idx2=request.getParameter("idx");
+//			int idx=Integer.parseInt(idx2);
+//			int nResult=bookstory_service.bookStoryReplyDelete(idx,reply_no);
+//			
+//			
+//			if(nResult>1) {
+//				System.out.println("댓글이 삭제되었습니다.");
+//				model.addAttribute("msg","댓글이 삭제되었습니다");
+//				model.addAttribute("url","BookStoryView");
+//			}
+//			
+//			
+//		return "redirect";
+//	} 
+
 		
 		//전체 글보기 > 전체 글 목록
 		@RequestMapping("/BookStoryAllList")

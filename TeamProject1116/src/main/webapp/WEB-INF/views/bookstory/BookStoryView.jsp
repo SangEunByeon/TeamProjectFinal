@@ -237,16 +237,20 @@
 								  
 								   
                                  <!-- 댓글 반복구간 -->
+                                  <c:forEach var="reply_view_bookstory" items="${ reply_view_bookstory }" >
                                   <div class="reply_content">
                                      <table>
+                                     <fmt:formatDate var="reg" value="${reply_view_bookstory.reg}"  pattern="yyyy.MM.dd HH:mm"/>
                                          <tr>
                                             <td>
                                                 <div class="myInfo_img"><img id="img" src="../uploadPro3_bookstory/${reply_view_bookstory.reply_profile}" width="80px" height="80px"></div> 
                                             </td>
                                             <td>
+                                            	
                                             	<input type="hidden" name="idx" value="${reply_view_bookstory.idx}">
-                                                <span style="font-weight: 800;">닉네임</span><span>${reply_view_bookstory.reply_writer}</span>
-                                              
+                                                <span style="font-weight: 800;">아이디 : </span><span>${reply_view_bookstory.reply_writer}</span><span class="reply_date">${reg}</span>
+                                              	<img class="delete_reply" onclick="goReplyDelete()" src="image/cancel.png" width="15px" height="15px" >
+                                              	
                                                 <div class=" content_text">
                                                    ${reply_view_bookstory.reply_content}
                                                 </div>
@@ -255,7 +259,7 @@
                                          </tr>
                                      </table>  
                                  </div> 
-                                 
+                                 </c:forEach>
                                
                                  <form action="replyAction" method="post" name="reply">
                                 <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
@@ -332,6 +336,10 @@
   	  	  	   location.href="BookStoryReadReivew"
   	  	   }
 	 	}	  
+
+	 	function goReplyDelete(){
+		location.href="bookStoryReplyDeleteAction"
+		 	}
 
     </script>
         

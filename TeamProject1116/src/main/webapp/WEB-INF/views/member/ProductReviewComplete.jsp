@@ -70,6 +70,14 @@
                                 </div>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                <div class="orderlist">
+                                <a href="MyProductQnA">상품문의</a>
+                                  <span>&gt</span> 
+                                </div>
+                                </td>
+                            </tr>
                             </table>
                         </div>
                     <tr>
@@ -133,18 +141,17 @@
 
                         </div>  
                             <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                                </ul>
-                                </nav>	    
+			   <ul class="pagination justify-content-center">
+			    <%
+			    int allPageNum=(Integer)request.getAttribute("allPageNum");
+			    for(int i=1; i<=allPageNum; i++){
+   		    	   %>
+			     <li class="page-item"><a href="page15?no=<%=i%>" class="page-link"><%=i%></a></li>
+			       <%
+			     }
+			    %>    
+			  </ul> 
+			</nav>     
                             </div>  
                     	</td>
                 	</tr>

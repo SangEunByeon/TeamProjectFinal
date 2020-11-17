@@ -87,8 +87,20 @@
    </insert>
    
    <select id="getCartDao" resultType="com.study.springboot.dto.CartDto">
-   select * from book_cart where user_id=#{param1} order by idx desc 
+    <![CDATA[ 
+     select *
+     from ( 
+     select 
+     rownum rn, idx, p_number, product_number, p_title, p_writer,p_price, p_discount_ratio, user_id, p_filename, reg
+     from book_cart
+     where rownum <= #{cri.pageNum} * #{cri.amount} AND user_id =#{id} 
+     order by idx desc) 
+     where rn > (#{cri.pageNum} -1) * #{cri.amount} AND user_id =#{id} 
+     ]]>
    </select>
+   <select id="countCartDao" resultType="int">
+   select count(*) from book_cart where user_id = #{param1}
+ </select>
    
    <delete id="deleteCartDao">
    delete from book_cart where idx=#{param1}

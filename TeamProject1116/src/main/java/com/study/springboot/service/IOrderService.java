@@ -21,7 +21,8 @@ public interface IOrderService {
 	public int countOrder();
 	public int countMemberOrder(HttpServletRequest request);
 	public int countstateOrder(String state);
-	public List<OrderDto> reviewToWriteList(HttpServletRequest request);
+	public List<OrderDto> reviewToWriteList(HttpServletRequest request,Criteria cri);
+	public int countReview(HttpServletRequest request);
 	public List<OrderDto> SearchOrder(HttpServletRequest request);
 	public List<OrderDto> getList(Criteria cri);
 }

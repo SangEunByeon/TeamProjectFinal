@@ -12,6 +12,6 @@ public interface ICartService {
 	public void insertToCart(HttpServletRequest request);
 	
 	public List<CartDto> getCart(HttpServletRequest request,Criteria cri);
-	
+	public int countCart(HttpServletRequest request);
 	public void deleteCart(HttpServletRequest request);
 }

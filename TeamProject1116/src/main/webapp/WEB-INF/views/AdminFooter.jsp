@@ -64,7 +64,7 @@
     <script type="text/javascript" src="js/headhesive.js"></script>
    
     
-	<script>
+	<!-- <script>
     $(function(){
         $(window).scroll(function(){  //스크롤하면 아래 코드 실행
                 var num = $(this).scrollTop();  // 스크롤값
@@ -75,16 +75,16 @@
                 }
             });
         });
-    </script>
+    </script> -->
     
 
     <!-- 메인 -->
     <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-    <script src="js/owl.carousel.js"></script>
-    <script src="js/owl.autoplay.js"></script>
-    <script src="js/owl.navigation.js"></script>
+    <!-- <script src="js/owl.carousel.js"></script> -->
+    <!-- <script src="js/owl.autoplay.js"></script> -->
+    <!-- <script src="js/owl.navigation.js"></script> -->
 
-    <script>
+    <!-- <script>
         $(function(){
             $('.owl-carousel').owlCarousel({
               items:5,
@@ -99,6 +99,6 @@
               autoplaySpeed:500
             });
         });
-    </script>
+    </script> -->
 </body>
 </html>

@@ -72,7 +72,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                <div class="my_info">
+                                <div class="orderlist">
                                 <a href="MyProductQnA">상품문의</a>
                                   <span>&gt</span> 
                                 </div>

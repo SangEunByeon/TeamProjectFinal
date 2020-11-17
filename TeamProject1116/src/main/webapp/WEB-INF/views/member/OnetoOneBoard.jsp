@@ -78,6 +78,14 @@ String id = (String) session.getAttribute("sessionID");
                                     </div>
                                     </td>
                                 </tr>
+                                 <tr>
+                                <td>
+                                <div class="orderlist">
+                                <a href="MyProductQnA">상품문의</a>
+                                  <span>&gt</span> 
+                                </div>
+                                </td>
+                         	   </tr>
                                 </table>
                             </div>
                         <div class="head_orderlist"> 

@@ -1,6 +1,7 @@
 package com.study.springboot.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,9 +58,10 @@ public class CartService implements ICartService{
 	public List<CartDto> getCart(HttpServletRequest request,Criteria cri) {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("sessionID");
-		List<CartDto> list = dao.getCartDao(user_id);
-		System.out.println("list:"+list);
-		return list;
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("id",user_id);
+		map.put("cri", cri);
+		return dao.getCartDao(map);
 	}
 
 	@Override
@@ -67,6 +69,13 @@ public class CartService implements ICartService{
 		String s_idx = request.getParameter("idx");
 		int idx = Integer.parseInt(s_idx);
 		dao.deleteCartDao(idx);
+	}
+
+	@Override
+	public int countCart(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String user_id = (String)session.getAttribute("sessionID");
+		return dao.countCartDao(user_id);
 	}
 
 

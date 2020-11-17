@@ -1,6 +1,7 @@
  
 package com.study.springboot.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -33,7 +34,8 @@ public interface IProductDao {
 	public int ProductAnswerDeleteDao(int idx,String p_answer_state);
 	
 	public int CartDao(CartDto dto); //장바구니
-	public List<CartDto> getCartDao(String user_id); //장바구니 목록보기
+	public List<CartDto> getCartDao(HashMap<String,Object> map); //장바구니 목록보기
+	public int countCartDao(String id); //장바구니 개수
 	public int deleteCartDao(int idx); //장바구니 삭제
 	
 	public List<Review_Board_Dto> productReviewListDao(int p_number);

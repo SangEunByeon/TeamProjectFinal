@@ -92,11 +92,17 @@ public class OrderService implements IOrderService{
 	}
 
 	@Override
-	   public List<OrderDto> reviewToWriteList(HttpServletRequest request) {
+	   public List<OrderDto> reviewToWriteList(HttpServletRequest request,Criteria cri) {
 	      HttpSession session = request.getSession();
 	      String o_orderID = (String)session.getAttribute("sessionID");
-	      List<OrderDto> list=dao.reviewToWriteListDao(o_orderID, 0, 5);
-	      return list;
+	      HashMap <String,Object> map = new HashMap <String,Object>();
+	      String r_state = "0";
+	      String o_state = "5";
+	      map.put("id",o_orderID);
+	      map.put("r_state",r_state);
+	      map.put("o_state",o_state);
+	      map.put("cri",cri);
+	      return dao.reviewToWriteListDao(map);
 	   }
 
 	@Override
@@ -127,6 +133,13 @@ public class OrderService implements IOrderService{
 			HttpSession session = request.getSession();
 			String sessionID = (String)session.getAttribute("sessionID");
 			return dao.countMemberOrderDao(sessionID);
+		}
+
+		@Override
+		public int countReview(HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("sessionID");
+			return dao.countReviewDao(id, "0", "5");
 		}
 		
 	

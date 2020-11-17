@@ -97,7 +97,10 @@
   	   <select id="noanswerlistDao" resultType="com.study.springboot.dto.OnetoOneBoardDto">
   	      select * from one_to_one_board where o_ans_check = #{param1} order by idx desc
   	   </select>
-  	     
+  	     <update id="adminwriteDao"> 
+      	     update one_to_one_board set admin_id=#{param2}, o_content_A=#{param3}, o_ans_check=#{param4}
+      	     where idx=#{param1}
+  	   </update>
   	   <select id="adminlistDao" resultType="com.study.springboot.dto.OnetoOneBoardDto">
   	      <![CDATA[ 
      select *

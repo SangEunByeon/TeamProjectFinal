@@ -7,6 +7,18 @@
 <head> 
     <title>메인페이지</title>
 </head>
+<style>
+.multiline-ellipsis{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; 
+    table-layout: fixed; 
+    text-overflow: ellipsis; 
+     max-width: 200px !important;
+   
+}
+</style>
 <body>   
 <!-- 메인헤더 -->
 
@@ -185,7 +197,7 @@
          	<div class="pre_img">
              <div class="pre_img_left" style="display:flex;">   
                  <div class="review_box_width"><a href="ProductDetail3?p_number=${review.p_number}"><img src="${review.p_filename}" style="width: 130px; height: 120px;"></a></div> 
-                 <div class="review_box_width1" style="margin-top:7%;">[${review.rate}]<br>${review.description}</div> 
+                 <div class="review_box_width1" style="margin-top:7%;">[${review.rate}]<br><p class="multiline-ellipsis">${review.description}</p></div> 
              </div>
              </div>
              </c:if>              
@@ -204,7 +216,7 @@
                       <th>제목</th>
                       <th>작성일</th>
                   </tr>
-                   <c:forEach var="notice" items= "${ notice }" >
+                   <c:forEach var="notice" items= "${ notice }"  end="4" >
                    <fmt:formatDate value="${notice.reg}" var="reg" pattern="yyyy.MM.dd" />
                   <tr style=" text-align: center;">
                       <td>${notice.n_writer}</td>  

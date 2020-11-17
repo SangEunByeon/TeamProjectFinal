@@ -198,7 +198,7 @@ $(document).ready(function () {
 				  	<td ><h3 style="font-size:2.5ch !important;"><strong>책소개</strong></h3></td>
 				  </tr>
 				  <tr>
-					  <td><h4 style="font-size:2ch !important; ">${dto.p_content}</h4> </td>
+					  <td style="white-space:pre-wrap;"><h4 style="font-size:2ch !important; ">${dto.p_content}</h4> </td>
 				  </tr>
 				  <tr>
 				  <td><h3 style="font-size:2.5ch !important;"><strong>책 이미지</strong></h3></td>

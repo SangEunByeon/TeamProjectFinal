@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.study.springboot.dto.Criteria;
+import com.study.springboot.dto.OnetoOneBoardDto;
 import com.study.springboot.dto.ProductDto;
 import com.study.springboot.dto.Product_QnA_Board_Dto;
 
@@ -20,8 +21,11 @@ public interface IProductQnABoardService {
 	
 	//1116 productQnA 목록
 	public List<Product_QnA_Board_Dto> myProductQnAList(HttpServletRequest request,Criteria cri);
+	public List<Product_QnA_Board_Dto> myProductQnAList2(HttpServletRequest request);
 	public int countMyProductQnA(HttpServletRequest request);
 	public List<Product_QnA_Board_Dto> SearchmyProductQnA(HttpServletRequest request);
 	public List<Product_QnA_Board_Dto> noAnswerQnA(HttpServletRequest request);
 	public Product_QnA_Board_Dto MyProductQnAView(HttpServletRequest request);
+	
+	public List<OnetoOneBoardDto> onetoonelistDao(HttpServletRequest request);
 }

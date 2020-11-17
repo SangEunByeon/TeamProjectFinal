@@ -10,57 +10,80 @@
 	<style>
 	/* 사이드바 메인컨텐츠 기본양식 시작 */
  	.AdminWrapper1{
-	width: 100%;
-	text-align:center; 
-	min-width:1200px;
+		width: 100%;
+		text-align:center; 
+		min-width:1200px;
 	}
 	 .AdminWrapper2{
-	display: inline-block;  
-	margin-top:250px;
+		display: inline-block;  
+		margin-top:250px;
 	}  
  	.sidebar, .contents{
-	display: inline-block;
+		display: inline-block;
 	}
 	.sidebar>p{
-    font-size: 30px;
-    font-weight: 900; 
+	    font-size: 30px;
+	    font-weight: 900; 
     }  
     table tr td >a{
-    text-decoration:none;
-    color: rgb(40, 40, 40);
+	    text-decoration:none;
+	    color: rgb(40, 40, 40);
+    }
+    .sidebar{   
+	    width: 180px;
+	    height: 700px; 
+    } 
+    .sidebar table tr td{
+       width: 150px; 
+       border:1px solid rgb(155, 155, 155);
+       border-collapse: collapse;    
+    } 
+    .sidebarlist{
+        padding-left:25px;
+   		padding: 8px;
+        width: 178px;
+        height: 40px;
+    }
+    .sidebarlist>a{
+       color: rgb(40, 40, 40);
+       text-decoration: none;   
+    }
+    .sidebarlist:hover{
+       background-color: rgb(239, 239, 239);
     }
     /* 사이드바 메인컨텐츠 기본양식 끝 */
+    
     .table-striped th, .table-striped td{
-	font-size:1.4ch;
-	overflow:hidden;
-	text-overflow:ellipsis; 
-	white-space:nowrap;
+		font-size:1.4ch;
+		overflow:hidden;
+		text-overflow:ellipsis; 
+		white-space:nowrap;
 	}
 	/* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 300px; 
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-    
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 300px !important;/* Could be more or less, depending on screen size */                          
-        }
-        .searchcon input{
-        width:75px;
-        }
+    .modal {
+	     display: none; /* Hidden by default */
+	     position: fixed; /* Stay in place */
+	     z-index: 1; /* Sit on top */
+	     left: 0;
+	     top: 0;
+	     width: 300px; 
+	     height: 100%; /* Full height */
+	     overflow: auto; /* Enable scroll if needed */
+	     background-color: rgb(0,0,0); /* Fallback color */
+	     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+     }
+ 
+     /* Modal Content/Box */
+     .modal-content {
+         background-color: #fefefe;
+         margin: 15% auto; /* 15% from the top and centered */
+         padding: 20px;
+         border: 1px solid #888;
+         width: 300px !important;/* Could be more or less, depending on screen size */                          
+     }
+     .searchcon input{
+     width:75px;
+     }
 	</style>
 	<script>
 	function modal() {
@@ -146,24 +169,30 @@
 	
        <!-- 왼쪽 사이드 메뉴바 시작 -->
 		<div class="sidebar" style="width:200px; float:left;">
-				<table style="width: 150px;">
+				<table style="width: 150px;" cellpadding="10px" cellspaing="10px">
 				<p>회원관리</p>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 							<a href="ManageMember">회원 목록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 						    <a href="WithdrawMember">탈퇴 목록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 							<a href="ManageOrder">주문 관리</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>
@@ -215,8 +244,8 @@
 			  </ul> 
 			</nav>  
 				   
-		    <button onclick="goDelete();">회원 탈퇴</button>
-		    <button onclick="modal();">마일리지 관리</button>
+		    <button onclick="goDelete();" class="btn btn-sm btn-danger">회원 탈퇴</button>
+		    <button onclick="modal();" class="btn btn-sm btn-danger">마일리지 관리</button>
 		    </section>
 		 </div>
 		 

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.study.springboot.dao.IProductDao;
 import com.study.springboot.dto.Criteria;
+import com.study.springboot.dto.OnetoOneBoardDto;
 import com.study.springboot.dto.ProductDto;
 import com.study.springboot.dto.Product_QnA_Board_Dto;
 @Primary
@@ -134,6 +135,20 @@ public class ProductQnABoardService implements IProductQnABoardService{
 		HttpSession session = request.getSession();
 		String sessionID=(String)session.getAttribute("sessionID");
 		return dao.countMyProductQnADao(sessionID);
+	}
+
+	@Override
+	public List<Product_QnA_Board_Dto> myProductQnAList2(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("sessionID");	
+		return dao.myProductQnAListDao2(id, "답변완료");
+	}
+
+	@Override
+	public List<OnetoOneBoardDto> onetoonelistDao(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("sessionID");
+		return dao.onetoonelistDao(id, "답변완료");
 	}
 	
 	

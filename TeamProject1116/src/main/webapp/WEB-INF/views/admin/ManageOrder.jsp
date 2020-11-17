@@ -31,6 +31,28 @@
     text-decoration:none;
     color: rgb(40, 40, 40);
     }
+    .sidebar{   
+	    width: 180px;
+	    height: 700px; 
+    } 
+    .sidebar table tr td{
+       width: 150px; 
+       border:1px solid rgb(155, 155, 155);
+       border-collapse: collapse;    
+    } 
+    .sidebarlist{
+        padding-left:25px;
+   		padding: 8px;
+        width: 178px;
+        height: 40px;
+    }
+    .sidebarlist>a{
+       color: rgb(40, 40, 40);
+       text-decoration: none;   
+    }
+    .sidebarlist:hover{
+       background-color: rgb(239, 239, 239);
+    }
     /* 사이드바 메인컨텐츠 기본양식 끝 */
 	</style>
 	<script type="text/javascript">
@@ -51,29 +73,37 @@
 	
 	  <!-- 왼쪽 사이드 메뉴바 시작 -->
        	<div class="sidebar" style="width:200px; float:left;">
-			<table style="width: 150px;">
+				<table style="width: 150px;" cellpadding="10px" cellspaing="10px">
 				<p>회원관리</p>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 							<a href="ManageMember">회원 목록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 						    <a href="WithdrawMember">탈퇴 목록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 							<a href="ManageOrder">주문 관리</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>
-				
-		</div>
+	    </div>
+      <!-- 왼쪽 사이드 메뉴바 끝 -->
+      
+      <!-- 오른쪽 컨텐츠 시작 -->	    
 		<div class="contents" style="height: 100%;">
 		  
 		    <section>
@@ -123,7 +153,7 @@
 			<option value="4" >배송 중</option>
 			<option value="5">배송 완료</option>
 			</select>
-		    <button type="submit" class="selectUpdate_btn"  >선택변경</button>
+		    <button type="submit" class="selectUpdate_btn btn btn-sm btn-danger"  >선택변경</button>
 		    </div>
 		    </form>
 		    

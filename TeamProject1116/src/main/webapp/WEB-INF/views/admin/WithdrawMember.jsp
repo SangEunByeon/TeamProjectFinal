@@ -29,6 +29,28 @@
     text-decoration:none;
     color: rgb(40, 40, 40);
     }
+    .sidebar{   
+	    width: 180px;
+	    height: 700px; 
+    } 
+    .sidebar table tr td{
+       width: 150px; 
+       border:1px solid rgb(155, 155, 155);
+       border-collapse: collapse;    
+    } 
+    .sidebarlist{
+        padding-left:25px;
+   		padding: 8px;
+        width: 178px;
+        height: 40px;
+    }
+    .sidebarlist>a{
+       color: rgb(40, 40, 40);
+       text-decoration: none;   
+    }
+    .sidebarlist:hover{
+       background-color: rgb(239, 239, 239);
+    }
     /* 사이드바 메인컨텐츠 기본양식 끝 */
 	</style>
 
@@ -42,34 +64,42 @@
     <div class="AdminWrapper1">
 	<div class="AdminMain AdminWrapper2">
 	
-          <!-- 왼쪽 사이드 메뉴바 시작 -->
+       <!-- 왼쪽 사이드 메뉴바 시작 -->
 		<div class="sidebar" style="width:200px; float:left;">
-				<table style="width: 150px;">
+				<table style="width: 150px;" cellpadding="10px" cellspaing="10px">
 				<p>회원관리</p>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 							<a href="ManageMember">회원 목록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 						    <a href="WithdrawMember">탈퇴 목록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 							<a href="ManageOrder">주문 관리</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>
 	    </div>
-      <!-- 왼쪽 사이드 메뉴바 끝 -->      
+      <!-- 왼쪽 사이드 메뉴바 끝 -->     
 		<div class="contents">
 		<div class="section"> 
 		<h2>탈퇴 목록</h2>
+		<hr>
+		<br>
 		 <table id="member_list"  class="table table-striped">
 		   <tr>
 		   <th scope="col">번호</th><th scope="col">아이디</th><th scope="col">탈퇴사유</th><th scope="col">탈퇴메세지</th><th scope="col">탈퇴일</th>

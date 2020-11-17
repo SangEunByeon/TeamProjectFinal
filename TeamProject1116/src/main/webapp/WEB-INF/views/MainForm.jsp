@@ -78,7 +78,7 @@
                 <div class="title"> 
                 <div>
                 <a style="color:#ccc; font-size:15px; " href="Product_detail?p_number=${dto2.p_number}"> 
-               				 <span>
+               				<span>
                				 		<br/>
                                     ${dto2.p_title}
                                     <br/><br/>  

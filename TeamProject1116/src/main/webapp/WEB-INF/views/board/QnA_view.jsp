@@ -193,8 +193,8 @@ function SirenFunction(idMyDiv){
 	</table>
 	<div id ="butt" style="float:right;margin-right:100px;">
 	<input type="hidden" name="idx" value="${dto.idx}">
-		<input type="button" value="목록" onclick="goFirstForm()">
-		<input type="button" onclick="SirenFunction('SirenDiv'); return false;" class="blind_view" value="답변하기">
+		<input type="button" value="목록" onclick="goFirstForm()" class="btn btn-sm btn-danger">
+		<input type="button" onclick="SirenFunction('SirenDiv'); return false;" class="blind_view btn btn-sm btn-danger"" value="답변하기">
 	</div>
 	</form>
 	

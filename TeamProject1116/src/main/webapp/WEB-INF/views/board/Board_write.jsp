@@ -36,6 +36,28 @@
     text-decoration:none;
     color: rgb(40, 40, 40);
     }
+	.sidebar{   
+      width: 180px;
+      height: 700px; 
+    } 
+    .sidebar table tr td{
+      width: 150px; 
+      border:1px solid rgb(155, 155, 155);
+      border-collapse: collapse;    
+    } 
+    .sidebarlist{
+      padding-left:25px;
+   	  padding: 8px;
+      width: 178px;
+      height: 40px;
+    }
+    .sidebarlist>a{
+      color: rgb(40, 40, 40);
+      text-decoration: none;   
+    }
+    .sidebarlist:hover{
+      background-color: rgb(239, 239, 239);
+    }
     
     /* 사이드바 메인컨텐츠 기본양식 끝 */
     
@@ -156,26 +178,34 @@
 				<p>게시판 관리</p>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Notice_board">공지사항</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 						    <a href="OnetoOneBoard_A">1:1문의</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Question_board">자주하는 질문</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Event_board">이벤트</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>
@@ -220,8 +250,8 @@
 	</table>
 	<div id ="butt">
 	
-		<input type="submit" value="작성"/>
-		<input type="button" value="취소" onclick="goFirstForm()">
+		<input type="submit" value="작성" class="btn btn-sm btn-danger"/>
+		<input type="button" value="취소" class="btn btn-sm btn-danger" onclick="goFirstForm()">
 	</div>
 	</form>
 	

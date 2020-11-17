@@ -181,8 +181,8 @@
 	</table>
 	<div id ="butt">
 	
-		<input type="submit" value="작성"/>
-		<input type="button" value="취소" onclick="goFirstForm()">
+		<input type="submit" value="작성" class="btn btn-sm btn-danger"/>
+		<input type="button" value="취소" class="btn btn-sm btn-danger" onclick="goFirstForm()">
 	</div>
 	</form>
 	

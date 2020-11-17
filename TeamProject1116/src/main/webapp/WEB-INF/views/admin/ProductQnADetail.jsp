@@ -32,6 +32,28 @@
 	    text-decoration:none;
 	    color: rgb(40, 40, 40);
 	    }
+	    .sidebar{   
+	      width: 180px;
+	      height: 700px; 
+	    } 
+	    .sidebar table tr td{
+	      width: 150px; 
+	      border:1px solid rgb(155, 155, 155);
+	      border-collapse: collapse;    
+	    } 
+	    .sidebarlist{
+	      padding-left:25px;
+	   	  padding: 8px;
+	      width: 178px;
+	      height: 40px;
+	    }
+	    .sidebarlist>a{
+	      color: rgb(40, 40, 40);
+	      text-decoration: none;   
+	    }
+	    .sidebarlist:hover{
+	      background-color: rgb(239, 239, 239);
+	    }
 	    /* 사이드바 메인컨텐츠 기본양식 끝 */
 	</style>
 </head>
@@ -49,25 +71,32 @@
 				<p>상품관리</p>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 							<a href="ManageProduct">상품 목록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 						    <a href="UploadProduct">상품 등록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 						    <a href="ProductQnA">상품 문의</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>
 	    </div>
       <!-- 왼쪽 사이드 메뉴바 끝 -->
+      
       <div class="contents">
       <h2>상품 문의 상세보기</h2>
       <table class="table table-striped">

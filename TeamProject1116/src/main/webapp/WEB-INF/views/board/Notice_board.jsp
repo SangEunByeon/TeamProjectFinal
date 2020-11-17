@@ -33,6 +33,28 @@
     th, td {
 	    font-size: 1.4ch;
 	}
+	.sidebar{   
+      width: 180px;
+      height: 700px; 
+    } 
+    .sidebar table tr td{
+      width: 150px; 
+      border:1px solid rgb(155, 155, 155);
+      border-collapse: collapse;    
+    } 
+    .sidebarlist{
+      padding-left:25px;
+   	  padding: 8px;
+      width: 178px;
+      height: 40px;
+    }
+    .sidebarlist>a{
+      color: rgb(40, 40, 40);
+      text-decoration: none;   
+    }
+    .sidebarlist:hover{
+      background-color: rgb(239, 239, 239);
+    }
     /* 사이드바 메인컨텐츠 기본양식 끝 */
 	
 	#bt{
@@ -66,26 +88,34 @@
 				<p>게시판 관리</p>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Notice_board">공지사항</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 						    <a href="OnetoOneBoard_A">1:1문의</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Question_board">자주하는 질문</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Event_board">이벤트</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>
@@ -114,6 +144,7 @@
 	  <!-- 오른쪽 컨텐츠 시작 -->
 	<div class="contents">
         <h2>공지 사항</h2>
+        <hr>
 	<table id="notice_list" class="table table-striped" style="width :800px;">
 	<tr>
 	<th scope="col" class="num" style="width:100px">카테고리</th><th scope="col" class="title2" style="width:400px">제목</th><th scope="col" class="writer" style="width:100px">작성자</th><th scope="col" class="date" style="width:150px">작성일</th><th scope="col" class="hit" style="width:50px">조회</th>
@@ -130,7 +161,7 @@
 	</c:forEach>
 	</table>
 	<%if("admin".equals(session.getAttribute("sessionID"))){  %>
-		    <button style="float:right; width:60px; height:30px;" onclick="goNotice_write()">글작성</button> 
+		    <button style="float:right; width:60px; height:30px;" onclick="goNotice_write()" class="btn btn-sm btn-danger">글작성</button> 
 		    <% }%> 
 	 
 	<nav aria-label="Page navigation example">

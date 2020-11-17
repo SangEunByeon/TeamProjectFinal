@@ -89,5 +89,12 @@
      ]]>
     </select>
     
+    <select id="getUserOrderInfoDao" resultType="_int">
+    select count(*) from book_order where o_orderid=#{param1} and o_state=#{param2}
+    </select>
+    
+    
+    
+    
    
 </mapper>

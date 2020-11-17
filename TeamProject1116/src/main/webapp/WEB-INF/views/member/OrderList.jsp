@@ -6,6 +6,7 @@
 <head> 
 <link rel="stylesheet" href="css/member/orderlist.css">
     <title>주문목록</title> 
+<% String id = (String)session.getAttribute("sessionID"); %>
 </head>
 <style>
 .btn-danger{
@@ -31,7 +32,7 @@ font-size: 1.5ch;
 	                        <div class="section">
 	                         <div class="aside">
 	                            <table cellpadding="10px" cellspaing="10px">
-	                                <p>마이페이지</p> 
+	                                <p><a href="MyPageMain?id=<%=id%>">마이페이지</a></p> 
 	                            <tr>
 	                                <td>
 	                                    <div class="orderlist">

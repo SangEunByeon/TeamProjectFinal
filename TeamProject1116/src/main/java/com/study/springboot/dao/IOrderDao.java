@@ -24,5 +24,8 @@ public interface IOrderDao {
 	public int countstateOrderDao(String state);
 	public List<OrderDto> getListWithPaging(Criteria cri);
 	
+	//1117
+	public int getUserOrderInfoDao(String id, int o_state);
+	
 	
 }

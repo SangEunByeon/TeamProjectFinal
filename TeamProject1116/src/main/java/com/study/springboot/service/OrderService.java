@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +17,6 @@ import com.study.springboot.dao.IMemberDao;
 import com.study.springboot.dao.IOrderDao;
 import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.OrderDto;
-import com.study.springboot.dto.ProductDto;
 
 @Service
 @Primary
@@ -140,6 +140,21 @@ public class OrderService implements IOrderService{
 			HttpSession session = request.getSession();
 			String id = (String)session.getAttribute("sessionID");
 			return dao.countReviewDao(id, "0", "5");
+		}
+
+		@Override
+		public Map<String,Integer> getUserOrderInfo(HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			String sessionID = (String)session.getAttribute("sessionID");
+			Map<String,Integer> map= new HashMap();
+			
+			map.put("del1", dao.getUserOrderInfoDao(sessionID, 1));
+			map.put("del2", dao.getUserOrderInfoDao(sessionID, 2));
+			map.put("del3", dao.getUserOrderInfoDao(sessionID, 3));
+			map.put("del4", dao.getUserOrderInfoDao(sessionID, 4));
+			map.put("del5", dao.getUserOrderInfoDao(sessionID, 5));
+			
+			return map;
 		}
 		
 	

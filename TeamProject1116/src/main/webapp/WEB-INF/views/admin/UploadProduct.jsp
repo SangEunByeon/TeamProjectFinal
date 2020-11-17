@@ -31,6 +31,28 @@
     height: 200px;
     resize: none;
     }
+  	.sidebar{   
+     width: 180px;
+     height: 700px; 
+    } 
+   .sidebar table tr td{
+     width: 150px; 
+     border:1px solid rgb(155, 155, 155);
+     border-collapse: collapse;    
+    } 
+   .sidebarlist{
+     padding-left:25px;
+  	  padding: 8px;
+     width: 178px;
+     height: 40px;
+    }
+   .sidebarlist>a{
+     color: rgb(40, 40, 40);
+     text-decoration: none;   
+    }
+   .sidebarlist:hover{
+     background-color: rgb(239, 239, 239);
+    }
     /* 사이드바 메인컨텐츠 기본양식 끝 */
 	</style>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -73,26 +95,32 @@
 	<div class="AdminMain AdminWrapper2">
 	
 
-      <!-- 왼쪽 사이드 메뉴바 시작 -->
+	   <!-- 왼쪽 사이드 메뉴바 시작 -->
 		<div class="sidebar" style="width:200px; float:left;">
 				<table style="width: 150px;">
 				<p>상품관리</p>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 							<a href="ManageProduct">상품 목록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 						    <a href="UploadProduct">상품 등록</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						    <div class="sidebarlist">
 						    <a href="ProductQnA">상품 문의</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>
@@ -104,6 +132,7 @@
 		<form name="productInfo" action="UploadProductAction" method="post" enctype="multipart/form-data"  
 		onsubmit="return checkValue()"> 
 		<h2>상품 등록</h2>
+		<hr>
 				<table class="table table-striped">
 			  <tbody>
 			    <tr>
@@ -200,8 +229,8 @@
 			    </tr>
 			  </tbody>
 			</table>
-		<button type="submit">상품 등록</button>
-		<button><a href="ManageProduct">목록으로</a></button>
+		<button type="submit" class="btn btn-sm btn-danger" >상품 등록</button>
+		<button class="btn btn-sm btn-danger" ><a href="ManageProduct" style="text-decoration:none; color:white;">목록으로</a></button>
 		</form>      
      </div> 
    

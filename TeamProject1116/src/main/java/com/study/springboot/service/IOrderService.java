@@ -3,6 +3,7 @@ package com.study.springboot.service;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,4 +26,8 @@ public interface IOrderService {
 	public int countReview(HttpServletRequest request);
 	public List<OrderDto> SearchOrder(HttpServletRequest request);
 	public List<OrderDto> getList(Criteria cri);
+	
+	
+	//1117
+	public Map<String,Integer> getUserOrderInfo(HttpServletRequest request);
 }

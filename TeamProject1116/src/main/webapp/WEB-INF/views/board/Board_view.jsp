@@ -265,8 +265,8 @@
 	<div id ="butt">
 	<input type="hidden" name="idx" value="${dto.idx}">
 	<%if("admin".equals(session.getAttribute("sessionID"))){  %>
-		<input type="submit" value="수정"/>
-		<input type="button" value="목록" onclick="goFirstForm(4)">
+		<input type="submit" class="btn btn-sm btn-danger" value="수정"/>
+		<input type="button" class="btn btn-sm btn-danger" value="목록" onclick="goFirstForm(4)">
 		<% }else{%> 
 		<c:choose>
 		<c:when test="${dto.category eq '1'}">

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    
+    <% String id = (String)session.getAttribute("sessionID"); %>
     <link rel="stylesheet" href="css/member/myinfo.css">
 </head>
 <style>
@@ -44,21 +46,21 @@
                         <tr>
                             <td>
                                 <div class="orderlist">
-                                <a href="#">주문내역</a> 
+                                <a href="OrderList">주문내역</a> 
                                 </div>
                             </td> 
                         </tr>
                         <tr>
                             <td>
                                 <div class="basket">
-                                <a href="#">장바구니</a>
+                                <a href="Basket">장바구니</a>
                                 </div>
                             </td> 
                         </tr>
                         <tr>
                             <td>
                                 <div class="review">
-                                <a href="#">상품후기</a>
+                                <a href="ProductReivew">상품후기</a>
 
                                 </div>
                             </td> 
@@ -66,28 +68,28 @@
                         <tr>
                             <td>
                                 <div class="point">
-                                <a href="#">적립금</a>
+                                <a href="PointInfo">적립금</a>
                                 </div>
                             </td> 
                         </tr>
                         <tr>
                             <td>
                                 <div class="ask">
-                                <a href="#">1:1문의</a>
+                                <a href="OnetoOneBoard">1:1문의</a>
                                 </div>
                             </td> 
                         </tr>
                         <tr>
                             <td>
                             <div class="my_info">
-                            <a href="#">내정보</a>
+                            <a href="MyInfo">내정보</a>
                             </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
                             <div class="my_info">
-                            <a href="#">상품문의</a>
+                            <a href="MyProductQnA">상품문의</a>
                             </div>
                             </td>
                         </tr>
@@ -96,75 +98,44 @@
                <div class="head_orderlist"> 
                        <h4>마이페이지</h4>   
                     <table>
+                    <tr>
+                    <td>
+                    <div style="margin-bottom: 30px;"><h3><%=id%>님의 포인트는 ${userdto.point}점 입니다.</h3></div>
+                    </td>
+                    </tr>
                         <tr>
                             <td>
                                 <div>진행중인 주문/배송 (최근 3개월)</div>
                                 <div class="post post1">
                                     <div class="postdiv">
-                                        <h1><div class="delivery">0</div></h1><br>
+                                        <h1><div class="delivery">${del1}</div></h1><br>
                                         <h6>주문확인중</h6>
                                     </div>
                                     <div style="margin: 0 auto;"><h1>></h1></div>
                                     <div class="postdiv">
-                                        <h1><div class="delivery">0</div></h1><br>
+                                        <h1><div class="delivery">${del2}</div></h1><br>
                                         <h6>주문확인</h6>
                                     </div>
                                     <div style="margin: 0 auto;"><h1>></h1></div>
                                     <div class="postdiv">
-                                        <h1><div class="delivery">0</div></h1><br>
+                                        <h1><div class="delivery">${del3}</div></h1><br>
                                         <h6>배송준비중</h6>
                                     </div>
                                     <div style="margin: 0 auto;"><h1>></h1></div>
                                     <div class="postdiv">
-                                        <h1><div class="delivery">0</div></h1><br>
+                                        <h1><div class="delivery">${del4}</div></h1><br>
                                         <h6>배송중</h6>
                                     </div>
                                     <div style="margin: 0 auto;"><h1>></h1></div>
                                     <div class="postdiv">
-                                        <h1><div class="delivery">0</div></h1><br>
+                                        <h1><div class="delivery">${del5}</div></h1><br>
                                         <h6>배송완료</h6>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         <tr><td>　</td></tr>
-                        <tr>
-                            <td>
-                                <div style="width:700px;">최근주문내역 <a href="#" class="more">더보기</a></div>
-                                <div class="post" >
-                                    <table class="table table-striped">
-                                        <thead>
-                                          <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
-                                </div>
-                            </td>
-                        </tr>
+						<hr>
                         <tr><td>　</td></tr>
                         <tr>
                             <td>
@@ -176,71 +147,75 @@
                                     </tr>
                                     <tr>
                                         <td><div class="onetoone">
-                                            <table class="table table-striped">
+                                        
+                                      <table class="table table-striped">
                                                 <thead>
                                                   <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">First</th>
-                                                    <th scope="col">Last</th>
-                                                    <th scope="col">Handle</th>
+                                                    <th scope="col">문의유형</th>
+                                                    <th scope="col">제목</th>
+                                                    <th scope="col">답변상태</th>
+                                                  </tr>
                                                   </tr>
                                                 </thead>
-                                                <tbody>
-                                                  <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
-                                                  </tr>
+                                               <tbody>
+                                                <c:if test="${onelist == '[]'}">
                                                 </tbody>
-                                              </table>
+                                                </table>
+                                                <div>
+                                                <h3 style="font-size:1.4ch; text-align:center;">등록된 1:1 문의 글이 없습니다.</h3>
+                                                </div>
+                                                </c:if>
+                                                
+                                                <c:if test="${onelist != null}">
+                                                <c:forEach items="${ onelist }" var="onelist" begin="0" end="2" step="1">
+                                                 <tr>
+                                                    <td style="font-size:1.4ch;">${onelist.o_type}</td>
+                                                    <td style="font-size:1.4ch;">${onelist.o_title}</td>
+                                                    <td style="font-size:1.4ch; color: blue;">${onelist.o_ans_check}</td>
+                                                  </tr>
+                                                  </c:forEach>
+                                                  </tbody>
+                                                  </table>
+                                              
+                                                  </c:if>
                                         </div></td>
-                                        <td>　</td>
+                                        
+                                      <td>　</td>
                                         <td><div class="proqna">
+                
                                             <table class="table table-striped">
                                                 <thead>
                                                   <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">First</th>
-                                                    <th scope="col">Last</th>
-                                                    <th scope="col">Handle</th>
+                                                    <th scope="col">도서명</th>
+                                                    <th scope="col">작가명</th>
+                                                    <th scope="col">답변상태</th>
                                                   </tr>
                                                 </thead>
                                                 <tbody>
-                                                  <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Mark</td>
-                                                    <td>Otto</td>
-                                                    <td>@mdo</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
-                                                  </tr>
+                                                
+                                                <c:if test="${qnalist == '[]'}">
                                                 </tbody>
-                                              </table>
+                                                </table>
+                                                <h3 style="font-size:1.4ch; text-align:center;">등록된 상품 문의 글이 없습니다.</h3>
+                                                </c:if>
+                                                
+                                                <c:if test="${qnalist != null}">
+                                                <c:forEach items="${ qnalist }" var="qnalist" begin="0" end="2" step="1">
+                                                 <tr>
+                                                    <td style="font-size:1.4ch;">${qnalist.p_title}</td>
+                                                    <td style="font-size:1.4ch;">${qnalist.p_writer}</td>
+                                                    <td style="font-size:1.4ch; color: blue;">${qnalist.p_answer_state}</td>
+                                                  </tr>
+                                                </c:forEach>
+                                                  </tbody>
+                                                  </table>
+                                                </c:if>
+                                       
+                                             
                                         </div></td>
                                     </tr>
+                                </table>
+                                </table>
                                 </table>
                             </td>
                         </tr>

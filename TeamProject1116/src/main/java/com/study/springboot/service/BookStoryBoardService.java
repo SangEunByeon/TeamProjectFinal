@@ -26,8 +26,7 @@ import com.study.springboot.dto.ProductDto;
 public class BookStoryBoardService implements IBookStoryBoardService { 
 	
 	@Autowired
-	BookStoryBoardReplyDto replyDto;
-	
+	BookStoryBoardReplyDto replyDto; 
 	@Autowired
 	IBookStoryBoardDao bookstoryDao; 
 	@Autowired
@@ -146,19 +145,21 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 	@Override
 	public int bookstoryLike_check(int idx) throws Exception { 
 		return bookstoryDao.bookstoryLike_checkDao(idx);
-	}
-
+	} 
+  
 	@Override
-	public int BookstoryRelpy(BookStoryBoardDto bookstoryDto) {
-		int nResult=bookstoryDao.BookstoryRelpyDao(bookstoryDto);
+	public int bookstoryRelpyWrite(BookStoryBoardReplyDto replyDto) {
+		int nResult=bookstoryDao.bookstoryRelpyWriteDao(replyDto);
 		return nResult;
 	}
-
+ 
 	@Override
-	public List<BookStoryBoardDto> bookstoryReplyView(String bs_user_id) {
-		List<BookStoryBoardDto> list=bookstoryDao.bookstoryReplyViewDao(bs_user_id);
-		return list;
+	public BookStoryBoardReplyDto bookstoryReplyView(int idx) {
+		BookStoryBoardReplyDto dto=bookstoryDao.bookstoryReplyViewDao(idx);
+		return dto;
 	}
+	 
+ 
 	  
 	 
 }

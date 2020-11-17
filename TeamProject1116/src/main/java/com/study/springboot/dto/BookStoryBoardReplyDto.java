@@ -1,6 +1,7 @@
 package com.study.springboot.dto;
+ 
 
-import java.sql.Date;
+import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
@@ -10,6 +11,7 @@ import lombok.Data;
 @Data
 public class BookStoryBoardReplyDto {
 	private int idx;
+	private String reply_profile;
 	private String reply_category;
 	private String reply_writer;
 	private String reply_content;

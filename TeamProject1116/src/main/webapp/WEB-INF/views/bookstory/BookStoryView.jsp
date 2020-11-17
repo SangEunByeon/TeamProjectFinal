@@ -4,6 +4,7 @@
   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %> 
+<%@ page import="com.study.springboot.dto.BookStoryBoardReplyDto" %> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
     
@@ -13,6 +14,9 @@
 	 String id = (String) session.getAttribute("sessionID"); 
 	 MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
 	 System.out.println("memberDto"+memberDto); 
+	 /* BookStoryBoardReplyDto reply_view_bookstory = (BookStoryBoardReplyDto)session.getAttribute("reply_view_bookstory");  
+	 System.out.println("reply_view_bookstory"+reply_view_bookstory);  */
+	  
 %>  
   
 <html>
@@ -231,31 +235,38 @@
                                     <span class="reply_f_upload">최신순</span>
                                  </div>
 								  
+								   
                                  <!-- 댓글 반복구간 -->
-                                 <div class="reply_content">
+                                  <div class="reply_content">
                                      <table>
                                          <tr>
                                             <td>
-                                                <div class="myInfo_img"><img src="https://placehold.it/80x80"></div> 
+                                                <div class="myInfo_img"><img id="img" src="../uploadPro3_bookstory/${reply_view_bookstory.reply_profile}" width="80px" height="80px"></div> 
                                             </td>
                                             <td>
-                                                <span style="font-weight: 800;">${list_bookstory.bs_user_id}</span>
+                                            	<input type="hidden" name="idx" value="${reply_view_bookstory.idx}">
+                                                <span style="font-weight: 800;">닉네임</span><span>${reply_view_bookstory.reply_writer}</span>
                                               
                                                 <div class=" content_text">
-                                                    ${list_bookstory.reply}
+                                                   ${reply_view_bookstory.reply_content}
                                                 </div>
                                                
                                             </td>
                                          </tr>
                                      </table>  
-                                 </div>
+                                 </div> 
                                  
+                               
                                  <form action="replyAction" method="post" name="reply">
+                                <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
                                 <input type="hidden" name="idx" value="${content_view_bookstory.idx}">
-                                 <table>
+                                <input type="hidden" name="reply_writer" value="${content_view_bookstory.bs_user_id}">
+                                <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}">
+                                 
+                                <table>
                                     <tr>
                                         <td style="padding-top: 20px;">
-                                            <textarea name="reply" id="reply" cols="95" rows="5" placeholder="댓글을 달아주세요"></textarea>
+                                            <textarea name="reply_content" id="reply_content" cols="95" rows="5" placeholder="댓글을 달아주세요"></textarea>
                                         </td>
                                         <td>
                                             <input type="submit" class="btn btn-light" value="댓글달기" style="text-align: center;"> 

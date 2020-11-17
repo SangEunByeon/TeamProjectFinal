@@ -47,14 +47,28 @@
      </select>  
      
      
-    <delete id="bookstoryDeleteDao">
+     <delete id="bookstoryDeleteDao">
    			delete from bookstory_board where idx=#{param1}
-    </delete>
+     </delete>
     
-    <update id="bookstoryUpdateDao"  parameterType="com.study.springboot.dto.BookStoryBoardDto">
+     <update id="bookstoryUpdateDao"  parameterType="com.study.springboot.dto.BookStoryBoardDto">
    			update  bookstory_board set bs_category=#{bs_category} , bs_title =#{bs_title} ,bs_content=#{bs_content} where idx=#{idx}
-    </update> 
-    
+     </update> 
+      
+     <insert id="bookstoryRelpyWriteDao" parameterType="com.study.springboot.dto.BookStoryBoardReplyDto">
+       <selectKey keyProperty="reply_no" resultType="int" order="BEFORE">
+          select bookstoryboard_reply_seq.nextval FROM DUAL
+       </selectKey>
+        insert into bookstoryboard_reply (idx, reply_no, reply_category, reply_writer, reply_content,reply_profile, reg)
+             values (#{idx},#{reply_no}, #{reply_category}, #{reply_writer}, #{reply_content}, #{reply_profile}, #{reg})
+     </insert>
+  
+   	 <select id="bookstoryReplyViewDao" resultType="com.study.springboot.dto.BookStoryBoardReplyDto">
+            select * from bookstoryboard_reply where idx=#{param1}  
+     </select>  
+   
+   
+   
     
       
 </mapper>

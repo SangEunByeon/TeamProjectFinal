@@ -169,9 +169,20 @@
 	 ]]>
 	
 	</select>
-	
+	<select id="countMyProductQnADao" resultType="int">
+      select count(*) from book_product_qna where id=#{param1}
+   </select>
 	<select id="myProductQnAListDao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
-	select * from book_product_qna where id = #{param1} order by idx desc
+	<![CDATA[ 
+     select *
+     from ( 
+     select 
+     rownum rn, idx,p_number,p_content,reg,id,p_answer,p_answer_state,p_title,p_writer
+     from book_product_qna
+     where rownum <= #{cri.pageNum} * #{cri.amount} AND id=#{id}
+     order by idx desc) 
+     where rn > (#{cri.pageNum} -1) * #{cri.amount} AND id=#{id}
+     ]]>
 	</select>
 	
 	<select id="SearchmyProductQnADao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">

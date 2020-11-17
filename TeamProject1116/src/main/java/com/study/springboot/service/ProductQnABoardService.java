@@ -2,6 +2,7 @@ package com.study.springboot.service;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.study.springboot.dao.IProductDao;
+import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.ProductDto;
 import com.study.springboot.dto.Product_QnA_Board_Dto;
 @Primary
@@ -96,10 +98,13 @@ public class ProductQnABoardService implements IProductQnABoardService{
 	
 	
 	@Override
-	public List<Product_QnA_Board_Dto> myProductQnAList(HttpServletRequest request) {
+	public List<Product_QnA_Board_Dto> myProductQnAList(HttpServletRequest request,Criteria cri) {
 		HttpSession session = request.getSession();
 		String sessionID=(String)session.getAttribute("sessionID");
-		return dao.myProductQnAListDao(sessionID);
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("id", sessionID);
+		map.put("cri", cri);
+		return dao.myProductQnAListDao(map);
 	}
 
 	@Override
@@ -122,6 +127,13 @@ public class ProductQnABoardService implements IProductQnABoardService{
 		String s_idx = request.getParameter("idx");
 		int idx=Integer.parseInt(s_idx);
 		return dao.MyProductQnAViewDao(idx);
+	}
+
+	@Override
+	public int countMyProductQnA(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String sessionID=(String)session.getAttribute("sessionID");
+		return dao.countMyProductQnADao(sessionID);
 	}
 	
 	

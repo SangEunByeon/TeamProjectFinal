@@ -52,7 +52,8 @@ public interface IProductDao {
 	
 	
 	//1116
-	public List<Product_QnA_Board_Dto> myProductQnAListDao(String sessionID);
+	public List<Product_QnA_Board_Dto> myProductQnAListDao(HashMap<String,Object> map);
+	public int countMyProductQnADao(String id);
 	public List<Product_QnA_Board_Dto> SearchmyProductQnADao(String category,String keyword);
 	public List<Product_QnA_Board_Dto> noAnswerQnADao(String id,String answerCheck);
 	// 1117

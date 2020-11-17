@@ -345,14 +345,24 @@ public class MyController_M {
 		return "redirect";
 	}
 	
-//	//장바구니 폼
-//	@RequestMapping("/Basket")
-//	public String Basket(HttpServletRequest request,Model model) {
-//		List<CartDto> list = cart_service.getCart(request);
-//		model.addAttribute("list",list);
-//		return "member/Basket";
-//	}
-	
+	//장바구니 폼
+			@RequestMapping("/Basket")
+			public String Basket(HttpServletRequest request,Model model) {
+				Criteria cri = new Criteria(1,7);
+				int bookcnt=cart_service.countCart(request);
+				int allPageNum; 
+				if(bookcnt%7==0) {
+					allPageNum =bookcnt/7;
+				}else {
+					allPageNum =bookcnt/7+1; 
+				}
+				request.setAttribute("list",cart_service.getCart(request, cri));
+				cri.setAllPageNum(allPageNum);
+				request.setAttribute("allPageNum", allPageNum);
+				
+				return "member/Basket";
+			}
+		
 	//장바구니 폼 추가 로직
 	@RequestMapping("/addBasket")
 	public String addBasket(HttpServletRequest request,Model model) {	
@@ -378,11 +388,21 @@ public class MyController_M {
 	}
 	
 	//상품후기 폼
-	@RequestMapping("/ProductReivew")
-	public String ProductReivew(HttpServletRequest request,Model model) {
-		List<OrderDto> list=order_service.reviewToWriteList(request);
-		model.addAttribute("list",list);
-		return "member/ProductReivew";}  
+		@RequestMapping("/ProductReivew")
+		public String ProductReivew(HttpServletRequest request,Model model) {
+			Criteria cri = new Criteria(1,7);
+			int bookcnt=order_service.countReview(request);
+			int allPageNum; 
+			if(bookcnt%7==0) {
+				allPageNum =bookcnt/7;
+			}else {
+				allPageNum =bookcnt/7+1; 
+			}
+			request.setAttribute("list",order_service.reviewToWriteList(request, cri));
+			cri.setAllPageNum(allPageNum);
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/ProductReivew";
+	}    
 	
 	//상품후기작성 폼
 	@RequestMapping("/ProductReviewWrite")
@@ -397,7 +417,8 @@ public class MyController_M {
 		model.addAttribute("o_orderid",o_orderid);
 		model.addAttribute("p_number",p_number);
 		model.addAttribute("o_number",o_number);
-		return "member/ProductReviewWrite";}  
+		return "member/ProductReviewWrite";
+	}
 	
 	//상품후기작성 로직
 	@RequestMapping(value="/WriteReviewAction",  method = RequestMethod.POST)
@@ -407,17 +428,27 @@ public class MyController_M {
 		String o_num = request.getParameter("o_number");
 		int o_number = Integer.parseInt(o_num);
 		review_service.changeReviewState(1,o_number);
-		List<Review_Board_Dto> list=review_service.viewWrittenReview(request);
-		model.addAttribute("list",list);
-		return "member/ProductReviewComplete";}  	
+		model.addAttribute("msg","상품후기 작성이 완료되었습니다.");
+		model.addAttribute("url","/ProductReviewComplete");
+		return "redirect";}  	
 	
 	//상품완료후기 폼
 	@RequestMapping("/ProductReviewComplete")
 	public String ProductReviewComplete(HttpServletRequest request, Model model) {	
-		List<Review_Board_Dto> list=review_service.viewWrittenReview(request);
-		model.addAttribute("list",list);
-		return "member/ProductReviewComplete";}
-	
+		Criteria cri = new Criteria(1,7);
+		int bookcnt=review_service.countReviewComplete(request);
+		int allPageNum; 
+		if(bookcnt%7==0) {
+			allPageNum =bookcnt/7;
+		}else {
+			allPageNum =bookcnt/7+1; 
+		}
+		request.setAttribute("list",review_service.viewWrittenReview(request, cri));
+		cri.setAllPageNum(allPageNum);
+		request.setAttribute("allPageNum", allPageNum);
+		return "member/ProductReviewComplete";
+	}
+		
 	@RequestMapping("/deleteReview")
 	public String deleteReview(HttpServletRequest request,Model model) {
 		review_service.deleteReview(request);
@@ -524,60 +555,59 @@ public class MyController_M {
 	   }
   
 	  //로그인 검사
-    @RequestMapping(value="/MemberLoginAction", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
- 	public String loginCheck(HttpServletRequest request, HttpSession session, Model model, HttpServletResponse response) throws IOException{  	
-    	
-    	
-    	String id=request.getParameter("id");
-    	String password=request.getParameter("password");  
-    	String keepLogin=request.getParameter("keepLogin");
-    	System.out.println("keepLogin:"+keepLogin);
-    	 
-    	
-		int nResult = member_service.loginCheck(id, password);
-		if( nResult <= 0 ) {
-			System.out.println("로그인 실패");
-	        model.addAttribute("msg","로그인 실패 - 아이디나 암호를 확인해주세요");
-	        model.addAttribute("url","LoginForm");
-		}else {
-			
-			if(keepLogin!=null) {  
-				//로그인시 id로 쿠키설정
-				if(keepLogin.equals("true")){
-					Cookie cookieId=new Cookie("id",id);
-					Cookie cookiePW=new Cookie("password",password);
-					cookieId.setMaxAge(60*60*24*14);//2주간
-					cookiePW.setMaxAge(60*60*24*14);
-					response.addCookie(cookieId);
-					response.addCookie(cookiePW);
-					System.out.println("쿠키id생성");
-				}else {
-					Cookie[] cookies=request.getCookies();
-					if(cookies!=null) {
-						for(Cookie cookie: cookies) {
-							if(cookie.getName().equals("id") && cookie.getName().equals("password")) {
-								//삭제:시간설정0
-								cookie.setMaxAge(0);
-								response.addCookie(cookie);
+	    @RequestMapping(value="/MemberLoginAction", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
+	 	public String loginCheck(HttpServletRequest request, HttpSession session, Model model, HttpServletResponse response) throws IOException{  	
+	    	
+	    	
+	    	String id=request.getParameter("id");
+	    	String password=request.getParameter("password");  
+	    	String keepLogin=request.getParameter("keepLogin");
+	    	System.out.println("keepLogin:"+keepLogin);
+	    	 
+	    	
+			int nResult = member_service.loginCheck(id, password);
+			if( nResult <= 0 ) {
+				System.out.println("로그인 실패");
+		        model.addAttribute("msg","로그인 실패 - 아이디나 암호를 확인해주세요");
+		        model.addAttribute("url","LoginForm");
+			}else {
+				
+				if(keepLogin!=null) {  
+					//로그인시 id로 쿠키설정
+					if(keepLogin.equals("true")){
+						Cookie cookieId=new Cookie("id",id);
+						Cookie cookiePW=new Cookie("password",password);
+						cookieId.setMaxAge(60*60*24*14);//2주간
+						cookiePW.setMaxAge(60*60*24*14);
+						response.addCookie(cookieId);
+						response.addCookie(cookiePW);
+						System.out.println("쿠키id생성");
+					}else {
+						Cookie[] cookies=request.getCookies();
+						if(cookies!=null) {
+							for(Cookie cookie: cookies) {
+								if(cookie.getName().equals("id") && cookie.getName().equals("password")) {
+									//삭제:시간설정0
+									cookie.setMaxAge(0);
+									response.addCookie(cookie);
+								}
 							}
 						}
-					}
-				}	
+					}	
+				}
+				
+				System.out.println("로그인 성공"); 
+				MemberDto dto=member_service.getUserInfo(id);
+				session.setAttribute("memberDto", dto);
+				System.out.println("세션DTO:"+dto); 
+		   		session.setAttribute("sessionID", id);    
+				model.addAttribute("msg","로그인 성공");
+	            model.addAttribute("url","MainForm");
 			}
-			
-			System.out.println("로그인 성공"); 
-			MemberDto dto=member_service.getUserInfo(id);
-			session.setAttribute("memberDto", dto);
-			System.out.println("세션DTO:"+dto); 
-	   		session.setAttribute("sessionID", id);    
-			model.addAttribute("msg","로그인 성공");
-            model.addAttribute("url","MainForm");
-		}
-		return "redirect";
-    }
+			return "redirect";
+	    }
 	    
 	    
- 
 	  //로그아웃
 	    @RequestMapping("/LogOut")
 	 	public String LogOut(HttpServletRequest request, Model model, HttpServletResponse response){  	
@@ -593,8 +623,7 @@ public class MyController_M {
 			        model.addAttribute("url","/");
 				}else {
 
-					if(id!=null && passowrd!=null) { 
-						
+					if(id!=null && passowrd!=null) {  
 						
 					Cookie[] cookies = request.getCookies(); 
 					 if(cookies != null) {
@@ -615,7 +644,7 @@ public class MyController_M {
 						 	} 
 					 	} 
 					}
-					
+					session.invalidate();
 					request.getSession().invalidate();
 					model.addAttribute("msg","로그아웃 성공");
 		            model.addAttribute("url","/");
@@ -624,7 +653,7 @@ public class MyController_M {
 		    } 
 		    	return "MainForm"; 
 			
-	    }
+	    }     
     
     //내정보 아이디, 비밀번호 체크
     @RequestMapping(value="/MyInfoAction", method = RequestMethod.POST, produces = "text/html; charset=UTF-8")
@@ -1102,6 +1131,25 @@ public class MyController_M {
 		request.setAttribute("allPageNum", allPageNum);
 		return "admin/ManageMember";
 	}
+	//사용자 폼 > 상품문의 페이징
+		@RequestMapping("/page4")
+		public String MyProductQnApaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,10);
+			request.setAttribute("list",pro_qna_service.myProductQnAList(request,cri));
+			
+			int bookcnt=pro_qna_service.countMyProductQnA(request);
+			int allPageNum; 
+			if(bookcnt%10==0) {
+				allPageNum =bookcnt/10;
+			}else {
+				allPageNum =bookcnt/10+1; 
+			}
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/MyProductQnA";
+		}
+		
 	//공지사항 페이징
 		@RequestMapping("/page5")
 		public String Noticepaging(HttpServletRequest request,Model model) {
@@ -1189,6 +1237,114 @@ public class MyController_M {
 			}
 			request.setAttribute("allPageNum", allPageNum);
 			return "admin/WithdrawMember";
+		}
+		
+		//사용자 폼 >  주문목록 페이징
+		@RequestMapping("/page10")
+		public String OrderListpaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,7);
+			request.setAttribute("list",order_service.listbyUser(request, cri));
+			int bookcnt=order_service.countMemberOrder(request);
+			int allPageNum; 
+			if(bookcnt%7==0) {
+				allPageNum =bookcnt/7;
+			}else {
+				allPageNum =bookcnt/7+1; 
+			}
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/OrderList";
+		}
+		//사용자 폼 >  장바구니 페이징
+		@RequestMapping("/page11")
+		public String Basketpaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,7);
+			request.setAttribute("list",cart_service.getCart(request, cri));
+			int bookcnt=cart_service.countCart(request);
+			int allPageNum; 
+			if(bookcnt%7==0) {
+				allPageNum =bookcnt/7;
+			}else {
+				allPageNum =bookcnt/7+1; 
+			}
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/Basket";
+		}
+		//사용자 폼 >  포인트 페이징
+		@RequestMapping("/page12")
+		public String PointInfopaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			 HttpSession session = request.getSession();
+		     String id = (String)session.getAttribute("sessionID");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,10);
+			request.setAttribute("list",point_service.pointList(id, cri));
+			int bookcnt=point_service.count(id);
+			int allPageNum; 
+			if(bookcnt%10==0) {
+				allPageNum =bookcnt/10;
+			}else {
+				allPageNum =bookcnt/10+1; 
+			}
+			model.addAttribute("point",member_service.getUserInfo(id));
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/PointInfo";
+		}
+		//사용자 폼 >  1:1문의 페이징
+		@RequestMapping("/page13")
+		public String OnetoOneBoardpaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			HttpSession session = request.getSession();
+			String id = (String)session.getAttribute("sessionID");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,7);
+			request.setAttribute("list",oneBoardservice.list(id, cri));
+			int bookcnt=oneBoardservice.countMember(id);
+			int allPageNum; 
+			if(bookcnt%7==0) {
+				allPageNum =bookcnt/7;
+			}else {
+				allPageNum =bookcnt/7+1; 
+			}
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/OnetoOneBoard";
+		}
+		//사용자 폼 >  상품 후기 작성가능
+		@RequestMapping("/page14")
+		public String ProductReviewpaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,7);
+			request.setAttribute("list",order_service.reviewToWriteList(request, cri));
+			int bookcnt=order_service.countReview(request);
+			int allPageNum; 
+			if(bookcnt%7==0) {
+				allPageNum =bookcnt/7;
+			}else {
+				allPageNum =bookcnt/7+1; 
+			}
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/ProductReivew";
+		}
+		//사용자 폼 >  상품 후기 작성완료
+		@RequestMapping("/page15")
+		public String ProductReviewCompletepaging(HttpServletRequest request,Model model) {
+			String s_no=request.getParameter("no");
+			int no = Integer.parseInt(s_no);
+			Criteria cri = new Criteria(no,7);
+			request.setAttribute("list",review_service.viewWrittenReview(request, cri));
+			int bookcnt=review_service.countReviewComplete(request);
+			int allPageNum; 
+			if(bookcnt%7==0) {
+				allPageNum =bookcnt/7;
+			}else {
+				allPageNum =bookcnt/7+1; 
+			}
+			request.setAttribute("allPageNum", allPageNum);
+			return "member/ProductReviewComplete";
 		}
 	//관리자 폼 > 상품관리 화면 > 상품 검색
 	@RequestMapping("/SearchProduct")
@@ -1730,11 +1886,16 @@ public String stateAlign(HttpServletRequest request,Model model){
 			int hit=bookstory_service.bookstoryHit(idx); 
 			model.addAttribute("hit",hit); 
 			
-			  
-			 //댓글보기
+		 
+		    //댓글보기
 			List<BookStoryBoardReplyDto> replyDto=bookstory_service.bookstoryReplyView(idx);
 			request.getSession().setAttribute("reply_view_bookstory", replyDto); 
-			System.out.println("한번보기"+replyDto);
+	 
+			
+			//댓글 수 
+			int replyCount=bookstory_service.bookStoryReplyCount(idx); 
+			model.addAttribute("replyCount",replyCount);
+			
 			return "bookstory/BookStoryView";  
 		} 
 		
@@ -1839,25 +2000,32 @@ public String stateAlign(HttpServletRequest request,Model model){
 			return "redirect";
 	    }  
 	
-//		//댓글 삭제
-//		@RequestMapping("/bookStoryReplyDeleteAction")
-//		public String bookStoryReplyDeleteAction(HttpServletRequest request,Model model){   
-//		String idx2=request.getParameter("idx");
-//			int idx=Integer.parseInt(idx2);
-//			int nResult=bookstory_service.bookStoryReplyDelete(idx,reply_no);
-//			
-//			
-//			if(nResult>1) {
-//				System.out.println("댓글이 삭제되었습니다.");
-//				model.addAttribute("msg","댓글이 삭제되었습니다");
-//				model.addAttribute("url","BookStoryView");
-//			}
-//			
-//			
-//		return "redirect";
-//	} 
+		//댓글 삭제
+		@RequestMapping("/bookStoryReplyDeleteAction")
+		public String bookStoryReplyDeleteAction(HttpServletRequest request,Model model){
 
-		
+			String idx2=request.getParameter("idx");
+			System.out.println("게시글번호"+idx2);
+			int idx=Integer.parseInt(idx2);   
+			
+			
+			String reply_no2=request.getParameter("reply_no");
+			System.out.println("댓글번호"+reply_no2);
+			int reply_no=Integer.parseInt(reply_no2); 
+			
+			
+			int nResult=bookstory_service.bookStoryReplyDelete(reply_no); 
+			
+			
+			if(nResult>0) {
+				System.out.println("댓글이 삭제되었습니다.");
+				model.addAttribute("msg","댓글이 삭제되었습니다");
+				model.addAttribute("url","BookStoryView?idx="+idx); 
+			} 
+			
+			return "redirect";
+		} 
+		 
 		//전체 글보기 > 전체 글 목록
 		@RequestMapping("/BookStoryAllList")
 		public String BookStoryAllList(HttpServletRequest request, Model model){
@@ -1982,15 +2150,27 @@ public String stateAlign(HttpServletRequest request,Model model){
 	//1116 마이큐엔에이
 		@RequestMapping("/MyProductQnA")
 		public String MyProductQnA(HttpServletRequest request,Model model) {
-			List<Product_QnA_Board_Dto> list=pro_qna_service.myProductQnAList(request);
-			model.addAttribute("list",list);
+			Criteria cri = new Criteria(1,10);
+			int bookcnt=pro_qna_service.countMyProductQnA(request);
+			int allPageNum; 
+			if(bookcnt%10==0) {
+				allPageNum =bookcnt/10;
+			}else {
+				allPageNum =bookcnt/10+1; 
+			}
+			request.setAttribute("list",pro_qna_service.myProductQnAList(request,cri));
+			cri.setAllPageNum(allPageNum);
+			request.setAttribute("allPageNum", allPageNum);	
 			return "member/MyProductQnA";
 		}
+		
 		
 		//1116 마이큐엔에이 search 기능
 		@RequestMapping("/SearchmyProductQnA")
 		public String SearchmyProductQnA(HttpServletRequest request,Model model) {
 			List<Product_QnA_Board_Dto> list=pro_qna_service.SearchmyProductQnA(request);
+			int allPageNum =0;	
+			request.setAttribute("allPageNum", allPageNum);
 			model.addAttribute("list",list);
 			return "member/MyProductQnA";
 		}
@@ -1999,21 +2179,20 @@ public String stateAlign(HttpServletRequest request,Model model){
 	   @RequestMapping("/NoAnswer_qna") 
 	   public String NoAnswer_qna(HttpServletRequest request,Model model) { 
 		  List<Product_QnA_Board_Dto> list=pro_qna_service.noAnswerQnA(request);
+		  int allPageNum =0;	
+		request.setAttribute("allPageNum", allPageNum);
 		  model.addAttribute("list",list);
 	      return "member/MyProductQnA"; 
 	   }
-
-
-	//1117 마이큐엔에이 상세보기
-	@RequestMapping("/MyProductQnAView")
-	public String MyProductQnAView(HttpServletRequest request,Model model) {
+	   //1117 마이큐엔에이 상세보기
+	   @RequestMapping("/MyProductQnAView")
+	   public String MyProductQnAView(HttpServletRequest request,Model model) {
 		   Product_QnA_Board_Dto dto=pro_qna_service.MyProductQnAView(request);
 		   System.out.println("마이큐엔에이 리스트: "+dto);
 		   model.addAttribute("dto",dto);
 		   return "member/MyProductQnAView";
-	}
+	   }
 		
-
 
 }
 

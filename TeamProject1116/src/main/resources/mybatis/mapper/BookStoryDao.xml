@@ -61,7 +61,16 @@
      </insert>
   
    	 <select id="bookstoryReplyViewDao" resultType="com.study.springboot.dto.BookStoryBoardReplyDto">
-            select * from bookstoryboard_reply where idx=#{param1}  
+            select * from bookstoryboard_reply where idx=#{param1}  order by reg asc
+     </select>  
+   
+   
+   	 <delete id="bookStoryReplyDeleteDao" >
+            delete from bookstoryboard_reply where reply_no=#{param1}
+     </delete>  
+     
+   	 <select id="bookStoryReplyCountDao" resultType="com.study.springboot.dto.BookStoryBoardReplyDto">
+            select * from bookstoryboard_reply where idx=#{param1}
      </select>  
    
    

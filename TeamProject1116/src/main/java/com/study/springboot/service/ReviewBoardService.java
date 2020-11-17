@@ -118,6 +118,7 @@ public class ReviewBoardService implements IReviewBoardService{
 		dao.changeReviewState(o_number);
 		return 0;
 	}
+	
 	@Override
 	public int countReviewComplete(HttpServletRequest request) {
 		HttpSession session = request.getSession();

@@ -1,10 +1,11 @@
-<%@page import="com.study.springboot.dto.BookStoryBoardDto"%>
+<%@page import="com.study.springboot.dto.BookStoryBoardDto"%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %> 
 <%@ page import="com.study.springboot.dto.BookStoryBoardReplyDto" %> 
+<%@page import="java.util.List"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
     
@@ -13,9 +14,8 @@
 		System.out.println("bookstory content_view"+content_view_bookstory);
 	 String id = (String) session.getAttribute("sessionID"); 
 	 MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
-	 System.out.println("memberDto"+memberDto); 
-	 /* BookStoryBoardReplyDto reply_view_bookstory = (BookStoryBoardReplyDto)session.getAttribute("reply_view_bookstory");  
-	 System.out.println("reply_view_bookstory"+reply_view_bookstory);  */
+	 System.out.println("memberDto"+memberDto);   
+	 List<BookStoryBoardReplyDto> reply_view_bookstory= (List<BookStoryBoardReplyDto>)session.getAttribute("reply_view_bookstory");
 	  
 %>  
   
@@ -178,7 +178,7 @@
                                 <td>
                                     <div class="reply_text">
                                         <span class="reply_img"><img src="image/bookstory/reply.png" width="30" height="30"></span> 
-                                        <a href="#reply_start"><span>댓글</span></a><span class="reply_text2">10</span>
+                                        <a href="#reply_start"><span>댓글</span></a><span class="reply_text2">${replyCount}</span>
                                     </div>
                                 </td>
                             </tr>
@@ -224,20 +224,19 @@
 								       </a>
                                         
                                     <span class="reply_img2"><img src="image/bookstory/reply.png" width="30" height="30" ><a name="reply_start"></a></span> 
-                                    <a href=""><span class="reply_text">댓글</span></a><span class="reply_text2">10</span>
+                                    <a href=""><span class="reply_text">댓글</span></a><span class="reply_text2">${replyCount}</span>
                                 </div>
                                  <hr />
                                  
                                
                                  <div class='reply_bottom_box2'>
                                     <span class="reply_text3">댓글</span>
-                                    <span class="reply_date">등록순</span>
-                                    <span class="reply_f_upload">최신순</span>
                                  </div>
 								  
 								   
                                  <!-- 댓글 반복구간 -->
-                                  <c:forEach var="reply_view_bookstory" items="${ reply_view_bookstory }" >
+                                 <div class="dropdown">
+                                  <c:forEach var="reply_view_bookstory" items="${reply_view_bookstory}">
                                   <div class="reply_content">
                                      <table>
                                      <fmt:formatDate var="reg" value="${reply_view_bookstory.reg}"  pattern="yyyy.MM.dd HH:mm"/>
@@ -245,11 +244,29 @@
                                             <td>
                                                 <div class="myInfo_img"><img id="img" src="../uploadPro3_bookstory/${reply_view_bookstory.reply_profile}" width="80px" height="80px"></div> 
                                             </td>
-                                            <td>
-                                            	
-                                            	<input type="hidden" name="idx" value="${reply_view_bookstory.idx}">
+                                            <td> 
+                                            <input type="hidden" name="idx" value="${reply_view_bookstory.idx}">
+                                            	<input type="hidden" name="reply_no" value="${reply_view_bookstory.reply_no}">
                                                 <span style="font-weight: 800;">아이디 : </span><span>${reply_view_bookstory.reply_writer}</span><span class="reply_date">${reg}</span>
-                                              	<img class="delete_reply" onclick="goReplyDelete()" src="image/cancel.png" width="15px" height="15px" >
+                                                
+                                               <% 
+                                                String sessionID2=(String)session.getAttribute("sessionID");
+                                                
+                                               BookStoryBoardReplyDto dto = (BookStoryBoardReplyDto)pageContext.getAttribute("reply_view_bookstory");
+                                               String reply_writer = dto.getReply_writer();
+                                               System.out.println("reply_writer:"+reply_writer);
+                                                if(reply_writer.equals(sessionID2) && sessionID2!=null){
+                                                %>
+                                                <!-- 댓글삭제기능 -->
+                                              	<a  href="bookStoryReplyDeleteAction?reply_no=${reply_view_bookstory.reply_no}&idx=${reply_view_bookstory.idx}"><img class="delete_reply" src="image/cancel.png" width="20px" height="15px" ></a>
+                                               	<%
+                                                }else{
+                                                %>
+                                                <a style="display: none;" href="bookStoryReplyDeleteAction?reply_no=${reply_view_bookstory.reply_no}&idx=${reply_view_bookstory.idx}"><img class="delete_reply" src="image/cancel.png" width="20px" height="15px" ></a>
+                                              
+                                                <%
+                                                }
+                                                %> 
                                               	
                                                 <div class=" content_text">
                                                    ${reply_view_bookstory.reply_content}
@@ -260,13 +277,22 @@
                                      </table>  
                                  </div> 
                                  </c:forEach>
+                                 </div>
+                               
                                
                                  <form action="replyAction" method="post" name="reply">
                                 <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
                                 <input type="hidden" name="idx" value="${content_view_bookstory.idx}">
                                 <input type="hidden" name="reply_writer" value="${content_view_bookstory.bs_user_id}">
                                 <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}">
+                               <% 
+                                String sessionID2=(String)session.getAttribute("sessionID");
                                  
+                                BookStoryBoardReplyDto dto = (BookStoryBoardReplyDto)pageContext.getAttribute("reply_view_bookstory");
+                                String reply_writer = dto.getReply_writer();
+                                System.out.println("reply_writer:"+reply_writer);
+                                if(reply_writer.equals(sessionID2) && sessionID2!=null){
+                                %>
                                 <table>
                                     <tr>
                                         <td style="padding-top: 20px;">
@@ -278,14 +304,17 @@
                                         </td>
                                     </tr>
                                 </table>
-                                </form> 
+                               <%
+                                }
+                                %> 
+                                </form>  
                         </div> 
                     </div> 
                     
                      
                     <%
-                    String sessionID=(String)session.getAttribute("sessionID");
-                    if(content_view_bookstory.getBs_user_id().equals(sessionID) && sessionID!=null){
+                    String sessionID3=(String)session.getAttribute("sessionID");
+                    if(content_view_bookstory.getBs_user_id().equals(sessionID3) && sessionID3!=null){
                     %>
                     <div class="list_box2"> 
                       	<button type="button" class="btn btn-light"><a href="BookStoryModify?idx=${content_view.idx}">수정<a></button>
@@ -336,11 +365,7 @@
   	  	  	   location.href="BookStoryReadReivew"
   	  	   }
 	 	}	  
-
-	 	function goReplyDelete(){
-		location.href="bookStoryReplyDeleteAction"
-		 	}
-
+ 
     </script>
         
 <!-- 푸터넣기 -->

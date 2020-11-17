@@ -158,6 +158,22 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		List<BookStoryBoardReplyDto> list=bookstoryDao.bookstoryReplyViewDao(idx);
 		return list;
 	}
+
+	@Override
+	public int bookStoryReplyDelete(int reply_no) {
+		int nResult=bookstoryDao.bookStoryReplyDeleteDao(reply_no);
+		return nResult;
+	}
+ 
+
+	@Override
+	public int bookStoryReplyCount(int idx) {
+		List<BookStoryBoardReplyDto> list=bookstoryDao.bookStoryReplyCountDao(idx);
+		System.out.println("댓글수"+list.size());
+		return list.size();
+	}
+	
+	
 	 
  
 	  

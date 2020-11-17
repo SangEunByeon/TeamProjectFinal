@@ -110,7 +110,6 @@ String id = (String) session.getAttribute("sessionID");
                                 </div>  
                                 <table id="member_list"  class="table table-striped order-list ">
                                 
-                                
 		                            <tr class="one-list-title">
 		                                <th scope="col"  style="width: 8%;" >번호</th>
 		                                <th scope="col"  style="width: 20%;" >도서명/작가</th>
@@ -125,7 +124,7 @@ String id = (String) session.getAttribute("sessionID");
 		                            <tr class="one-list-text">
 		                                <td>${list.idx}</td>
 		                                <td>${list.p_title}/${list.p_writer}</td>
-		                                <td><a href="#">${list.p_content}</a></td>
+		                                <td><a href="MyProductQnAView?idx=${list.idx}">${list.p_content}</a></td>
 		                                <td id="user_id" value="user_id" >${list.id}</td>
 		                                
 		                                <c:set var = "p_answer_state" scope="session" value = "${list.p_answer_state}"/>

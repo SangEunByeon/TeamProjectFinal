@@ -116,6 +116,13 @@ public class ProductQnABoardService implements IProductQnABoardService{
 		String answerCheck="미등록";
 		return dao.noAnswerQnADao(sessionID,answerCheck);
 	}
+
+	@Override
+	public Product_QnA_Board_Dto MyProductQnAView(HttpServletRequest request) {
+		String s_idx = request.getParameter("idx");
+		int idx=Integer.parseInt(s_idx);
+		return dao.MyProductQnAViewDao(idx);
+	}
 	
 	
 	

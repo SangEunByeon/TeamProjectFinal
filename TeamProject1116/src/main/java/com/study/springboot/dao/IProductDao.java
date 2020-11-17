@@ -53,5 +53,6 @@ public interface IProductDao {
 	public List<Product_QnA_Board_Dto> myProductQnAListDao(String sessionID);
 	public List<Product_QnA_Board_Dto> SearchmyProductQnADao(String category,String keyword);
 	public List<Product_QnA_Board_Dto> noAnswerQnADao(String id,String answerCheck);
-	
-} 
+	// 1117
+	public Product_QnA_Board_Dto MyProductQnAViewDao(int idx);
+	} 

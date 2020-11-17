@@ -14,7 +14,6 @@ public class Product_QnA_Board_Dto {
 	private String p_answer; //질문 답변
 	private String p_answer_state; //답변 상태
 	private Date reg; //날짜
-	
 	private String p_title;
 	private String p_writer;
 }

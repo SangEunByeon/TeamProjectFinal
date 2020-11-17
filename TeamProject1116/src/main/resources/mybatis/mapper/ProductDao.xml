@@ -177,10 +177,13 @@
     	</choose>
     </select>
     
-     <select id="noAnswerQnADao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
-  	      select * from book_product_qna where id = #{param1} and p_answer_state=#{param2} order by idx desc
-  	 </select>
-	
+    <select id="noAnswerQnADao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
+ 	    select * from book_product_qna where id = #{param1} and p_answer_state=#{param2} order by idx desc
+    </select>
+
+	<select id="MyProductQnAViewDao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
+		select * from book_product_qna where idx = #{param1}
+	</select>
 	
    
    

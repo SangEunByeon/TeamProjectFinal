@@ -21,4 +21,5 @@ public interface IProductQnABoardService {
 	public List<Product_QnA_Board_Dto> myProductQnAList(HttpServletRequest request);
 	public List<Product_QnA_Board_Dto> SearchmyProductQnA(HttpServletRequest request);
 	public List<Product_QnA_Board_Dto> noAnswerQnA(HttpServletRequest request);
+	public Product_QnA_Board_Dto MyProductQnAView(HttpServletRequest request);
 }

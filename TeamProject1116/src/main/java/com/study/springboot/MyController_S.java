@@ -92,9 +92,6 @@ public class MyController_S {
 	IPointService point_service;
 	
 	
-	
-	
-	
 	/////구매프로세스//////
    @RequestMapping("/purchase")
     public String purchase1(HttpServletRequest request,Model model) {
@@ -1806,7 +1803,7 @@ public String stateAlign(HttpServletRequest request,Model model){
 		
 	//	String bs_user_id=request.getParameter("bs_user_id");
 	//	System.out.println("유저아이디"+bs_user_id);
-	//	
+
 	//	 //댓글보기
 	//	List <BookStoryBoardDto> list=bookstory_service.bookstoryReplyView(bs_user_id);
 	//	model.addAttribute("list_bookstory",list);
@@ -1982,10 +1979,21 @@ public String stateAlign(HttpServletRequest request,Model model){
 	public String PointInfo(HttpServletRequest request,Model model) throws Exception{
 	 HttpSession session = request.getSession();
       String id = (String)session.getAttribute("sessionID");
+      Criteria cri = new Criteria(1,10);
+		int bookcnt=point_service.count(id);
+		int allPageNum; 
+		if(bookcnt%10==0) {
+			allPageNum =bookcnt/10;
+		}else {
+			allPageNum =bookcnt/10+1; 
+		}
+		request.setAttribute("list",point_service.pointList(id,cri));
+		cri.setAllPageNum(allPageNum);
+		request.setAttribute("allPageNum", allPageNum);
       model.addAttribute("point",member_service.getUserInfo(id));
-	  model.addAttribute("list",point_service.pointList(id));
 	 return"member/PointInfo";
 	 }
+	
 	 
 	//관리자 폼 > 회원 목록 > 회원 검색
 	@RequestMapping("/MemberSearch")
@@ -2043,6 +2051,15 @@ public String stateAlign(HttpServletRequest request,Model model){
 	  List<Product_QnA_Board_Dto> list=pro_qna_service.noAnswerQnA(request);
 	  model.addAttribute("list",list);
       return "member/MyProductQnA"; 
+   }
+   
+   //1117 마이큐엔에이 상세보기
+   @RequestMapping("/MyProductQnAView")
+   public String MyProductQnAView(HttpServletRequest request,Model model) {
+	   Product_QnA_Board_Dto dto=pro_qna_service.MyProductQnAView(request);
+	   System.out.println("마이큐엔에이 리스트: "+dto);
+	   model.addAttribute("dto",dto);
+	   return "member/MyProductQnAView";
    }
 	
 

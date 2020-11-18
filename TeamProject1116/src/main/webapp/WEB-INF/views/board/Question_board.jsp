@@ -32,7 +32,7 @@
     color: rgb(40, 40, 40);
     }
      th, td {
-	    font-size: 1.4ch;
+	    font-size: 1.4ch !important;
 	}
 	.sidebar{   
       width: 180px;
@@ -123,14 +123,18 @@
 				<p>고객센터</p>
 					<tr>
 						<td>
+						<div class="sidebarlist">
 							<a href="Notice_board">공지사항</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						<div class="sidebarlist">
 							<a href="Question_board">자주하는 질문</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>

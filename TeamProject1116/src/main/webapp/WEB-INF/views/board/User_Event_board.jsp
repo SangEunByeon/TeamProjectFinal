@@ -31,8 +31,30 @@
     color: rgb(40, 40, 40);
     }
     
-	th, td {
-	    font-size: 1.4ch;
+	.sidebar{   
+      width: 180px;
+      height: 700px; 
+    } 
+    .sidebar table tr td{
+      width: 150px; 
+      border:1px solid rgb(155, 155, 155);
+      border-collapse: collapse;    
+    } 
+    .sidebarlist{
+      padding-left:25px;
+   	  padding: 8px;
+      width: 178px;
+      height: 40px;
+    }
+    .sidebarlist>a{
+      color: rgb(40, 40, 40);
+      text-decoration: none;   
+    }
+    .sidebarlist:hover{
+      background-color: rgb(239, 239, 239);
+    }
+    th, td {
+	    font-size: 1.4ch !important;
 	}
     /* 사이드바 메인컨텐츠 기본양식 끝 */
 	
@@ -57,8 +79,10 @@
 				<p>이벤트</p>
 					<tr>
 						<td>
+						<div class="sidebarlist">
 							<a href="User_Event_board">이벤트</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>

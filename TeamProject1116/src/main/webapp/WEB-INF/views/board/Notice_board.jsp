@@ -66,7 +66,6 @@
 	function goNotice_write() {
 		location.href = "Board_write";
 	}
-	
     </script>
 </head>
 <body>
@@ -126,14 +125,18 @@
 				<p>고객센터</p>
 					<tr>
 						<td>
+						<div class="sidebarlist">
 							<a href="Notice_board">공지사항</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+						<div class="sidebarlist">
 							<a href="Question_board">자주하는 질문</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>
@@ -167,10 +170,10 @@
 	<nav aria-label="Page navigation example">
 			   <ul class="pagination justify-content-center">
 			    <%
-			    int allPageNum=(Integer)request.getAttribute("allPageNum");
+			    int allPageNum=(Integer)request.getAttribute("allPageNum");	
 			    for(int i=1; i<=allPageNum; i++){
    		    	   %>
-			     <li class="page-item"><a href="page5?no=<%=i%>" class="page-link"><%=i%></a></li>
+			     <li class="page-item" id="pageNum" value=<%=i%>><a href="page5?no=<%=i%>"  class="page-link" onclick="goPage(<%=i%>);" ><%=i%></a></li>
 			       <%
 			     }
 			    %>    

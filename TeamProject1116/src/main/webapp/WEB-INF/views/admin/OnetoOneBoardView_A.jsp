@@ -46,6 +46,31 @@
 	.actionbar{
 	width:150px;
 	} 
+	.sidebar{   
+      width: 180px;
+      height: 700px; 
+    } 
+    .sidebar table tr td{
+      width: 150px; 
+      border:1px solid rgb(155, 155, 155);
+      border-collapse: collapse;    
+    } 
+    .sidebarlist{
+      padding-left:25px;
+   	  padding: 8px;
+      width: 178px;
+      height: 40px;
+    }
+    .sidebarlist>a{
+      color: rgb(40, 40, 40);
+      text-decoration: none;   
+    }
+    .sidebarlist:hover{
+      background-color: rgb(239, 239, 239);
+    }
+    th, td {
+	    font-size: 1.4ch !important;
+	}
 	</style>
   
 </head>
@@ -63,26 +88,34 @@
 				<p>게시판 관리</p>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Notice_board">공지사항</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 						    <a href="OnetoOneBoard_A">1:1문의</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Question_board">자주하는 질문</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
+							<div class="sidebarlist">
 							<a href="Event_board">이벤트</a>
 							<span href="#">&gt</span>
+							</div>
 						</td>
 					</tr>
 				</table>

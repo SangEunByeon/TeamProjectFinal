@@ -1,9 +1,9 @@
-<%@page import="com.study.springboot.dto.BookStoryBoardDto"%> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %> 
+<%@page import="com.study.springboot.dto.BookStoryBoardDto"%> 
 <%@ page import="com.study.springboot.dto.BookStoryBoardReplyDto" %> 
 <%@page import="java.util.List"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -11,7 +11,7 @@
     
 <%
 	 BookStoryBoardDto content_view_bookstory=(BookStoryBoardDto)session.getAttribute("content_view_bookstory");   
-		System.out.println("bookstory content_view"+content_view_bookstory);
+	 System.out.println("bookstory content_view"+content_view_bookstory);
 	 String id = (String) session.getAttribute("sessionID"); 
 	 MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
 	 System.out.println("memberDto"+memberDto);   
@@ -34,14 +34,14 @@
             <aside>
                 <div class="hr"></div>
                 <div class="info_head">
-                    <a href="#"><span>북스토리</span></a>  
-                    <a href="#"><span>내 정보</span></a>  
-                    <hr />
+                     <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
+                    <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div>   
                 </div>
              	<%
             	if(session.getAttribute("sessionID")==null){
            		%>	
            		<div class="info_body">
+           		 <hr />
                     <img src="image/bookstory/user.png" width="200px" height="200px"> 
                 </div>
                 <div class="info-text">
@@ -140,17 +140,17 @@
                     <table>
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryWriterInfo"><span>작가정보</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo"><span>작가정보</span></a>
                             </td>
-                        </tr>
+                        </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="#"><span>책 가격</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 미리보기</span></a>
                             </td>
-                        </tr>
+                        </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="#"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 초성 이벤트</span></a>
                             </td>
                         </tr> 
                     </table> 
@@ -165,8 +165,8 @@
                     <a href="#" id="category" value="category">${content_view_bookstory.bs_category}</a>                   
                   
                      <div class="list_box">
-                     <button type="button" class="btn btn-light">이전글</button>
-                     <button type="button" class="btn btn-light">다음글</button>
+                     <a href="prev_bookstoryList?idx="${content_view.idx}><button type="button" class="btn btn-light">이전글</button></a>
+                     <a href="next_bookstoryList?idx="${content_view.idx}><button type="button" class="btn btn-light">다음글</button></a>
                      <a name="top"></a><button type="button" class="btn btn-light" onclick="goList()">목록</button>
                     </div>
                         <div class="title_text" >
@@ -224,18 +224,20 @@
 								       </a>
                                         
                                     <span class="reply_img2"><img src="image/bookstory/reply.png" width="30" height="30" ><a name="reply_start"></a></span> 
-                                    <a href=""><span class="reply_text">댓글</span></a><span class="reply_text2">${replyCount}</span>
+                                    <a class="btn btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">댓글</a>
+                                <span class="reply_text2">${replyCount}</span>
                                 </div>
                                  <hr />
                                  
-                               
+                               <div class="collapse" id="collapseExample">
+                    			 <div class="card card-body">
+                    			 
                                  <div class='reply_bottom_box2'>
                                     <span class="reply_text3">댓글</span>
                                  </div>
-								  
 								   
                                  <!-- 댓글 반복구간 -->
-                                 <div class="dropdown">
+                                 
                                   <c:forEach var="reply_view_bookstory" items="${reply_view_bookstory}">
                                   <div class="reply_content">
                                      <table>
@@ -278,23 +280,19 @@
                                  </div> 
                                  </c:forEach>
                                  </div>
+                				 </div>
                                
-                               
-                                 <form action="replyAction" method="post" name="reply">
+                               	<%  
+                               	if(session.getAttribute("sessionID")!=null){
+                               	%>
+                                <form action="replyAction" method="post" name="reply">
                                 <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
                                 <input type="hidden" name="idx" value="${content_view_bookstory.idx}">
                                 <input type="hidden" name="reply_writer" value="${content_view_bookstory.bs_user_id}">
                                 <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}">
-                               <% 
-                                String sessionID2=(String)session.getAttribute("sessionID");
-                                 
-                                BookStoryBoardReplyDto dto = (BookStoryBoardReplyDto)pageContext.getAttribute("reply_view_bookstory");
-                                String reply_writer = dto.getReply_writer();
-                                System.out.println("reply_writer:"+reply_writer);
-                                if(reply_writer.equals(sessionID2) && sessionID2!=null){
-                                %>
+                               
                                 <table>
-                                    <tr>
+                                    <tr> 
                                         <td style="padding-top: 20px;">
                                             <textarea name="reply_content" id="reply_content" cols="95" rows="5" placeholder="댓글을 달아주세요"></textarea>
                                         </td>
@@ -302,12 +300,36 @@
                                             <input type="submit" class="btn btn-light" value="댓글달기" style="text-align: center;"> 
 
                                         </td>
+                                   
+	                                
                                     </tr>
-                                </table>
-                               <%
+                                </table>  
+                                </form> 
+                                
+                                <%
+                                }else{ 
+                               	%> 
+                               	
+                               	<form action="replyAction" method="post" name="reply">
+                                <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
+                                <input type="hidden" name="idx" value="${content_view_bookstory.idx}"> 
+                                <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}">
+                               
+                                <table>
+                                    <tr> 
+                                        <td style="padding-top: 20px; display:none;">
+                                            <textarea name="reply_content" id="reply_content" cols="95" rows="5" placeholder="댓글을 달아주세요"></textarea>
+                                        </td>
+                                        <td style="  display:none;">
+                                            <input type="submit" class="btn btn-light" value="댓글달기" style="text-align: center;"> 
+
+                                        </td> 
+                                    </tr>
+                                </table>  
+                                </form> 
+                                <%  
                                 }
-                                %> 
-                                </form>  
+                                %>
                         </div> 
                     </div> 
                     
@@ -317,8 +339,8 @@
                     if(content_view_bookstory.getBs_user_id().equals(sessionID3) && sessionID3!=null){
                     %>
                     <div class="list_box2"> 
-                      	<button type="button" class="btn btn-light"><a href="BookStoryModify?idx=${content_view.idx}">수정<a></button>
-                   		<button type="button" class="btn btn-light"><a href="BoardStoryDeleteAction?idx=${content_view.idx}">삭제<a></button>
+                      	<button type="button" class="btn btn-light"><a href="prev_bookstoryList?idx=${content_view.idx}">수정<a></button>
+                   		<button type="button" class="btn btn-light"><a href="next_bookstoryList?idx=${content_view.idx}">삭제<a></button>
                         <button type="button" class="btn btn-light" onclick="goList()">목록</button>
                        	<a href="#top"> <button type="button" class="btn btn-light">TOP</button></a>
                     </div> 
@@ -338,6 +360,11 @@
             </section>   
         </div>   
         
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->  
+    
+      <script src="js/jquery-2.2.4.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         
      <script> 
      function writeReturn() {
@@ -364,8 +391,7 @@
   	  	   }else if(category_list == '책읽고,리뷰남기기'){
   	  	  	   location.href="BookStoryReadReivew"
   	  	   }
-	 	}	  
- 
+	 	}	   
     </script>
         
 <!-- 푸터넣기 -->

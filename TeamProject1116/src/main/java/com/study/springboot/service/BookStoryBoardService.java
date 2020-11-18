@@ -172,8 +172,16 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		System.out.println("댓글수"+list.size());
 		return list.size();
 	}
-	
-	
+
+	@Override
+	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request) {
+//		String hit2=request.getParameter("hit");
+//		int hit=Integer.parseInt(hit2);
+		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstory_mainpopularListDao();
+		return list;
+	}
+
+ 
 	 
  
 	  

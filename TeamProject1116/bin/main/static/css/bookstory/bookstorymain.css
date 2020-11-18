@@ -1,11 +1,9 @@
-@charset "UTF-8";
-
-/* *{border: 1px solid red;} */
+@charset "UTF-8"; 
 
  /* 메인 */
  #main{ 
      width: 70%;
-     height:1500px;  
+     height:1900px;
      margin: 0 auto;    
     }  
 aside{    
@@ -24,19 +22,55 @@ aside{
     border: 1px solid  rgb(68, 68, 68);
 }
 
+/* 북스토리,내정보 박스 */
 .info_head{ 
-    padding-top: 15px;
-    text-align: center;
+    padding-top: 15px; 
+    text-align: center; 
+    border-radius: 0;
+} 
+.bookstory_Info>a{color:black;} 
+.bookstory_Info{
+    padding-top:10px;
+    position: absolute;
+    width: 130px;
     height: 60px;
 } 
+
+.bookstory_Info:hover{
+    border-bottom: 3px solid rgb(68, 68, 68);
+} 
+.bookstory_MyInfo>a{color:black;} 
+.bookstory_MyInfo{  
+    padding-top:10px;
+    float:right;
+    width: 130px;
+    height: 60px;
+}
+.bookstory_MyInfo:hover{  
+    border-bottom: 3px solid rgb(68, 68, 68);
+}
+
+
+.info_box2{
+    padding-top:10px;
+}
+
+.myinfo_text1{
+    padding-right: 10px;
+}
+
+.rank_info{
+    padding-top:30px;
+}
+ 
 
 .info_head>a{
     padding:0 20px;
     text-decoration: none;
     color:black;
 }
-.info_body{
-    padding: 20px 0;
+.info_body{ 
+    padding: 44px 0;
     text-align: center;
 }
 .info-text{
@@ -108,32 +142,63 @@ section{
     border: 1px solid  rgb(182, 182, 182);
 }
 .all_view{
+	width:950px;
       margin-top: 50px;
 }
 .all_view>a{
     color:black;
+} 
+.all_more{ 
+	 
+	float: right;
 }
+
+.all_more>span{
+	position: absolute;
+	color:black; 
+}
+
+ 
 /* 이미지-버전*/
 .section_content{
     padding-top: 10px;
-    height: 400px;
+    height: 350px;
+    overflow: hidden;
+} 
+.section_content2{
+    padding-top: 10px;
+    height: 700px;
+    overflow: hidden;
 }
+
 .section_box{ 
-    padding:0 10px;
+    padding:0 5px; 
+
 }
 .content_box{
 	display:table;
     height: 60x;
 }
 .section_title{
-    margin-top:5px;
+	width:190px;
+	text-align:center;
+   	padding-top:10px;
     font-size:13px;
 }
 .section_id{
-    margin-top:5px;
+	width:190px;
+	text-align:center;
+    padding-top:5px;
     font-size: 12px;
 }
-.section_title>a , .section_id>a{
+.section_title>a { 
+	
+	font-size:15px;
+    color:black;
+}
+
+.section_id>a{  
+	font-size:13px;
     color:black;
 }
 
@@ -141,8 +206,7 @@ section{
 .view_box tr th{ 
     height: 5px;
     font-size: 12px;
-}
-
+} 
 .view_box_1{
     font-size: 12px;
 }
@@ -189,5 +253,33 @@ section{
 .register{
     padding-top:50px;
     padding-left: 70px; 
+}
+
+
+/* 북스토리 정보 */
+.read_rank_box{ 
+    padding: 50px;
+}
+.read_rank{
+    font-size: 30px;
+}
+
+.rank_text_box{
+    margin-left: 65px;
+    width:880px;
+    height: 150px;
+    background-color: rgb(235, 235, 235);
+}
+
+.rank_text1{
+    padding-left: 70px;
+    padding-top:25px;
+}
+.rank_text2{
+    padding-top:10px;
+}
+.dropdown_rankConditional{
+    margin-left: 65px;
+    width:880px;
 }
  

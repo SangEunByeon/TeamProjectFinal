@@ -5,7 +5,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.study.springboot.dao.IBookStoryBoardDao">
- <!--ㅎ  -->
+ 
  <!-- 북스토리 프로필 삽입 -->
    <update id="uploadProfileDao" parameterType="com.study.springboot.dto.MemberDto">
       update book_member set book_profile=#{book_profile} where id=#{id}
@@ -37,7 +37,7 @@
     </select>
      
     
-     <!-- 글목록  --> 
+     <!--전체 글목록  --> 
      <select id="bookstoryListDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
             select * from bookstory_board order by idx desc
      </select> 
@@ -54,7 +54,15 @@
      <update id="bookstoryUpdateDao"  parameterType="com.study.springboot.dto.BookStoryBoardDto">
    			update  bookstory_board set bs_category=#{bs_category} , bs_title =#{bs_title} ,bs_content=#{bs_content} where idx=#{idx}
      </update> 
+     
+     <!-- 인기글목록 -->
+  	 <select id="bookstory_mainpopularListDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
+         select * from bookstory_board order by hit desc
+     </select>  
+    
       
+      
+     <!-- 댓글  -->
      <insert id="bookstoryRelpyWriteDao" parameterType="com.study.springboot.dto.BookStoryBoardReplyDto">
         insert into bookstoryboard_reply ( reply_no,  idx, reply_category, reply_writer, reply_content,reply_profile, reg)
              values (bookstoryboard_reply_seq.nextval, #{idx}, #{reply_category}, #{reply_writer}, #{reply_content}, #{reply_profile}, #{reg})
@@ -72,8 +80,8 @@
    	 <select id="bookStoryReplyCountDao" resultType="com.study.springboot.dto.BookStoryBoardReplyDto">
             select * from bookstoryboard_reply where idx=#{param1}
      </select>  
-   
-   
+    
+    
    
     
       

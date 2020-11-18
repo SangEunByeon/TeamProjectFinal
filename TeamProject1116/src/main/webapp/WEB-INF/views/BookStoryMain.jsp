@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.study.springboot.dto.BookStoryBoardDto"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
 
- <%
+ <% 
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
  System.out.println("memberDto"+memberDto);   
+  
  %>  
   
 <html>
@@ -25,14 +28,15 @@
             <aside>
                 <div class="hr"></div>
                 <div class="info_head">
-                    <a href="#"><span>북스토리</span></a>  
-                    <a href="#"><span>내 정보</span></a>  
-                    <hr />
+                     <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
+                    <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
+                  
                 </div>
              	<%
             	if(session.getAttribute("sessionID")==null){
            		%>	
            		<div class="info_body">
+           		  <hr />
                     <img src="image/bookstory/user.png" width="200px" height="200px"> 
                 </div>
                 <div class="info-text">
@@ -104,22 +108,22 @@
                     <table>
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryCommunication"><span>북스토리,소통</span></a>
+                                <img src="image/book.png" width="20px" height="20px"><a href="BookStoryCommunication"><span>북스토리,소통</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
+                                <img src="image/book.png" width="20px" height="20px"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
+                                <img src="image/book.png" width="20px" height="20px"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
                             </td>
                         </tr>
                          <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryGoodWriting"><span>좋은글귀 남기기</span></a>
+                                <img src="image/book.png" width="20px" height="20px"><a href="BookStoryGoodWriting"><span>좋은글귀 남기기</span></a>
                             </td>
                         </tr>
                     </table> 
@@ -128,52 +132,73 @@
                         <a href="#">책 정보</a>
                     </div>
                     <hr />
-                    <table>
+                     <table>
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryWriterInfo"><span>작가정보</span></a>
-                            </td>
-                        </tr>
-                        <tr class="category_box">
-                            <td>
-                                <img src="https:placehold.it/20x20"><a href="#"><span>책 가격</span></a>
-                            </td>
-                        </tr>
-                        <tr class="category_box">
-                            <td>
-                                <img src="https:placehold.it/20x20"><a href="#"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo"><span>작가정보</span></a>
                             </td>
                         </tr> 
-                    </table> 
+                        <tr class="category_box">
+                            <td>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 미리보기</span></a>
+                            </td>
+                        </tr> 
+                        <tr class="category_box">
+                            <td>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 초성 이벤트</span></a>
+                            </td>
+                        </tr> 
+                    </table>  
                 </div> 
             </aside> 
             <section>   
                 <div class="book_img">
-                    <img src="image/bookstory/book1.jpg" width="195px" height="300px">
-                    <img src="image/bookstory/book2.jpg" width="195px" height="300px"> 
-                    <img src="image/bookstory/book3.jpg" width="195px" height="300px"> 
-                    <img src="image/bookstory/book4.jpg" width="195px" height="300px">  
-                    <img src="image/bookstory/book5.jpg" width="195px" height="300px"> 
-                     
+                	<img src="image/bookstory/bookmain.jpeg" width="990px" height="400px">   
                 </div>
+              
                 <div class="all_view"><a href="#"><span>인기글</span></a></div>
-                <div class="hr3"></div>
-                <div class="section_content">
-                    <table>
-                        <tr>
-                        <td class="section_box">
-                            <a href="#"><img src="https:placehold.it/130x200" width="130px" height="200px"></a>
-                            <div class="content_box">
-                                <div class="section_title"><a href="#"><span>책제목입니다.</span></a></div>
-                                <div class="section_id"><a href="#"><span>글쓴이</span></a></div>
-                            </div>  
-                        </td>  
-                        </tr>
-                    </table>
- 
-                <div class="all_view"><a href="#"><span>전체글보기</span></a></div>
+               
+                
                 <div class="hr3"></div>
                 <div class="section_content"> 
+                
+                    <table>
+                        <tr>
+                        <c:forEach var="dto" items="${ Popular_list }"  >  
+                		<input type="hidden" name="idx" value="${dto.idx}"> 
+                		<input type="hidden" name="hit" value="${dto.hit}">
+                        <td class="section_box" scope="col"> 
+                            <!-- 이미지 반복구간 -->
+                        	<c:set var="string1" value="${dto.bs_content}" />
+                        	<c:forEach items="${fn:split(string1,'>')}" var="item" >
+                        	<c:if test="${fn:contains(item,'img')}">
+                        	<c:set var="string2" value="${fn:substringAfter(item, 'style')}" /> 
+                        	<c:set var="string3" value='=width:190px;height:280px;>' /> 
+                        	<c:set var="image" value="${fn:replace(item,string2,string3) }" />  
+                        	</c:if>
+                        	</c:forEach>
+                        	
+                        	 <span><a href="BookStoryView?idx=${dto.idx}">${image}</a></span> 
+                            <div class="content_box">
+                                <div class="section_title"><a href="#"><span>${dto.bs_title}</span></a></div>
+                                <div class="section_id"><a href="#"><span>${dto.bs_user_id}</span></a></div>
+                            </div>  
+                            
+                        </td>  
+                        </c:forEach> 
+                        </tr>
+                    </table> 
+                    
+                </div>
+ 	 			
+ 
+                <div class="all_view">
+                <a href="#"><span>전체글보기</span></a>
+                <a  class="all_more" href="BookStoryAllList"><span>더보기</span></a>
+                </div>
+                
+                <div class="hr3"></div>
+                <div class="section_content2"> 
                
                     <table id="member_list"  class="table table-striped view_box "> 
                         <tr class="one-list-title ">
@@ -194,11 +219,8 @@
                         </tr>     
                         </c:forEach>
                     </table>  
-                </div>
-                </div>
-                 
-            </section>   
-           
+                </div> 
+            </section>  
         </div> 
         
     <!-- 메인푸터 --> 

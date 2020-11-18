@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -448,14 +449,7 @@ public class MyController_M {
 		request.setAttribute("allPageNum", allPageNum);
 		return "member/ProductReviewComplete";
 	}
-		
-	@RequestMapping("/deleteReview")
-	public String deleteReview(HttpServletRequest request,Model model) {
-		review_service.deleteReview(request);
-		model.addAttribute("msg","리뷰가 삭제되었습니다.");
-		model.addAttribute("url","/ProductReviewComplete");
-		return "redirect";
-	}
+		 
 	
 	//1:1문의 폼
 	@RequestMapping("/OneBoard")
@@ -1771,7 +1765,7 @@ public class MyController_M {
 		}	
 	}
 	@RequestMapping("/stateAlign")
-public String stateAlign(HttpServletRequest request,Model model){
+	public String stateAlign(HttpServletRequest request,Model model){
 		
 		Criteria cri = new Criteria(1,10);
 		String state=(request.getParameter("o_stateview"));
@@ -1806,15 +1800,26 @@ public String stateAlign(HttpServletRequest request,Model model){
 			model.addAttribute("count",count);
 			System.out.println("회원수:"+count);
 			 
+			
+			//전체글 가져오기
 			ArrayList<BookStoryBoardDto> list=bookstory_service.bookstoryList(request);
 			System.out.println("전체글보기:"+list);
 			model.addAttribute("list", list);
+			
+			
+			//인기글 가져오기  
+			ArrayList<BookStoryBoardDto> Popular_list=bookstory_service.bookstory_mainpopularList(request);
+			model.addAttribute("Popular_list",Popular_list);
+			
 		
 			return "BookStoryMain";
 		} 
-		 
+		//프로필 폼
 		@RequestMapping("/BookStoryProfile")
-		public String BookStoryProfile(){return "bookstory/BookStoryProfile";}  
+		public String BookStoryProfile(){return "bookstory/BookStoryProfile";}    
+		//내정보 폼
+		@RequestMapping("/BookStoryMyInfo")
+		public String bookstory_MyInfo(){return "bookstory/BookStoryMyInfo";}  
 		//글쓰기 폼
 		@RequestMapping("/BookStoryWrite")
 		public String BookStoryWrite(HttpServletRequest request, Model model){  
@@ -1898,10 +1903,7 @@ public String stateAlign(HttpServletRequest request,Model model){
 			
 			return "bookstory/BookStoryView";  
 		} 
-		
-		
-		
-		
+		 
 		//글보기> 수정폼
 		@RequestMapping("/BookStoryModify")
 			public String BookStoryModify(HttpServletRequest request,Model model){   
@@ -1981,7 +1983,8 @@ public String stateAlign(HttpServletRequest request,Model model){
 			replyDto.setIdx(idx);  
 			replyDto.setReply_profile(request.getParameter("reply_profile"));
 			replyDto.setReply_category(request.getParameter("reply_category"));
-			replyDto.setReply_writer(request.getParameter("reply_writer"));
+			String reply_writer=(String)session.getAttribute("sessionID");
+			replyDto.setReply_writer(reply_writer);
 			replyDto.setReply_content(request.getParameter("reply_content"));
 			replyDto.setReg(new Date()); 
 			System.out.println("replyDto"+replyDto);
@@ -2042,6 +2045,9 @@ public String stateAlign(HttpServletRequest request,Model model){
 			return "bookstory/BookStoryAllList";
 			}  
 		
+		
+		
+		
 		//카테고리  
 		@RequestMapping(value = {"/BookStoryCommunication","/BookStoryGoodWriting", "/BookStoryOneLineReivew","/BookStoryReadReivew"})
 		public String bookStoryCategory(HttpServletRequest request, Model model) {
@@ -2073,7 +2079,10 @@ public String stateAlign(HttpServletRequest request,Model model){
 			return nextUrl;
 			}	
 			  
-				   
+		//관리자>작가정보
+		@RequestMapping("/BookStoryWriterInfo")
+		public String BookStoryWriterInfo(){  return "bookstory/BookStoryWriterInfo"; }  
+						   
 
 
 	//마일리지 적립 
@@ -2141,13 +2150,13 @@ public String stateAlign(HttpServletRequest request,Model model){
 		return "redirect";  
 	}
 	//책 검색
-	@RequestMapping("/bookSearch")
-	public String bookSearch(HttpServletRequest request,Model model){
-	request.setAttribute("list",product_service.BookSearch(request));
-	return "category/SearchBook"; }
-	
-	
-	//1116 마이큐엔에이
+		@RequestMapping("/bookSearch")
+		public String bookSearch(HttpServletRequest request,Model model){
+		request.setAttribute("list",product_service.BookSearch(request));
+		return "category/SearchBook"; }
+				
+		
+		//1116 마이큐엔에이
 		@RequestMapping("/MyProductQnA")
 		public String MyProductQnA(HttpServletRequest request,Model model) {
 			Criteria cri = new Criteria(1,10);
@@ -2163,7 +2172,6 @@ public String stateAlign(HttpServletRequest request,Model model){
 			request.setAttribute("allPageNum", allPageNum);	
 			return "member/MyProductQnA";
 		}
-		
 		
 		//1116 마이큐엔에이 search 기능
 		@RequestMapping("/SearchmyProductQnA")
@@ -2192,7 +2200,40 @@ public String stateAlign(HttpServletRequest request,Model model){
 		   model.addAttribute("dto",dto);
 		   return "member/MyProductQnAView";
 	   }
+	   
+	   //1117
+	   @RequestMapping("/MyPageMain")
+	   public String MyPageMain(HttpServletRequest request, Model model) {
+		   String id = request.getParameter("id");
+		   MemberDto userdto = member_service.getUserInfo(id);
+		   Map<String, Integer> map=order_service.getUserOrderInfo(request);
+		   List<Product_QnA_Board_Dto> qnalist = pro_qna_service.myProductQnAList2(request);
+		   List<OnetoOneBoardDto> onelist=pro_qna_service.onetoonelistDao(request);
+		   
+		   
+		   model.addAttribute("userdto",userdto);
+		   model.addAttribute("del1",map.get("del1"));
+		   model.addAttribute("del2",map.get("del2"));
+		   model.addAttribute("del3",map.get("del3"));
+		   model.addAttribute("del4",map.get("del4"));
+		   model.addAttribute("del5",map.get("del5"));
+		   model.addAttribute("qnalist",qnalist);
+		   model.addAttribute("onelist",onelist);
+		   
+		   
+		   
+		  
+		   return "member/MyPageMain";
+	   }
+	   
+	   @RequestMapping("/deleteReview")
+	   public String deleteReview(HttpServletRequest request,Model model) {
+		   review_service.deleteReview(request);
+		   model.addAttribute("msg","리뷰가 삭제되었습니다.");
+		   model.addAttribute("url","/ProductReviewComplete");
+		   return "redirect";
+	   }
 		
 
-}
 
+	}

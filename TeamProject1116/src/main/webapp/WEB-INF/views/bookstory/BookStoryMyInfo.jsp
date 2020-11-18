@@ -1,22 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.study.springboot.dto.BookStoryBoardDto"%> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
 
- <%
+ <% 
  String id = (String) session.getAttribute("sessionID"); 
- MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
+ MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
+ System.out.println("memberDto"+memberDto);   
+  
  %>  
   
 <html>
 <head>
+<link rel="stylesheet" href="css/bookstory/bookstorymyInfo.css"> 
 <link rel="stylesheet" href="css/bookstory/bookstorymain.css"> 
-<title>북스토리글 전체보기</title>
+<title>북스토리메인</title>
 </head>
 <body>
 <!-- 북스토리메인헤더 -->
 <jsp:include page="/WEB-INF/views/BookStoryMainHeader.jsp"/>
+
 
    <div id="main">
 
@@ -127,7 +133,7 @@
                         <a href="#">책 정보</a>
                     </div>
                     <hr />
-                    <table>
+                     <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo"><span>작가정보</span></a>
@@ -146,36 +152,43 @@
                     </table> 
                 </div> 
             </aside> 
-            <section>    
-              	<div class="all_view"><a href="#"><span>작가정보</span></a></div>
-             	<div class="hr3"></div>
-             	<div class="section_content3"> 
-            
-                 <table id="member_list"  class="table table-striped view_box "> 
-                     <tr class="one-list-title ">
-                         <th scope="col" style="width: 5%;" >번호</th> 
-                         <th scope="col" style="width: 50%;" >제목</th>
-                         <th scope="col" style="width: 10%;" >작성자</th> 
-                         <th scope="col"  style="width: 10%;">작성일</th> 
-                         <th scope="col"  style="width: 5%;">조회수</th> 
-                     </tr> 
-                     <c:forEach var="dto" items="${ list }" > 
-                     <tr class="view_box_1">  
-                         <td>${dto.idx}</td>
-                         <td><a href="BookStoryView?idx=${dto.idx}">${dto.bs_title}</a></td>
-                         <td>${dto.bs_user_id}</td>
-                           <fmt:formatDate var="reg" value="${dto.reg}"  pattern="yyyy.MM.dd"/>
-                         <td>${reg}</td>
-                         <td>${dto.hit}</td>   
-                     </tr>     
-                     </c:forEach>
-                 </table> 
-                 </div>  
+              <section> 
+                <div class="read_rank_box">
+                <span class="read_rank">읽힘랭킹</span>
+                <p>연필 한자루부터 다섯자루까지, 열심히 활동해서 카페 랭킹을 올려보세요.</p>
+                </div>
+                <img src="image/rank.jpg" width="1000px">
+                <div class="rank_text_box">
+                   
+                    <ul class="rank_text1">
+                        <li>
+                            읽힘은 <strong>한자루부터 다섯자루까지 5등급으로</strong> 나누어져 있습니다.
+                        </li>
+                        <li class="rank_text2">
+                           랭킹은 활동 점수에 따라 월 <strong>2회(1일 경) 업데이트 되며,</strong> 각 단계별로 <strong>조건이 충족시에 한단계 씩 증가</strong>합니다.
+                        </li>
+                        <li class="rank_text2">
+                            자세한 카페 등급 조건은 
+                            <a class="btn btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <strong>읽힘</strong>
+                              </a>
+                            을 클릭하세요
+                         </li>
+                    </ul> 
+                </div>  
+                  <div class="collapse dropdown_rankConditional" id="collapseExample">
+                    <div class="card card-body">
+                        <p class="rank_text2">한자루 : 게시글 20개, 댓글 20개</p>
+                        <p class="rank_text2">두자루 : 게시글 40개, 댓글 40개</p>
+                        <p class="rank_text2">세자루 : 게시글 60개, 댓글 60개</p>
+                        <p class="rank_text2">네자루 : 게시글 80개, 댓글 80개</p>
+                        <p class="rank_text2">다섯자루 : 게시글 100개, 댓글 100개</p>
+                    </div>
+                  </div>
             </section>
-        </div>
-
-    
- 	<!-- 메인푸터 --> 
+        </div> 
+        
+    <!-- 메인푸터 --> 
 	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>
      
  	<!-- 글쓰기  -->

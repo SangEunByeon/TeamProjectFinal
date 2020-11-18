@@ -28,6 +28,8 @@ public interface IBookStoryBoardService {
 	public int bookstoryRelpyWrite(BookStoryBoardReplyDto replyDto); 
 	public List<BookStoryBoardReplyDto> bookstoryReplyView(int idx);  
 	public int bookStoryReplyDelete(int reply_no); 
-	public int bookStoryReplyCount(int idx); 
+	public int bookStoryReplyCount(int idx);  
+	
+	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request); //인기있는 게시글 목록
 	
 }

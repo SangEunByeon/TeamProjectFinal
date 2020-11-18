@@ -21,8 +21,7 @@ String id = (String) session.getAttribute("sessionID");
     -webkit-box-orient: vertical; 
     table-layout: fixed; 
     text-overflow: ellipsis; 
-     max-width: 200px !important;
-   
+     max-width: 200px !important;  
 }
 </style>
 

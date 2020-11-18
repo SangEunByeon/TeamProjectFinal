@@ -5,15 +5,6 @@
 <head> 
 <link rel="stylesheet" href="css/member/delete.css">
     <title>탈퇴하기</title>  
- <script type="text/javascript">
-		// 비밀번호 미입력시 경고창
-		function passwordCheck(){
-			if(!document.deleteform.password.value){
-				alert("비밀번호를 입력하지 않았습니다.");
-				return false;
-			}
-		}
-	</script>
 </head>
 <body> 
       
@@ -195,9 +186,27 @@
       
 <!-- 메인푸터 -->
 <jsp:include page="/WEB-INF/views/MainFooter.jsp"/>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript"> 
 	function cancle(){location.href="MainForm";}
+
+
+	// 비밀번호 미입력시 경고창
+	function passwordCheck(){
+		var radiocheck = $('input:radio[name=complain_radio]').is(':checked');
+		var passwordcheck
+		if (radiocheck == false) {
+		    alert('옵션을 선택해주세요.');
+		    return false;
+		   }
+		   
+	    if(document.deleteInfo.password.value==""){
+			alert("비밀번호를 입력하지 않았습니다.");
+			return false;
+		}
+
+	}
+
 </script>
  
  

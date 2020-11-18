@@ -126,7 +126,7 @@ padding-left: 80px;
                                     <tr>
                                         <td> 
                                             <div class="input-group content">
-                                                <span>문의내용</span> 
+                                                <span>내용</span> 
                                                 <div class="text-box"> 
                                                 <textarea name="o_content_Q" cols="75" rows="10" style="border: 1px solid rgb(206, 206, 206);" disabled>${dto.p_content}</textarea>
                                                 
@@ -140,7 +140,7 @@ padding-left: 80px;
                                             <button type="button" class="btn btn-danger ">
                                             <a href="DeleteMyProductQnA?idx=${dto.idx}"><span style="text-decoration:none; color: white;">삭제</span></a>
                                             </button>         
-                                            <input type="button" class="btn btn-secondary" value="목록" onclick="golist()">
+                                            <input type="button" class="btn btn-danger" value="목록" onclick="golist()">
                                             </div>
                                         </td> 
                                     </tr>

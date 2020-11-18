@@ -134,10 +134,20 @@ padding-left: 80px;
                                             </div>
                                         </td> 
                                     </tr>
+                                        <tr>
+                                        <td>  
+                                            <div class="product-review-save">
+                                            <button type="button" class="btn btn-danger ">
+                                            <a href="DeleteMyProductQnA?idx=${dto.idx}"><span style="text-decoration:none; color: white;">삭제</span></a>
+                                            </button>         
+                                            <input type="button" class="btn btn-secondary" value="목록" onclick="golist()">
+                                            </div>
+                                        </td> 
+                                    </tr>
                             </table>
                             </form> 
                            
-                           <!-- 관리자 답변 보기 --> 
+                    
                    
                             <table>
                             <tr>
@@ -165,27 +175,7 @@ padding-left: 80px;
 							</div> 
                      
                      
-                     
-                     
-                                
-                                
-                           <!-- 관리자 답변 보기 --> 
-                           	
-                        <!--     <table>
-                            <tr>
-                            <td>
-                            	<hr />
-                            	 <div class="input-group content">
-                                    <span>답변</span> 
-                                    <div class="text-box"> 
-                                    <textarea name="o_content_A" cols="75" rows="5" style="border: 1px solid rgb(206, 206, 206);">관리자답변</textarea>
-                                 </div>
-                                 </div>
-                            </td>
-                            </tr>
-                            </table> -->
-                            
-                           	<!-- 관리자답변끝  --> 
+       
 							</div> 
                     </div>
                     </td>
@@ -196,7 +186,10 @@ padding-left: 80px;
     
 <!-- 메인푸터 -->
 <jsp:include page="/WEB-INF/views/MainFooter.jsp"/>
-
+<script>
+	function golist(){location.href="MyProductQnA"} 
+ 
+</script>
  
 </body>
 </html>

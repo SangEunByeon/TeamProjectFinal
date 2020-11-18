@@ -35,7 +35,8 @@
 	.nav-link{
 	text-decoration: none;
 	color: black;
-	font-size: 1.5ch;
+	font-size: 14px;
+	font-weight: bold;
 	}
 	.banner{
 	min-width: 1000px;

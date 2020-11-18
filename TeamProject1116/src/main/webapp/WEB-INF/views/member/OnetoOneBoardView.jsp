@@ -154,11 +154,11 @@
                                     <tr>
                                         <td>  
                                             <div class="product-review-save">
-                                            <button type="button" class="btn btn-secondary ">
+                                            <button type="button" class="btn btn-danger ">
                                             <a href="OnetoOneDeleteBoard?idx=${content_view.idx}"><span style="text-decoration:none; color: white;">삭제</span></a>
                                             </button>
-                                            <input type="submit" class="btn btn-secondary" value="수정">
-                                            <input type="button" class="btn btn-secondary" value="목록" onclick="golist()">
+                                            <input type="submit" class="btn btn-danger" value="수정">
+                                            <input type="button" class="btn btn-danger" value="목록" onclick="golist()">
                                             </div>
                                         </td> 
                                     </tr> 

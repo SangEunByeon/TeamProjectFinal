@@ -107,8 +107,8 @@
                                     <td><span><fmt:formatNumber value="${list.p_price * (100-list.p_discount_ratio)/100}" type="currency"/></span></td>
                                     
                                     <td> 
-                                        <div class="box_center order"><button type="button" class="btn btn-secondary order_cancle" onclick="order()">주문</button></div>
-                                        <div class="box_center delete"><button type="button" class="btn btn-secondary order_cancle">
+                                        <div class="box_center order"><button type="button" class="btn btn-danger order_cancle" onclick="order()">주문</button></div>
+                                        <div class="box_center delete"><button type="button" class="btn btn-danger order_cancle">
                                         <a href="deleteCart?idx=${list.idx}" style="text-decoration:none; color:white">삭제</a> 
                                         </button></div>
                                     </td> 

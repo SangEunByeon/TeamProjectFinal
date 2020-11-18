@@ -190,7 +190,7 @@
                                     <tr>
                                         <td> 
                                             <div class="product-review-save">
-                                            <button type="submit" class="btn btn-secondary">완료</button>
+                                            <button type="submit" class="btn btn-danger">완료</button>
                                             </div>
                                         </td> 
                                     </tr> 

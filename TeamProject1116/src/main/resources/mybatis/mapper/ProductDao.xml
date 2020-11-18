@@ -216,6 +216,9 @@
 	select * from one_to_one_board where user_id=#{param1} order by reg desc
 	</select>
 	
+	<delete id="DeleteMyProductQnADao">
+	delete from book_product_qna where idx=#{param1}
+	</delete>
    
    
 </mapper> 

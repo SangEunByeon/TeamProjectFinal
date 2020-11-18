@@ -19,7 +19,7 @@ String id = (String) session.getAttribute("sessionID");
 <!-- 메인헤더 -->
 <jsp:include page="/WEB-INF/views/MainHeader.jsp"/>
   
-  		<!-- 1:1문의 -->
+        <!-- 1:1문의 -->
         <div id="main">
             <div class="MyPage_Form">  
                 <table>
@@ -85,7 +85,7 @@ String id = (String) session.getAttribute("sessionID");
                                   <span>&gt</span> 
                                 </div>
                                 </td>
-                         	   </tr>
+                               </tr>
                                 </table>
                             </div>
                         <div class="head_orderlist"> 
@@ -95,7 +95,7 @@ String id = (String) session.getAttribute("sessionID");
                                     <table style="margin-left:200px;">
                                     
                                               <p style="padding-top:30px;">  <input type="button" class="btn btn-outline-secondary reply_no" value="답변 없는 문의만 보기" style="width:170px;height:40px;"onclick="ChangeForm()"  /> </p>
-									
+                           
                                         <tr>
                                             <td>
                                             <div class="col-auto my-1 search-text-form"> 
@@ -111,85 +111,85 @@ String id = (String) session.getAttribute("sessionID");
                                                      
                                                 </select>
                                                 
-                                    		</div> 
+                                          </div> 
                                             </td> 
                                             <td>
                                                 <input class="form-control search-text" type="search-1" placeholder="Search" aria-label="Search"  name="keyword">
                                             </td>
                                             <td>
-                                                <button class="btn btn-secondary" type="submit">검색</button> 
+                                                <button class="btn btn-danger" type="submit">검색</button> 
                                             </td> 
                                         </tr>  
                                     </table>
                                     </form>
                                 </div>  
                                 <table id="member_list"  class="table table-striped order-list ">
-		                            <tr class="one-list-title">
-		                                <th scope="col"  style="width: 8%;" >번호</th>
-		                                <th scope="col"  style="width: 12%;" >유형</th>
-		                                <th scope="col"  style="width: 30%;" >제목</th>
-		                                <th scope="col"  style="width: 10%;" >작성자</th>
-		                                <th scope="col"  style="width: 10%;">답변상태</th> 
-		                                <th scope="col"  style="width: 10%;">작성일</th> 
-		                            </tr>
-		                             <c:forEach var="list" items="${ list }" >
-		                             
-		                            <tr class="one-list-text">
-		                            <fmt:formatDate var="reg" value="${list.reg}"  pattern="yyyy.MM.dd"/>
-		                                <td>${list.idx}</td>
-		                                <td>${list.o_type}</td>
-		                                <td><a href="OnetoOneBoardView?idx=${list.idx}" style="color:black;">${list.o_title}</a></td>
-		                                <td id="user_id" value="user_id"  onchange="check_id()" >${list.user_id}</td>
-		                                 <div id="check"></div>
-		                               	<!-- 미등록, 답변완료 --> 
-		                                  <c:set var = "o_ans_check" scope = "session" value ="${list.o_ans_check}"/>
-									      <c:if test = "${o_ans_check eq '미등록'}">
-										  <td style="color:red;"><c:out value = "${list.o_ans_check}"/></td>
-									      </c:if>
-								          <c:if test = "${o_ans_check eq '답변완료'}">
-									      <td style="color:blue;"><c:out value = "${list.o_ans_check}"/></td>
-								          </c:if>
-								           
-		                                <td>${reg}</td>  
-		                            </tr> 
+                                  <tr class="one-list-title">
+                                      <th scope="col"  style="width: 8%;" >번호</th>
+                                      <th scope="col"  style="width: 12%;" >유형</th>
+                                      <th scope="col"  style="width: 30%;" >제목</th>
+                                      <th scope="col"  style="width: 10%;" >작성자</th>
+                                      <th scope="col"  style="width: 10%;">답변상태</th> 
+                                      <th scope="col"  style="width: 10%;">작성일</th> 
+                                  </tr>
+                                   <c:forEach var="list" items="${ list }" >
+                                   
+                                  <tr class="one-list-text">
+                                  <fmt:formatDate var="reg" value="${list.reg}"  pattern="yyyy.MM.dd"/>
+                                      <td>${list.idx}</td>
+                                      <td>${list.o_type}</td>
+                                      <td><a href="OnetoOneBoardView?idx=${list.idx}" style="color:black;">${list.o_title}</a></td>
+                                      <td id="user_id" value="user_id"  onchange="check_id()" >${list.user_id}</td>
+                                       <div id="check"></div>
+                                        <!-- 미등록, 답변완료 --> 
+                                        <c:set var = "o_ans_check" scope = "session" value ="${list.o_ans_check}"/>
+                                 <c:if test = "${o_ans_check eq '미등록'}">
+                                <td style="color:red;"><c:out value = "${list.o_ans_check}"/></td>
+                                 </c:if>
+                                  <c:if test = "${o_ans_check eq '답변완료'}">
+                                 <td style="color:blue;"><c:out value = "${list.o_ans_check}"/></td>
+                                  </c:if>
+                                   
+                                      <td>${reg}</td>  
+                                  </tr> 
                              </c:forEach>
                             </table>  
                            
-                              <input class="btn btn-secondary" type="button" value="작성하기" onclick="goOnetoOneBoardWirte()">  
+                              <input class="btn btn-danger" type="button" value="작성하기" onclick="goOnetoOneBoardWirte()">  
                             
                                 <nav aria-label="Page navigation example">
-			   <ul class="pagination justify-content-center">
-			    <%
-			    int allPageNum=(Integer)request.getAttribute("allPageNum");
-			    for(int i=1; i<=allPageNum; i++){
-   		    	   %>
-			     <li class="page-item"><a href="page13?no=<%=i%>" class="page-link"><%=i%></a></li>
-			       <%
-			     }
-			    %>    
-			  </ul> 
-			</nav> 	    
+            <ul class="pagination justify-content-center">
+             <%
+             int allPageNum=(Integer)request.getAttribute("allPageNum");
+             for(int i=1; i<=allPageNum; i++){
+                   %>
+              <li class="page-item"><a href="page13?no=<%=i%>" class="page-link"><%=i%></a></li>
+                <%
+              }
+             %>    
+           </ul> 
+         </nav>        
                         </div> 
                     </div>
                     </td>
                 </tr>
                </table> 
-	        </div> 
-	    </div>     
+           </div> 
+       </div>     
         
 <!-- 메인푸터 -->
 <jsp:include page="/WEB-INF/views/MainFooter.jsp"/>
 
 
-	<script type="text/javascript"> 
-	function ChangeForm(){ location.href="NoAnswer_user"; }
-	function goOnetoOneBoardWirte(){ location.href="OnetoOneBoardWrite";  }
-	function ProductReview(){location.href="ProductReivew";}
-	function ReviewWrite() { location.href="ProductReviewWrite"; } 
-	function completePage(){ location.href="ProductReviewComplete";}
+   <script type="text/javascript"> 
+   function ChangeForm(){ location.href="NoAnswer_user"; }
+   function goOnetoOneBoardWirte(){ location.href="OnetoOneBoardWrite";  }
+   function ProductReview(){location.href="ProductReivew";}
+   function ReviewWrite() { location.href="ProductReviewWrite"; } 
+   function completePage(){ location.href="ProductReviewComplete";}
 
-	 
     
-	</script> 
+    
+   </script> 
  
 </body>

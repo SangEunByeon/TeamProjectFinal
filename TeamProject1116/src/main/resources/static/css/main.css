@@ -126,10 +126,10 @@ input[type=submit]{
   margin:0 auto;
 }
 .nav-link > span{
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: bold;
   text-decoration: none;
   color: rgb(40, 40, 40);
-  
   margin:0 10px;
 }
 

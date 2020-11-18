@@ -132,6 +132,7 @@
                                 <span> 전체카테고리 </span>  
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="AllBook">전체보기</a>
                             <a class="dropdown-item" href="novel">소설</a>
                             <a class="dropdown-item" href="essay">시/에세이</a>
                             <a class="dropdown-item" href="humanities">인문학</a> 

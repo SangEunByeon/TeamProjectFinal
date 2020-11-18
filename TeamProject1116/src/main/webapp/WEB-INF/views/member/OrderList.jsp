@@ -13,9 +13,7 @@
 width: 95px;
 height: 25px; 
 }
-td{
-font-size: 1.5ch;
-}
+
 </style>
 <body> 
       

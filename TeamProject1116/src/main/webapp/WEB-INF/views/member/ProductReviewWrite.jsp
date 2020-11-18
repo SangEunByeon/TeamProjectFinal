@@ -156,7 +156,7 @@
                                      	<input type="hidden" name="p_writer" value="${p_writer}">
                                      	<input type="hidden" name="o_orderid" value="${o_orderid}">
                                          <div class="product-review-save">
-                                         <button type="submit" class="btn btn-secondary">저장</button>
+                                         <button type="submit" class="btn btn-danger">저장</button>
                                          </div>
                                      </td> 
                                  </tr> 

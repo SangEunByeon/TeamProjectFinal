@@ -10,8 +10,22 @@ String id = (String) session.getAttribute("sessionID");
 <html>
 <head> 
 <link rel="stylesheet" href="css/member/onetooneboard.css">
-    <title>1:1문의게시판</title>  
+    <title>상품문의게시판</title>  
 </head>
+
+<style>
+.multiline-ellipsis{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+    table-layout: fixed; 
+    text-overflow: ellipsis; 
+     max-width: 200px !important;
+   
+}
+</style>
+
 <body> 
       
 <!-- 메인헤더 -->
@@ -87,13 +101,11 @@ String id = (String) session.getAttribute("sessionID");
                                 </table>
                             </div>
                         <div class="head_orderlist"> 
-                            <h4>1:1문의게시판</h4>     
+                            <h4>상품문의게시판</h4>     
                                 <div class="form-row align-items-center">              
                                    <form action="SearchmyProductQnA" method="post" class="complain_form"> 
                                     <table style="margin-left:200px;">
-                                    
-                                              <p style="padding-top:30px;">  <input type="button" class="btn btn-outline-secondary reply_no" value="답변 없는 문의만 보기" style="width:170px;height:40px;"onclick="ChangeForm()"  /> </p>
-									
+                                              <p style="padding-top:30px;"><input type="button" class="btn btn-outline-secondary reply_no" value="답변 없는 문의만 보기" style="width:170px; height:40px;"onclick="ChangeForm()" /> </p>
                                         <tr>
                                             <td>
                                             <div class="col-auto my-1 search-text-form"> 
@@ -110,7 +122,7 @@ String id = (String) session.getAttribute("sessionID");
                                                 <input class="form-control search-text" type="search-1" placeholder="Search" aria-label="Search"  name="keyword">
                                             </td>
                                             <td>
-                                                <button class="btn btn-secondary" type="submit">검색</button> 
+                                                <button class="btn btn-danger" type="submit">검색</button> 
                                             </td> 
                                         </tr>  
                                     </table>
@@ -132,7 +144,7 @@ String id = (String) session.getAttribute("sessionID");
 		                            <tr class="one-list-text">
 		                                <td>${list.idx}</td>
 		                                <td>${list.p_title}/${list.p_writer}</td>
-		                                <td><a href="MyProductQnAView?idx=${list.idx}" style="color:black;">${list.p_content}</a></td>
+		                                <td><a href="MyProductQnAView?idx=${list.idx}" style="color:black;" class="multiline-ellipsis">${list.p_content}</a></td>
 		                                <td id="user_id" value="user_id" >${list.id}</td>
 		                                
 		                                <c:set var = "p_answer_state" scope="session" value = "${list.p_answer_state}"/>

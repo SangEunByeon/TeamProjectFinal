@@ -147,6 +147,14 @@ public class ProductQnABoardService implements IProductQnABoardService{
 		String id = (String)session.getAttribute("sessionID");
 		return dao.onetoonelistDao(id);
 	}
+
+	@Override
+	public int DeleteMyProductQnA(HttpServletRequest request) {
+		String s_idx = request.getParameter("idx");
+		int idx = Integer.parseInt(s_idx);
+		dao.DeleteMyProductQnADao(idx);
+		return 0;
+	}
 	
 	
 	

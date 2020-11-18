@@ -2181,6 +2181,15 @@ public class MyController_S {
 	   return "member/MyProductQnAView";
    }
    
+   //1118 마이큐엔에이 삭제
+   @RequestMapping("/DeleteMyProductQnA")
+   public String DeleteMyProductQnA(HttpServletRequest request,Model model) {
+	   pro_qna_service.DeleteMyProductQnA(request);
+	   model.addAttribute("msg","상품문의가 삭제되었습니다.");
+	   model.addAttribute("url","/MyProductQnA");
+	   return "redirect";
+   }
+   
    //1117
    @RequestMapping("/MyPageMain")
    public String MyPageMain(HttpServletRequest request, Model model) {
@@ -2209,6 +2218,7 @@ public class MyController_S {
 	   model.addAttribute("url","/ProductReviewComplete");
 	   return "redirect";
    }
+   
 	
 
 

@@ -63,6 +63,7 @@ public interface IProductDao {
 	public Product_QnA_Board_Dto MyProductQnAViewDao(int idx);
 	// 1118 수정
 	public List<OnetoOneBoardDto> onetoonelistDao(String id);
+	public int DeleteMyProductQnADao(int idx);
 	
 	
 	} 

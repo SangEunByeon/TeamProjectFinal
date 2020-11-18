@@ -111,7 +111,7 @@
                                     <input type="hidden" name="o_orderid" value="${list.o_orderid}">
                                     <input type="hidden" name="o_number" value="${list.o_number}">
 	                                     <div class="box_center">
-	                                       <button type="submit" class="btn btn-secondary review_write">후기쓰기</button>
+	                                       <button type="submit" class="btn btn-danger review_write">후기쓰기</button>
 	                                     </div>
                                      </form>
                                     </td> 

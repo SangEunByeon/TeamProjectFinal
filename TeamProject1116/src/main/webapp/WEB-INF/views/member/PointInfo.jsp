@@ -81,7 +81,7 @@
                           	  </tr>
                                 </table>
                             </div>
-                        <div class="head_orderlist" style="height:470px;">
+                        <div class="head_orderlist">
                              <h4>포인트 이용 내역</h4>  
                              <br />
                              

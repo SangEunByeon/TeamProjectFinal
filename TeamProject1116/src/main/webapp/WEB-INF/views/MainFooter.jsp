@@ -8,8 +8,9 @@
   <!-- 푸터 --> 
     <footer> 
        <!-- 대표전화, 무통장입금 -->
+       <div style="height: 75px;"></div>
        <hr />
-        <div class="container footer_text">
+        <div class="container footer_text" >
         <table style="border: none;"> 
             <tr>
                 <td>

@@ -84,7 +84,7 @@
                     <td>
                       <div class="section">
 
-                            <div class="head_orderlist" style="height: 470px;"> 
+                            <div class="head_orderlist"> 
                                 <h4>상품후기</h4>  
                                 <div class="product-review_box">
                                     <button type="button" class="btn btn-secondary possible_Productreview" onclick="ProductReivew()">작성가능후기</button> 

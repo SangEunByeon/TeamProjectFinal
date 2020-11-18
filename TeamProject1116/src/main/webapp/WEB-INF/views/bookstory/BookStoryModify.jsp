@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
 	BookStoryBoardDto content_view=(BookStoryBoardDto)session.getAttribute("content_view"); 
+	String id = (String) session.getAttribute("sessionID"); 
 %>
    
 <!DOCTYPE html>
@@ -130,6 +131,26 @@ position:relative;}
                                 <span>카테고리</span>
                             </td>
                             <td> 
+                            
+                            <% 
+                            if(id.equals("admin")){	
+                           	%>
+                           	<!-- 중복된 이름 제거 -->
+                            <div class="form-group board_category text_form" >  
+                                <select class="form-control" id="bs_category" name="bs_category">    
+                                 <option value="${content_view.bs_category}"></option>
+                                <option value="${content_view.bs_category}">북스토리</option>
+                                <option value="${content_view.bs_category}">한줄서평</option>
+                                <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
+                                <option value="${content_view.bs_category}">좋은글귀 남기기</option>  
+                                <option><strong>작가정보</strong></option>
+                                <option><strong>책미리보기</strong></option>
+                                <option><strong>책 이벤트</strong></option>
+                                </select> 
+                            </div>
+                            <% 
+                            }else{
+                            %>
                             <!-- 중복된 이름 제거 -->
                             <div class="form-group board_category text_form" >  
                                 <select class="form-control" id="bs_category" name="bs_category">    
@@ -139,7 +160,11 @@ position:relative;}
                                 <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
                                 <option value="${content_view.bs_category}">좋은글귀 남기기</option>  
                                 </select> 
-                            </div>  
+                            </div>
+                            <%
+                            }
+                            %>  
+                            
                             </td>
                         </tr>  
                         <tr>

@@ -9,7 +9,7 @@
 <html>
 <head> 
 <link rel="stylesheet" href="css/bookstory/bookstorymain.css"> 
-<title>북스토리프로필</title> 
+<title>북스토리 프로필</title> 
 <script>
 var newImage = new Image(); 
 function updateImage() {//이미지 자동 새로고침

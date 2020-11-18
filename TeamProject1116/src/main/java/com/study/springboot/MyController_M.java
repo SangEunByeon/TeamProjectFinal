@@ -62,8 +62,8 @@ import com.study.springboot.service.MailService;
 
 import lombok.AllArgsConstructor;
  
-//@AllArgsConstructor
-//@Controller
+@AllArgsConstructor
+@Controller
 public class MyController_M {
 	@Autowired
 	FileUploadService fileUploadService;
@@ -1844,6 +1844,7 @@ public class MyController_M {
 			}else {
 				System.out.println("이미지 등록성공");  
 				request.getSession().setAttribute("book_img", dto);
+				request.getSession().setAttribute("memberDto", dto);
 				model.addAttribute("msg","이미지업로드를 성공하였습니다.");
 				model.addAttribute("url","BookStoryProfile");
 			}
@@ -2043,12 +2044,10 @@ public class MyController_M {
 			model.addAttribute("list", list);
 		
 			return "bookstory/BookStoryAllList";
-			}  
+			}    
 		
 		
-		
-		
-		//카테고리  
+		//카테고리-전체글보기,북스토리,한줄서평,책읽고리뷰,좋은글귀남기기
 		@RequestMapping(value = {"/BookStoryCommunication","/BookStoryGoodWriting", "/BookStoryOneLineReivew","/BookStoryReadReivew"})
 		public String bookStoryCategory(HttpServletRequest request, Model model) {
 			String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
@@ -2077,14 +2076,53 @@ public class MyController_M {
 				model.addAttribute("list",bookstory_service.bookStoryCategory("책읽고,리뷰남기기"));
 				nextUrl = "bookstory/BookStoryReadReivew"; }
 			return nextUrl;
-			}	
-			  
-		//관리자>작가정보
-		@RequestMapping("/BookStoryWriterInfo")
-		public String BookStoryWriterInfo(){  return "bookstory/BookStoryWriterInfo"; }  
-						   
-
-
+		}
+		 
+		//관리자> 공지사항 
+		 @RequestMapping("/BookStoryNotice_A")
+		 public String BookStoryNotice_A(){   return "BookStoryNotice_A";  } 
+			
+		 
+		//관리자> 책 미리보기 
+		 @RequestMapping("/BookStoryBookPreview_A")
+		 public String BookStoryBookPreview_A(Model model, HttpServletRequest request){ 
+			 	int count=bookstory_service.getMainProfile(request);
+				model.addAttribute("count",count); 
+			 
+				System.out.println(request.getParameter("bs_category"));
+				ArrayList<BookStoryBoardDto> preBookList=bookstory_service.bookstory_preBookList(request); 
+				model.addAttribute("preBookList",preBookList);
+				System.out.println("preBookList"+preBookList);
+			 return "bookstory/BookStoryBookPreview_A";  
+			 } 
+			
+		 //관리자 카테고리 -공지사항,작가정보,책미리보기,책이벤트
+		 @RequestMapping(value = {"/BookStoryWriterInfo_A","/BookStoryEvent_A"})
+			public String bookStoryCategory_A(HttpServletRequest request, Model model) {
+			String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+			
+			//회원수
+			int count=bookstory_service.getMainProfile(request);
+			model.addAttribute("count",count);
+			System.out.println("회원수:"+count);
+			
+			
+			System.out.println("requestURL"+requestUrl);
+			String nextUrl = "";
+			if (requestUrl.equals("/BookStoryWriterInfo_A")) {
+				model.addAttribute("list",bookstory_service.bookStoryCategory("작가정보"));
+				nextUrl = "bookstory/BookStoryWriterInfo_A"; } 
+			
+			else if (requestUrl.equals("/BookStoryEvent_A")) {
+				model.addAttribute("list",bookstory_service.bookStoryCategory("책 이벤트"));  
+				nextUrl = "bookstory/BookStoryEvent_A"; } 
+			return nextUrl;
+		} 
+			 
+		
+		 
+		 
+		 
 	//마일리지 적립 
 	@RequestMapping("/upPointAction")
 	public JsonObject upPointAction(HttpServletRequest request,Model model) {
@@ -2192,13 +2230,15 @@ public class MyController_M {
 		  model.addAttribute("list",list);
 	      return "member/MyProductQnA"; 
 	   }
-	   //1117 마이큐엔에이 상세보기
-	   @RequestMapping("/MyProductQnAView")
-	   public String MyProductQnAView(HttpServletRequest request,Model model) {
-		   Product_QnA_Board_Dto dto=pro_qna_service.MyProductQnAView(request);
-		   System.out.println("마이큐엔에이 리스트: "+dto);
-		   model.addAttribute("dto",dto);
-		   return "member/MyProductQnAView";
+	   
+	   
+	   //1118 마이큐엔에이 삭제
+	   @RequestMapping("/DeleteMyProductQnA")
+	   public String DeleteMyProductQnA(HttpServletRequest request,Model model) {
+		   pro_qna_service.DeleteMyProductQnA(request);
+		   model.addAttribute("msg","상품문의가 삭제되었습니다.");
+		   model.addAttribute("url","/MyProductQnA");
+		   return "redirect";
 	   }
 	   
 	   //1117
@@ -2209,8 +2249,7 @@ public class MyController_M {
 		   Map<String, Integer> map=order_service.getUserOrderInfo(request);
 		   List<Product_QnA_Board_Dto> qnalist = pro_qna_service.myProductQnAList2(request);
 		   List<OnetoOneBoardDto> onelist=pro_qna_service.onetoonelistDao(request);
-		   
-		   
+		     
 		   model.addAttribute("userdto",userdto);
 		   model.addAttribute("del1",map.get("del1"));
 		   model.addAttribute("del2",map.get("del2"));
@@ -2219,10 +2258,7 @@ public class MyController_M {
 		   model.addAttribute("del5",map.get("del5"));
 		   model.addAttribute("qnalist",qnalist);
 		   model.addAttribute("onelist",onelist);
-		   
-		   
-		   
-		  
+
 		   return "member/MyPageMain";
 	   }
 	   
@@ -2233,7 +2269,15 @@ public class MyController_M {
 		   model.addAttribute("url","/ProductReviewComplete");
 		   return "redirect";
 	   }
-		
+	   
+	   //1117 마이큐엔에이 상세보기
+	   @RequestMapping("/MyProductQnAView")
+	   public String MyProductQnAView(HttpServletRequest request,Model model) {
+		   Product_QnA_Board_Dto dto=pro_qna_service.MyProductQnAView(request);
+		   System.out.println("마이큐엔에이 리스트: "+dto);
+		   model.addAttribute("dto",dto);
+		   return "member/MyProductQnAView";
+	   } 
 
 
 	}

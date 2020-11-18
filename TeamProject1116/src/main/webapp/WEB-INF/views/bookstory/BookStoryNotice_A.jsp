@@ -6,18 +6,17 @@
 
  <%
  String id = (String) session.getAttribute("sessionID"); 
- MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
+ MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
  %>  
   
 <html>
 <head>
 <link rel="stylesheet" href="css/bookstory/bookstorymain.css"> 
-<title>북스토리 책읽고, 리뷰</title>
+<title>북스토리 공지사항</title>
 </head>
 <body>
 <!-- 북스토리메인헤더 -->
 <jsp:include page="/WEB-INF/views/BookStoryMainHeader.jsp"/>
-
 
      <div id="main">
 
@@ -81,11 +80,10 @@
                         </tr> 
                     </table>
                 </div>
-                 
                 <div>
-                    <input type="button" class="btn btn-warning" value="글쓰기" name="write" onclick="writeReview()"> 
+                 
+                    <input type="button" class="btn btn-warning" value="글쓰기" name="write" onclick="writeReview()">   
                 </div>  
-                
             	<%	
             	}
              	 %> 
@@ -144,13 +142,13 @@
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
                             </td>
                         </tr> 
-                    </table>
+                    </table> 
                 </div> 
-            </aside>  
-             <section>  
-              	<div class="all_view"><a href="#"><span>책읽고,리뷰남기기</span></a></div>
+            </aside> 
+            <section>        
+              	<div class="all_view"><a href="#"><span>작가정보</span></a></div>
              	<div class="hr3"></div>
-             	<div class="section_content"> 
+             	<div class="section_content3"> 
             
                  <table id="member_list"  class="table table-striped view_box "> 
                      <tr class="one-list-title ">
@@ -185,7 +183,7 @@
    		alert("로그인해주세요");
    		location.href="LoginForm"
    	 }
-      function writeReview() {location.href="BookStoryWrite"} 
+      function writeReview() {location.href="BookStoryWrite"}  
     </script>
 </body>
 </html>

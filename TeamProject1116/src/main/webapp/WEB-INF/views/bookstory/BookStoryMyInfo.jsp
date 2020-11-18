@@ -17,7 +17,7 @@
 <head>
 <link rel="stylesheet" href="css/bookstory/bookstorymyInfo.css"> 
 <link rel="stylesheet" href="css/bookstory/bookstorymain.css"> 
-<title>북스토리메인</title>
+<title>북스토리 내정보</title>
 </head>
 <body>
 <!-- 북스토리메인헤더 -->
@@ -130,26 +130,26 @@
                     </table> 
                     <div class="hr2"></div>
                      <div class="board_box_category">
-                        <a href="#">책 정보</a>
+                        <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
                      <table>
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo"><span>작가정보</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 초성 이벤트</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
                             </td>
                         </tr> 
-                    </table> 
+                    </table>
                 </div> 
             </aside> 
               <section> 

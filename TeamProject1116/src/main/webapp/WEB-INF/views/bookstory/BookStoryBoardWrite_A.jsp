@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
-<% 
-	String id = (String) session.getAttribute("sessionID"); 
-%>
-      
+   
 <!DOCTYPE html>
 <html>
 <head> 
@@ -15,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
  
-    <title>북스토리 글쓰기</title> 
+    <title>북스토리 관리자 글쓰기</title> 
 	 
 <style> 
 .note-modal-backdrop{
@@ -118,7 +115,7 @@ position:relative;}
         <div id="main">
             <div class="write_box" id="pannel1">
             <div style="width: 60%; margin: auto;">
-                <form method="post" action="BookStoryWriteAction" name="write" onsubmit="return checkValue()"> 
+                <form method="post" action="BookStoryWriteAction_A" name="write" onsubmit="return checkValue()"> 
                     <input type="hidden" name="profile_img" value="${dto.book_profile}"> 
                 <br/>
                 <br/>
@@ -128,38 +125,17 @@ position:relative;}
                                 <span>카테고리</span>
                             </td>
                             <td>
-                             <% 
-                            if(id.equals("admin")){	
-                           	%>
-                           	<!-- 중복된 이름 제거 -->
-                            <div class="form-group board_category text_form" >  
-                            <select class="form-control" id="bs_category" name="bs_category">    
-                                <option selected value="${content_view.bs_category}">카테고리선택</option>
-                                <option value="${content_view.bs_category}">북스토리</option>
-                                <option value="${content_view.bs_category}">한줄서평</option>
-                                <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
-                                <option value="${content_view.bs_category}">좋은글귀 남기기</option>  
-                                <option value="writerInfo"><strong>작가정보</strong></option>
-                                <option value="bookpreview"><strong>책미리보기</strong></option>
-                                <option value="bookevent"><strong>책 이벤트</strong></option>
-                                </select> 
+                            <div class="form-group board_category text_form"> 
+                                <select class="form-control" id="bs_category" name="bs_category">
+                                <option selected>북스토리,소통</option>
+                                <option>한줄서평</option>
+                                <option>책읽고,리뷰남기기</option>
+                                <option>좋은글귀 남기기</option>
+                                <option><strong>작가정보</strong></option>
+                                <option><strong>책미리보기</strong></option>
+                                <option><strong>책 이벤트</strong></option>
+                                </select>
                             </div>
-                            <% 
-                            }else{
-                            %>
-                            <!-- 중복된 이름 제거 -->
-                            <div class="form-group board_category text_form" >  
-                            <select class="form-control" id="bs_category" name="bs_category">    
-                                <option selected value="${content_view.bs_category}">카테고리선택</option>
-                                <option value="${content_view.bs_category}">북스토리</option>
-                                <option value="${content_view.bs_category}">한줄서평</option>
-                                <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
-                                <option value="${content_view.bs_category}">좋은글귀 남기기</option>  
-                                </select> 
-                            </div>
-                            <%
-                            }
-                            %>  
                             </td>
                         </tr>  
                         <tr>

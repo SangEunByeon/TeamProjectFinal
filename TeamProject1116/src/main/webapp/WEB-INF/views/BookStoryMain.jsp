@@ -31,7 +31,8 @@
                      <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
                     <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
                   
-                </div>
+                </div> 
+                
              	<%
             	if(session.getAttribute("sessionID")==null){
            		%>	
@@ -50,8 +51,8 @@
                      </tr> 
                  </table>
              	</div>
-                <div>
-                    <input type="button" class="btn btn-warning" value="글쓰기" name="write" onclick="writeReturn()"> 
+                <div> 
+                <input type="button" class="btn btn-warning" value="글쓰기" name="write" onclick="writeReturn()">  
                 </div> 
            		<%
             	}else{	
@@ -85,11 +86,10 @@
                         </tr> 
                     </table>
                 </div>
+               <div>
                  
-                <div>
-                    <input type="button" class="btn btn-warning" value="글쓰기" name="write" onclick="writeReview()"> 
+                    <input type="button" class="btn btn-warning" value="글쓰기" name="write" onclick="writeReview()">   
                 </div>  
-                
             	<%	
             	}
              	 %> 
@@ -129,26 +129,26 @@
                     </table> 
                     <div class="hr2"></div>
                      <div class="board_box_category">
-                        <a href="#">책 정보</a>
+                        <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
                      <table>
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo"><span>작가정보</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 초성 이벤트</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
                             </td>
                         </tr> 
-                    </table>  
+                    </table>
                 </div> 
             </aside> 
             <section>   
@@ -232,7 +232,7 @@
    		alert("로그인해주세요");
    		location.href="LoginForm"
    	 }
-      function writeReview() {location.href="BookStoryWrite"} 
+      function writeReview() {location.href="BookStoryWrite"}  
     </script>
 </body>
 </html>

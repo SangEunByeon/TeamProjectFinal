@@ -162,7 +162,7 @@ section{
 /* 이미지-버전*/
 .section_content{
     padding-top: 10px;
-    height: 350px;
+    height: 370px;
     overflow: hidden;
 } 
 .section_content2{
@@ -282,4 +282,12 @@ section{
     margin-left: 65px;
     width:880px;
 }
+
+.writer_info_box{
+	height:270px; 
+	overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+	
+}  
  

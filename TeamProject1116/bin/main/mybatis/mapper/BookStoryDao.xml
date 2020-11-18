@@ -24,7 +24,7 @@
         <selectKey keyProperty="idx" resultType="int" order="BEFORE">
            select bookstory_board_seq.nextval FROM DUAL
         </selectKey>
-         insert into bookstory_board (idx, bs_category, bs_user_id, bs_title, bs_content, profile_img,reg)
+         insert into bookstory_board (idx, bs_category, bs_user_id, bs_title, bs_content, profile_img, reg)
               values (#{idx}, #{bs_category}, #{bs_user_id}, #{bs_title}, #{bs_content}, #{profile_img}, #{reg})
    </insert>
    
@@ -59,7 +59,6 @@
   	 <select id="bookstory_mainpopularListDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
          select * from bookstory_board order by hit desc
      </select>  
-    
       
       
      <!-- 댓글  -->
@@ -80,6 +79,12 @@
    	 <select id="bookStoryReplyCountDao" resultType="com.study.springboot.dto.BookStoryBoardReplyDto">
             select * from bookstoryboard_reply where idx=#{param1}
      </select>  
+     
+     
+     <!-- 관리자 -->
+     <select id="bookstory_preBookListDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
+         select * from bookstory_board where bs_category=#{param1} order by reg desc
+     </select> 
     
     
    

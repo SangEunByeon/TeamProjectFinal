@@ -23,7 +23,7 @@
 <head>
 <link rel="stylesheet" href="css/bookstory/bookstoryview.css"> 
 <link rel="stylesheet" href="css/bookstory/bookstorymain.css"> 
-<title>북스토리메인</title>
+<title>북스토리 페이지</title>
 </head>
 <body>
 <!-- 북스토리메인헤더 -->
@@ -134,26 +134,26 @@
                     </table> 
                     <div class="hr2"></div>
                      <div class="board_box_category">
-                        <a href="#">책 정보</a>
+                        <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
-                    <table>
+                     <table>
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo"><span>작가정보</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="#"><span>책 초성 이벤트</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
                             </td>
                         </tr> 
-                    </table> 
+                    </table>
                 </div> 
             </aside> 
             <section> 
@@ -339,8 +339,8 @@
                     if(content_view_bookstory.getBs_user_id().equals(sessionID3) && sessionID3!=null){
                     %>
                     <div class="list_box2"> 
-                      	<button type="button" class="btn btn-light"><a href="prev_bookstoryList?idx=${content_view.idx}">수정<a></button>
-                   		<button type="button" class="btn btn-light"><a href="next_bookstoryList?idx=${content_view.idx}">삭제<a></button>
+                      <button type="button" class="btn btn-light"><a href="BookStoryModify?idx=${content_view_bookstory.idx}">수정<a></button>
+                   		<button type="button" class="btn btn-light"><a href="BoardStoryDeleteAction?idx=${content_view_bookstory.idx}">삭제<a></button>
                         <button type="button" class="btn btn-light" onclick="goList()">목록</button>
                        	<a href="#top"> <button type="button" class="btn btn-light">TOP</button></a>
                     </div> 
@@ -390,6 +390,12 @@
 				location.href="BookStoryOneLineReivew";
   	  	   }else if(category_list == '책읽고,리뷰남기기'){
   	  	  	   location.href="BookStoryReadReivew"
+  	  	   }else if(category_list == '작가정보'){
+  	  	  	   location.href="BookStoryWriterInfo_A"
+  	  	   }else if(category_list == '책 미리보기'){
+  	  	  	   location.href="BookStoryBookPreview_A"
+  	  	   }else if(category_list == '책 이벤트'){
+  	  	  	   location.href="BookStoryEvent_A"
   	  	   }
 	 	}	   
     </script>

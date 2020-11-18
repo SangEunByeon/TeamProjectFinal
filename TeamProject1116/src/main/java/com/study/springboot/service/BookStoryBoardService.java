@@ -174,15 +174,19 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 	}
 
 	@Override
-	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request) {
-//		String hit2=request.getParameter("hit");
-//		int hit=Integer.parseInt(hit2);
+	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request) { 
 		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstory_mainpopularListDao();
 		return list;
 	}
 
+	@Override
+	public ArrayList<BookStoryBoardDto> bookstory_preBookList(HttpServletRequest request) {
+		 String bs_category=request.getParameter("bs_category");
+		 System.out.println("bs_category"+bs_category);
+		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstory_preBookListDao(bs_category);
+		return list;
+	}
  
-	 
  
 	  
 	 

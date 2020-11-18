@@ -31,5 +31,6 @@ public interface IBookStoryBoardService {
 	public int bookStoryReplyCount(int idx);  
 	
 	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request); //인기있는 게시글 목록
+	public ArrayList<BookStoryBoardDto> bookstory_preBookList(HttpServletRequest request); //책 미리보기 목록
 	
 }

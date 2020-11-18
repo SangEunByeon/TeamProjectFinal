@@ -35,5 +35,5 @@ public interface IBookStoryBoardDao {
 	
 	
 	public ArrayList<BookStoryBoardDto> bookstory_mainpopularListDao(); //인기있는 게시글 목록
-	
+	public ArrayList<BookStoryBoardDto> bookstory_preBookListDao(String bs_category); //책 미리보기 목록
 }

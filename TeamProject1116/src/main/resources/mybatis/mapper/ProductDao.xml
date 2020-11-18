@@ -201,7 +201,7 @@
     </select>
     
     <select id="myProductQnAListDao2" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
-    select * from book_product_qna where id=#{param1} and p_answer_state=#{param2} order by reg desc
+    select * from book_product_qna where id=#{param1} order by reg desc
     </select>
     
     <select id="noAnswerQnADao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
@@ -213,7 +213,7 @@
 	</select>
 	
 	<select id="onetoonelistDao" resultType="com.study.springboot.dto.OnetoOneBoardDto">
-	select * from one_to_one_board where user_id=#{param1} and o_ans_check=#{param2} order by reg desc
+	select * from one_to_one_board where user_id=#{param1} order by reg desc
 	</select>
 	
    

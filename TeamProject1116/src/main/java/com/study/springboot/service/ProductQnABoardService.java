@@ -95,9 +95,6 @@ public class ProductQnABoardService implements IProductQnABoardService{
 		return 0;
 	}
 
-	
-	
-	
 	@Override
 	public List<Product_QnA_Board_Dto> myProductQnAList(HttpServletRequest request,Criteria cri) {
 		HttpSession session = request.getSession();
@@ -141,14 +138,14 @@ public class ProductQnABoardService implements IProductQnABoardService{
 	public List<Product_QnA_Board_Dto> myProductQnAList2(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("sessionID");	
-		return dao.myProductQnAListDao2(id, "답변완료");
+		return dao.myProductQnAListDao2(id);
 	}
 
 	@Override
 	public List<OnetoOneBoardDto> onetoonelistDao(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("sessionID");
-		return dao.onetoonelistDao(id, "답변완료");
+		return dao.onetoonelistDao(id);
 	}
 	
 	

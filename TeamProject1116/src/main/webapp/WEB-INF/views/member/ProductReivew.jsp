@@ -20,7 +20,7 @@
                     <td>
                         <div class="aside">
                             <table  cellpadding="10px" cellspaing="10px">
-                                <p>마이페이지</p> 
+                            <p><a href="MyPageMain?id=<%=session.getAttribute("sessionID")%>" style="text-decoration:none; color:black;">마이페이지</a></p>
                             <tr>
                                 <td>
                                     <div class="orderlist">
@@ -84,7 +84,7 @@
                     <td>
                       <div class="section">
 
-                            <div class="head_orderlist"> 
+                            <div class="head_orderlist" style="height: 470px;"> 
                                 <h4>상품후기</h4>  
                                 <div class="product-review_box">
                                     <button type="button" class="btn btn-secondary possible_Productreview" onclick="ProductReivew()">작성가능후기</button> 

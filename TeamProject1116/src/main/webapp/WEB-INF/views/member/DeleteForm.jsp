@@ -29,7 +29,7 @@
                         <div class="section">
                             <div class="aside">
                                 <table  cellpadding="10px" cellspaing="10px">
-                                    <p>마이페이지</p> 
+                                <p><a href="MyPageMain?id=<%=session.getAttribute("sessionID")%>" style="text-decoration:none; color:black;">마이페이지</a></p> 
                                 <tr>
                                     <td>
                                         <div class="orderlist">

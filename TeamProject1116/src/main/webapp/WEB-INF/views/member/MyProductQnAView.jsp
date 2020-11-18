@@ -8,6 +8,11 @@
 <link rel="stylesheet" href="css/member/onetooneboardwrite.css">
     <title>글보기</title> 
 </head>
+<style>
+.o_title_box_reg{
+padding-left: 80px;
+}
+</style>
 <body> 
       
 <!-- 메인헤더 -->
@@ -23,7 +28,7 @@
                         <div class="section">
                             <div class="aside">
                                 <table  cellpadding="10px" cellspaing="10px">
-                                    <p>마이페이지</p> 
+                                <p><a href="MyPageMain?id=<%=session.getAttribute("sessionID")%>" style="text-decoration:none; color:black;">마이페이지</a></p> 
                                 <tr>
                                     <td>
                                         <div class="orderlist">
@@ -92,7 +97,7 @@
                                             <div class="input-group phone-num">
                                                 <span>도서명</span>   
                                             <div class="select-box"> 
-                                              <input class="form-control" type="text" name="p_title" value="${dto.p_title}" >                                 
+                                              <input class="form-control" type="text" name="p_title" value="${dto.p_title}" disabled>                                 
                                             </div> 
                                             </div>
                                         </td> 
@@ -102,7 +107,7 @@
                                             <div class="input-group o_title">
                                                 <span>작가</span> 
                                             <div class="select-box o_title_box">
-                                              <input class="form-control" type="text" name="p_writer" value="${dto.p_writer}" >      
+                                              <input class="form-control" type="text" name="p_writer" value="${dto.p_writer}" disabled>      
                                             </div>
                                             </div>
                                         </td> 
@@ -111,9 +116,9 @@
                                         <td> 
                                             <div class="input-group o_title">
                                                 <span>작성일</span> 
-                                            <div class="select-box o_title_box">
-                                             <fmt:formatDate value="${list.reg}" var="reg" pattern="yyyy.MM.dd"/>
-                                              <input class="form-control" type="text" name="reg" value="${reg}" >      
+                                            <div class="select-box o_title_box_reg">
+                                             <fmt:formatDate value="${dto.reg}" var="reg" pattern="yyyy.MM.dd"/>
+                                              <input class="form-control" type="text" name="reg" value="${reg}" disabled>      
                                             </div>
                                             </div>
                                         </td> 
@@ -123,7 +128,7 @@
                                             <div class="input-group content">
                                                 <span>문의내용</span> 
                                                 <div class="text-box"> 
-                                                <textarea name="o_content_Q" cols="75" rows="10" style="border: 1px solid rgb(206, 206, 206);">${dto.p_content}</textarea>
+                                                <textarea name="o_content_Q" cols="75" rows="10" style="border: 1px solid rgb(206, 206, 206);" disabled>${dto.p_content}</textarea>
                                                 
                                             </div>
                                             </div>
@@ -142,10 +147,9 @@
                                     <span>답변</span> 
                                     <div class="text-box"> 
                                     
-                                     <c:set var = "p_answer_state" scope="session" value = "${dto.p_answer_state}"/>
+                                     <c:set var = "p_answer_state" scope="session" value = "${dto.p_answer_state}" />
                                      <c:if test = "${p_answer_state eq '미등록'}">
                                       <textarea name="o_content_A" cols="75" rows="5" style="border: 1px solid rgb(206, 206, 206);" disabled>아직 답변이 등록되지 않았습니다.</textarea>
-                                 
                                      </c:if>
                                      <c:if test = "${p_answer_state eq '답변완료'}">
                                       <textarea name="o_content_A" cols="75" rows="5" style="border: 1px solid rgb(206, 206, 206);" disabled>${dto.p_answer}</textarea>

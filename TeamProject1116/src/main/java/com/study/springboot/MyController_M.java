@@ -62,8 +62,8 @@ import com.study.springboot.service.MailService;
 
 import lombok.AllArgsConstructor;
  
-@AllArgsConstructor
-@Controller
+//@AllArgsConstructor
+//@Controller
 public class MyController_M {
 	@Autowired
 	FileUploadService fileUploadService;

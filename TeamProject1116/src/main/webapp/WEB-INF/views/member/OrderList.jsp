@@ -32,7 +32,7 @@ font-size: 1.5ch;
 	                        <div class="section">
 	                         <div class="aside">
 	                            <table cellpadding="10px" cellspaing="10px">
-	                                <p><a href="MyPageMain?id=<%=id%>">마이페이지</a></p> 
+	                                <p><a href="MyPageMain?id=<%=id%>" style="text-decoration:none; color:black;">마이페이지</a></p> 
 	                            <tr>
 	                                <td>
 	                                    <div class="orderlist">

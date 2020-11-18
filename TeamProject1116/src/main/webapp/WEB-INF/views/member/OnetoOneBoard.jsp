@@ -28,7 +28,7 @@ String id = (String) session.getAttribute("sessionID");
                         <div class="section">
                             <div class="aside">
                                 <table  cellpadding="10px" cellspaing="10px">
-                                    <p>마이페이지</p> 
+                                <p><a href="MyPageMain?id=<%=session.getAttribute("sessionID")%>" style="text-decoration:none; color:black;">마이페이지</a></p>
                                 <tr>
                                     <td>
                                         <div class="orderlist">
@@ -138,7 +138,7 @@ String id = (String) session.getAttribute("sessionID");
 		                            <fmt:formatDate var="reg" value="${list.reg}"  pattern="yyyy.MM.dd"/>
 		                                <td>${list.idx}</td>
 		                                <td>${list.o_type}</td>
-		                                <td><a href="OnetoOneBoardView?idx=${list.idx}">${list.o_title}</a></td>
+		                                <td><a href="OnetoOneBoardView?idx=${list.idx}" style="color:black;">${list.o_title}</a></td>
 		                                <td id="user_id" value="user_id"  onchange="check_id()" >${list.user_id}</td>
 		                                 <div id="check"></div>
 		                               	<!-- 미등록, 답변완료 --> 

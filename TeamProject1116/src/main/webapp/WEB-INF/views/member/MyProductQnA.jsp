@@ -26,7 +26,7 @@ String id = (String) session.getAttribute("sessionID");
                         <div class="section">
                             <div class="aside">
                                 <table  cellpadding="10px" cellspaing="10px">
-                                    <p>마이페이지</p> 
+                                <p><a href="MyPageMain?id=<%=session.getAttribute("sessionID")%>" style="text-decoration:none; color:black;">마이페이지</a></p> 
                                 <tr>
                                     <td>
                                         <div class="orderlist">
@@ -132,7 +132,7 @@ String id = (String) session.getAttribute("sessionID");
 		                            <tr class="one-list-text">
 		                                <td>${list.idx}</td>
 		                                <td>${list.p_title}/${list.p_writer}</td>
-		                                <td><a href="MyProductQnAView?idx=${list.idx}">${list.p_content}</a></td>
+		                                <td><a href="MyProductQnAView?idx=${list.idx}" style="color:black;">${list.p_content}</a></td>
 		                                <td id="user_id" value="user_id" >${list.id}</td>
 		                                
 		                                <c:set var = "p_answer_state" scope="session" value = "${list.p_answer_state}"/>

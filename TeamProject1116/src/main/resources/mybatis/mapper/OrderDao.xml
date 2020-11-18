@@ -10,8 +10,8 @@
  	  <selectKey keyProperty="o_number" resultType="int" order="BEFORE">
 		        select book_order_seq.nextval FROM DUAL
 	  </selectKey>
-      insert into book_order (o_number,o_receiver, o_phone, p_number, count, o_orderid,o_price,p_title,p_filename,o_address,o_point,o_memo,o_charge,o_total,o_state,o_charge2,reg, review_state)
-           values (#{o_number},#{o_receiver}, #{o_phone}, #{p_number}, #{count} , #{o_orderid},#{o_price},#{p_title},#{p_filename},#{o_address},#{o_point},#{o_memo},#{o_charge},#{o_total},#{o_state},#{o_charge2},#{reg}, #{review_state})
+      insert into book_order (p_writer,o_number,o_receiver, o_phone, p_number, count, o_orderid,o_price,p_title,p_filename,o_address,o_point,o_memo,o_charge,o_total,o_state,o_charge2,reg, review_state)
+           values (#{p_writer},#{o_number},#{o_receiver}, #{o_phone}, #{p_number}, #{count} , #{o_orderid},#{o_price},#{p_title},#{p_filename},#{o_address},#{o_point},#{o_memo},#{o_charge},#{o_total},#{o_state},#{o_charge2},#{reg}, #{review_state})
 	</insert>
 
     <select id="orderlistDao" resultType="com.study.springboot.dto.OrderDto"> 

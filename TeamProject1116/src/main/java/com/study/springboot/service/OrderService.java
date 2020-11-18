@@ -45,6 +45,7 @@ public class OrderService implements IOrderService{
 	      dto.setO_state("1");
 	      dto.setO_charge2(request.getParameter("Card"));
 	      dto.setP_title(request.getParameter("p_title"));
+	      dto.setP_writer(request.getParameter("p_writer"));
 	      dto.setReg(new Date());
 	      dto.setReview_state(0);
 	      dao.orderwriteDao(dto);

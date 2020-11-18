@@ -28,13 +28,13 @@
     <select id="pointListDao" resultType="com.study.springboot.dto.PointDto">
 	   <![CDATA[ 
      select idx,pt_move,id_member,pt_content,pt_result,reg
-     from ( 
+     from  ( 
      select 
      rownum rn, idx,pt_move,id_member,pt_content,pt_result,reg
      from POINT
-     where rownum <= #{cri.pageNum} * #{cri.amount} AND id_member=#{id} 
-     order by reg desc) 
-     where rn > (#{cri.pageNum} -1) * #{cri.amount} AND id_member=#{id} 
+     where rownum <= (select count(*) from POINT where id_member=#{id} 
+     )+10-#{cri.pageNum} * #{cri.amount} AND id_member=#{id} order by idx desc)  
+     where rn > (select count(*) from POINT where id_member=#{id})-#{cri.pageNum} * #{cri.amount} AND id_member=#{id} 
      ]]>
 	</select>
 </mapper>

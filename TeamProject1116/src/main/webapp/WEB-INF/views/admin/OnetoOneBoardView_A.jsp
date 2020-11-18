@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="com.study.springboot.dto.OnetoOneBoardDto" %> 
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.study.springboot.dto.OnetoOneBoardDto" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/member/onetooneboardwrite.css"> 
+<link rel="stylesheet" href="css/member/onetooneboardwrite.css">
 <title>1:1문의보기</title>
 	<style>
 	
@@ -69,7 +69,7 @@
 					</tr>
 					<tr>
 						<td>
-						    <a href="QnA_board">1:1문의</a>
+						    <a href="OnetoOneBoard_A">1:1문의</a>
 							<span href="#">&gt</span>
 						</td>
 					</tr>
@@ -92,7 +92,7 @@
 	  <!-- 오른쪽 컨텐츠 시작 -->
 	<div class="contents">
 	  <div class="section"> 
-        <div class="head_orderlist"> 
+        <div class="head_orderlist" style="padding-left: 0px; width:800px;"> 
             <h4>글 보기</h4>   
             
             <!-- 상품명 -->  
@@ -184,9 +184,6 @@
 			        </td> 
 			   </tr>  
 	       	   </table> 
-	       	   <div class="before_list">
-	       			<input type="button" class="btn btn-secondary" value="목록" onclick="golist()">
-	       	   </div>
 	       	   </form> 
 		</div>
         </div>
@@ -199,9 +196,8 @@
 	<!-- 푸터 부분  -->
 	<jsp:include page="/WEB-INF/views/AdminFooter.jsp"/>
 	</div>
-	<script> 
-function goview(){location.href="ReviewWrite"}
-function golist(){location.href="OnetoOneBoard_A"}
-</script>
+	<script src="js/jquery-2.2.4.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -110,17 +110,17 @@
    select * from book_review where p_number = #{param1} order by idx desc
    </select>
    
-   <select id="getListWithPaging" resultType="com.study.springboot.dto.ProductDto">
+ <select id="getListWithPaging" resultType="com.study.springboot.dto.ProductDto">
 
     <![CDATA[ 
      select idx, p_number, p_filename, p_category, p_category2, p_title, p_writer, p_price 
      from ( 
      select 
-     rownum rn, idx, p_number,p_filename,p_category, p_category2, p_title, p_writer, p_price 
+     rownum rn, idx, p_number, p_filename, p_category, p_category2, p_title, p_writer, p_price 
      from book_product
-     where rownum <= #{pageNum} * #{amount} 
-     order by p_number desc) 
-     where rn > (#{pageNum} -1) * #{amount} 
+     where rownum <= (select count(*) from book_product)+5-#{pageNum} * #{amount} 
+     order by idx desc)  
+     where rn > (select count(*) from book_product)-#{pageNum} * #{amount}
      ]]>
 
     </select>

@@ -117,7 +117,7 @@
                                <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px;">
                                <a href="deleteReview?idx=${list.idx}&o_number=${list.o_number}" style="color:white">삭제</a>
                                </button>
-                               <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px;">
+                               <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px; margin-top: 10px;">
                                <a href="modifyReviewForm?idx=${list.idx}&o_number=${list.o_number}" style="color:white">수정</a>
                                </button>
                             </td>
@@ -132,9 +132,9 @@
                             <td style="font-size: 1.3ch;">${reg}</td>
                             <td style="font-size: 1.3ch;">
                                <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px;">
-                               <a href="modifyReviewForm?idx=${list.idx}" style="color:white">삭제</a>
+                               <a href="deleteReview?idx=${list.idx}&o_number=${list.o_number}"  style="color:white">삭제</a>
                                </button>
-                               <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px;">
+                               <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px; margin-top: 10px;">
                                <a href="modifyReviewForm?idx=${list.idx}" style="color:white">수정</a>
                                </button>
                             </td>

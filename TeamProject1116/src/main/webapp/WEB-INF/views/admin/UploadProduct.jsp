@@ -241,6 +241,7 @@
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
   
 <jsp:include page="/WEB-INF/views/AdminFooter.jsp"/>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 // 할인율에 따른 가격 계산
 function cal_price(){
@@ -272,13 +273,16 @@ function checkValue(){
 	var p_content=proInfo.p_content.value;
 	var p_filename=proInfo.p_filename.value;
 	var p_filename2=proInfo.p_filename2.value;
-
-	/* if(!p_number){
-		alert('상품번호를 입력해주세요.'); 
+	var num_check = $('#check_hidden').val();
+	
+    if(num_check != "yes"){
+		alert('상품번호 중복확인을 해주세요.'); 
+		return false;}
+    else if(!p_number){
+    	alert('상품번호를 입력해주세요.'); 
 		productInfo.p_number.focus();
 		return false;}
-	else  */
-		if(!p_title){
+	else  if(!p_title){
 		alert('상품명을 입력해주세요.'); 
 		productInfo.p_title.focus();
 		return false;}

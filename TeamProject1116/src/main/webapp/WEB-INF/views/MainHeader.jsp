@@ -86,9 +86,9 @@
                           <span><%= id %>회원님</span>
                     </a>
                     <div class="dropdown-menu member_dropdown" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="PointInfo">마일리지</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="MyPageMain?id=<%=id%>">마이페이지</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="PointInfo">마일리지</a>
                         <a class="dropdown-item" href="ProductReivew">상품후기</a>
                         <a class="dropdown-item" href="OnetoOneBoardWrite">1:1문의</a>
                         <a class="dropdown-item" href="LogOut">로그아웃</a>

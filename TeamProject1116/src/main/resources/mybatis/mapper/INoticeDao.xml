@@ -69,9 +69,9 @@
      select 
      rownum rn, idx,n_writer,n_title,n_hit,reg,category
      from notice_board
-     where rownum <= #{cri.pageNum} * #{cri.amount} AND category =#{category} 
-     order by idx desc) 
-     where rn > (#{cri.pageNum} -1) * #{cri.amount} AND category =#{category} 
+     where rownum <= (select count(*) from notice_board where category = #{category} 
+     )+7-#{cri.pageNum} * #{cri.amount} AND category =#{category} order by reg desc)
+     where rn > (select count(*) from notice_board where category = #{category})-#{cri.pageNum} * #{cri.amount} AND category =#{category} 
      ]]>
 
     </select>

@@ -321,7 +321,17 @@
 	<input type="hidden" name="idx" value="${dto.idx}">
 	<%if("admin".equals(session.getAttribute("sessionID"))){  %>
 		<input type="submit" class="btn btn-sm btn-danger" value="수정"/>
-		<input type="button" class="btn btn-sm btn-danger" value="목록" onclick="goFirstForm(4)">
+		<c:choose>
+		<c:when test="${dto.category eq '1'}">
+		<input type="button" value="목록" onclick="goFirstForm(1)">
+		</c:when>
+		<c:when test="${dto.category eq '2'}">
+		<input type="button" value="목록" onclick="goFirstForm(2)">
+		</c:when>
+		<c:when test="${dto.category eq '3'}">
+		<input type="button" value="목록" onclick="goFirstForm(4)">
+		</c:when>
+		</c:choose>
 		<% }else{%> 
 		<c:choose>
 		<c:when test="${dto.category eq '1'}">

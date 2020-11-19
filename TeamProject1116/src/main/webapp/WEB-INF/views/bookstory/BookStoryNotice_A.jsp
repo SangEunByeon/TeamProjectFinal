@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %>
-
+ <!-- 수정1119  -->
  <%
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   

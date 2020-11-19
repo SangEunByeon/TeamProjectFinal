@@ -2,6 +2,7 @@ package com.study.springboot.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import com.study.springboot.FileUploadService;
 import com.study.springboot.dao.IBookStoryBoardDao;
 import com.study.springboot.dto.BookStoryBoardDto;
 import com.study.springboot.dto.BookStoryBoardReplyDto;
+import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.ProductDto;
  
@@ -124,6 +126,21 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstoryListDao();
 		return list;
 	} 
+   
+  
+	@Override
+	public List<BookStoryBoardDto> bookstoryAllList(HttpServletRequest request,String page) {  
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 10; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size); //5, 10, 15 페이지 끝 줄번호
+		
+		System.out.println("startRowNum:"+startRowNum);
+		System.out.println("endRowNum:"+endRowNum);
+		
+		List<BookStoryBoardDto> list=bookstoryDao.bookstoryAllListDao(startRowNum, endRowNum);
+		return list;
+	} 
 
 	@Override
 	public List<BookStoryBoardDto> bookStoryCategory(String bs_category) { 
@@ -186,6 +203,7 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstory_preBookListDao(bs_category);
 		return list;
 	}
+ 
  
  
 	  

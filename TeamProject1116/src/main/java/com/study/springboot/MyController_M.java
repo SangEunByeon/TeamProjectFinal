@@ -33,10 +33,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.JsonObject;
 import com.study.springboot.dao.IMemberDao;
-import com.study.springboot.dao.INoticeDao;
+import com.study.springboot.dao.INoticeDao; 
 import com.study.springboot.dto.BookStoryBoardDto;
 import com.study.springboot.dto.BookStoryBoardReplyDto;
 import com.study.springboot.dto.CartDto;
@@ -1340,6 +1341,8 @@ public class MyController_M {
 			request.setAttribute("allPageNum", allPageNum);
 			return "member/ProductReviewComplete";
 		}
+		 
+		
 	//관리자 폼 > 상품관리 화면 > 상품 검색
 	@RequestMapping("/SearchProduct")
 	public String SearchProduct(HttpServletRequest request,Model model) {
@@ -1811,6 +1814,13 @@ public class MyController_M {
 			ArrayList<BookStoryBoardDto> Popular_list=bookstory_service.bookstory_mainpopularList(request);
 			model.addAttribute("Popular_list",Popular_list);
 			
+			//페이징
+			String page=request.getParameter("page");
+			
+			if(page==null) {
+				page="1";
+				request.getSession().setAttribute("page", page);
+			}
 		
 			return "BookStoryMain";
 		} 
@@ -2039,13 +2049,26 @@ public class MyController_M {
 			System.out.println("회원수:"+count);
 			
 			
-			ArrayList<BookStoryBoardDto> list=bookstory_service.bookstoryList(request);
+			
+			//페이징처리
+			String page = request.getParameter("page");
+			System.out.println( "page:" + page);
+			
+			
+			if(page==null) {
+				page="1";
+			}
+			
+			List<BookStoryBoardDto> list=bookstory_service.bookstoryAllList(request,page);
 			System.out.println("전체글보기:"+list);
-			model.addAttribute("list", list);
+			request.getSession().setAttribute("list", list);
+		
+			
+			request.getSession().setAttribute("page", page);
 		
 			return "bookstory/BookStoryAllList";
-			}    
-		
+			}  
+		 
 		
 		//카테고리-전체글보기,북스토리,한줄서평,책읽고리뷰,좋은글귀남기기
 		@RequestMapping(value = {"/BookStoryCommunication","/BookStoryGoodWriting", "/BookStoryOneLineReivew","/BookStoryReadReivew"})

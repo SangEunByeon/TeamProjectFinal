@@ -42,6 +42,23 @@
             select * from bookstory_board order by idx desc
      </select> 
       
+      
+      	<!-- select * from bookstory_board order by idx desc -->
+     <select id="bookstoryAllListDao" resultType="com.study.springboot.dto.BookStoryBoardDto"> 
+		 
+			SELECT *
+			FROM
+		    (
+		        SELECT 
+		            ROWNUM AS RNUM, bookstory_board.*
+		        FROM
+		            bookstory_board
+		        ORDER BY idx desc
+		    )
+			WHERE
+	    	RNUM BETWEEN #{param1} AND #{param2}
+     </select> 
+      
      <select id="bookStoryCategoryDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
             select * from bookstory_board where bs_category=#{param1} order by idx desc
      </select>  

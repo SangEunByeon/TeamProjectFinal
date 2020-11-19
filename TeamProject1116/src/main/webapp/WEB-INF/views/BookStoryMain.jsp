@@ -219,8 +219,9 @@
                         </tr>     
                         </c:forEach>
                     </table>  
-                </div> 
+                </div>  
             </section>  
+            
         </div> 
         
     <!-- 메인푸터 --> 

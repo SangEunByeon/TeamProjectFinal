@@ -3,7 +3,7 @@
 <% 
 	String id = (String) session.getAttribute("sessionID"); 
 %>
-      
+       <!-- 수정1119  -->
 <!DOCTYPE html>
 <html>
 <head> 

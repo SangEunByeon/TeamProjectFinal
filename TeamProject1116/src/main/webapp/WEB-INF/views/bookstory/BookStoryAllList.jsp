@@ -3,10 +3,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %>
+<%@ page import="com.study.springboot.dto.BookStoryBoardDto" %>
+<%@ page import="java.util.List"%>
 
  <%
  String id = (String) session.getAttribute("sessionID"); 
- MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
+ MemberDto memberDto = (MemberDto)session.getAttribute("memberDto"); 
+ 
+ List<BookStoryBoardDto> list = (List<BookStoryBoardDto>)session.getAttribute("list"); 
+	System.out.println( "list count:" + list.size() );
+	String list_page = (String)session.getAttribute("page");
+	System.out.println( "list_page:" + list_page );
+	String page1_active = "";
+	String page2_active = "";
+	String page3_active = "";
+	if(list_page.equals("1")) 
+		page1_active = "active";
+	if(list_page.equals("2")) 
+		page2_active = "active";
+	if(list_page.equals("3")) 
+		page3_active = "active";
+ 
  %>  
   
 <html>
@@ -171,10 +188,29 @@
                      </c:forEach>
                  </table> 
                  </div>  
+          	      <nav aria-label="...">
+				  	<ul class="pagination">
+					    <li class="page-item disabled">
+					      	<span class="page-link">Previous</span>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					    	<a class="page-link"  href="BookStoryAllList?page=1">1</a>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					      	<a class="page-link" href="BookStoryAllList?page=2">2</a>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					    	<a class="page-link" href="BookStoryAllList?page=3">3</a>
+					    </li>
+					    <li class="page-item">
+					      	<a class="page-link" href="#">Next</a>
+					    </li>
+				  	</ul>
+				</nav>
             </section>
         </div>
-
-    
+				 
+				 
  	<!-- 메인푸터 --> 
 	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>
      

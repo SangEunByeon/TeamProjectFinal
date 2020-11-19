@@ -9,7 +9,7 @@
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");     
  %>  
-  
+  <!-- 수정1119  --> 
 <html>
 <head>
 <link rel="stylesheet" href="css/bookstory/bookstorymain.css"> 

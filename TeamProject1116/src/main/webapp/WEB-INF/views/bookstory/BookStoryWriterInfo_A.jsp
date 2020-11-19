@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
-
+ <!-- 수정1119  -->
  <%
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
@@ -127,7 +127,7 @@
                         <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
-                     <table>
+                       <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
@@ -135,7 +135,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category=책 미리보기"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -143,19 +143,19 @@
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
                             </td>
                         </tr> 
-                    </table> 
+                    </table>
                 </div> 
             </aside> 
             <section>        
-              	<div class="all_view"><a href="#"><span>작가정보</span></a></div>
+              	 	<div class="all_view"><span>작가정보</span></div>
              	<div class="hr3"></div>
              	<div class="section_content3"> 
             
                  <table id="member_list"  class="table table-striped view_box "> 
                      <tr class="one-list-title ">
                          <th scope="col" style="width: 15%;" >번호</th> 
-                         <th scope="col" style="width: 30%;" >작가사진</th>
-                         <th scope="col" style="width: 40%;" >작가소개</th> 
+                         <th scope="col" style="width: 25%;" >작가사진</th>
+                         <th scope="col" style="width: 35%;" >작가소개</th> 
                          <th scope="col"  style="width: 10%;">작성자</th> 
                          <th scope="col"  style="width: 15%;">조회수</th> 
                      </tr> 
@@ -176,12 +176,20 @@
                        	 
               	 	     <!-- 콘텐츠 반복구간 -->
                    		 <c:set var="string1" value="${dto.bs_content}" />
-                        	 
+                   		   
                     	 <td>${dto.idx}</td> 
-                         <td><span><a href="BookStoryView?idx=${dto.idx}">${image}</a></span> </td>
-                         <td><div class="writer_info_box">${fn:substringAfter(string1,'p class="0">')}</div> </td>   
+                         <td>
+                         <div class="content_text">
+                         <span class="content_img"><a href="BookStoryView?idx=${dto.idx}">${image}</a></span> 
+                         </div>
+                         </td>
+                         <td class="writer_info_box" ><div class="writer_info_box2">${fn:substringAfter(string1, '">')}</div> </td>   
                          <td>${dto.bs_user_id}</td>
                          <td>${dto.hit}</td>   
+                         
+                          
+                       	
+                       	 
                      </tr>     
                      </c:forEach>
                  </table> 

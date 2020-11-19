@@ -2061,9 +2061,7 @@ public class MyController_M {
 			
 			List<BookStoryBoardDto> list=bookstory_service.bookstoryAllList(request,page);
 			System.out.println("전체글보기:"+list);
-			request.getSession().setAttribute("list", list);
-		
-			
+			request.getSession().setAttribute("list", list); 
 			request.getSession().setAttribute("page", page);
 		
 			return "bookstory/BookStoryAllList";
@@ -2084,33 +2082,70 @@ public class MyController_M {
 			System.out.println("requestURL"+requestUrl);
 			String nextUrl = "";
 			if (requestUrl.equals("/BookStoryCommunication")) {
-				model.addAttribute("list",bookstory_service.bookStoryCategory("북스토리,소통"));
+				String page = request.getParameter("page");
+				System.out.println( "page:" + page);
+				if(page==null) {
+					page="1";
+				}
+				
+				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory("북스토리,소통",page);
+				request.getSession().setAttribute("list", list); 
+				request.getSession().setAttribute("page", page);
+				
+				
 				nextUrl = "bookstory/BookStoryCommunication"; }
 			
 			else if (requestUrl.equals("/BookStoryGoodWriting")) {
-				model.addAttribute("list",bookstory_service.bookStoryCategory("좋은글귀 남기기"));
+				String page = request.getParameter("page");
+				System.out.println( "page:" + page);
+				if(page==null) {
+					page="1";
+				}
+				
+				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory("좋은글귀 남기기",page);
+				request.getSession().setAttribute("list", list); 
+				request.getSession().setAttribute("page", page);
+				
 				nextUrl = "bookstory/BookStoryGoodWriting"; }
 			
 			else if (requestUrl.equals("/BookStoryOneLineReivew")) {
-				model.addAttribute("list",bookstory_service.bookStoryCategory("한줄서평"));  
+				String page = request.getParameter("page");
+				System.out.println( "page:" + page);
+				if(page==null) {
+					page="1";
+				}
+				
+				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory("한줄서평",page);
+				request.getSession().setAttribute("list", list); 
+				request.getSession().setAttribute("page", page);
+				
 				nextUrl = "bookstory/BookStoryOneLineReivew"; }
 			
 			else if (requestUrl.equals("/BookStoryReadReivew")) {
-				model.addAttribute("list",bookstory_service.bookStoryCategory("책읽고,리뷰남기기"));
+				String page = request.getParameter("page");
+				System.out.println( "page:" + page);
+				if(page==null) {
+					page="1";
+				}
+				
+				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory("책읽고,리뷰남기기",page);
+				request.getSession().setAttribute("list", list); 
+				request.getSession().setAttribute("page", page);
+				
 				nextUrl = "bookstory/BookStoryReadReivew"; }
 			return nextUrl;
 		}
-		 
-		//관리자> 공지사항 
-		 @RequestMapping("/BookStoryNotice_A")
-		 public String BookStoryNotice_A(){   return "BookStoryNotice_A";  } 
-			
+		   
+		
 		 
 		//관리자> 책 미리보기 
 		 @RequestMapping("/BookStoryBookPreview_A")
 		 public String BookStoryBookPreview_A(Model model, HttpServletRequest request){ 
-			 	int count=bookstory_service.getMainProfile(request);
-				model.addAttribute("count",count); 
+			 	//회원수
+				int count=bookstory_service.getMainProfile(request);
+				model.addAttribute("count",count);
+				System.out.println("회원수:"+count);
+				
 			 
 				System.out.println(request.getParameter("bs_category"));
 				ArrayList<BookStoryBoardDto> preBookList=bookstory_service.bookstory_preBookList(request); 
@@ -2118,9 +2153,11 @@ public class MyController_M {
 				System.out.println("preBookList"+preBookList);
 			 return "bookstory/BookStoryBookPreview_A";  
 			 } 
-			
-		 //관리자 카테고리 -공지사항,작가정보,책미리보기,책이벤트
-		 @RequestMapping(value = {"/BookStoryWriterInfo_A","/BookStoryEvent_A"})
+		 
+		 
+		  
+		 //관리자 카테고리 -작가정보,책미리보기,책이벤트
+		 @RequestMapping(value = {"/BookStoryNotice_A","/BookStoryWriterInfo_A","/BookStoryEvent_A"})
 			public String bookStoryCategory_A(HttpServletRequest request, Model model) {
 			String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 			
@@ -2132,13 +2169,47 @@ public class MyController_M {
 			
 			System.out.println("requestURL"+requestUrl);
 			String nextUrl = "";
-			if (requestUrl.equals("/BookStoryWriterInfo_A")) {
-				model.addAttribute("list",bookstory_service.bookStoryCategory("작가정보"));
+			
+			 if (requestUrl.equals("/BookStoryWriterInfo_A")) {
+				String page = request.getParameter("page");
+				System.out.println( "page:" + page);
+				if(page==null) {
+					page="1";
+				}
+				
+				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory("작가정보",page);
+				request.getSession().setAttribute("list", list); 
+				request.getSession().setAttribute("page", page);
+				
 				nextUrl = "bookstory/BookStoryWriterInfo_A"; } 
 			
 			else if (requestUrl.equals("/BookStoryEvent_A")) {
-				model.addAttribute("list",bookstory_service.bookStoryCategory("책 이벤트"));  
+				String page = request.getParameter("page");
+				System.out.println( "page:" + page);
+				if(page==null) {
+					page="1";
+				}
+				
+				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory("책 이벤트",page);
+				request.getSession().setAttribute("list", list); 
+				request.getSession().setAttribute("page", page);
+				
 				nextUrl = "bookstory/BookStoryEvent_A"; } 
+			 
+			else if (requestUrl.equals("/BookStoryNotice_A")) {
+				String page = request.getParameter("page");
+				System.out.println( "page:" + page);
+				if(page==null) {
+					page="1";
+				}
+				
+				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory("공지사항",page);
+				request.getSession().setAttribute("list", list); 
+				request.getSession().setAttribute("page", page);
+				
+				nextUrl = "bookstory/BookStoryNotice_A"; } 
+			   
+			 
 			return nextUrl;
 		} 
 			 

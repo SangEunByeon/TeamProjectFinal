@@ -46,3 +46,7 @@ input[type=text]{
 	padding-top:30px;
 }
 
+/* 파일업로드  */
+.file_upload_add{
+	float:left;
+}

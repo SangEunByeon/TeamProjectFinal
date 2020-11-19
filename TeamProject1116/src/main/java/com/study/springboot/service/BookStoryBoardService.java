@@ -119,33 +119,7 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 	public BookStoryBoardDto bookstoryView(int idx) {
 		BookStoryBoardDto dto=bookstoryDao.bookstoryViewDao(idx);
 		return dto;
-	}
-
-	@Override
-	public ArrayList<BookStoryBoardDto> bookstoryList(HttpServletRequest request) {
-		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstoryListDao();
-		return list;
 	} 
-   
-  
-	@Override
-	public List<BookStoryBoardDto> bookstoryAllList(HttpServletRequest request,String page) {  
-		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
-		int num_page_size = 10; //한페이지당 Row갯수
-		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
-		int endRowNum = (num_page_no * num_page_size); //5, 10, 15 페이지 끝 줄번호
-		
-		System.out.println("startRowNum:"+startRowNum);
-		System.out.println("endRowNum:"+endRowNum);
-		
-		List<BookStoryBoardDto> list=bookstoryDao.bookstoryAllListDao(startRowNum, endRowNum);
-		return list;
-	} 
-
-	@Override
-	public List<BookStoryBoardDto> bookStoryCategory(String bs_category) { 
-		return bookstoryDao.bookStoryCategoryDao(bs_category);
-	}
  
 	@Override
 	public int bookstoryDelete(int idx) {
@@ -189,6 +163,43 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		System.out.println("댓글수"+list.size());
 		return list.size();
 	}
+	
+
+	@Override
+	public ArrayList<BookStoryBoardDto> bookstoryList(HttpServletRequest request) {
+		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstoryListDao();
+		return list;
+	} 
+   
+  
+	@Override
+	public List<BookStoryBoardDto> bookstoryAllList(HttpServletRequest request,String page) {  
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 20; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size); //5, 10, 15 페이지 끝 줄번호
+		
+		System.out.println("startRowNum:"+startRowNum);
+		System.out.println("endRowNum:"+endRowNum);
+		
+		List<BookStoryBoardDto> list=bookstoryDao.bookstoryAllListDao(startRowNum, endRowNum);
+		return list;
+	} 
+
+	@Override
+	public List<BookStoryBoardDto> bookStoryCategory(String bs_category,String page) { 
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 20; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size); //5, 10, 15 페이지 끝 줄번호
+		
+		System.out.println("startRowNum:"+startRowNum);
+		System.out.println("endRowNum:"+endRowNum);
+		
+		List<BookStoryBoardDto> list=bookstoryDao.bookStoryCategoryDao(bs_category,startRowNum, endRowNum);
+		
+		return list;
+	}
 
 	@Override
 	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request) { 
@@ -198,14 +209,11 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 
 	@Override
 	public ArrayList<BookStoryBoardDto> bookstory_preBookList(HttpServletRequest request) {
-		 String bs_category=request.getParameter("bs_category");
-		 System.out.println("bs_category"+bs_category);
+		String bs_category=request.getParameter("bs_category");
+		System.out.println("bs_category"+bs_category);
 		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstory_preBookListDao(bs_category);
 		return list;
 	}
- 
- 
- 
-	  
+   
 	 
 }

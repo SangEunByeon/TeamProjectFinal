@@ -3,11 +3,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %> 
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  
+<%@ page import="com.study.springboot.dto.BookStoryBoardDto" %>
+<%@ page import="java.util.List"%>
 
  <%
  String id = (String) session.getAttribute("sessionID"); 
- MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");     
+ MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
+ 
+ List<BookStoryBoardDto> list = (List<BookStoryBoardDto>)session.getAttribute("list"); 
+	System.out.println( "list count:" + list.size() );
+	String list_page = (String)session.getAttribute("page");
+	System.out.println( "list_page:" + list_page );
+	String page1_active = "";
+	String page2_active = "";
+	String page3_active = "";
+	if(list_page.equals("1")) 
+		page1_active = "active";
+	if(list_page.equals("2")) 
+		page2_active = "active";
+	if(list_page.equals("3")) 
+		page3_active = "active";
  %>  
   <!-- 수정1119  --> 
 <html>
@@ -127,7 +143,7 @@
                         <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
-                     <table>
+                      <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
@@ -135,7 +151,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -143,12 +159,12 @@
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
                             </td>
                         </tr> 
-                    </table> 
+                    </table>
                 </div> 
             </aside> 
             <section>        
-              	<div class="all_view"><a href="#"><span>책 미리보기</span></a></div>
-             	<div class="hr3"></div>
+              		<div class="all_view"><span>책 미리보기</span></div>
+             	<div class="hr3"></div> 
              	 
              	  <table>
                         <tr>
@@ -176,7 +192,29 @@
                         </tr>
                     </table> 
              	 
-             	 
+             	     <!-- 페이징처리 -->
+          	      <nav aria-label="...">
+				  	<ul class="pagination">
+					   <!--  <li class="page-item disabled">
+					      	<span class="page-link">Previous</span>
+					    </li> -->
+					    <li class="page-item <%= page1_active %>">
+					    	<a class="page-link"  href="BookStoryBookPreview_A?bs_category='책 미리보기'?page=1">1</a>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					      	<a class="page-link" href="BookStoryBookPreview_A?bs_category='책 미리보기'?page=2">2</a>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					    	<a class="page-link" href="BookStoryBookPreview_A?bs_category='책 미리보기'?page=3">3</a>
+					    </li>
+					      <li class="page-item <%= page1_active %>">
+					    	<a class="page-link" href="BookStoryBookPreview_A?bs_category='책 미리보기'?page=4">4</a>
+					    </li> 
+					<!--     <li class="page-item">
+					      	<a class="page-link" href="#">Next</a>
+					    </li> -->
+				  	</ul>
+				</nav>
              	 
              	 
              	 

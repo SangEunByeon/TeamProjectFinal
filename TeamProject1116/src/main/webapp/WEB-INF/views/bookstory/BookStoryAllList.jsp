@@ -144,7 +144,7 @@
                         <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
-                     <table>
+                    <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
@@ -152,7 +152,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -164,7 +164,7 @@
                 </div> 
             </aside> 
             <section>    
-              	<div class="all_view"><a href="#"><span>전체글보기</span></a></div>
+              	<div class="all_view"><span>전체글보기</span></div>
              	<div class="hr3"></div>
              	<div class="section_content3"> 
             
@@ -188,11 +188,13 @@
                      </c:forEach>
                  </table> 
                  </div>  
+                 
+                 <!-- 페이징처리 -->
           	      <nav aria-label="...">
 				  	<ul class="pagination">
-					    <li class="page-item disabled">
+					   <!--  <li class="page-item disabled">
 					      	<span class="page-link">Previous</span>
-					    </li>
+					    </li> -->
 					    <li class="page-item <%= page1_active %>">
 					    	<a class="page-link"  href="BookStoryAllList?page=1">1</a>
 					    </li>
@@ -202,9 +204,12 @@
 					    <li class="page-item <%= page1_active %>">
 					    	<a class="page-link" href="BookStoryAllList?page=3">3</a>
 					    </li>
-					    <li class="page-item">
+					      <li class="page-item <%= page1_active %>">
+					    	<a class="page-link" href="BookStoryAllList?page=4">4</a>
+					    </li> 
+					<!--     <li class="page-item">
 					      	<a class="page-link" href="#">Next</a>
-					    </li>
+					    </li> -->
 				  	</ul>
 				</nav>
             </section>

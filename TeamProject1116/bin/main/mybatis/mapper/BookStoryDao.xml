@@ -34,18 +34,52 @@
      
     <select id="bookstoryViewDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
        select * from bookstory_board where idx =#{idx}
-    </select>
-     
+    </select> 
     
      <!--전체 글목록  --> 
      <select id="bookstoryListDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
             select * from bookstory_board order by idx desc
      </select> 
+       
+       
+     <select id="bookstoryAllListDao" resultType="com.study.springboot.dto.BookStoryBoardDto"> 
+		 
+			SELECT *
+			FROM
+		    (
+		        SELECT 
+		            ROWNUM AS RNUM, bookstory_board.*
+		        FROM
+		            bookstory_board
+		        ORDER BY idx desc
+       	    )
+			WHERE
+	    	idx BETWEEN #{param1} AND #{param2}
+     </select> 
+      
+      
       
      <select id="bookStoryCategoryDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
-            select * from bookstory_board where bs_category=#{param1} order by idx desc
+         SELECT *
+			FROM
+		    (
+		        SELECT 
+		            ROWNUM AS RNUM, bookstory_board.*
+		        FROM
+		            bookstory_board where bs_category=#{param1}
+		        ORDER BY idx desc
+       	    )
+			WHERE
+	    	RNUM BETWEEN #{param2} AND #{param3}
      </select>  
+      
      
+      
+     <!-- 인기글목록 -->
+  	 <select id="bookstory_mainpopularListDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
+         select * from bookstory_board order by hit desc
+     </select>  
+      
      
      <delete id="bookstoryDeleteDao">
    			delete from bookstory_board where idx=#{param1}
@@ -55,11 +89,6 @@
    			update  bookstory_board set bs_category=#{bs_category} , bs_title =#{bs_title} ,bs_content=#{bs_content} where idx=#{idx}
      </update> 
      
-     <!-- 인기글목록 -->
-  	 <select id="bookstory_mainpopularListDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
-         select * from bookstory_board order by hit desc
-     </select>  
-      
       
      <!-- 댓글  -->
      <insert id="bookstoryRelpyWriteDao" parameterType="com.study.springboot.dto.BookStoryBoardReplyDto">

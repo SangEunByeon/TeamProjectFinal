@@ -3,12 +3,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %>
-<%@ page import="com.study.springboot.dto.BookStoryBoardDto" %> 
- <!-- 수정1119  -->
+<%@ page import="com.study.springboot.dto.BookStoryBoardDto" %>
+<%@ page import="java.util.List"%>  
  <%
  BookStoryBoardDto content_view=(BookStoryBoardDto)session.getAttribute("content_view"); 
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
+ 
+ List<BookStoryBoardDto> list = (List<BookStoryBoardDto>)session.getAttribute("list"); 
+	System.out.println( "list count:" + list.size() );
+	String list_page = (String)session.getAttribute("page");
+	System.out.println( "list_page:" + list_page );
+	String page1_active = "";
+	String page2_active = "";
+	String page3_active = "";
+	if(list_page.equals("1")) 
+		page1_active = "active";
+	if(list_page.equals("2")) 
+		page2_active = "active";
+	if(list_page.equals("3")) 
+		page3_active = "active";
+
+ 
  %>  
   
 <html>
@@ -130,7 +146,7 @@
                         <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
-                     <table>
+                      <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
@@ -138,7 +154,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -150,21 +166,19 @@
                 </div> 
             </aside> 
             <section>     
-              	<div class="all_view"><span>북스토리,소통</span></a></div>
-              	
+              		<div class="all_view"><span>북스토리,소통</span></div>
              	<div class="hr3"></div>
+              	 
              	<div class="section_content3">  
                  <table id="member_list"  class="table table-striped view_box "> 
-                     <tr class="one-list-title ">
-                         <th scope="col" style="width: 5%;" >번호</th> 
+                     <tr class="one-list-title ">  
                          <th scope="col" style="width: 50%;" >제목</th>
                          <th scope="col" style="width: 10%;" >작성자</th> 
                          <th scope="col"  style="width: 10%;">작성일</th> 
                          <th scope="col"  style="width: 5%;">조회수</th> 
                      </tr> 
                      <c:forEach var="list" items="${ list }" >  
-                     <tr class="view_box_1">  
-                         <td>${list.idx}</td>
+                     <tr class="view_box_1">    
                          <td><a href="BookStoryView?idx=${list.idx}">${list.bs_title}</a></td>
                          <td>${list.bs_user_id}</td>
                            <fmt:formatDate var="reg" value="${list.reg}"  pattern="yyyy.MM.dd"/>
@@ -174,6 +188,30 @@
                      </c:forEach>
                  </table> 
                  </div>  
+                 
+                 <!-- 페이징처리 -->
+                 <nav aria-label="...">
+				  	<ul class="pagination">
+					   <!--  <li class="page-item disabled">
+					      	<span class="page-link">Previous</span>
+					    </li> -->
+					    <li class="page-item <%= page1_active %>">
+					    	<a class="page-link"  href="BookStoryCommunication?page=1">1</a>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					      	<a class="page-link" href="BookStoryCommunication?page=2">2</a>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					    	<a class="page-link" href="BookStoryCommunication?page=3">3</a>
+					    </li>
+					      <li class="page-item <%= page1_active %>">
+					    	<a class="page-link" href="BookStoryCommunication?page=4">4</a>
+					    </li> 
+					<!--     <li class="page-item">
+					      	<a class="page-link" href="#">Next</a>
+					    </li> -->
+				  	</ul>
+				</nav>
             </section>
         </div>
 

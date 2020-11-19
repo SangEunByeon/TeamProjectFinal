@@ -133,7 +133,7 @@
                         <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
-                     <table>
+                      <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
@@ -141,7 +141,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">

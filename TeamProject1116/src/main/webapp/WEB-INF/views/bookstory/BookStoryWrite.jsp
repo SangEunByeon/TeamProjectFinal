@@ -133,15 +133,16 @@ position:relative;}
                            	%>
                            	<!-- 중복된 이름 제거 -->
                             <div class="form-group board_category text_form" >  
-                            <select class="form-control" id="bs_category" name="bs_category">    
-                                <option selected value="${content_view.bs_category}">카테고리선택</option>
-                                <option value="${content_view.bs_category}">북스토리</option>
-                                <option value="${content_view.bs_category}">한줄서평</option>
-                                <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
-                                <option value="${content_view.bs_category}">좋은글귀 남기기</option>  
-                                <option value="writerInfo"><strong>작가정보</strong></option>
-                                <option value="bookpreview"><strong>책미리보기</strong></option>
-                                <option value="bookevent"><strong>책 이벤트</strong></option>
+                            <select class="form-control" id="bs_category" name="bs_catagory">    
+                                <option selected value="0">카테고리선택</option>
+                                <option value="북스토리,소통">북스토리,소통</option>
+                                <option value="한줄서평">한줄서평</option>
+                                <option value="책읽고,리뷰남기기">책읽고,리뷰남기기</option>
+                                <option value="좋은글귀 남기기">좋은글귀 남기기</option>  
+                                 <option value="공지사항"><strong>공지사항</strong></option>
+                                <option value="작가정보"><strong>작가정보</strong></option>
+                                <option value="책 미리보기"><strong>책 미리보기</strong></option>
+                                <option value="책 이벤트"><strong>책 이벤트</strong></option>
                                 </select> 
                             </div>
                             <% 
@@ -149,12 +150,12 @@ position:relative;}
                             %>
                             <!-- 중복된 이름 제거 -->
                             <div class="form-group board_category text_form" >  
-                            <select class="form-control" id="bs_category" name="bs_category">    
-                                <option selected value="${content_view.bs_category}">카테고리선택</option>
-                                <option value="${content_view.bs_category}">북스토리</option>
-                                <option value="${content_view.bs_category}">한줄서평</option>
-                                <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
-                                <option value="${content_view.bs_category}">좋은글귀 남기기</option>  
+                            <select class="form-control" id="bs_category" name="bs_catagory">    
+                                <option selected value="0">카테고리선택</option>
+                                <option value="북스토리,소통">북스토리,소통</option>
+                                <option value="한줄서평">한줄서평</option>
+                                <option value="책읽고,리뷰남기기">책읽고,리뷰남기기</option>
+                                <option value="좋은글귀 남기기">좋은글귀 남기기</option> 
                                 </select> 
                             </div>
                             <%

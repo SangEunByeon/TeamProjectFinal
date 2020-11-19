@@ -145,7 +145,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">

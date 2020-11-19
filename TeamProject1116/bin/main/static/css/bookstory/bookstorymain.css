@@ -1,5 +1,17 @@
 @charset "UTF-8"; 
 
+@font-face {
+  font-family: 'NanumBarunGothic';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
+  src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
+ }
+
+ body{
+  font-family:'NanumBarunGothic';
+} 
+
  /* 메인 */
  #main{ 
      width: 70%;
@@ -141,11 +153,13 @@ section{
     height: 1px;
     border: 1px solid  rgb(182, 182, 182);
 }
+
+ 
 .all_view{
 	width:950px;
       margin-top: 50px;
 }
-.all_view>a{
+.all_view>span{
     color:black;
 } 
 .all_more{ 
@@ -201,15 +215,14 @@ section{
 	font-size:13px;
     color:black;
 }
+.introduction_nopic{
+	work-break:break-all;
+}
 
 /* 글-버전 */
-.view_box tr th{ 
-    height: 5px;
-    font-size: 12px;
-} 
-.view_box_1{
-    font-size: 12px;
-}
+.view_box tr th{  
+    height: 5px; 
+}  
 
 /* 북스토리 프로필 */
 .profile_img>a{
@@ -281,13 +294,26 @@ section{
 .dropdown_rankConditional{
     margin-left: 65px;
     width:880px;
-}
-
-.writer_info_box{
-	height:270px; 
-	overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-	
-}  
+}    
+  
+.writer_info_box div{ 
  
+	height:300px;
+	position:relative;
+	display: contents;  
+ 	 overflow:hidden;  
+	 text-overflow: ellipsis;
+	 
+}  
+.view_box_1 p{
+	width:500px;
+}
+.prev_img{   
+	width:1100px;
+	display: flex;
+}
+.prev_img tr td{
+	padding-bottom:10px;
+	display: inline-block;
+}
+  

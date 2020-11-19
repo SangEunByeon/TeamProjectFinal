@@ -24,18 +24,16 @@ public interface IBookStoryBoardDao {
 	public int bookStoryReplyDeleteDao(int reply_no);//댓글삭제
 	public List<BookStoryBoardReplyDto> bookStoryReplyCountDao(int idx); //댓글수체크
 	public BookStoryBoardDto bookstory_prevListDao(int idx); //이전글
-	
-	public ArrayList<BookStoryBoardDto> bookstoryListDao();//메인 전체 글목록 
-	public List<BookStoryBoardDto> bookstoryAllListDao(int startRowNum,int endRowNum); // 전체 글목록 
-	public List<BookStoryBoardDto> bookStoryCategoryDao(String bs_category); //카테고리별 글 목록 
+	 
 	public int bookstoryWriteDao(BookStoryBoardDto bookstoryDto); //글작성 
 	public BookStoryBoardDto bookstoryViewDao(int idx); //해당 글 보기 
 	public int bookstoryDeleteDao(int idx); //글 삭제
 	public int bookstoryUpdateDao(BookStoryBoardDto dto); //글 수정
 	
-	
+	public ArrayList<BookStoryBoardDto> bookstoryListDao();//메인 전체 글목록 
+	public List<BookStoryBoardDto> bookstoryAllListDao(int startRowNum,int endRowNum); // 전체 글목록 
+	public List<BookStoryBoardDto> bookStoryCategoryDao(String bs_category,int startRowNum,int endRowNum); //카테고리별 글 목록 
 	public ArrayList<BookStoryBoardDto> bookstory_mainpopularListDao(); //인기있는 게시글 목록
-	public ArrayList<BookStoryBoardDto> bookstory_preBookListDao(String bs_category); //책 미리보기 목록
-	
+	public ArrayList<BookStoryBoardDto> bookstory_preBookListDao(String bs_category); //책 미리보기 목록 
 	 
 }

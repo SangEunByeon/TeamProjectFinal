@@ -4,10 +4,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
+<%@ page import="com.study.springboot.dto.BookStoryBoardDto" %>
+<%@ page import="java.util.List"%>
  <!-- 수정1119  -->
  <%
  String id = (String) session.getAttribute("sessionID"); 
- MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
+ MemberDto memberDto = (MemberDto)session.getAttribute("memberDto"); 
+ 
+ List<BookStoryBoardDto> list = (List<BookStoryBoardDto>)session.getAttribute("list"); 
+	System.out.println( "list count:" + list.size() );
+	String list_page = (String)session.getAttribute("page");
+	System.out.println( "list_page:" + list_page );
+	String page1_active = "";
+	String page2_active = "";
+	String page3_active = "";
+	if(list_page.equals("1")) 
+		page1_active = "active";
+	if(list_page.equals("2")) 
+		page2_active = "active";
+	if(list_page.equals("3")) 
+		page3_active = "active";
  %>  
   
 <html>
@@ -135,7 +151,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category=책 미리보기"><span>책 미리보기</span></a>
+                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -147,7 +163,7 @@
                 </div> 
             </aside> 
             <section>        
-              	 	<div class="all_view"><span>작가정보</span></div>
+              	<div class="all_view"><span>작가정보</span></div>
              	<div class="hr3"></div>
              	<div class="section_content3"> 
             
@@ -185,15 +201,37 @@
                          </td>
                          <td class="writer_info_box" ><div class="writer_info_box2">${fn:substringAfter(string1, '">')}</div> </td>   
                          <td>${dto.bs_user_id}</td>
-                         <td>${dto.hit}</td>   
-                         
-                          
-                       	
-                       	 
+                         <td>${dto.hit}</td>     
                      </tr>     
                      </c:forEach>
                  </table> 
                  </div>  
+                 
+                 
+                     <!-- 페이징처리 -->
+          	      <nav aria-label="...">
+				  	<ul class="pagination">
+					   <!--  <li class="page-item disabled">
+					      	<span class="page-link">Previous</span>
+					    </li> -->
+					    <li class="page-item <%= page1_active %>">
+					    	<a class="page-link"  href="BookStoryWriterInfo_A?page=1">1</a>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					      	<a class="page-link" href="BookStoryWriterInfo_A?page=2">2</a>
+					    </li>
+					    <li class="page-item <%= page1_active %>">
+					    	<a class="page-link" href="BookStoryWriterInfo_A?page=3">3</a>
+					    </li>
+					      <li class="page-item <%= page1_active %>">
+					    	<a class="page-link" href="BookStoryWriterInfo_A?page=4">4</a>
+					    </li> 
+					<!--     <li class="page-item">
+					      	<a class="page-link" href="#">Next</a>
+					    </li> -->
+				  	</ul>
+				</nav>
+				
             </section>
         </div>
 

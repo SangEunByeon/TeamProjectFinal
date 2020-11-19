@@ -19,7 +19,7 @@ public interface IBookStoryBoardService {
 	public int bookstoryWrite(HttpServletRequest request);  
 	public int bookstoryHit(int idx) throws Exception;
 	public BookStoryBoardDto bookstoryView(int idx); 
-	public List<BookStoryBoardDto> bookStoryCategory(String bs_category); 
+	public List<BookStoryBoardDto> bookStoryCategory(String bs_category, String page); 
 	public int bookstoryDelete(int idx);   
 	public int bookStoryUpdate(BookStoryBoardDto dto);
 	public int bookstoryLike_check(int idx) throws Exception;    
@@ -28,11 +28,10 @@ public interface IBookStoryBoardService {
 	public int bookStoryReplyDelete(int reply_no); 
 	public int bookStoryReplyCount(int idx);  
 	
-	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request); //인기있는 게시글 목록
-	public ArrayList<BookStoryBoardDto> bookstory_preBookList(HttpServletRequest request); //책 미리보기 목록
-  
+	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request);  
+	public ArrayList<BookStoryBoardDto> bookstory_preBookList(HttpServletRequest request);   
 	public ArrayList<BookStoryBoardDto> bookstoryList(HttpServletRequest request);
-	public List<BookStoryBoardDto> bookstoryAllList(HttpServletRequest request,String page);
+	public List<BookStoryBoardDto> bookstoryAllList(HttpServletRequest request,String page);  
 	 
 	 
 	

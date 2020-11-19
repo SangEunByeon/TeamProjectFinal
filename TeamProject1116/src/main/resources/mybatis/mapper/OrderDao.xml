@@ -43,7 +43,7 @@
      select *
      from ( 
      select 
-     rownum rn,p_number, p_title,p_writer,o_orderid,reg,o_state,p_filename,review_state
+     rownum rn,p_number, p_title,p_writer,o_orderid,reg,o_state,p_filename,review_state,o_number
      from book_order
      where rownum <= #{cri.pageNum} * #{cri.amount} AND o_orderid=#{id} AND review_state=#{r_state}  AND o_state=#{o_state} 
      order by reg desc) 

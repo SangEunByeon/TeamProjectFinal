@@ -79,7 +79,7 @@
      select *
      from ( 
      select 
-     rownum rn,idx,description,p_title,rate,reg,o_orderid,p_number,o_number
+     rownum rn,idx,description,p_title,rate,reg,o_orderid,p_number,o_number,p_filename,p_writer
      from book_review
      where rownum <= #{cri.pageNum} * #{cri.amount} AND o_orderid=#{id}
      order by idx desc) 

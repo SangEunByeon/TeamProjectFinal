@@ -86,19 +86,19 @@
 			    <tr>
 			      <th scope="row">판매가</th>
 			      <td>
-					<input type="text" name="p_price" value="${dto.p_price}">   <!-- 천 단위 콤마 기능 추가하기 -->
+					<input type="text" name="p_price" value="${dto.p_price}"> 
 				  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">할인율</th>
 						<td>
 							<select name="p_discount_ratio" id="discount_rate" onchange="cal_price()" >
-								<option value="0">없음</option>
-								<option value="5">5%</option>
-								<option value="10">10%</option>
-								<option value="15">15%</option>
-								<option value="20">20%</option>
-								<option value="30">30%</option>
+								<option value="0" <c:if test="${dto.p_discount_ratio eq '0'}">selected</c:if>>없음</option>
+								<option value="5" <c:if test="${dto.p_discount_ratio eq '5'}">selected</c:if>>5%</option>
+								<option value="10" <c:if test="${dto.p_discount_ratio eq '10'}">selected</c:if>>10%</option>
+								<option value="15" <c:if test="${dto.p_discount_ratio eq '15'}">selected</c:if>>15%</option>
+								<option value="20" <c:if test="${dto.p_discount_ratio eq '20'}">selected</c:if>>20%</option>
+								<option value="30" <c:if test="${dto.p_discount_ratio eq '30'}">selected</c:if>>30%</option>
 							</select>
 						</td>
 			    </tr>
@@ -106,14 +106,14 @@
 			      <th scope="row">카테고리1</th>
 						<td>
 							<select name="p_category">
-								<option value="소설">소설</option>
-								<option value="경제/경영">경제/경영</option>
-								<option value="시/에세이">시/에세이</option>
-								<option value="인문학">인문학</option>
-								<option value="예술">예술</option>
-								<option value="자기계발">자기계발</option>
-								<option value="독립서적">독립서적</option>
-								<option value="음반">음반</option>
+								<option value="소설" <c:if test="${dto.p_category eq '소설'}">selected</c:if>>소설</option>
+								<option value="경제/경영" <c:if test="${dto.p_category eq '경제/경영'}">selected</c:if>>경제/경영</option>
+								<option value="시/에세이" <c:if test="${dto.p_category eq '시/에세이'}">selected</c:if>>시/에세이</option>
+								<option value="인문학" <c:if test="${dto.p_category eq '인문학'}">selected</c:if>>인문학</option>
+								<option value="예술" <c:if test="${dto.p_category eq '예술'}">selected</c:if>>예술</option>
+								<option value="자기계발" <c:if test="${dto.p_category eq '자기계발'}">selected</c:if>>자기계발</option>
+								<option value="독립서적" <c:if test="${dto.p_category eq '독립서적'}">selected</c:if>>독립서적</option>
+								<option value="음반" <c:if test="${dto.p_category eq '음반'}">selected</c:if>>음반</option>
 							</select>
 						</td>
 			    </tr>
@@ -121,10 +121,10 @@
 			      <th scope="row">카테고리2</th>
 			            <td>
 							<select name="p_category2">
-								<option value="일반">일반도서</option>
-								<option value="인기">인기도서</option>
-								<option value="신간">신간도서</option>
-								<option value="추천">추천도서</option>
+								<option value="일반" <c:if test="${dto.p_category2 eq '일반'}">selected</c:if>>일반도서</option>
+								<option value="인기" <c:if test="${dto.p_category2 eq '인기'}">selected</c:if>>인기도서</option>
+								<option value="신간" <c:if test="${dto.p_category2 eq '신간'}">selected</c:if>>신간도서</option>
+								<option value="추천" <c:if test="${dto.p_category2 eq '추천'}">selected</c:if>>추천도서</option>
 							</select>
 						</td>			
 			    </tr>

@@ -176,7 +176,16 @@
      ]]>
 </select>
 	
-	<select id="countDeleteDao" resultType="int">select count(*) from delete_member
+	<select id="countDeleteDao" resultType="int">
+	select count(*) from delete_member
 	 </select>
+	
+	<select id="modifyReviewFormDao" resultType="com.study.springboot.dto.Review_Board_Dto">
+	select * from book_review where idx=#{param1}
+	</select>
+	
+	<update id="modifyReviewDao" parameterType="com.study.springboot.dto.Review_Board_Dto">
+	update book_review set rate = #{rate}, description = #{description}, p_filename = #{p_filename}, reg = #{reg} where idx = #{idx}
+	</update>
 	
 </mapper>

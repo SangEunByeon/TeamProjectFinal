@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <html>
 <head> 
 <link rel="stylesheet" href="css/member/reivew_write.css">
-    <title>상품후기작성</title> 
+    <title>상품후기수정</title> 
 </head>
 <body> 
       
@@ -83,26 +83,31 @@
                      <div class="head_orderlist"> 
                              <h4>후기쓰기</h4> 
                               
-                          <form action = "WriteReviewAction" name="review" method="post" enctype="multipart/form-data">
+                          <form action = "modifyReview" name="review" method="post" enctype="multipart/form-data">
                              <p> 만족도를 표현해주세요</p>
                              <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="매우만족">
+                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="매우만족" 
+                                 <c:if test="${dto.rate eq '매우만족'}">checked</c:if>>
                                  <label class="form-check-label" for="inlineRadio1">매우만족</label>
                              </div>
                              <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="만족">
+                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="만족"
+                                 <c:if test="${dto.rate eq '만족'}">checked</c:if>>
                                  <label class="form-check-label" for="inlineRadio2">만족</label>
                              </div> 
                              <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="만족">
+                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="보통" 
+                                 <c:if test="${dto.rate eq '보통'}">checked</c:if>>
                                  <label class="form-check-label" for="inlineRadio2">보통</label>
                              </div> 
                              <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="만족">
+                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="불만"
+                                 <c:if test="${dto.rate eq '불만'}">checked</c:if>>
                                  <label class="form-check-label" for="inlineRadio2">불만</label>
                              </div> 
                              <div class="form-check form-check-inline">
-                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="만족">
+                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="매우불만"
+                                 <c:if test="${dto.rate eq '매우불만'}">checked</c:if>>
                                  <label class="form-check-label" for="inlineRadio2">매우불만</label>
                              </div>  
 
@@ -112,7 +117,7 @@
                                      <div class="input-group choose-product">  
                                          <span>상품명</span>
                                      <div class="select-box"> 
-                                         <input class="form-control" value="${p_title}" type="text" disabled="true" style="width:400px;">
+                                         <input class="form-control" value="${dto.p_title}" type="text" disabled="true" style="width:400px;">
                                      </div>
                                      </div>
                                      </td> 
@@ -122,7 +127,7 @@
                                          <div class="input-group review-id">
                                              <span>아이디</span> 
                                          <div class="select-box"> 
-                                         <input class="form-control" value="${o_orderid}" type="text" disabled="true">    
+                                         <input class="form-control" value="${dto.o_orderid}" type="text" disabled="true">    
                                          </div>
                                          </div>
                                      </td> 
@@ -133,7 +138,10 @@
                                          <div class="input-group phone-num">
                                              <span>내용</span> 
                                              <div class="text-box"> 
-                                             <textarea name="description" cols="75" rows="10" placeholder="내용" style="border: 1px solid rgb(206, 206, 206);"></textarea>
+                                             <textarea name="description" cols="75" rows="10" 
+                                             style="border: 1px solid rgb(206, 206, 206);">
+                                             ${dto.description}
+                                             </textarea>
                                          </div>
                                          </div>
                                      </td> 
@@ -150,13 +158,13 @@
                                  </tr>
                                  <tr>
                                      <td> 
-                                         <input type="hidden" name="o_number" value="${o_number}">
-                                         <input type="hidden" name="p_number" value="${p_number}">
-                                     	 <input type="hidden" name="p_title" value="${p_title}">
-                                     	 <input type="hidden" name="p_writer" value="${p_writer}">
-                                     	 <input type="hidden" name="o_orderid" value="${o_orderid}">
+                                        <input type="hidden" name="idx" value="${dto.idx}">
+                                        <input type="hidden" name="o_number" value="${o_number}">
+                                        <input type="hidden" name="p_number" value="${p_number}">
+                                     	<input type="hidden" name="p_title" value="${p_title}">
+                                     	<input type="hidden" name="p_writer" value="${p_writer}">
+                                     	<input type="hidden" name="o_orderid" value="${o_orderid}">
                                          <div class="product-review-save">
-                                         
                                          <button type="submit" class="btn btn-danger">저장</button>
                                          </div>
                                      </td> 
@@ -185,7 +193,6 @@ function checkValue(){
 		return false;
 	}
 
-	
 }
 
 </script>

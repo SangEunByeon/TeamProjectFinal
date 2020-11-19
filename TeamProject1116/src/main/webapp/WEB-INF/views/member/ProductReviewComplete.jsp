@@ -117,6 +117,9 @@
                                <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px;">
                                <a href="deleteReview?idx=${list.idx}&o_number=${list.o_number}" style="color:white">삭제</a>
                                </button>
+                               <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px;">
+                               <a href="modifyReviewForm?idx=${list.idx}&o_number=${list.o_number}" style="color:white">수정</a>
+                               </button>
                             </td>
                             </tr>
                             </c:if>
@@ -129,7 +132,10 @@
                             <td style="font-size: 1.3ch;">${reg}</td>
                             <td style="font-size: 1.3ch;">
                                <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px;">
-                               <a href="deleteReview?idx=${list.idx}&o_number=${list.o_number}" style="color:white">삭제</a>
+                               <a href="modifyReviewForm?idx=${list.idx}" style="color:white">삭제</a>
+                               </button>
+                               <button class="btn btn-sm btn-danger" style="font-size: 1.6ch; width: 40px;">
+                               <a href="modifyReviewForm?idx=${list.idx}" style="color:white">수정</a>
                                </button>
                             </td>
                             </tr>
@@ -141,21 +147,21 @@
 
                         </div>  
                             <nav aria-label="Page navigation example">
-			   <ul class="pagination justify-content-center">
-			    <%
-			    int allPageNum=(Integer)request.getAttribute("allPageNum");
-			    for(int i=1; i<=allPageNum; i++){
-   		    	   %>
-			     <li class="page-item"><a href="page15?no=<%=i%>" class="page-link"><%=i%></a></li>
-			       <%
-			     }
-			    %>    
-			  </ul> 
-			</nav>     
+            <ul class="pagination justify-content-center">
+             <%
+             int allPageNum=(Integer)request.getAttribute("allPageNum");
+             for(int i=1; i<=allPageNum; i++){
+                   %>
+              <li class="page-item"><a href="page15?no=<%=i%>" class="page-link"><%=i%></a></li>
+                <%
+              }
+             %>    
+           </ul> 
+         </nav>     
                             </div>  
-                    	</td>
-                	</tr>
-               	</table> 
+                       </td>
+                   </tr>
+                  </table> 
             </div> 
         </div>   
     
@@ -163,11 +169,11 @@
 <jsp:include page="/WEB-INF/views/MainFooter.jsp"/>
 
 
-	<script type="text/javascript"> 
-	function ProductReivew(){location.href="ProductReivew";}
-	function ReviewWrite() {location.href="ProductReviewWrite";} 
-	function completePage(){location.href="ProductReviewComplete";}
-	</script> 
+   <script type="text/javascript"> 
+   function ProductReivew(){location.href="ProductReivew";}
+   function ReviewWrite() {location.href="ProductReviewWrite";} 
+   function completePage(){location.href="ProductReviewComplete";}
+   </script> 
  
 </body>
 </html>

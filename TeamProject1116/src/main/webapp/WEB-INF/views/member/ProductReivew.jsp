@@ -110,6 +110,7 @@
                                     <input type="hidden" name="p_title" value="${list.p_title}">
                                     <input type="hidden" name="o_orderid" value="${list.o_orderid}">
                                     <input type="hidden" name="o_number" value="${list.o_number}">
+                                    <input type="hidden" name="p_writer" value="${list.p_writer}">
 	                                     <div class="box_center">
 	                                       <button type="submit" class="btn btn-danger review_write">후기쓰기</button>
 	                                     </div>

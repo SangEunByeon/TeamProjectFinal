@@ -12,12 +12,15 @@ import com.study.springboot.dto.Review_Board_Dto;
 
 public interface IReviewBoardService {
 
-	public int writeReview(HttpServletRequest request, MultipartFile file,Model model);
+	public int writeReview(HttpServletRequest request, MultipartFile file, Model model);
 	public List<Review_Board_Dto> viewWrittenReview(HttpServletRequest request,Criteria cri);
 	public int changeReviewState(int i,int o_number);
 	public List<Review_Board_Dto> productReviewList(HttpServletRequest request);
 	public List<Review_Board_Dto> reviewlist();
 	public int deleteReview(HttpServletRequest request);
 	public int countReviewComplete(HttpServletRequest request);
+	
+	public Review_Board_Dto modifyReviewForm(HttpServletRequest request);
+	public int modifyReview(HttpServletRequest request, MultipartFile file, Model model);
 
 }

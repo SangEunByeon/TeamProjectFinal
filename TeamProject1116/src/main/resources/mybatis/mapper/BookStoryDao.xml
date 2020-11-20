@@ -123,6 +123,13 @@
             select * from bookstoryboard_reply where reply_writer=#{param1}
     </select> 
     
+    <!-- 좋아요기능 -->
+    <update id="like_checkDao" parameterType="HashMap">
+    	update bookstory_board set like_check= like_check+1 where idx;
+    </update>
     
+    <update id="like_check_cancelDao" parameterType="HashMap">
+    	update bookstory_board set like_check=0 where idx;
+    </update>
     
 </mapper>

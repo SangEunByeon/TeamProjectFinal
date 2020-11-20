@@ -24,8 +24,8 @@ public class MemberDto {
 	private Date reg;	 
 	private String book_profile; //북스토리 프로필 
 	private String rank;// 북스토리 등급
-	private int content_c; //북스토리 게시글 수
-	private int reply_c; //북스토리 댓글 수
+	private int content_count; //북스토리 게시글 수
+	private int reply_count; //북스토리 댓글 수
 	
 	private boolean cookieDel; 
 	private String complain_radio; //탈퇴시 불편사항

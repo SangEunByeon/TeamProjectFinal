@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
+<%@ page import="com.study.springboot.dto.MemberDto" %>
 <% 
 	String id = (String) session.getAttribute("sessionID"); 
+	MemberDto memberDto = (MemberDto)session.getAttribute("memberDto"); 	
+
 %> 
 <!DOCTYPE html>
 <html>
@@ -115,6 +118,8 @@ position:relative;}
             <div style="width: 60%; margin: auto;">
                 <form method="post" action="BookStoryWriteAction" name="write" onsubmit="return checkValue()"> 
                     <input type="hidden" name="profile_img" value="${dto.book_profile}"> 
+                    <input type="hidden" name="id" value="${dto.id}">
+                   
                 <br/>
                 <br/>
                     <table>

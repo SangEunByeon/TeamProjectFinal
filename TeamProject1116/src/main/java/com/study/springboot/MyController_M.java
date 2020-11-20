@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.coyote.RequestGroupInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
@@ -97,6 +98,8 @@ public class MyController_M {
 	IReviewBoardService review_service;
 	@Autowired
 	IPointService point_service;
+	@Autowired
+	MemberDto storyboardmemberdto;
 	
 	/////구매프로세스//////
    @RequestMapping("/purchase")
@@ -1828,6 +1831,8 @@ public class MyController_M {
 		//프로필 폼
 		@RequestMapping("/BookStoryProfile")
 		public String BookStoryProfile(){return "bookstory/BookStoryProfile";}    
+		
+		
 		//내정보 폼
 		@RequestMapping("/BookStoryMyInfo")
 		public String bookstory_MyInfo(HttpServletRequest request, Model model,HttpSession session){
@@ -1835,20 +1840,20 @@ public class MyController_M {
 		int count=bookstory_service.getMainProfile(request);
 		model.addAttribute("count",count);
 		System.out.println("회원수:"+count);
-		
-		//게시글 작성시 넣어야 할듯.?
-		
+		 
 //		//게시글 수 
-//		int content_count=(int)session.getAttribute("content_count");
-//		int content_c=member_service.update_content_c(content_count);
-//		System.out.println("게시글"+content_count);
-//		model.addAttribute("content_count",content_count);
-//		session.setAttribute("content_c", content_c);
-//		//댓글 수
-//		int reply_count=(int)session.getAttribute("reply_count");  
-//		System.out.println("게시글"+reply_count);
-//		model.addAttribute("reply_count",reply_count);
-//		
+		
+		String bs_user_id=(String)session.getAttribute("sessionID");  
+		int content_count=bookstory_service.contents_count(bs_user_id);
+		System.out.println("게시글 수:"+content_count);
+ 		session.setAttribute("content_count",content_count);  
+		 
+		
+		//댓글 수
+		String writer_id=(String)session.getAttribute("sessionID");
+		int reply_count=bookstory_service.replys_count(writer_id); 
+		session.setAttribute("reply_count",reply_count); 
+		 
 		return "bookstory/BookStoryMyInfo";
 		}  
 	
@@ -1886,7 +1891,7 @@ public class MyController_M {
 			 return "redirect"; 
 		}   
 		
-		//글쓰기
+		// 북스토리 -글쓰기
 		@RequestMapping(value = "/BookStoryWriteAction",  method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
 		public String BookStoryWriteAction(HttpServletRequest request,Model model,HttpSession session){  
 			int nResult=bookstory_service.bookstoryWrite(request);	
@@ -1894,10 +1899,16 @@ public class MyController_M {
 				System.out.println("글 작성을 실패하였습니다."); 
 				model.addAttribute("msg","글 작성을 실패하였습니다.");
 				model.addAttribute("url","BookStoryWrite");
-			}else {
+			}else {  
+				//게시글 수 추가
+				String id=(String)session.getAttribute("sessionID");   
+				int updateCountentCount=member_service.update_content_count(id);
+				System.out.println("게시글 수"+updateCountentCount);
+				
 				System.out.println("글 작성을 성공하였습니다.");  
 				model.addAttribute("msg","글 작성을 성공하였습니다.");
 				model.addAttribute("url","BookStoryMain"); 
+				
 				}
 			return "redirect";
 			}
@@ -1920,6 +1931,7 @@ public class MyController_M {
 				session.setAttribute("BookStoryDto", dto);
 				session.setAttribute("content_view_bookstory",dto); 
 				System.out.println("북스토리글 보기"+dto); 
+				session.setAttribute("bookstoryContentNum", idx);
 			
 				
 			//조회수증가
@@ -1934,11 +1946,25 @@ public class MyController_M {
 			
 			//댓글 수 
 			int replyCount=bookstory_service.bookStoryReplyCount(idx); 
-			model.addAttribute("replyCount",replyCount);
+			model.addAttribute("replyCount",replyCount); 
+			 
 			
 			return "bookstory/BookStoryView";  
 		} 
-		 
+		
+//		 //좋아요 구현
+//		@ResponseBody
+//		  @RequestMapping(value="/liketo/like.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
+//		  public String like(HttpSession session){
+//		  
+//			int bookstoryContentNum= (Integer)session.getAttribute("bookstoryContentNum");
+//			
+//			
+//			return null;
+//			
+//			
+//		}
+		
 		//글보기> 수정폼
 		@RequestMapping("/BookStoryModify")
 			public String BookStoryModify(HttpServletRequest request,Model model){   
@@ -1998,6 +2024,11 @@ public class MyController_M {
 				 model.addAttribute("msg","BoardStoryDeleteAction?idx="+idx);
 				 model.addAttribute("url","BookStoryView");
 			 }else {
+				 //게시글 수 삭제
+				String id=(String)session.getAttribute("sessionID");   
+				int deleteCountentCount=member_service.delete_content_count(id);
+				System.out.println("게시글 수 차감"+deleteCountentCount);
+				 
 				 System.out.println("삭제를 성공하였습니다");
 				 model.addAttribute("msg","삭제를 성공하였습니다.");
 				 model.addAttribute("url","BookStoryMain");
@@ -2031,6 +2062,10 @@ public class MyController_M {
 				model.addAttribute("msg","댓글쓰기를 실패하였습니다.");
 				model.addAttribute("url","BookStoryView?idx="+idx);
 			}else {
+				String id=(String)session.getAttribute("sessionID");   
+				int updateReplyCount=member_service.update_reply_count(id);
+				System.out.println("댓글 수 증가"+updateReplyCount);
+				 
 				System.out.println("댓글쓰기를 성공하였습니다.");
 				model.addAttribute("msg","댓글쓰기를 성공하였습니다.");
 				model.addAttribute("url","BookStoryView?idx="+idx); 
@@ -2040,7 +2075,7 @@ public class MyController_M {
 	
 		//댓글 삭제
 		@RequestMapping("/bookStoryReplyDeleteAction")
-		public String bookStoryReplyDeleteAction(HttpServletRequest request,Model model){
+		public String bookStoryReplyDeleteAction(HttpServletRequest request, HttpSession session, Model model){
 
 			String idx2=request.getParameter("idx");
 			System.out.println("게시글번호"+idx2);
@@ -2056,6 +2091,11 @@ public class MyController_M {
 			
 			
 			if(nResult>0) {
+				String id=(String)session.getAttribute("sessionID");   
+				int deleteReplyCount=member_service.delete_reply_count(id);
+				System.out.println("댓글 수 차감"+deleteReplyCount);
+				
+				
 				System.out.println("댓글이 삭제되었습니다.");
 				model.addAttribute("msg","댓글이 삭제되었습니다");
 				model.addAttribute("url","BookStoryView?idx="+idx); 
@@ -2240,7 +2280,8 @@ public class MyController_M {
 		//관리자>북스토리- 회원관리  
 		 @RequestMapping("/BookstoryManage")
 		 public String BookstoryManage(Model model, HttpServletRequest request,HttpSession session){ 
-  	 
+			 
+			 
 		 List<MemberDto> list=member_service.memberManage();
 		 model.addAttribute("list",list); 
 		 return "admin/BookstoryManage";  
@@ -2268,6 +2309,22 @@ public class MyController_M {
 			} 
 			return "redirect";  
 		} 
+		
+		
+		//보류
+//		@RequestMapping("/Rankstate")
+//		public String Rankstate(HttpServletRequest request,Model model){
+//			 
+//			String ContentAndReplyCount=(request.getParameter("ContentAndReplyCount"));
+//			
+//			String content_count2=request.getParameter("content_count");
+//			int content_count=Integer.parseInt(content_count2);
+//			String reply_count2=request.getParameter("reply_count");
+//			int reply_count=Integer.parseInt(reply_count2);
+//			request.setAttribute("list",member_service.rankstate(ContentAndReplyCount,content_count,reply_count)); 
+//			 
+//		return "admin/BookstoryManage"; }
+		 
 		
 	//마일리지 적립 
 	@RequestMapping("/upPointAction")

@@ -10,8 +10,8 @@
 	  	<selectKey keyProperty="idx" resultType="int" order="BEFORE">
            select book_member_seq.nextval FROM DUAL
      	</selectKey>
-	      insert into book_member (idx, id, password, name, phone, mail1, mail2, address1, address2, address3, address4, book_profile,point, reg)
-	           values (#{idx}, #{id}, #{password}, #{name}, #{phone}, #{mail1}, #{mail2}, #{address1},#{address2},#{address3},#{address4},#{book_profile},#{point},#{reg})
+	      insert into book_member (idx, id, password, name, phone, mail1, mail2, address1, address2, address3, address4, book_profile,point, reg, rank )
+	           values (#{idx}, #{id}, #{password}, #{name}, #{phone}, #{mail1}, #{mail2}, #{address1},#{address2},#{address3},#{address4},#{book_profile},#{point},#{reg},#{rank})
 	</insert>
 	
 	<select id="idCheckDao" resultType="String" >
@@ -79,7 +79,7 @@
      select *
      from ( 
      select 
-     rownum rn,idx,description,p_title,rate,reg,o_orderid,p_number,o_number
+     rownum rn,idx,description,p_title,rate,reg,o_orderid,p_number,o_number,p_filename,p_writer
      from book_review
      where rownum <= #{cri.pageNum} * #{cri.amount} AND o_orderid=#{id}
      order by idx desc) 
@@ -142,10 +142,10 @@
 	 <select id="getListWithPaging" resultType="com.study.springboot.dto.MemberDto">
 
     <![CDATA[ 
-     select reg, id, password, name, phone, address1, address2, address3, address4,mail1, mail2
+     select reg, id, password, name, phone, address1, address2, address3, address4,mail1, mail2,rank
      from(
      select 
-     rownum rn, reg, id, password, name, phone, address1, address2, address3, address4,mail1, mail2
+     rownum rn, reg, id, password, name, phone, address1, address2, address3, address4,mail1, mail2,rank
      from book_member
      where rownum <= #{pageNum} * #{amount} 
      order by rn desc) 
@@ -176,7 +176,53 @@
      ]]>
 </select>
 	
-	<select id="countDeleteDao" resultType="int">select count(*) from delete_member
+	<select id="countDeleteDao" resultType="int">
+	select count(*) from delete_member
 	 </select>
 	
+	<select id="modifyReviewFormDao" resultType="com.study.springboot.dto.Review_Board_Dto">
+	select * from book_review where idx=#{param1}
+	</select>
+	
+	<update id="modifyReviewDao" parameterType="com.study.springboot.dto.Review_Board_Dto">
+	update book_review set rate = #{rate}, description = #{description}, p_filename = #{p_filename}, reg = #{reg} where idx = #{idx}
+	</update>
+	
+	
+	<!-- 북스토리 회원정보 가져오기 -->
+	<select id="memberManageDao" resultType="com.study.springboot.dto.MemberDto">
+		select * from book_member
+	</select>
+	
+	<update id="updateRankDao" parameterType="com.study.springboot.dto.MemberDto" >
+        update book_member set rank=#{param2} where id = #{param1}
+    </update>
+	
+	<update id="update_content_countDao" parameterType="com.study.springboot.dto.MemberDto">
+		   update book_member set content_count= content_count+1 where id=#{id}
+    </update>
+      
+	<update id="update_reply_countDao" parameterType="com.study.springboot.dto.MemberDto">
+		   update book_member set reply_count= reply_count+1 where id=#{id}
+    </update>
+    
+    <update id="delete_content_countDao" parameterType="com.study.springboot.dto.MemberDto">
+		   update book_member set content_count= content_count-1 where id=#{id}
+    </update> 
+    
+    <update id="delete_reply_countDao" parameterType="com.study.springboot.dto.MemberDto">
+		   update book_member set reply_count= reply_count-1 where id=#{id}
+    </update> 
+    
+    
+    <!-- 보류 -->
+  <!--    <select id="rankstateDao" resultType="com.study.springboot.dto.MemberDto"> 
+		 
+		select * from book_member 
+		<if test='param1.equals("20")'> 
+		   where  #{param1} > #{param2} or #{param1} > #{param3} order by idx desc;
+		</if>  
+	</select>
+     -->
+    
 </mapper>

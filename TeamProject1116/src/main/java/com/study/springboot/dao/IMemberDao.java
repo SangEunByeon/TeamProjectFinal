@@ -51,7 +51,10 @@ public interface IMemberDao {
 	//북스토리회원-등급관리
 	public List<MemberDto> memberManageDao();
 	public int updateRankDao(String id, String rank);
-	public int update_content_cDao(int content_c); 
-	
+	public int update_content_countDao(String id); 
+	public int update_reply_countDao(String id);
+	public int delete_content_countDao(String id); 
+	public int delete_reply_countDao(String id);
+	public List<MemberDto> rankstateDao(String contentAndReplyCount, int content_count, int reply_count); //게시글,댓글 수 찾기
 }
 

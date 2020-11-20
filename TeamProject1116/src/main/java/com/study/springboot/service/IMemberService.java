@@ -10,6 +10,7 @@ import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.Delete_MemberDto;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.OnetoOneBoardDto;
+import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.ProductDto;
 import com.study.springboot.dto.Review_Board_Dto;
  
@@ -38,6 +39,10 @@ public interface IMemberService {
 	public List<Delete_MemberDto> deletelist(Criteria cri);  // 수정
 	public List<MemberDto> memberManage(); // 북스토리 회원 정보가져오기  
 	public int updateRank(String id, String rank);//북스토리 회원 랭킹변경 
-	public int update_content_c(int content_c);
+	public int update_content_count(String id); // 게시글 수 증가 
+	public int update_reply_count(String id);//댓글 수 증가
+	public int delete_content_count(String id);//게시글 수 감소
+	public int delete_reply_count(String id); //댓글 수 감소   
+	public List<MemberDto> rankstate(String contentAndReplyCount, int content_count, int reply_count);//게시글,댓글 수 찾기
 	
 }

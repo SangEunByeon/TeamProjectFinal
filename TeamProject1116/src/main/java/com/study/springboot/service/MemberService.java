@@ -266,9 +266,33 @@ public class MemberService implements IMemberService{
 		}
 
 		@Override
-		public int update_content_c(int content_c) {
-			int nResult = memberDao.update_content_cDao(content_c);
+		public int update_content_count(String id) {
+			int nResult = memberDao.update_content_countDao(id);
+		      return nResult; 
+		}
+		 
+		@Override
+		public int update_reply_count(String id) {
+			int nResult = memberDao.update_reply_countDao(id);
 		      return nResult; 
 		}
 
+		@Override
+		public int delete_content_count(String id) {
+			int nResult = memberDao.delete_content_countDao(id);
+	        return nResult; 
+		}
+
+		@Override
+		public int delete_reply_count(String id) {
+			int nResult = memberDao.delete_reply_countDao(id);
+			return nResult;
+		}
+ 
+		@Override
+		public List<MemberDto> rankstate(String contentAndReplyCount,int content_count,int reply_count) { 
+			return memberDao.rankstateDao(contentAndReplyCount,content_count,reply_count);
+		}
+
+		
 }

@@ -215,22 +215,27 @@
                                 <!-- 댓글기능 -->  
                                 <div class="reply_bottom_box"> 
 
-                                    <span class="heart_img"><img src="image/bookstory/blankheart.png" width="30" height="30"></span> 
-                                   <a href="like_check"><span class="heart_text">좋아요</span></a><span class="heart_text2">${like_check}</span>
-                                       
-                                       
-                                        <a class="btn btn-outline-dark heart">
-								           <img id="heart" src="">
-								       </a>
+                                    <span class="heart_img">
+                                    <c:choose>
+                                    <c:when test="${idx ne null}">
+                                    <a href='javascript: like_func();'><img src="image/bookstory/like.png" width="30px" height="30px" alt="좋아요선클릭후" id="like_img"></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <a href='javascript: login_need();'><img src="image/bookstory/like_cancle.png" width="30px" height="30px" alt="좋아요클릭전"></a>
+                                    </c:otherwise>
+                                    </c:choose>
+                                    </span> 
+                                   <a href="like_check">
+                                   <span class="heart_text">좋아요</span> 
                                         
                                     <span class="reply_img2"><img src="image/bookstory/reply.png" width="30" height="30" ><a name="reply_start"></a></span> 
-                                    <a class="btn btn"  id="myCollapsible" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">댓글</a>
+                                    <a class="btn btn"  id="accordion"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">댓글</a>
                                 <span class="reply_text2">${replyCount}</span>
                                 </div>
                                  <hr />
                                  
-                               <div class="collapse" id="collapseExample">
-                    			 <div class="card card-body">
+                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+           						 <div class="card-body">
                     			 
                                  <div class='reply_bottom_box2'>
                                     <span class="reply_text3">댓글</span>
@@ -239,8 +244,7 @@
                                  <!-- 댓글 반복구간 -->
                                  
                                   <c:forEach var="reply_view_bookstory" items="${reply_view_bookstory}">
-                                  <div class="reply_content">
-                                     <div class="accordion" id="accordionExample">
+                                  <div class="reply_content"> 
                                      <table> 
                                      <fmt:formatDate var="reg" value="${reply_view_bookstory.reg}"  pattern="yyyy.MM.dd HH:mm"/>
                                          <tr>
@@ -278,8 +282,7 @@
                                             </td>
                                          </tr> 
                                      </table>  
-                                     </div>
-                                 </div> 
+                                     </div> 
                                  </c:forEach>
                                  </div>
                 				 </div>
@@ -291,7 +294,7 @@
                                 <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
                                 <input type="hidden" name="idx" value="${content_view_bookstory.idx}">
                                 <input type="hidden" name="reply_writer" value="${content_view_bookstory.bs_user_id}">
-                                <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}">
+                                <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}"> 
                                
                                 <table>
                                     <tr> 
@@ -408,6 +411,42 @@
  		        console.log( "nav fix" );
  		    });
     </script> 
+    <script>
+    /* 좋아요 */
+    function like_func(){
+      var frm_read = $('#frm_read');
+      var boardno = $('#boardno', frm_read).val();
+      //var mno = $('#mno', frm_read).val();
+      //console.log("boardno, mno : " + boardno +","+ mno);
+      
+      $.ajax({
+        url: "../liketo/like.do",
+        type: "GET",
+        cache: false,
+        dataType: "json",
+        data: 'idx=' +idx,
+        success: function(data) {
+          var msg = '';
+          var like_img = '';
+          msg += data.msg;
+          alert(msg);
+          
+          if(data.like_check == 0){
+        	  like_img = "image/bookstory/like_cancle.png" width="30px" height="30px"; //취소상태
+          }else{ 
+            like_img = "image/bookstory/like.png" width="30px" height="30px"; //누른상태
+          }      
+          $('#like_img', frm_read).attr('src', like_img);
+          $('#like_cnt').html(data.like_cnt);
+          $('#like_check').html(data.like_check);
+        },
+        error: function(request, status, error){
+          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        }
+      });
+    }
+ 
+    </script>
     
     
 <!-- 푸터넣기 -->

@@ -18,4 +18,7 @@ public class BookStoryBoardDto {
 	private String bs_file1;//게시글 내용 이미지
 	private Date reg; //등록일자
 	private int hit; //조회수 
+ 
+	private int like_check; //좋아요 체크확인여부
+	
 }

@@ -115,8 +115,21 @@
          select * from bookstory_board where bs_category=#{param1} order by reg desc
      </select> 
     
-    
+    <select id="contents_countDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
+            select * from bookstory_board where bs_user_id=#{param1}
+    </select> 
    
+    <select id="replys_countDao" resultType="com.study.springboot.dto.BookStoryBoardReplyDto">
+            select * from bookstoryboard_reply where reply_writer=#{param1}
+    </select> 
     
-      
+    <!-- 좋아요기능 -->
+    <update id="like_checkDao" parameterType="HashMap">
+    	update bookstory_board set like_check= like_check+1 where idx;
+    </update>
+    
+    <update id="like_check_cancelDao" parameterType="HashMap">
+    	update bookstory_board set like_check=0 where idx;
+    </update>
+    
 </mapper>

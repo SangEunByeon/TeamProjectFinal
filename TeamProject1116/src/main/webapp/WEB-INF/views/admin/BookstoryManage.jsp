@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
-<% 
-    
+
+ <%
+ MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
  %>
  
 <!DOCTYPE html>
@@ -66,25 +67,13 @@
 	}
 	 
 	</style>
-	<script> 
-
-	
-	 function checkValue()
-		{
-		 if(document.memberSearch.keyword1.value!=""){
-			 if(document.memberSearch.keyword2.value==""){
-				alert("종료일을 입력해주세요.");
-				 return false;
-				 }	
-			}
-		 if(document.memberSearch.keyword2.value!=""){
-			 if(document.memberSearch.keyword1.value==""){
-				alert("시작일을 입력해주세요.");
-				 return false;
-				 }	
-			}
-		}
-	</script> 
+	  
+	<script type="text/javascript">
+	function formChange(obj)
+	{
+		obj.submit(); 
+	} 
+	</script>
 </head>
 <body>
 <!-- 헤더부분 -->
@@ -142,19 +131,23 @@
 		    <section>
 		   <h2>회원 목록</h2>
 		   <hr>
-		   <form action="MemberSearch" onsubmit="return checkValue()" name="memberSearch">
-		   	<div class="searchcon">
-			   <table class="membersearch">
-				   <tr>
-				   	<th>가입일</th><td><input type="date" style="width:130px;" name="keyword1">~</td><td><input type="date" style="width:130px;" name="keyword2"></td>
-				   	<th>아이디</th><td><input type="text" name="keyword3"></td>
-				   	<th>이름</th><td><input type="text" name="keyword4"></td>
-				   	<th><button type="submit" >검색</button></th>
-				   </tr>   
-			   </table>   
-			</div>
-		   </form>
-		   <br>
+		   <form action="Rankstate" method="post" >
+	       <div style="width:200px; float:right;">
+	       <input type="hidden"  name="content_count" value="${dto.content_count}">
+	       <input type="hidden" name="reply_count" value="${dto.reply_count}">
+	       <span>	<select style="height:26px;"class="tbox" name="ContentAndReplyCount" onchange="formChange(this.form)">
+	         	<option value="0" selected>게시글,댓글 수</option>
+				<option value="20" >20개</option>
+				<option value="40" >40개</option>
+				<option value="50" >50개</option>
+				<option value="60" >60개</option>
+				<option value="80">80개</option>
+				<option value="100">100개</option>
+				</select></span>
+	       </div>   
+	       </form>
+	       
+	       
 		   
 		  <form action="updateRankAction" method="post" > 
 		   <table id="member_list"  class="table table-striped">
@@ -179,8 +172,8 @@
 		   <td id="id">${dto.id}</td>
 		   <td>${dto.name}</td>
 		   <td>${dto.phone}</td>
-		   <td>${content_count}</td>
-		   <td>${reply_count}</td>
+		   <td>${dto.content_count}</td>
+		   <td>${dto.reply_count}</td>
 		   <td>${dto.rank}</td>
 		   </tr>
 		   </c:forEach>

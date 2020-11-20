@@ -198,9 +198,31 @@
         update book_member set rank=#{param2} where id = #{param1}
     </update>
 	
-	<update id="update_content_cDao" parameterType="com.study.springboot.dto.MemberDto">
-		   update book_member set content_c=#{content_c} where id =#{id}
+	<update id="update_content_countDao" parameterType="com.study.springboot.dto.MemberDto">
+		   update book_member set content_count= content_count+1 where id=#{id}
     </update>
       
-	
+	<update id="update_reply_countDao" parameterType="com.study.springboot.dto.MemberDto">
+		   update book_member set reply_count= reply_count+1 where id=#{id}
+    </update>
+    
+    <update id="delete_content_countDao" parameterType="com.study.springboot.dto.MemberDto">
+		   update book_member set content_count= content_count-1 where id=#{id}
+    </update> 
+    
+    <update id="delete_reply_countDao" parameterType="com.study.springboot.dto.MemberDto">
+		   update book_member set reply_count= reply_count-1 where id=#{id}
+    </update> 
+    
+    
+    <!-- 보류 -->
+  <!--    <select id="rankstateDao" resultType="com.study.springboot.dto.MemberDto"> 
+		 
+		select * from book_member 
+		<if test='param1.equals("20")'> 
+		   where  #{param1} > #{param2} or #{param1} > #{param3} order by idx desc;
+		</if>  
+	</select>
+     -->
+    
 </mapper>

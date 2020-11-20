@@ -214,6 +214,18 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstory_preBookListDao(bs_category);
 		return list;
 	}
+
+	@Override
+	public int contents_count(String bs_user_id) { 
+		List<BookStoryBoardDto> list= bookstoryDao.contents_countDao(bs_user_id);
+		return list.size();
+	}
+
+	@Override
+	public int replys_count(String reply_writer) {
+		List<BookStoryBoardReplyDto> list= bookstoryDao.replys_countDao(reply_writer);
+		return list.size();
+	}
    
 	 
 }

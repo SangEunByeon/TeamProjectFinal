@@ -43,9 +43,15 @@ public interface IMemberDao {
 	public List<MemberDto> getListWithPaging(Criteria cri);
 	public int countDeleteDao();
 	public List<Delete_MemberDto> deletelistDao(Criteria cri);  // 수정
-	
-	
+  
 	//1119 리뷰 수정
 	public Review_Board_Dto modifyReviewFormDao(int idx);
 	public int modifyReviewDao(Review_Board_Dto dto);
+	
+	//북스토리회원-등급관리
+	public List<MemberDto> memberManageDao();
+	public int updateRankDao(String id, String rank);
+	public int update_content_cDao(int content_c); 
+	
 }
+

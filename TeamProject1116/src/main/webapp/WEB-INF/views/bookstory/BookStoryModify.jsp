@@ -143,9 +143,9 @@ position:relative;}
                                 <option value="${content_view.bs_category}">한줄서평</option>
                                 <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
                                 <option value="${content_view.bs_category}">좋은글귀 남기기</option>  
-                                <option><strong>작가정보</strong></option>
-                                <option><strong>책미리보기</strong></option>
-                                <option><strong>책 이벤트</strong></option>
+                                <option value="${content_view.bs_category}"><strong>작가정보</strong></option>
+                                <option value="${content_view.bs_category}"><strong>책미리보기</strong></option>
+                                <option value="${content_view.bs_category}"><strong>책 이벤트</strong></option>
                                 </select> 
                             </div>
                             <% 
@@ -155,7 +155,7 @@ position:relative;}
                             <div class="form-group board_category text_form" >  
                                 <select class="form-control" id="bs_category" name="bs_category">    
                                  <option value="${content_view.bs_category}"></option>
-                                <option value="${content_view.bs_category}">북스토리</option>
+                                <option value="${content_view.bs_category}">북스토리,소통</option>
                                 <option value="${content_view.bs_category}">한줄서평</option>
                                 <option value="${content_view.bs_category}">책읽고,리뷰남기기</option>
                                 <option value="${content_view.bs_category}">좋은글귀 남기기</option>  

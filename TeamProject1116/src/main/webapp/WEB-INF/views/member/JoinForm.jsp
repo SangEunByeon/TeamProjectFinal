@@ -188,7 +188,8 @@
 <div id="main"> 
       <div class="join_form">  
          <form name="userInfo" action="MemberJoinAction" method="post"  onsubmit="return checkValue()"> 
-              <input type="hidden" name="book_profile">
+              <input type="hidden" name="book_profile"> 
+              <input type="hidden" name="rank" value="한자루">
             <p class="join_head">Join us</p> 
             <table> 
                <th>

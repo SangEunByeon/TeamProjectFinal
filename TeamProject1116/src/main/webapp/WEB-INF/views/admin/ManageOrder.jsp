@@ -79,7 +79,7 @@
 						<td>
 						    <div class="sidebarlist">
 							<a href="ManageMember">회원 목록</a>
-							<span href="#">&gt</span>
+							<span>&gt</span>
 							</div>
 						</td>
 					</tr>
@@ -87,7 +87,7 @@
 						<td>
 						    <div class="sidebarlist">
 						    <a href="WithdrawMember">탈퇴 목록</a>
-							<span href="#">&gt</span>
+							<span>&gt</span>
 							</div>
 						</td>
 					</tr>
@@ -95,7 +95,17 @@
 						<td>
 						    <div class="sidebarlist">
 							<a href="ManageOrder">주문 관리</a>
-							<span href="#">&gt</span>
+							<span>&gt</span>
+							</div>
+						</td>
+					</tr> 
+				</table>
+				<table style="margin-top:30px">
+					<tr >
+						<td>
+						    <div class="sidebarlist">
+							<a href="BookstoryManage">북스토리목록</a>
+							<span>&gt</span>
 							</div>
 						</td>
 					</tr>

@@ -110,25 +110,25 @@
                         <a href="BookStoryAllList">전체글보기</a>
                     </div>
                     <hr />
-                   <table>
+                <table>
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryCommunication"><span>북스토리,소통</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryCommunication"><span>북스토리,소통</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
                             </td>
                         </tr>
                          <tr class="category_box">
                             <td>
-                                <img src="https:placehold.it/20x20"><a href="BookStoryGoodWriting"><span>좋은글귀 남기기</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryGoodWriting"><span>좋은글귀 남기기</span></a>
                             </td>
                         </tr>
                     </table> 
@@ -140,17 +140,17 @@
                      <table>
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
                             </td>
                         </tr> 
                     </table>
@@ -164,9 +164,9 @@
                     
                     <a href="#" id="category" value="category">${content_view_bookstory.bs_category}</a>                   
                   
-                     <div class="list_box">
-                     <a href="prev_bookstoryList?idx="${content_view.idx}><button type="button" class="btn btn-light">이전글</button></a>
-                     <a href="next_bookstoryList?idx="${content_view.idx}><button type="button" class="btn btn-light">다음글</button></a>
+                     <div class="list_box"> 
+                     <a href="BookStoryView?idx=${content_view_bookstory.idx-1}"><button type="button" class="btn btn-light">이전글</button></a>
+                     <a href="BookStoryView?idx=${content_view_bookstory.idx+1}"><button type="button" class="btn btn-light">다음글</button></a>
                      <a name="top"></a><button type="button" class="btn btn-light" onclick="goList()">목록</button>
                     </div>
                         <div class="title_text" >
@@ -224,7 +224,7 @@
 								       </a>
                                         
                                     <span class="reply_img2"><img src="image/bookstory/reply.png" width="30" height="30" ><a name="reply_start"></a></span> 
-                                    <a class="btn btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">댓글</a>
+                                    <a class="btn btn"  id="myCollapsible" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">댓글</a>
                                 <span class="reply_text2">${replyCount}</span>
                                 </div>
                                  <hr />
@@ -240,7 +240,8 @@
                                  
                                   <c:forEach var="reply_view_bookstory" items="${reply_view_bookstory}">
                                   <div class="reply_content">
-                                     <table>
+                                     <div class="accordion" id="accordionExample">
+                                     <table> 
                                      <fmt:formatDate var="reg" value="${reply_view_bookstory.reg}"  pattern="yyyy.MM.dd HH:mm"/>
                                          <tr>
                                             <td>
@@ -275,8 +276,9 @@
                                                 </div>
                                                
                                             </td>
-                                         </tr>
+                                         </tr> 
                                      </table>  
+                                     </div>
                                  </div> 
                                  </c:forEach>
                                  </div>
@@ -398,8 +400,16 @@
   	  	  	   location.href="BookStoryEvent_A"
   	  	   }
 	 	}	   
-    </script>
-        
+
+ 	  $( document ).ready(function() {
+ 		    $('.navbar').click(function(){
+ 		        $('.navbar.navbar-fixed').removeClass('navbar-fixed');
+ 		        $(this).addClass('navbar-fixed');
+ 		        console.log( "nav fix" );
+ 		    });
+    </script> 
+    
+    
 <!-- 푸터넣기 -->
 </body>
 

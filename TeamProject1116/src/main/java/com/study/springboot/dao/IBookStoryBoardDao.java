@@ -35,5 +35,6 @@ public interface IBookStoryBoardDao {
 	public List<BookStoryBoardDto> bookStoryCategoryDao(String bs_category,int startRowNum,int endRowNum); //카테고리별 글 목록 
 	public ArrayList<BookStoryBoardDto> bookstory_mainpopularListDao(); //인기있는 게시글 목록
 	public ArrayList<BookStoryBoardDto> bookstory_preBookListDao(String bs_category); //책 미리보기 목록 
-	 
+	public List<BookStoryBoardDto> contents_countDao(String bs_user_id);//게시글 수
+	public List<BookStoryBoardReplyDto> replys_countDao(String writer_id); //댓글수
 }

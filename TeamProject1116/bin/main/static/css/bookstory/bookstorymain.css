@@ -95,6 +95,25 @@ aside{
 .text_p{
     padding-left: 20px; 
 }
+
+/* 내정보 */
+.MyInfo_boxsize{
+	padding-top:40px;
+	width:250px;
+	height:320px;
+} 
+
+.myImage{  
+	display:block; 
+	margin:0 auto;
+}
+.myRank_box{   
+	padding-top:10px;   
+	padding-left:50px;
+}  
+.myRank_text{
+	padding-left:10px;
+} 
 /* 글쓰기 */
 input[type=button]{
     width: 100%;

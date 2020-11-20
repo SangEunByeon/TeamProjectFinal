@@ -97,6 +97,8 @@
 	     $('#myModal').hide();
 	};
 
+	 
+
 	function goDelete() {
 		var delchk =[];
 		$('.chk:checked').each(function(){
@@ -196,6 +198,16 @@
 						</td>
 					</tr>
 				</table>
+				<table style="margin-top:30px">
+					<tr >
+						<td>
+						    <div class="sidebarlist">
+							<a href="BookstoryManage">북스토리목록</a>
+							<span>&gt</span>
+							</div>
+						</td>
+					</tr>
+				</table>
 	    </div>
       <!-- 왼쪽 사이드 메뉴바 끝 -->
       
@@ -220,7 +232,7 @@
 		   
 		   <table id="member_list"  class="table table-striped">
 		   <tr>
-		   <th style="width:80px !important;" scope="col">선택</th><th scope="col">가입일</th><th scope="col">아이디</th><th scope="col">이름</th><th scope="col">휴대폰</th><th scope="col">주소</th><th scope="col">이메일</th>
+		   <th style="width:80px !important;" scope="col">선택</th><th scope="col">가입일</th><th scope="col">아이디</th><th scope="col">이름</th><th scope="col">휴대폰</th><th scope="col">주소</th><th scope="col">이메일</th> 
 		   </tr>
 		   <c:forEach items="${ list }" var="dto" >
 		   <fmt:formatDate value="${dto.reg}" var="reg" pattern="yyyy.MM.dd" />
@@ -246,6 +258,7 @@
 				   
 		    <button onclick="goDelete();" class="btn btn-sm btn-danger">회원 탈퇴</button>
 		    <button onclick="modal();" class="btn btn-sm btn-danger">마일리지 관리</button>
+		     
 		    </section>
 		 </div>
 		 
@@ -283,6 +296,9 @@
       </div>
     </div>
         <!--End Modal-->
+        
+        
+        
         
   <script src="js/jquery-2.2.4.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

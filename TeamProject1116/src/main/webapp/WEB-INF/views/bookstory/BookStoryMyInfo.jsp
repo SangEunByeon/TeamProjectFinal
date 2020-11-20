@@ -9,8 +9,8 @@
  <% 
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
- System.out.println("memberDto"+memberDto);   
-  
+ System.out.println("memberDto"+memberDto);    
+ 
  %>  
   
 <html>
@@ -61,13 +61,41 @@
             	<%
             		if(memberDto.getBook_profile()!=null){
        			%>		     
-  					  <img src="../uploadPro3_bookstory/${memberDto.book_profile}" width="200px" height="200px">	 
-                      <p style="padding-top:5px"><a href="BookStoryProfile">이미지 등록</a></p>
+  					 
+					<div class="MyInfo_boxsize">
+						<div class="myImage">
+							<img src="../uploadPro3_bookstory/${memberDto.book_profile}" width="120px" height="120px">	 
+						
+						</div>
+						<hr />
+						<div class="myRank">
+						<table class="myRank_table">
+						<tr>
+						<td class="myRank_box">
+					     <img src="/image/bookstory/pencil.png" width="30px" height="30px" alt="등급" ><span class="myRank_text">내 등급 :</span> <span class="myRank_text"> ${memberDto.rank} </span>
+						</td>
+						</tr>
+						<tr>
+						<td class="myRank_box">
+					    <img src="/image/bookstory/writing.png" width="30px" height="30px" alt="게시글"><span class="myRank_text"> 내 게시물수 :</span> <span class="myRank_text">${content_count} </span>
+						</td>
+						</tr>
+						<tr>
+						<td class="myRank_box">
+					    <img src="/image/bookstory/reply.png" width="30px" height="30px" alt="댓글"><span class="myRank_text">내 댓글수 :</span> <span class="myRank_text">${reply_count}</span> 
+						</td>
+						</tr> 
+						
+						</table> 
+						<hr />				
+						</div>
+						
+					</div>
                 <%
                       
             		}else{
             	%>
-            	      <img src="image/bookstory/user.png" width="200px" height="200px"> 
+            	      <img src="image/bookstory/user.png" width="150px" height="150px"> 
             	        <p style="padding-top:5px"><a href="BookStoryProfile">이미지 등록</a></p>
             	<%		
             		}
@@ -109,22 +137,22 @@
                     <table>
                         <tr class="category_box">
                             <td>
-                                <img src="image/book.png" width="20px" height="20px"><a href="BookStoryCommunication"><span>북스토리,소통</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryCommunication"><span>북스토리,소통</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/book.png" width="20px" height="20px"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/book.png" width="20px" height="20px"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
                             </td>
                         </tr>
                          <tr class="category_box">
                             <td>
-                                <img src="image/book.png" width="20px" height="20px"><a href="BookStoryGoodWriting"><span>좋은글귀 남기기</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryGoodWriting"><span>좋은글귀 남기기</span></a>
                             </td>
                         </tr>
                     </table> 
@@ -136,17 +164,17 @@
                       <table>
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryEvent_A"><span>책 이벤트</span></a>
                             </td>
                         </tr> 
                     </table>
@@ -157,7 +185,7 @@
                 <span class="read_rank">읽힘랭킹</span>
                 <p>연필 한자루부터 다섯자루까지, 열심히 활동해서 카페 랭킹을 올려보세요.</p>
                 </div>
-                <img src="image/rank.jpg" width="1000px">
+                <img src="image/bookstory/rank.jpg"  alt="읽힘등급표" width="1000px">
                 <div class="rank_text_box">
                    
                     <ul class="rank_text1">
@@ -169,7 +197,7 @@
                         </li>
                         <li class="rank_text2">
                             자세한 카페 등급 조건은 
-                            <a class="btn btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <a style="color:red " class="btn btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 <strong>읽힘</strong>
                               </a>
                             을 클릭하세요

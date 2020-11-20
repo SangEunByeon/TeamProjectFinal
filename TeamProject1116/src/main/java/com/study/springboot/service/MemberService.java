@@ -42,7 +42,8 @@ public class MemberService implements IMemberService{
 		memberDto.setAddress2(request.getParameter("address2"));
 		memberDto.setAddress3(request.getParameter("address3"));
 		memberDto.setAddress4(request.getParameter("address4"));
-		memberDto.setBook_profile(request.getParameter("book_profile")); //북스토리 프로필
+		memberDto.setBook_profile(request.getParameter("book_profile")); //북스토리 프로필 
+		memberDto.setRank(request.getParameter("rank"));//북스토리 랭킹 
 		memberDto.setPoint(100);
 		memberDto.setReg(new Date()); 
 		
@@ -250,6 +251,24 @@ public class MemberService implements IMemberService{
 		public List<Delete_MemberDto> deletelist(Criteria cri){
 			List<Delete_MemberDto> list = memberDao.deletelistDao(cri);
 			return list;
+		}
+
+		@Override
+		public List<MemberDto> memberManage() {
+			List<MemberDto> list=memberDao.memberManageDao();
+			return list;
+		}
+ 
+		@Override
+		public int updateRank(String id,String rank){    
+			int nResult = memberDao.updateRankDao(id,rank);
+		      return nResult; 
+		}
+
+		@Override
+		public int update_content_c(int content_c) {
+			int nResult = memberDao.update_content_cDao(content_c);
+		      return nResult; 
 		}
 
 }

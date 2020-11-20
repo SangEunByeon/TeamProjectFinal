@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>   
 <% 
 	String id = (String) session.getAttribute("sessionID"); 
-%>
-       <!-- 수정1119  -->
+%> 
 <!DOCTYPE html>
 <html>
 <head> 
@@ -23,7 +22,7 @@ position:relative;}
 </style>
 	<script type="text/javascript">
 	 function checkValue()
-		{
+		{  
 			if(!document.write.bs_title.value){
 				alert("제목을 입력하세요.");
 				return false;
@@ -31,10 +30,6 @@ position:relative;}
 			 
 			if(!document.write.bs_content.value){
 				alert("본문을 입력해주세요.");
-				return false;
-			}
-			if(document.write.bs_catagory.value==0){
-				alert("카테고리를 지정해주세요");
 				return false;
 			}
 		}
@@ -133,16 +128,15 @@ position:relative;}
                            	%>
                            	<!-- 중복된 이름 제거 -->
                             <div class="form-group board_category text_form" >  
-                            <select class="form-control" id="bs_category" name="bs_catagory">    
-                                <option selected value="0">카테고리선택</option>
-                                <option value="북스토리,소통">북스토리,소통</option>
-                                <option value="한줄서평">한줄서평</option>
-                                <option value="책읽고,리뷰남기기">책읽고,리뷰남기기</option>
-                                <option value="좋은글귀 남기기">좋은글귀 남기기</option>  
-                                 <option value="공지사항"><strong>공지사항</strong></option>
-                                <option value="작가정보"><strong>작가정보</strong></option>
-                                <option value="책 미리보기"><strong>책 미리보기</strong></option>
-                                <option value="책 이벤트"><strong>책 이벤트</strong></option>
+                            <select class="form-control" id="bs_category" name="bs_category">    
+                                <option selected value="북스토리,소통">북스토리,소통</option>
+                                <option>한줄서평</option>
+                                <option>책읽고,리뷰남기기</option>
+                                <option>좋은글귀 남기기</option>  
+                                <option><strong>공지사항</strong></option>
+                                <option><strong>작가정보</strong></option>
+                                <option><strong>책 미리보기</strong></option>
+                                <option><strong>책 이벤트</strong></option>
                                 </select> 
                             </div>
                             <% 
@@ -150,12 +144,11 @@ position:relative;}
                             %>
                             <!-- 중복된 이름 제거 -->
                             <div class="form-group board_category text_form" >  
-                            <select class="form-control" id="bs_category" name="bs_catagory">    
-                                <option selected value="0">카테고리선택</option>
-                                <option value="북스토리,소통">북스토리,소통</option>
-                                <option value="한줄서평">한줄서평</option>
-                                <option value="책읽고,리뷰남기기">책읽고,리뷰남기기</option>
-                                <option value="좋은글귀 남기기">좋은글귀 남기기</option> 
+                            <select class="form-control" id="bs_category" name="bs_category">    
+                               	<option selected value="북스토리,소통">북스토리,소통</option>
+                                <option>한줄서평</option>
+                                <option>책읽고,리뷰남기기</option>
+                                <option>좋은글귀 남기기</option> 
                                 </select> 
                             </div>
                             <%

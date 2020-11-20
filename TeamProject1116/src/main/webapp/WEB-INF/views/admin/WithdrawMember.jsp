@@ -93,6 +93,17 @@
 						</td>
 					</tr>
 				</table>
+				
+				<table style="margin-top:30px">
+					<tr >
+						<td>
+						    <div class="sidebarlist">
+							<a href="BookstoryManage">북스토리목록</a>
+							<span>&gt</span>
+							</div>
+						</td>
+					</tr>
+				</table>
 	    </div>
       <!-- 왼쪽 사이드 메뉴바 끝 -->     
 		<div class="contents">

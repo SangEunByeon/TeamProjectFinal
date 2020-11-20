@@ -87,6 +87,7 @@
                               <a class="dropdown-item" href="ManageMember">회원목록</a>
                               <a class="dropdown-item" href="WithdrawMember">탈퇴회원</a>
                               <a class="dropdown-item" href="ManageOrder">주문관리</a>
+                               <a class="dropdown-item" href="BookstoryManage">북스토리목록</a>
                             </div>
                         </div>
                            <div class="dropdown show">

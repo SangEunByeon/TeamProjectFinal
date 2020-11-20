@@ -31,7 +31,9 @@ public interface IBookStoryBoardService {
 	public ArrayList<BookStoryBoardDto> bookstory_mainpopularList(HttpServletRequest request);  
 	public ArrayList<BookStoryBoardDto> bookstory_preBookList(HttpServletRequest request);   
 	public ArrayList<BookStoryBoardDto> bookstoryList(HttpServletRequest request);
-	public List<BookStoryBoardDto> bookstoryAllList(HttpServletRequest request,String page);  
+	public List<BookStoryBoardDto> bookstoryAllList(HttpServletRequest request,String page);
+	public int contents_count(String bs_user_id);
+	public int replys_count(String reply_writer);  
 	 
 	 
 	

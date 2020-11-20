@@ -36,5 +36,8 @@ public interface IMemberService {
 	public List<MemberDto> getList(Criteria cri);
 	public int countDelete();
 	public List<Delete_MemberDto> deletelist(Criteria cri);  // 수정
+	public List<MemberDto> memberManage(); // 북스토리 회원 정보가져오기  
+	public int updateRank(String id, String rank);//북스토리 회원 랭킹변경 
+	public int update_content_c(int content_c);
 	
 }

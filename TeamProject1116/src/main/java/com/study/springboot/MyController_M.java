@@ -60,6 +60,7 @@ import com.study.springboot.service.IProductQnABoardService;
 import com.study.springboot.service.IProductService;
 import com.study.springboot.service.IReviewBoardService;
 import com.study.springboot.service.MailService;
+import com.study.springboot.service.MemberService;
 
 import lombok.AllArgsConstructor;
  
@@ -1829,7 +1830,29 @@ public class MyController_M {
 		public String BookStoryProfile(){return "bookstory/BookStoryProfile";}    
 		//내정보 폼
 		@RequestMapping("/BookStoryMyInfo")
-		public String bookstory_MyInfo(){return "bookstory/BookStoryMyInfo";}  
+		public String bookstory_MyInfo(HttpServletRequest request, Model model,HttpSession session){
+		//회원수
+		int count=bookstory_service.getMainProfile(request);
+		model.addAttribute("count",count);
+		System.out.println("회원수:"+count);
+		
+		//게시글 작성시 넣어야 할듯.?
+		
+//		//게시글 수 
+//		int content_count=(int)session.getAttribute("content_count");
+//		int content_c=member_service.update_content_c(content_count);
+//		System.out.println("게시글"+content_count);
+//		model.addAttribute("content_count",content_count);
+//		session.setAttribute("content_c", content_c);
+//		//댓글 수
+//		int reply_count=(int)session.getAttribute("reply_count");  
+//		System.out.println("게시글"+reply_count);
+//		model.addAttribute("reply_count",reply_count);
+//		
+		return "bookstory/BookStoryMyInfo";
+		}  
+	
+		
 		//글쓰기 폼
 		@RequestMapping("/BookStoryWrite")
 		public String BookStoryWrite(HttpServletRequest request, Model model){  
@@ -1854,7 +1877,8 @@ public class MyController_M {
 			}else {
 				System.out.println("이미지 등록성공");  
 				request.getSession().setAttribute("book_img", dto);
-				request.getSession().setAttribute("memberDto", dto);
+				/* request.getSession().setAttribute("memberDto", dto); */
+				model.addAttribute("memberDto",dto);
 				model.addAttribute("msg","이미지업로드를 성공하였습니다.");
 				model.addAttribute("url","BookStoryProfile");
 			}
@@ -2156,7 +2180,7 @@ public class MyController_M {
 		 
 		 
 		  
-		 //관리자 카테고리 -작가정보,책미리보기,책이벤트
+		 //관리자> 카테고리 -작가정보,책미리보기,책이벤트
 		 @RequestMapping(value = {"/BookStoryNotice_A","/BookStoryWriterInfo_A","/BookStoryEvent_A"})
 			public String bookStoryCategory_A(HttpServletRequest request, Model model) {
 			String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
@@ -2213,10 +2237,38 @@ public class MyController_M {
 			return nextUrl;
 		} 
 			 
+		//관리자>북스토리- 회원관리  
+		 @RequestMapping("/BookstoryManage")
+		 public String BookstoryManage(Model model, HttpServletRequest request,HttpSession session){ 
+  	 
+		 List<MemberDto> list=member_service.memberManage();
+		 model.addAttribute("list",list); 
+		 return "admin/BookstoryManage";  
+		 } 
+		 
+		  
+		 
+		//관리자 > 북스토리 등급 수정
+		@RequestMapping("/updateRankAction")
+		public String updateRankAction(HttpServletRequest request, MemberDto memberDto, Model model) {
+			String[] id = (String[]) request.getParameterValues("chBox");
+			System.out.println("id"+id);
+			int nResult=0;
+			String rank=request.getParameter("rank");
+			for(int i=0;i<id.length;i++) {
+				nResult=member_service.updateRank(id[i], rank);
+			}
+			System.out.println("nResult"+nResult);
+			if(nResult<=0) {
+				model.addAttribute("msg","다시시도해주십시오.");
+				 model.addAttribute("url","/BookstoryManage");
+			}else {
+				model.addAttribute("msg","상태수정 완료했습니다.");
+				model.addAttribute("url","/BookstoryManage");
+			} 
+			return "redirect";  
+		} 
 		
-		 
-		 
-		 
 	//마일리지 적립 
 	@RequestMapping("/upPointAction")
 	public JsonObject upPointAction(HttpServletRequest request,Model model) {
@@ -2271,6 +2323,7 @@ public class MyController_M {
 	public String AdminDeleteAction(HttpServletRequest request, MemberDto memberDto, Model model) {
 
 		String idlist = request.getParameter("deleteid");
+		System.out.println("idlist"+idlist);
 		String[] idx=idlist.split(",",0);
 		for(String id : idx) {
 			request.setAttribute("id", id);

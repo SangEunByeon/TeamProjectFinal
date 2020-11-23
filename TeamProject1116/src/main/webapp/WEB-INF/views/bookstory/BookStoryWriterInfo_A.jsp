@@ -1,3 +1,4 @@
+ 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -37,13 +38,22 @@
 
      <div id="main">
 
-            <aside>
+             <aside>
                 <div class="hr"></div>
                 <div class="info_head">
                      <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
-                    <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
-                  
-                </div>
+               	<%
+            	if(session.getAttribute("sessionID")==null){
+           		%>	   
+                    <div class="bookstory_MyInfo"><a href="myInfoLogin"><span>내정보</span> </a>  </div>
+                <%
+            	}else{
+            	%>
+            		 <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
+            	<%
+            	}
+                %>  
+                </div> 
              	<%
             	if(session.getAttribute("sessionID")==null){
            		%>	
@@ -143,7 +153,7 @@
                         <a href="BookStoryNotice_A">공지사항</a>
                     </div>
                     <hr />
-                     <table>
+                    <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryWriterInfo_A"><span>작가정보</span></a>
@@ -151,7 +161,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -168,17 +178,18 @@
              	<div class="section_content3"> 
             
                  <table id="member_list"  class="table table-striped view_box "> 
-                     <tr class="one-list-title "> 
+                     	 <tr class="one-list-title "> 
+                      	 <th scope="col" style="width: 20%;" >작가이름</th>
                          <th scope="col" style="width: 25%;" >작가사진</th>
                          <th scope="col" style="width: 35%;" >작가소개</th> 
-                         <th scope="col"  style="width: 10%;">작성자</th> 
-                         <th scope="col"  style="width: 15%;">조회수</th> 
+                         <th scope="col"  style="width: 8%;">작성자</th> 
+                          <th scope="col"  style="width: 15%;">조회수</th> 
                      </tr> 
                      
                      <c:forEach var="dto" items="${ list }" > 
                      <input type="hidden" name="idx" value="${dto.idx}"> 
                      <tr class="view_box_1">    
-                     	
+                     	<td>${dto.bs_title}</td>
                      	 <!-- 이미지 반복구간 -->
                        	 <c:set var="string1" value="${dto.bs_content}" />
                        	 <c:forEach items="${fn:split(string1,'>')}" var="item" >
@@ -206,30 +217,23 @@
                  </div>  
                  
                  
-                     <!-- 페이징처리 -->
-          	      <nav aria-label="...">
-				  	<ul class="pagination">
-					   <!--  <li class="page-item disabled">
-					      	<span class="page-link">Previous</span>
-					    </li> -->
-					    <li class="page-item <%= page1_active %>">
+                 <!-- 페이징처리 -->
+          	      <nav aria-label="Page navigation example ">
+				  	<ul class="pagination  justify-content-center ">
+					  	<li class="page-item">
 					    	<a class="page-link"  href="BookStoryWriterInfo_A?page=1">1</a>
 					    </li>
-					    <li class="page-item <%= page1_active %>">
+					  	<li class="page-item">
 					      	<a class="page-link" href="BookStoryWriterInfo_A?page=2">2</a>
 					    </li>
-					    <li class="page-item <%= page1_active %>">
+					    <li class="page-item">
 					    	<a class="page-link" href="BookStoryWriterInfo_A?page=3">3</a>
 					    </li>
-					      <li class="page-item <%= page1_active %>">
+					      <li class="page-item">
 					    	<a class="page-link" href="BookStoryWriterInfo_A?page=4">4</a>
-					    </li> 
-					<!--     <li class="page-item">
-					      	<a class="page-link" href="#">Next</a>
-					    </li> -->
-				  	</ul>
-				</nav>
-				
+					    </li>  
+			  		</ul>
+				  </nav>
             </section>
         </div>
 
@@ -246,4 +250,4 @@
       function writeReview() {location.href="BookStoryWrite"}  
     </script>
 </body>
-</html>
+</html> 

@@ -59,10 +59,8 @@
 	function formChange(obj)
 	{
 		obj.submit(); 
-	}
-
-
-</script>
+	} 
+	</script>
 </head>
 <body>
 <!-- 헤더부분 -->

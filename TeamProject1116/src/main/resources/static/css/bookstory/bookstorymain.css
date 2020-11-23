@@ -6,18 +6,17 @@
   font-weight: 400;
   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot');
   src: url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.eot?#iefix') format('embedded-opentype'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.woff') format('woff'), url('//cdn.jsdelivr.net/font-nanumlight/1.0/NanumBarunGothicWeb.ttf') format('truetype');
- }
-
+ } 
  body{
   font-family:'NanumBarunGothic';
-} 
-
+}  
  /* 메인 */
  #main{ 
-     width: 70%;
-     height:1900px;
-     margin: 0 auto;    
+     width: 70%; 
+     margin: 0 auto;   
+     height:2000px; 
     }  
+     
 aside{    
     width: 270px;
     position: absolute;
@@ -164,8 +163,7 @@ button{
 
 section{ 
     margin-left: 300px;
-    width: 1000px;
-    height: 100px;
+    width: 1000px; 
 }
 .hr3{
     margin-top: 13px;
@@ -335,4 +333,10 @@ section{
 	padding-bottom:10px;
 	display: inline-block;
 }
-  
+
+.footer{
+	position: absolute;
+	width: 100%;
+	display: block;
+}
+ 

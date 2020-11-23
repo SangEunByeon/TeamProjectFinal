@@ -131,77 +131,77 @@
      <span>집콕생활, 위로가 되는 책<span>
      	<div class="owl-carousel owl-theme">
             <div class="item book1"> 
-                <a href="#">    
-                    <div class="title"> 
-                        <div>줄거리 요약 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+                <a href="http://localhost:8081/BookStoryView?idx=50">    
+                    <div class="title" style="text-overflow:ellipsis; white-space:normal; display: inline-block;"> 
+                        <div style=" font-size:18px; padding-top:90px; padding-left:45px;">미리보기</div>
                     </div>
-                    <img src="http://placehold.it/400x500"> 
+                    <img src="image/bookstory/main/book1.jpg" width="100px" height="220px"> 
                 </a>
             </div>
             <div class="item book1"> 
-                <a href="#">    
-                    <div class="title"> 
-                        <div>줄거리 요약 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+                <a href="http://localhost:8081/BookStoryView?idx=49">    
+                     <div class="title" style="text-overflow:ellipsis; white-space:normal; display: inline-block;"> 
+                        <div style=" font-size:18px; padding-top:90px; padding-left:45px;">미리보기</div>
                     </div>
-                    <img src="http://placehold.it/400x500"> 
+                     <img src="image/bookstory/main/book2.jpg" width="100px" height="220px"> 
                 </a>
             </div>
             <div class="item book1"> 
-                <a href="#">    
-                    <div class="title"> 
-                        <div>줄거리 요약 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+                <a href="http://localhost:8081/BookStoryView?idx=43">    
+                    <div class="title" style="text-overflow:ellipsis; white-space:normal; display: inline-block;"> 
+                        <div style=" font-size:18px; padding-top:90px; padding-left:45px;">미리보기</div>
                     </div>
-                    <img src="http://placehold.it/400x500"> 
+                    <img src="image/bookstory/main/book3.jpg" width="100px" height="220px"> 
                 </a>
             </div>
             <div class="item book1"> 
-                <a href="#">    
-                    <div class="title"> 
-                        <div>줄거리 요약 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+                <a href="http://localhost:8081/BookStoryView?idx=42">    
+                     <div class="title" style="text-overflow:ellipsis; white-space:normal; display: inline-block;"> 
+                        <div style=" font-size:18px; padding-top:90px; padding-left:45px;">미리보기</div>
                     </div>
-                    <img src="http://placehold.it/400x500"> 
+                     <img src="image/bookstory/main/book4.jpg" width="100px" height="220px"> 
                 </a>
             </div>
             <div class="item book1"> 
-                <a href="#">    
-                    <div class="title"> 
-                        <div>줄거리 요약 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+                <a href="http://localhost:8081/BookStoryView?idx=47">    
+                    <div class="title" style="text-overflow:ellipsis; white-space:normal; display: inline-block;"> 
+                        <div style=" font-size:18px; padding-top:90px; padding-left:45px;">미리보기</div>
                     </div>
-                    <img src="http://placehold.it/400x500"> 
+                   <img src="image/bookstory/main/book5.jpg" width="100px" height="220px">
                 </a>
             </div>
             <div class="item book1"> 
-                <a href="#">    
-                    <div class="title"> 
-                        <div>줄거리 요약 : ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+                <a href="http://localhost:8081/BookStoryView?idx=46">    
+                     <div class="title" style="text-overflow:ellipsis; white-space:normal; display: inline-block;"> 
+                        <div style=" font-size:18px; padding-top:90px; padding-left:45px;">미리보기</div>
                     </div>
-                    <img src="http://placehold.it/400x500"> 
+                     <img src="image/bookstory/main/book6.jpg" width="100px" height="220px">
                 </a>
             </div>
         </div>
-    </div>
+        </div>
     </div> 
     <!-- 후기 -->
     <div class="flex container">
-    <section class="review_import" style="margin-right: 10px;">
+    <section class="review_import" style="margin-right: 10px; overflow:hidden; height: 610px;">
     <table class="table_review"cellpadding="30px" cellspacing="30px"> 
                 
          	<div class="head_review">
-             <span>책 리뷰</span>   
-            <!--  <span class="review_box"><a href="#">더보기</a></span>  -->    
+             <span>책 리뷰</span>     
          	</div>   
-         	
-         	<c:forEach var="review" items="${review}" begin="0" end="2" step="1" >
+	        	<c:forEach var="review" items="${review}">
 	        <c:if test="${review.p_filename !=null}">
          	
          	<div class="pre_img">
-             <div class="pre_img_left" style="display:flex;">   
+             <div class="pre_img_left" style="display:flex;">  
+             <fmt:formatDate value="${review.reg}" var="reg" pattern="yyyy.MM.dd" /> 
                  <div class="review_box_width"><a href="ProductDetail3?p_number=${review.p_number}"><img src="${review.p_filename}" style="width: 130px; height: 120px;"></a></div> 
-                 <div class="review_box_width1" style="margin-top:7%;">[${review.rate}]<br><p class="multiline-ellipsis">${review.description}</p></div> 
+                 <div class="review_box_width1" style="margin-top:3%;"><strong>[${review.p_title}]<br>[${review.rate}/${reg}]</strong><br><p class="multiline-ellipsis">${review.description}</p></div> 
              </div>
              </div>
              </c:if>              
-	             </c:forEach>
+	             </c:forEach>   
+	       
      </table>    
      </section>   
    
@@ -230,8 +230,11 @@
             
             
              <div class="banner_img">
-              <img src="image/banner.png">
-          </div>  
+              <img src="image/banner.png" style="width: 380px; height: 150px;">
+             </div>  
+             <div class="banner_img">
+              <img src="image/ddd.PNG" style="width: 380px; height: 150px;">
+             </div>  
       </section>      
   </div>
   

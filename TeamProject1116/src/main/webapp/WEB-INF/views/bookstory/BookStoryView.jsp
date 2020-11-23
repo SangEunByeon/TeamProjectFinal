@@ -24,19 +24,32 @@
 <link rel="stylesheet" href="css/bookstory/bookstoryview.css"> 
 <link rel="stylesheet" href="css/bookstory/bookstorymain.css"> 
 <title>북스토리 페이지</title>
-</head>
+<script> 
+</script>
+</head> 
+
 <body>
 <!-- 북스토리메인헤더 -->
 <jsp:include page="/WEB-INF/views/BookStoryMainHeader.jsp"/>
 
   <div id="main">
 
-            <aside>
+             <aside>
                 <div class="hr"></div>
                 <div class="info_head">
                      <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
-                    <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div>   
-                </div>
+               	<%
+            	if(session.getAttribute("sessionID")==null){
+           		%>	   
+                    <div class="bookstory_MyInfo"><a href="myInfoLogin"><span>내정보</span> </a>  </div>
+                <%
+            	}else{
+            	%>
+            		 <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
+            	<%
+            	}
+                %>  
+                </div> 
              	<%
             	if(session.getAttribute("sessionID")==null){
            		%>	
@@ -145,7 +158,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -163,11 +176,15 @@
                     <div class="category_text"> 
                     
                     <a href="#" id="category" value="category">${content_view_bookstory.bs_category}</a>                   
+                  <div class="list_box">  
                   
-                     <div class="list_box"> 
-                     <a href="BookStoryView?idx=${content_view_bookstory.idx-1}"><button type="button" class="btn btn-light">이전글</button></a>
-                     <a href="BookStoryView?idx=${content_view_bookstory.idx+1}"><button type="button" class="btn btn-light">다음글</button></a>
+                 
+                  	 <a href="BookStoryView?idx=${content_view_bookstory.idx-1}"><button type="button" id="prev" class="btn btn-light" onclick="prev()">이전글</button></a>
+                  	 <a href="BookStoryView?idx=${content_view_bookstory.idx+1}"><button type="button" class="btn btn-light">다음글</button></a>
                      <a name="top"></a><button type="button" class="btn btn-light" onclick="goList()">목록</button>
+                  	 
+                     
+                    
                     </div>
                         <div class="title_text" >
                             <span>${content_view_bookstory.bs_title}</span>
@@ -209,24 +226,22 @@
                                 <hr />
                                 <!-- 콘텐츠 -->
                                 <div class="main_content_box">  
-									     <span class="content_view_m">${content_view_bookstory.bs_content}</span>
+									     <span class="content_view_m">${content_view_bookstory.bs_content}</span> 
                                 </div>
                            
                                 <!-- 댓글기능 -->  
                                 <div class="reply_bottom_box"> 
 
-                                    <span class="heart_img">
-                                    <c:choose>
-                                    <c:when test="${idx ne null}">
-                                    <a href='javascript: like_func();'><img src="image/bookstory/like.png" width="30px" height="30px" alt="좋아요선클릭후" id="like_img"></a>
-                                    </c:when>
-                                    <c:otherwise>
-                                    <a href='javascript: login_need();'><img src="image/bookstory/like_cancle.png" width="30px" height="30px" alt="좋아요클릭전"></a>
-                                    </c:otherwise>
-                                    </c:choose>
-                                    </span> 
-                                   <a href="like_check">
-                                   <span class="heart_text">좋아요</span> 
+                                    <span class="heart_img"> 
+                                    <img src="image/bookstory/like_cancle.png" width="30px" height="30px" alt="좋아요선클릭후" id="like_img" type="button" onclick="like_func()" > 
+                                      
+                                     
+                                     <input type="hidden" name="like_check" id="like_check" value="${content_view_bookstory.like_check}" />
+                                     <input type="hidden" name="idx" id="idx" value="${content_view_bookstory.idx}" />
+                                    <%--  <input type="hidden" name="like_cnt" id="like_cnt" value="${content_view_bookstory.like_cnt}" /> --%>
+                                     </span> 
+                                   
+                                   <span class="heart_text">좋아요</span> <span class="heart_text">10</span> 
                                         
                                     <span class="reply_img2"><img src="image/bookstory/reply.png" width="30" height="30" ><a name="reply_start"></a></span> 
                                     <a class="btn btn"  id="accordion"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">댓글</a>
@@ -290,9 +305,9 @@
                                	<%  
                                	if(session.getAttribute("sessionID")!=null){
                                	%>
-                                <form action="replyAction" method="post" name="reply">
-                                <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
+                                <form action="replyAction" method="post" name="reply"> 
                                 <input type="hidden" name="idx" value="${content_view_bookstory.idx}">
+                                <input type="hidden" name="reply_profile" value="${memberDto.book_profile}">
                                 <input type="hidden" name="reply_writer" value="${content_view_bookstory.bs_user_id}">
                                 <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}"> 
                                
@@ -344,7 +359,7 @@
                     if(content_view_bookstory.getBs_user_id().equals(sessionID3) && sessionID3!=null){
                     %>
                     <div class="list_box2"> 
-                      <button type="button" class="btn btn-light"><a href="BookStoryModify?idx=${content_view_bookstory.idx}">수정<a></button>
+                      	<button type="button" class="btn btn-light"><a href="BookStoryModify?idx=${content_view_bookstory.idx}">수정<a></button>
                    		<button type="button" class="btn btn-light"><a href="BoardStoryDeleteAction?idx=${content_view_bookstory.idx}">삭제<a></button>
                         <button type="button" class="btn btn-light" onclick="goList()">목록</button>
                        	<a href="#top"> <button type="button" class="btn btn-light">TOP</button></a>
@@ -360,17 +375,17 @@
 					}
                     %>
  
-                </div>   
+                </div>    
                 
-            </section>   
+            </section>  
+            
+         
+           <!-- 푸터	 -->   
+		    <jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>
+	 
+      
         </div>   
-        
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->  
-    
-      <script src="js/jquery-2.2.4.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-        
+         
      <script> 
      function writeReturn() {
    		alert("로그인해주세요");
@@ -402,53 +417,49 @@
   	  	   }else if(category_list == '책 이벤트'){
   	  	  	   location.href="BookStoryEvent_A"
   	  	   }
-	 	}	   
-
- 	  $( document ).ready(function() {
- 		    $('.navbar').click(function(){
- 		        $('.navbar.navbar-fixed').removeClass('navbar-fixed');
- 		        $(this).addClass('navbar-fixed');
- 		        console.log( "nav fix" );
- 		    });
-    </script> 
-    <script>
+	 	}	    
+     </script> 
+     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+     <script type="text/javascript">
+  
     /* 좋아요 */
     function like_func(){
-      var frm_read = $('#frm_read');
-      var boardno = $('#boardno', frm_read).val();
-      //var mno = $('#mno', frm_read).val();
-      //console.log("boardno, mno : " + boardno +","+ mno);
-      
-      $.ajax({
-        url: "../liketo/like.do",
-        type: "GET",
-        cache: false,
-        dataType: "json",
-        data: 'idx=' +idx,
-        success: function(data) {
-          var msg = '';
-          var like_img = '';
-          msg += data.msg;
-          alert(msg);
-          
-          if(data.like_check == 0){
-        	  like_img = "image/bookstory/like_cancle.png" width="30px" height="30px"; //취소상태
-          }else{ 
-            like_img = "image/bookstory/like.png" width="30px" height="30px"; //누른상태
-          }      
-          $('#like_img', frm_read).attr('src', like_img);
-          $('#like_cnt').html(data.like_cnt);
-          $('#like_check').html(data.like_check);
-        },
-        error: function(request, status, error){
-          alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-        }
-      });
-    }
- 
-    </script>
-    
-    
-<!-- 푸터넣기 -->
-</body>
+        
+      alert('좋아요 클릭');
+		var like_check = $('#like_check').val(); 
+		console.log('like_check'); 
+		var idx = $('#idx').val();  
+		
+		console.log('idx');
+      	$.ajax({ 
+      		url: 'http://localhost:8081/like_check?idx='+idx+'&like_check='+like_check,
+      	  	cache: false,
+      	    type: "GET", 
+      	    success: function(data) { 
+          	console.log(data);
+          	 var like_img =document.getElementById("like_img");
+	      	if(data.like_check == 0){ 
+	      	  console.log("좋아요 취소");   
+	      	 
+	      	 $('#like_img').attr('src','image/bookstory/like_cancle.png');
+	      
+		   	 	$('#like_img').load(window.location.href+'#like_img');
+		   	   $('#like_check').html(data.like_check); 
+	          } else  { 
+	        	  console.log("좋아요 클릭"); 
+	        	  
+	        	  $('#like_img').attr('src','image/bookstory/like.png');
+	        	  
+	        	$('#like_img').load(window.location.href+'#like_img'); 
+	        	   $('#like_check').html(data.like_check);
+	          }       
 
+      	    }
+
+      	});  
+
+    } 
+    </script>   
+     
+</body>
+</html>

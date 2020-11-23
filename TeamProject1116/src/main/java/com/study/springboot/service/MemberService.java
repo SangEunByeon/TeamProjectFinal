@@ -288,7 +288,7 @@ public class MemberService implements IMemberService{
 			int nResult = memberDao.delete_reply_countDao(id);
 			return nResult;
 		}
- 
+  
 		@Override
 		public List<MemberDto> rankstate(String contentAndReplyCount,int content_count,int reply_count) { 
 			return memberDao.rankstateDao(contentAndReplyCount,content_count,reply_count);

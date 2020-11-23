@@ -3,9 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
-
+<%@ page import="java.util.List"%>
+ 
  <%
- MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
+ MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
  %>
  
 <!DOCTYPE html>
@@ -132,14 +133,12 @@
 		   <h2>회원 목록</h2>
 		   <hr>
 		   <form action="Rankstate" method="post" >
+		   <input type="hidden"	value="${dto.idx}">
 	       <div style="width:200px; float:right;">
-	       <input type="hidden"  name="content_count" value="${dto.content_count}">
-	       <input type="hidden" name="reply_count" value="${dto.reply_count}">
 	       <span>	<select style="height:26px;"class="tbox" name="ContentAndReplyCount" onchange="formChange(this.form)">
 	         	<option value="0" selected>게시글,댓글 수</option>
 				<option value="20" >20개</option>
 				<option value="40" >40개</option>
-				<option value="50" >50개</option>
 				<option value="60" >60개</option>
 				<option value="80">80개</option>
 				<option value="100">100개</option>

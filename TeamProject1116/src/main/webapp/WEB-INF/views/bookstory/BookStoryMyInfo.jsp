@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
- <!-- 수정1119  -->
+ <!-- 1123수정 -->
  <% 
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
@@ -26,13 +26,22 @@
 
    <div id="main">
 
-            <aside>
+             <aside>
                 <div class="hr"></div>
                 <div class="info_head">
                      <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
-                    <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
-                  
-                </div>
+               	<%
+            	if(session.getAttribute("sessionID")==null){
+           		%>	   
+                    <div class="bookstory_MyInfo"><a href="myInfoLogin"><span>내정보</span> </a>  </div>
+                <%
+            	}else{
+            	%>
+            		 <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
+            	<%
+            	}
+                %>  
+                </div> 
              	<%
             	if(session.getAttribute("sessionID")==null){
            		%>	
@@ -169,7 +178,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -182,15 +191,15 @@
             </aside> 
               <section> 
                 <div class="read_rank_box">
-                <span class="read_rank">읽힘랭킹</span>
+                <span class="read_rank">구석책방 랭킹</span>
                 <p>연필 한자루부터 다섯자루까지, 열심히 활동해서 카페 랭킹을 올려보세요.</p>
                 </div>
-                <img src="image/bookstory/rank.jpg"  alt="읽힘등급표" width="1000px">
+                <img src="image/bookstory/rank.jpg"  alt="구석책방등급표" width="1000px">
                 <div class="rank_text_box">
                    
                     <ul class="rank_text1">
                         <li>
-                            읽힘은 <strong>한자루부터 다섯자루까지 5등급으로</strong> 나누어져 있습니다.
+                            구석책방은 <strong>한자루부터 다섯자루까지 5등급으로</strong> 나누어져 있습니다.
                         </li>
                         <li class="rank_text2">
                            랭킹은 활동 점수에 따라 월 <strong>2회(1일 경) 업데이트 되며,</strong> 각 단계별로 <strong>조건이 충족시에 한단계 씩 증가</strong>합니다.
@@ -198,7 +207,7 @@
                         <li class="rank_text2">
                             자세한 카페 등급 조건은 
                             <a style="color:red " class="btn btn" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                <strong>읽힘</strong>
+                                <strong>구석책방</strong>
                               </a>
                             을 클릭하세요
                          </li>

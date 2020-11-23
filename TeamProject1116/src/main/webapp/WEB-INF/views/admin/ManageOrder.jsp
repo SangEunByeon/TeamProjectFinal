@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <!-- 1123수정 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,10 +60,8 @@
 	function formChange(obj)
 	{
 		obj.submit(); 
-	}
-
-
-</script>
+	} 
+	</script>
 </head>
 <body>
 <!-- 헤더부분 -->

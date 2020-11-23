@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.http.HttpRequest;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.mail.Session;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +25,7 @@ import org.apache.coyote.RequestGroupInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -222,7 +225,8 @@ public class MyController_M {
 		model.addAttribute("notice",notice_dao.listDao(category));
 		model.addAttribute("list",product_service.bookCategory2Dao("신간"));
 		model.addAttribute("list2",product_service.bookCategory2Dao("인기"));
-		model.addAttribute("list3",product_service.bookCategory2Dao("추천"));
+		model.addAttribute("list3",product_service.bookCategory2Dao("추천")); 
+		 
 		return "MainForm";
 		}   
 	 
@@ -1831,8 +1835,12 @@ public class MyController_M {
 		//프로필 폼
 		@RequestMapping("/BookStoryProfile")
 		public String BookStoryProfile(){return "bookstory/BookStoryProfile";}    
-		
-		
+		//내정보- 로그인필요
+		@RequestMapping("/myInfoLogin")
+		public String myInfoLogin(Model model) {
+			model.addAttribute("msg","로그인이 필요합니다.");
+			model.addAttribute("url","LoginForm");
+			return "redirect";}		
 		//내정보 폼
 		@RequestMapping("/BookStoryMyInfo")
 		public String bookstory_MyInfo(HttpServletRequest request, Model model,HttpSession session){
@@ -1841,8 +1849,7 @@ public class MyController_M {
 		model.addAttribute("count",count);
 		System.out.println("회원수:"+count);
 		 
-//		//게시글 수 
-		
+//		//게시글 수  
 		String bs_user_id=(String)session.getAttribute("sessionID");  
 		int content_count=bookstory_service.contents_count(bs_user_id);
 		System.out.println("게시글 수:"+content_count);
@@ -1894,7 +1901,9 @@ public class MyController_M {
 		// 북스토리 -글쓰기
 		@RequestMapping(value = "/BookStoryWriteAction",  method = RequestMethod.POST , produces = "text/html; charset=UTF-8")
 		public String BookStoryWriteAction(HttpServletRequest request,Model model,HttpSession session){  
-			int nResult=bookstory_service.bookstoryWrite(request);	
+			 
+			int nResult=bookstory_service.bookstoryWrite(request);
+			System.out.println("파일명:"+nResult); 
 			if(nResult<1) {
 				System.out.println("글 작성을 실패하였습니다."); 
 				model.addAttribute("msg","글 작성을 실패하였습니다.");
@@ -1903,7 +1912,7 @@ public class MyController_M {
 				//게시글 수 추가
 				String id=(String)session.getAttribute("sessionID");   
 				int updateCountentCount=member_service.update_content_count(id);
-				System.out.println("게시글 수"+updateCountentCount);
+				System.out.println("게시글 수"+updateCountentCount);   
 				
 				System.out.println("글 작성을 성공하였습니다.");  
 				model.addAttribute("msg","글 작성을 성공하였습니다.");
@@ -1913,7 +1922,7 @@ public class MyController_M {
 			return "redirect";
 			}
 		 
-		//글보기, 조회수 증가
+		//글보기, 조회수 증가  
 		@RequestMapping("/BookStoryView")
 		public String BookStoryview(HttpServletRequest request,Model model) throws Exception{
 			//회원수
@@ -1926,12 +1935,12 @@ public class MyController_M {
 			  
 			//글보기+이미지보기
 			String idx2=request.getParameter("idx");
-				int idx=Integer.parseInt(idx2);
-				BookStoryBoardDto dto=bookstory_service.bookstoryView(idx);
-				session.setAttribute("BookStoryDto", dto);
-				session.setAttribute("content_view_bookstory",dto); 
-				System.out.println("북스토리글 보기"+dto); 
-				session.setAttribute("bookstoryContentNum", idx);
+			int idx=Integer.parseInt(idx2);
+			BookStoryBoardDto dto=bookstory_service.bookstoryView(idx);
+			session.setAttribute("BookStoryDto", dto);
+			session.setAttribute("content_view_bookstory",dto); 
+			System.out.println("북스토리글 보기"+dto); 
+			session.setAttribute("book_idx", idx);
 			
 				
 			//조회수증가
@@ -1951,19 +1960,32 @@ public class MyController_M {
 			
 			return "bookstory/BookStoryView";  
 		} 
+		 
 		
-//		 //좋아요 구현
-//		@ResponseBody
-//		  @RequestMapping(value="/liketo/like.do", method=RequestMethod.GET, produces="text/plain;charset=UTF-8")
-//		  public String like(HttpSession session){
-//		  
-//			int bookstoryContentNum= (Integer)session.getAttribute("bookstoryContentNum");
-//			
-//			
-//			return null;
-//			
-//			
-//		}
+		 //좋아요 구현 
+		  @RequestMapping("/like_check")
+		  public void like_check(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			  String like_check2=request.getParameter("like_check");
+			  String idx2=request.getParameter("idx");  
+			  System.out.println("좋아요 수1"+like_check2);
+			  int like_check=Integer.parseInt(like_check2); 
+			  int idx=Integer.parseInt(idx2);  
+ 
+			  if(like_check==0) {  //좋아요 0 일때, 좋아요수 증가 
+				  response.getWriter().print("1"); 
+				  bookstory_service.bookstorylike_check(idx,like_check);  
+				  System.out.println("좋아요 수2"+like_check2);
+				   
+			  }else {  
+				  response.getWriter().print("0");
+				  bookstory_service.bookstorylike_check_cancle(idx,like_check);
+				   
+				  System.out.println("좋아요 수3"+like_check2);
+			  }
+			
+		}
+		
+
 		
 		//글보기> 수정폼
 		@RequestMapping("/BookStoryModify")
@@ -2200,28 +2222,9 @@ public class MyController_M {
 			return nextUrl;
 		}
 		   
-		
-		 
-		//관리자> 책 미리보기 
-		 @RequestMapping("/BookStoryBookPreview_A")
-		 public String BookStoryBookPreview_A(Model model, HttpServletRequest request){ 
-			 	//회원수
-				int count=bookstory_service.getMainProfile(request);
-				model.addAttribute("count",count);
-				System.out.println("회원수:"+count);
-				
-			 
-				System.out.println(request.getParameter("bs_category"));
-				ArrayList<BookStoryBoardDto> preBookList=bookstory_service.bookstory_preBookList(request); 
-				model.addAttribute("preBookList",preBookList);
-				System.out.println("preBookList"+preBookList);
-			 return "bookstory/BookStoryBookPreview_A";  
-			 } 
-		 
-		 
 		  
-		 //관리자> 카테고리 -작가정보,책미리보기,책이벤트
-		 @RequestMapping(value = {"/BookStoryNotice_A","/BookStoryWriterInfo_A","/BookStoryEvent_A"})
+		 //관리자> 카테고리 -공지사항,작가정보,책이벤트
+		 @RequestMapping(value = {"/BookStoryBookPreview_A","/BookStoryNotice_A","/BookStoryWriterInfo_A","/BookStoryEvent_A"})
 			public String bookStoryCategory_A(HttpServletRequest request, Model model) {
 			String requestUrl = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 			
@@ -2241,11 +2244,24 @@ public class MyController_M {
 					page="1";
 				}
 				
-				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory("작가정보",page);
+				List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory2("작가정보",page);
 				request.getSession().setAttribute("list", list); 
 				request.getSession().setAttribute("page", page);
 				
 				nextUrl = "bookstory/BookStoryWriterInfo_A"; } 
+			 
+			 else  if (requestUrl.equals("/BookStoryBookPreview_A")) {
+					String page = request.getParameter("page");
+					System.out.println( "page:" + page);
+					if(page==null) {
+						page="1";
+					}
+					
+					List<BookStoryBoardDto> list=bookstory_service.bookStoryCategory3("책 미리보기",page);
+					request.getSession().setAttribute("list", list); 
+					request.getSession().setAttribute("page", page);
+					
+					nextUrl = "bookstory/BookStoryBookPreview_A"; } 
 			
 			else if (requestUrl.equals("/BookStoryEvent_A")) {
 				String page = request.getParameter("page");
@@ -2283,7 +2299,8 @@ public class MyController_M {
 			 
 			 
 		 List<MemberDto> list=member_service.memberManage();
-		 model.addAttribute("list",list); 
+		 model.addAttribute("list", list); 
+		 
 		 return "admin/BookstoryManage";  
 		 } 
 		 
@@ -2311,21 +2328,23 @@ public class MyController_M {
 		} 
 		
 		
-		//보류
-//		@RequestMapping("/Rankstate")
-//		public String Rankstate(HttpServletRequest request,Model model){
-//			 
-//			String ContentAndReplyCount=(request.getParameter("ContentAndReplyCount"));
-//			
-//			String content_count2=request.getParameter("content_count");
-//			int content_count=Integer.parseInt(content_count2);
-//			String reply_count2=request.getParameter("reply_count");
-//			int reply_count=Integer.parseInt(reply_count2);
-//			request.setAttribute("list",member_service.rankstate(ContentAndReplyCount,content_count,reply_count)); 
-//			 
-//		return "admin/BookstoryManage"; }
+		//등급
+		@RequestMapping("/Rankstate")
+		public String Rankstate(HttpServletRequest request,Model model, HttpSession session){
 		 
-		
+			String ContentAndReplyCount=(request.getParameter("ContentAndReplyCount")); 
+			
+			int content_count=(int)storyboardmemberdto.getContent_count(); 
+			int reply_count=(int)storyboardmemberdto.getContent_count(); 
+			
+			
+			List<MemberDto> list=member_service.rankstate(ContentAndReplyCount,content_count,reply_count);
+			 
+			 model.addAttribute("list",list);
+		return "admin/BookstoryManage"; 
+		}
+		 
+		 
 	//마일리지 적립 
 	@RequestMapping("/upPointAction")
 	public JsonObject upPointAction(HttpServletRequest request,Model model) {

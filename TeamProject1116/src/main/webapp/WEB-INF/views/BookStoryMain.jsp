@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
-
+<!-- 1123수정 -->
  <% 
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  
@@ -29,8 +29,17 @@
                 <div class="hr"></div>
                 <div class="info_head">
                      <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
-                    <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
-                  
+               	<%
+            	if(session.getAttribute("sessionID")==null){
+           		%>	   
+                    <div class="bookstory_MyInfo"><a href="myInfoLogin"><span>내정보</span> </a>  </div>
+                <%
+            	}else{
+            	%>
+            		 <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
+            	<%
+            	}
+                %>  
                 </div> 
                 
              	<%
@@ -140,7 +149,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -188,12 +197,11 @@
                         </c:forEach> 
                         </tr>
                     </table> 
-                    
                 </div>
  	 			
  
                 <div class="all_view">
-                <a href="#"><span>전체글보기</span></a>
+                <a href="BookStoryAllList"><span>전체글보기</span></a>
                 <a  class="all_more" href="BookStoryAllList"><span>더보기</span></a>
                 </div>
                 
@@ -201,16 +209,14 @@
                 <div class="section_content2"> 
                
                     <table id="member_list"  class="table table-striped view_box "> 
-                        <tr class="one-list-title ">
-                            <th scope="col" style="width: 5%;" >번호</th> 
+                        <tr class="one-list-title "> 
                             <th scope="col" style="width: 50%;" >제목</th>
                             <th scope="col" style="width: 10%;" >작성자</th> 
                             <th scope="col"  style="width: 10%;">작성일</th> 
-                            <th scope="col"  style="width: 15%;">조회수</th> 
+                            <th scope="col"  style="width: 6%;">조회수</th> 
                         </tr> 
                         <c:forEach var="dto" items="${ list }" > 
-                        <tr class="view_box_1">  
-                            <td>${dto.idx}</td>
+                        <tr class="view_box_1">   
                             <td><a href="BookStoryView?idx=${dto.idx}">${dto.bs_title}</a></td>
                             <td>${dto.bs_user_id}</td>
                               <fmt:formatDate var="reg" value="${dto.reg}"  pattern="yyyy.MM.dd"/>
@@ -220,18 +226,20 @@
                         </c:forEach>
                     </table>  
                 </div>  
-            </section>  
+                
+            </section>   
         </div> 
-        
-    <!-- 메인푸터 --> 
+        <!-- 메인푸터 --> 
 	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>
      
+    
  	<!-- 글쓰기  -->
      <script> 
       function writeReturn() {
    		alert("로그인해주세요");
    		location.href="LoginForm"
    	 }
+ 
       function writeReview() {location.href="BookStoryWrite"}  
     </script>
 </body>

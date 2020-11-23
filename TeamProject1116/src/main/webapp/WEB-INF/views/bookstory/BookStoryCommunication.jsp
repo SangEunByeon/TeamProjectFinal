@@ -5,6 +5,8 @@
 <%@ page import="com.study.springboot.dto.MemberDto" %>
 <%@ page import="com.study.springboot.dto.BookStoryBoardDto" %>
 <%@ page import="java.util.List"%>  
+<!-- 1123수정 -->
+
  <%
  BookStoryBoardDto content_view=(BookStoryBoardDto)session.getAttribute("content_view"); 
  String id = (String) session.getAttribute("sessionID"); 
@@ -36,16 +38,25 @@
 <!-- 북스토리메인헤더 -->
 <jsp:include page="/WEB-INF/views/BookStoryMainHeader.jsp"/>
 
-
+	
       <div id="main">
-
+	  <div class="bookstoryboard">		
             <aside>
                 <div class="hr"></div>
                 <div class="info_head">
                      <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
-                    <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
-                  
-                </div>
+               	<%
+            	if(session.getAttribute("sessionID")==null){
+           		%>	   
+                    <div class="bookstory_MyInfo"><a href="myInfoLogin"><span>내정보</span> </a>  </div>
+                <%
+            	}else{
+            	%>
+            		 <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
+            	<%
+            	}
+                %>  
+                </div> 
              	<%
             	if(session.getAttribute("sessionID")==null){
            		%>	
@@ -141,7 +152,7 @@
                             </td>
                         </tr>
                     </table> 
-                    <div class="hr2"></div>
+                    <div class="hr2"></div> 
                      <div class="board_box_category">
                         <a href="BookStoryNotice_A">공지사항</a>
                     </div>
@@ -154,7 +165,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -175,7 +186,7 @@
                          <th scope="col" style="width: 50%;" >제목</th>
                          <th scope="col" style="width: 10%;" >작성자</th> 
                          <th scope="col"  style="width: 10%;">작성일</th> 
-                         <th scope="col"  style="width: 15%;">조회수</th> 
+                          <th scope="col"  style="width: 6%;">조회수</th> 
                      </tr> 
                      <c:forEach var="list" items="${ list }" >  
                      <tr class="view_box_1">    
@@ -189,32 +200,26 @@
                  </table> 
                  </div>  
                  
-                 <!-- 페이징처리 -->
-                 <nav aria-label="...">
-				  	<ul class="pagination">
-					   <!--  <li class="page-item disabled">
-					      	<span class="page-link">Previous</span>
-					    </li> -->
-					    <li class="page-item <%= page1_active %>">
+                  <!-- 페이징처리 -->
+          	      <nav aria-label="Page navigation example ">
+				  	<ul class="pagination  justify-content-center ">
+					  	<li class="page-item">
 					    	<a class="page-link"  href="BookStoryCommunication?page=1">1</a>
 					    </li>
-					    <li class="page-item <%= page1_active %>">
+					  	<li class="page-item">
 					      	<a class="page-link" href="BookStoryCommunication?page=2">2</a>
 					    </li>
-					    <li class="page-item <%= page1_active %>">
+					    <li class="page-item">
 					    	<a class="page-link" href="BookStoryCommunication?page=3">3</a>
 					    </li>
-					      <li class="page-item <%= page1_active %>">
+					      <li class="page-item">
 					    	<a class="page-link" href="BookStoryCommunication?page=4">4</a>
-					    </li> 
-					<!--     <li class="page-item">
-					      	<a class="page-link" href="#">Next</a>
-					    </li> -->
-				  	</ul>
-				</nav>
+					    </li>  
+			  		</ul>
+				  </nav>
             </section>
         </div>
-
+		</div>
     
  	<!-- 메인푸터 --> 
 	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>

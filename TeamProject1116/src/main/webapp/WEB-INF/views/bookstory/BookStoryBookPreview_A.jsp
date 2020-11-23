@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>  
 <%@ page import="com.study.springboot.dto.BookStoryBoardDto" %>
 <%@ page import="java.util.List"%>
-
+<!-- 1123수정 -->
  <%
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
@@ -41,9 +41,18 @@
                 <div class="hr"></div>
                 <div class="info_head">
                      <div class="bookstory_Info"><a href="BookStoryMain"><span>북스토리</span></a></div>  
-                    <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
-                  
-                </div>
+               	<%
+            	if(session.getAttribute("sessionID")==null){
+           		%>	   
+                    <div class="bookstory_MyInfo"><a href="myInfoLogin"><span>내정보</span> </a>  </div>
+                <%
+            	}else{
+            	%>
+            		 <div class="bookstory_MyInfo"><a href="BookStoryMyInfo"><span>내정보</span></a></div> 
+            	<%
+            	}
+                %>  
+                </div> 
              	<%
             	if(session.getAttribute("sessionID")==null){
            		%>	
@@ -151,7 +160,7 @@
                         </tr> 
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A?bs_category='책 미리보기'"><span>책 미리보기</span></a>
+                                <img src="image/bookstory/wirterInfo.png" width="20px" height="20px"><a href="BookStoryBookPreview_A"><span>책 미리보기</span></a>
                             </td>
                         </tr> 
                         <tr class="category_box">
@@ -166,9 +175,10 @@
               		<div class="all_view"><span>책 미리보기</span></div>
              	<div class="hr3"></div> 
              	 
+             	 <div class="prev_img">
              	  <table>
                         <tr>
-                        <c:forEach var="dto" items="${ preBookList }"  >  
+                        <c:forEach var="dto" items="${ list }"  >  
                 		<input type="hidden" name="idx" value="${dto.idx}">  
                         <td class="section_box" scope="col"> 
                             <!-- 이미지 반복구간 -->
@@ -191,33 +201,25 @@
                         </c:forEach> 
                         </tr>
                     </table> 
-             	 
-             	     <!-- 페이징처리 -->
-          	      <nav aria-label="...">
-				  	<ul class="pagination">
-					   <!--  <li class="page-item disabled">
-					      	<span class="page-link">Previous</span>
-					    </li> -->
-					    <li class="page-item <%= page1_active %>">
-					    	<a class="page-link"  href="BookStoryBookPreview_A?bs_category='책 미리보기'?page=1">1</a>
+             	  </div>
+             	  
+             	  <!-- 페이징처리 -->
+          	      <nav aria-label="Page navigation example ">
+				  	<ul class="pagination  justify-content-center ">
+					  	<li class="page-item">
+					    	<a class="page-link"  href="BookStoryBookPrview?page=1">1</a>
 					    </li>
-					    <li class="page-item <%= page1_active %>">
-					      	<a class="page-link" href="BookStoryBookPreview_A?bs_category='책 미리보기'?page=2">2</a>
+					  	<li class="page-item">
+					      	<a class="page-link" href="BookStoryBookPrview?page=2">2</a>
 					    </li>
-					    <li class="page-item <%= page1_active %>">
-					    	<a class="page-link" href="BookStoryBookPreview_A?bs_category='책 미리보기'?page=3">3</a>
+					    <li class="page-item">
+					    	<a class="page-link" href="BookStoryBookPrview?page=3">3</a>
 					    </li>
-					      <li class="page-item <%= page1_active %>">
-					    	<a class="page-link" href="BookStoryBookPreview_A?bs_category='책 미리보기'?page=4">4</a>
-					    </li> 
-					<!--     <li class="page-item">
-					      	<a class="page-link" href="#">Next</a>
-					    </li> -->
-				  	</ul>
-				</nav>
-             	 
-             	 
-             	 
+					      <li class="page-item">
+					    	<a class="page-link" href="BookStoryBookPrview?page=4">4</a>
+					    </li>  
+			  		</ul>
+				  </nav> 
             </section>
         </div>
 

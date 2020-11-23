@@ -13,7 +13,7 @@ import com.study.springboot.dto.OnetoOneBoardDto;
 import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.ProductDto;
 import com.study.springboot.dto.Review_Board_Dto;
- 
+/*<!-- 1123수정 -->*/
  
 public interface IMemberService {
 	public int insertMember(HttpServletRequest request);//회원가입
@@ -42,7 +42,7 @@ public interface IMemberService {
 	public int update_content_count(String id); // 게시글 수 증가 
 	public int update_reply_count(String id);//댓글 수 증가
 	public int delete_content_count(String id);//게시글 수 감소
-	public int delete_reply_count(String id); //댓글 수 감소   
+	public int delete_reply_count(String id); //댓글 수 감소    
 	public List<MemberDto> rankstate(String contentAndReplyCount, int content_count, int reply_count);//게시글,댓글 수 찾기
 	
 }

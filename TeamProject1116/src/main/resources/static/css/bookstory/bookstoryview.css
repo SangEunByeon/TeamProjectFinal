@@ -1,5 +1,4 @@
-
-
+ /*<!-- 1123수정 -->*/
 /* 글보기 */
 .content_box{ 
     margin-top: 50px;
@@ -25,6 +24,7 @@
     position: relative;
     padding-right: 35px;
     padding-top:30px;
+    padding-bottom:30px;
 }
 .title_text{
     padding-top:5px;
@@ -87,10 +87,7 @@
 .main_content_box{  
     width: 915px; 
 }
-
-.main_content_box>span{
-	text-align: center;
-}
+ 
 
 .heart_text{ 
     padding-left:10px;

@@ -6,11 +6,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.study.springboot.dto.BookStoryBoardDto;
 import com.study.springboot.dto.BookStoryBoardReplyDto; 
 import com.study.springboot.dto.MemberDto; 
-
+/*<!-- 1123수정 -->*/
 
 @Mapper
 public interface IBookStoryBoardDao {   
@@ -18,7 +20,6 @@ public interface IBookStoryBoardDao {
 	public MemberDto getProfileDao(MemberDto memberDto); //프로필 이미지 등록(수정)
 	public List<MemberDto> getMainfileDao(); //메인 프로필- 아이디,회원수  
 	public int bookstoryHitDao(int idx) throws Exception; //조회수
-	public int bookstoryLike_checkDao(int idx) throws Exception; //좋아요기능  
 	public int bookstoryRelpyWriteDao(BookStoryBoardReplyDto replyDto);//댓글달기 
 	public List<BookStoryBoardReplyDto> bookstoryReplyViewDao(int idx); //댓글보기
 	public int bookStoryReplyDeleteDao(int reply_no);//댓글삭제
@@ -33,8 +34,16 @@ public interface IBookStoryBoardDao {
 	public ArrayList<BookStoryBoardDto> bookstoryListDao();//메인 전체 글목록 
 	public List<BookStoryBoardDto> bookstoryAllListDao(int startRowNum,int endRowNum); // 전체 글목록 
 	public List<BookStoryBoardDto> bookStoryCategoryDao(String bs_category,int startRowNum,int endRowNum); //카테고리별 글 목록 
-	public ArrayList<BookStoryBoardDto> bookstory_mainpopularListDao(); //인기있는 게시글 목록
-	public ArrayList<BookStoryBoardDto> bookstory_preBookListDao(String bs_category); //책 미리보기 목록 
+	public List<BookStoryBoardDto> bookStoryCategory2Dao(String bs_category,int startRowNum,int endRowNum); //작가정보 글 목록,책 미리보기 글 목록   
+	public ArrayList<BookStoryBoardDto> bookstory_mainpopularListDao(); //인기있는 게시글 목록 
+	public List<BookStoryBoardDto> bookstory_writerInfoListDao(String bs_category,int startRowNum,int endRowNum);  //작가 목록 
+	
 	public List<BookStoryBoardDto> contents_countDao(String bs_user_id);//게시글 수
 	public List<BookStoryBoardReplyDto> replys_countDao(String writer_id); //댓글수
+ 
+	public int bookstoryLike_checkDao(int idx,int like_check) throws Exception; //좋아요기능  
+	public int bookstorylike_check_cancleDao(int idx,int like_check)throws Exception;  //좋아요 취소
+	
+	 
 }
+

@@ -26,7 +26,7 @@
         </selectKey>
          insert into bookstory_board (idx, bs_category, bs_user_id, bs_title, bs_content, profile_img, reg)
               values (#{idx}, #{bs_category}, #{bs_user_id}, #{bs_title}, #{bs_content}, #{profile_img}, #{reg})
-   </insert>
+   </insert> 
    
     <update id="bookstoryHitDao" parameterType="_int">
           update bookstory_board set hit= hit+1 where idx=#{idx} 
@@ -56,8 +56,8 @@
 			WHERE
 	    	idx BETWEEN #{param1} AND #{param2}
      </select> 
-      
-      
+     
+   
       
      <select id="bookStoryCategoryDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
          SELECT *
@@ -72,6 +72,27 @@
 			WHERE
 	    	RNUM BETWEEN #{param2} AND #{param3}
      </select>  
+      
+       <select id="bookStoryCategory2Dao" resultType="com.study.springboot.dto.BookStoryBoardDto">
+         SELECT *
+			FROM
+		    (
+		        SELECT 
+		            ROWNUM AS RNUM, bookstory_board.*
+		        FROM
+		            bookstory_board where bs_category=#{param1}
+		        ORDER BY idx desc
+       	    )
+			WHERE
+	    	RNUM BETWEEN #{param2} AND #{param3}
+     </select>  
+     
+     <select id="bookStoryCategory4Dao" resultType="com.study.springboot.dto.BookStoryBoardDto">
+         SELECT * FROM bookstory_board bs_category order by idx desc
+		  
+     </select>  
+     
+      
       
      
       
@@ -97,7 +118,7 @@
      </insert>
   
    	 <select id="bookstoryReplyViewDao" resultType="com.study.springboot.dto.BookStoryBoardReplyDto">
-            select * from bookstoryboard_reply where idx=#{param1}  order by reg asc
+            select * from bookstoryboard_reply where idx=#{param1} order by reg asc
      </select>  
    
    
@@ -110,10 +131,7 @@
      </select>  
      
      
-     <!-- 관리자 -->
-     <select id="bookstory_preBookListDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
-         select * from bookstory_board where bs_category=#{param1} order by reg desc
-     </select> 
+     <!-- 관리자 --> 
     
     <select id="contents_countDao" resultType="com.study.springboot.dto.BookStoryBoardDto">
             select * from bookstory_board where bs_user_id=#{param1}
@@ -124,12 +142,13 @@
     </select> 
     
     <!-- 좋아요기능 -->
-    <update id="like_checkDao" parameterType="HashMap">
-    	update bookstory_board set like_check= like_check+1 where idx;
+    <update id="bookstoryLike_checkDao" parameterType="com.study.springboot.dto.BookStoryBoardDto">
+    		update bookstory_board set like_check= #{param2}+1 where idx=#{param1}
     </update>
     
-    <update id="like_check_cancelDao" parameterType="HashMap">
-    	update bookstory_board set like_check=0 where idx;
+    <update id="bookstorylike_check_cancleDao" parameterType="com.study.springboot.dto.BookStoryBoardDto">
+    		update bookstory_board set like_check= #{param2}-1 where idx=#{param1}
     </update>
+    
     
 </mapper>

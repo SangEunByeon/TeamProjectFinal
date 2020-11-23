@@ -22,7 +22,7 @@ import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.ProductDto;
  
-
+/*<!-- 1123수정 -->*/
 @Primary
 @Service
 public class BookStoryBoardService implements IBookStoryBoardService { 
@@ -78,32 +78,21 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		return list.size();
 	}
 	
-	
+	    
 	@Override
-	public int bookstoryWrite(HttpServletRequest request) {  
+	public int bookstoryWrite(HttpServletRequest request) {
 		HttpSession session=request.getSession();
 		String bs_user_id=(String)session.getAttribute("sessionID");
 		String bs_category=request.getParameter("bs_category");
 		
-//		String eng_category="";
-//		if(bs_category.equals("북스토리,소통")) {
-//			eng_category="BookStoryCommunication";
-//		}else if(bs_category.equals("한줄서평")) {
-//			eng_category="BookStoryOneLineReivew";
-//		}else if(bs_category.equals("책읽고,리뷰남기기")) {
-//			eng_category="BookStoryReadReivew";
-//		}else if(bs_category.equals("좋은글귀 남기기")){
-//			eng_category="BookStoryGoodWriting";
-//		}
-		
 		String bs_title=request.getParameter("bs_title");
 		String bs_content=request.getParameter("bs_content");
-		String profile_img=request.getParameter("profile_img");
+		String profile_img=request.getParameter("profile_img"); 
 		bookstoryDto.setBs_category(bs_category);
 		bookstoryDto.setBs_title(bs_title);
 		bookstoryDto.setBs_content(bs_content);
 		bookstoryDto.setBs_user_id(bs_user_id);
-		bookstoryDto.setProfile_img(profile_img);
+		bookstoryDto.setProfile_img(profile_img); 
 		bookstoryDto.setReg(new Date()); 
 		
 		int nResult=bookstoryDao.bookstoryWriteDao(bookstoryDto);
@@ -132,12 +121,7 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		int nResult=bookstoryDao.bookstoryUpdateDao(bookstoryDto);
 		return nResult;
 	}
- 
-	@Override
-	public int bookstoryLike_check(int idx) throws Exception { 
-		return bookstoryDao.bookstoryLike_checkDao(idx);
-	} 
-  
+	
 	@Override
 	public int bookstoryRelpyWrite(BookStoryBoardReplyDto replyDto) {
 		int nResult=bookstoryDao.bookstoryRelpyWriteDao(replyDto);
@@ -164,7 +148,7 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		return list.size();
 	}
 	
-
+ 
 	@Override
 	public ArrayList<BookStoryBoardDto> bookstoryList(HttpServletRequest request) {
 		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstoryListDao();
@@ -196,7 +180,7 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		System.out.println("startRowNum:"+startRowNum);
 		System.out.println("endRowNum:"+endRowNum);
 		
-		List<BookStoryBoardDto> list=bookstoryDao.bookStoryCategoryDao(bs_category,startRowNum, endRowNum);
+		List<BookStoryBoardDto> list=bookstoryDao.bookStoryCategory2Dao(bs_category,startRowNum, endRowNum);
 		
 		return list;
 	}
@@ -206,14 +190,39 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstory_mainpopularListDao();
 		return list;
 	}
-
+ 
+  
 	@Override
-	public ArrayList<BookStoryBoardDto> bookstory_preBookList(HttpServletRequest request) {
-		String bs_category=request.getParameter("bs_category");
-		System.out.println("bs_category"+bs_category);
-		ArrayList<BookStoryBoardDto> list=bookstoryDao.bookstory_preBookListDao(bs_category);
+	public List<BookStoryBoardDto> bookStoryCategory2(String bs_category,String page) { 
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 4; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size); //5, 10, 15 페이지 끝 줄번호
+		
+		System.out.println("startRowNum:"+startRowNum);
+		System.out.println("endRowNum:"+endRowNum);
+		
+		List<BookStoryBoardDto> list=bookstoryDao.bookStoryCategory2Dao(bs_category,startRowNum, endRowNum);
+		
 		return list;
 	}
+	 
+	
+	@Override
+	public List<BookStoryBoardDto> bookStoryCategory3(String bs_category,String page) { 
+		int num_page_no = Integer.parseInt( page ); //page번호 1,2,3,4
+		int num_page_size = 20; //한페이지당 Row갯수
+		int startRowNum = (num_page_no - 1) * num_page_size + 1; // 1, 6, 11 페이지 시작 줄번호
+		int endRowNum = (num_page_no * num_page_size); //5, 10, 15 페이지 끝 줄번호
+		
+		System.out.println("startRowNum:"+startRowNum);
+		System.out.println("endRowNum:"+endRowNum);
+		
+		List<BookStoryBoardDto> list=bookstoryDao.bookStoryCategory2Dao(bs_category,startRowNum, endRowNum);
+		
+		return list;
+	}
+	 
 
 	@Override
 	public int contents_count(String bs_user_id) { 
@@ -226,6 +235,18 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		List<BookStoryBoardReplyDto> list= bookstoryDao.replys_countDao(reply_writer);
 		return list.size();
 	}
-   
+	  
+	@Override
+	public int bookstorylike_check(int idx, int like_check) throws Exception {
+		int like=bookstoryDao.bookstoryLike_checkDao(idx,like_check);
+		return like;
+	}   
+	@Override
+	public int bookstorylike_check_cancle(int idx,int like_check) throws Exception {
+		int like_cancle=bookstoryDao.bookstorylike_check_cancleDao(idx,like_check);
+		return like_cancle;
+	}
+ 
+  
 	 
 }

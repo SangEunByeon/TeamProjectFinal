@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@ page import="com.study.springboot.dto.MemberDto" %>    
-     
+ <!-- 1123수정 -->    
     <%
     String id = (String) session.getAttribute("sessionID");
     %>
@@ -56,8 +56,8 @@
                     </div>
                     </span>   
                 
-                    <a href="#">주문/배송</a>   
-                    <a href="#">장바구니</a> 
+                    <a href="OrderList">주문/배송</a>   
+                    <a href="Basket">장바구니</a> 
                  	
                   <span class="dropdown show login_notice">
                     <a class="login_notice_btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

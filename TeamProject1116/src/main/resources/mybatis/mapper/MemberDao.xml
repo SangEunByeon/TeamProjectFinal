@@ -215,14 +215,34 @@
     </update> 
     
     
-    <!-- 보류 -->
-  <!--    <select id="rankstateDao" resultType="com.study.springboot.dto.MemberDto"> 
-		 
-		select * from book_member 
-		<if test='param1.equals("20")'> 
-		   where  #{param1} > #{param2} or #{param1} > #{param3} order by idx desc;
-		</if>  
+     
+    <select id="rankstateDao" resultType="com.study.springboot.dto.MemberDto"> 
+			  
+			select * from book_member where
+		 	 
+			<choose> 
+			<when test="param1.equals('20')">  
+				   20 <![CDATA[<=]]> content_count and  content_count  <![CDATA[<]]> 40   
+				and  20   <![CDATA[<=]]>  reply_count  and  reply_count   <![CDATA[<]]> 40  order by idx desc 
+			</when>  
+			<when test="param1.equals('40')">  
+				   40 <![CDATA[<=]]> content_count and  content_count  <![CDATA[<]]> 60   
+				and 40   <![CDATA[<=]]>  reply_count  and  reply_count   <![CDATA[<]]> 60  order by idx desc 
+			</when> 
+			<when test="param1.equals('60')">  
+				   60 <![CDATA[<=]]> content_count and  content_count  <![CDATA[<]]> 80  
+				and  60   <![CDATA[<=]]>  reply_count  and  reply_count   <![CDATA[<]]> 80  order by idx desc 
+			</when> 
+			<when test="param1.equals('80')">  
+				   80 <![CDATA[<=]]> content_count and  content_count  <![CDATA[<]]> 100   
+				and  80   <![CDATA[<=]]>  reply_count  and  reply_count   <![CDATA[<]]> 100  order by idx desc 
+			</when> 
+			<when test="param1.equals('100')">  
+				   100 <![CDATA[<=]]> content_count  and  100   <![CDATA[<]]>  reply_count  order by idx desc 
+			</when>  
+			</choose>
+			  
 	</select>
-     -->
+    
     
 </mapper>

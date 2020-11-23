@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
 <%@ page import="com.study.springboot.dto.MemberDto" %>
+<!-- 1123수정 -->
 <% 
 	String id = (String) session.getAttribute("sessionID"); 
 	MemberDto memberDto = (MemberDto)session.getAttribute("memberDto"); 	
@@ -22,6 +23,9 @@
 <style> 
 .note-modal-backdrop{
 position:relative;}
+#main{
+min-width: 1000px;
+}
 </style>
 	<script type="text/javascript">
 	 function checkValue()
@@ -118,6 +122,7 @@ position:relative;}
             <div style="width: 60%; margin: auto;">
                 <form method="post" action="BookStoryWriteAction" name="write" onsubmit="return checkValue()"> 
                     <input type="hidden" name="profile_img" value="${dto.book_profile}"> 
+                    <input type="hidden" name="reply_profile" value="${dto.book_profile}"> 
                     <input type="hidden" name="id" value="${dto.id}">
                    
                 <br/>
@@ -172,10 +177,27 @@ position:relative;}
                     </table> 
                     <br/><br/>
                     <textarea id="summernote" name="bs_content" style="z-index: 1;"></textarea> 
+                  	
+                  	
+                    <%
+                    	if(id.equals("admin")){
+                    %>
+                     
+             		<div  style="margin-top:10px; float:right"> 
+                    <input type="file" class="btn btn-link" name="bs_file1">
+                    <input type="submit" class="btn btn-secondary" value="글작성" data-toggle="modal" data-target="#basicModal" >
+            		<input type="button" class="btn btn-secondary" value="취소" onclick="goMain()">   
+            		</div>
+                    <%
+                    }else{ 
+                  	%>
                     <div  style="margin-top:10px; float:right"> 
                     <input type="submit" class="btn btn-secondary" value="글작성" data-toggle="modal" data-target="#basicModal" >
                     <input type="button" class="btn btn-secondary" value="취소" onclick="goMain()"> 
                     </div>
+                    <%
+                    }
+                    %>
                 </form>
             </div>
             </div>

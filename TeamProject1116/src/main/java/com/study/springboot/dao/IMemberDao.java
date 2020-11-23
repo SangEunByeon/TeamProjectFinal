@@ -12,7 +12,7 @@ import com.study.springboot.dto.Delete_MemberDto;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.Review_Board_Dto;
-
+/*<!-- 1123수정 -->*/
 //로그인, 회원가입
 @Mapper
 public interface IMemberDao {

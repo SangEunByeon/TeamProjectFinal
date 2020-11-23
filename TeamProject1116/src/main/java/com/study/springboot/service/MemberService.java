@@ -15,7 +15,7 @@ import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.Delete_MemberDto;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.ProductDto;
-
+/*<!-- 1123수정 -->*/
 @Primary
 @Service
 public class MemberService implements IMemberService{
@@ -288,7 +288,7 @@ public class MemberService implements IMemberService{
 			int nResult = memberDao.delete_reply_countDao(id);
 			return nResult;
 		}
- 
+  
 		@Override
 		public List<MemberDto> rankstate(String contentAndReplyCount,int content_count,int reply_count) { 
 			return memberDao.rankstateDao(contentAndReplyCount,content_count,reply_count);

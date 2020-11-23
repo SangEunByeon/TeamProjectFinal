@@ -13,7 +13,7 @@ import com.study.springboot.dto.OnetoOneBoardDto;
 import com.study.springboot.dto.OrderDto;
 import com.study.springboot.dto.ProductDto;
 import com.study.springboot.dto.Review_Board_Dto;
- 
+/*<!-- 1123수정 -->*/
  
 public interface IMemberService {
 	public int insertMember(HttpServletRequest request);//회원가입

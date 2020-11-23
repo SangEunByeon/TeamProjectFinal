@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
 <%@ page import="java.util.List"%>
- 
+ <!-- 1123수정 -->
  <%
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");   
  %>

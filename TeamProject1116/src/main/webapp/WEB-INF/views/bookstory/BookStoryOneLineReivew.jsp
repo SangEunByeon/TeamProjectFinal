@@ -4,7 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ page import="com.study.springboot.dto.MemberDto" %>
 <%@ page import="com.study.springboot.dto.BookStoryBoardDto" %>
-<%@ page import="java.util.List"%>  
+<%@ page import="java.util.List"%> 
+
+<!-- 1123수정 --> 
  <%
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  

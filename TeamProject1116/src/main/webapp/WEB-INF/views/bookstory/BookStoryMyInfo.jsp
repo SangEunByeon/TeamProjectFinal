@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page import="com.study.springboot.dto.MemberDto" %>
- <!-- 수정1119  -->
+ <!-- 1123수정 -->
  <% 
  String id = (String) session.getAttribute("sessionID"); 
  MemberDto memberDto = (MemberDto)session.getAttribute("memberDto");  

@@ -5,6 +5,8 @@
 <%@ page import="com.study.springboot.dto.MemberDto" %>
 <%@ page import="com.study.springboot.dto.BookStoryBoardDto" %>
 <%@ page import="java.util.List"%>  
+<!-- 1123수정 -->
+
  <%
  BookStoryBoardDto content_view=(BookStoryBoardDto)session.getAttribute("content_view"); 
  String id = (String) session.getAttribute("sessionID"); 

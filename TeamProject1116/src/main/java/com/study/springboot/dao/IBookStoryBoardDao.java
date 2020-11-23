@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.springboot.dto.BookStoryBoardDto;
 import com.study.springboot.dto.BookStoryBoardReplyDto; 
 import com.study.springboot.dto.MemberDto; 
-
+/*<!-- 1123수정 -->*/
 
 @Mapper
 public interface IBookStoryBoardDao {   

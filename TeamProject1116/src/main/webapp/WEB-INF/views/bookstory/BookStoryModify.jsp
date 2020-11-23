@@ -6,7 +6,7 @@
 	BookStoryBoardDto content_view=(BookStoryBoardDto)session.getAttribute("content_view"); 
 	String id = (String) session.getAttribute("sessionID"); 
 %>
-    <!-- 수정1119  -->
+ <!-- 1123수정 -->
 <!DOCTYPE html>
 <html>
 <head> 

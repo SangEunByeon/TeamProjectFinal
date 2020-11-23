@@ -6,7 +6,7 @@
 </head>
 <body>
   <!-- 푸터 --> 
-
+<!-- 1123수정 -->
     <footer>  
     <hr class="footer_border" />
        <!-- 대표전화, 무통장입금 --> 

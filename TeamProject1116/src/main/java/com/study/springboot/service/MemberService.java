@@ -15,7 +15,7 @@ import com.study.springboot.dto.Criteria;
 import com.study.springboot.dto.Delete_MemberDto;
 import com.study.springboot.dto.MemberDto;
 import com.study.springboot.dto.ProductDto;
-
+/*<!-- 1123수정 -->*/
 @Primary
 @Service
 public class MemberService implements IMemberService{

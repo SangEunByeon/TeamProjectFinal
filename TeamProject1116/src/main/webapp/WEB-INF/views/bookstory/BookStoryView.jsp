@@ -8,7 +8,7 @@
 <%@page import="java.util.List"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-     <!-- 수정1119  -->
+   <!-- 1123수정 -->
 <%
 	 BookStoryBoardDto content_view_bookstory=(BookStoryBoardDto)session.getAttribute("content_view_bookstory");   
 	 System.out.println("bookstory content_view"+content_view_bookstory);

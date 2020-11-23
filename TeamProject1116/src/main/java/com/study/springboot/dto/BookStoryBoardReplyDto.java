@@ -6,7 +6,7 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
-
+/*<!-- 1123수정 -->*/
 @Component
 @Data
 public class BookStoryBoardReplyDto {

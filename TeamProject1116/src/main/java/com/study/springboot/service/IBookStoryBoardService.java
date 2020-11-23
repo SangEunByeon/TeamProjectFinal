@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.study.springboot.dto.BookStoryBoardDto;
 import com.study.springboot.dto.BookStoryBoardReplyDto; 
 import com.study.springboot.dto.MemberDto; 
-
+/*<!-- 1123수정 -->*/
 public interface IBookStoryBoardService {  
 	public String uploadProfile(HttpServletRequest request, MultipartFile file, Model model);   
 	public MemberDto getProfile(HttpServletRequest request);

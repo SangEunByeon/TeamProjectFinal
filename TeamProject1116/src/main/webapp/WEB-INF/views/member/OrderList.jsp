@@ -96,8 +96,8 @@ height: 25px;
     
                                 <p>※ 배송이 시작되면 주문을 취소할 수 없습니다.</p>
                                 <table id="member_list"  class="table table-striped order-list ">
-                                <tr class="table_col">
-                                    <th scope="col" style="font-size : 1.3ch;" >날짜/주문번호</th>
+                                <tr class="table_col" style="text-align: center;">
+                                    <th scope="col" style="width: 10%; font-size : 1.5ch;">날짜/주문번호</th>
                                     <th scope="col" style="font-size : 1.5ch;" >이미지</th>
                                     <th scope="col" style="width: 40%; font-size : 1.5ch;" >상품명</th>
                                     <th scope="col" style="width: 12%; font-size : 1.5ch;" >수량</th>

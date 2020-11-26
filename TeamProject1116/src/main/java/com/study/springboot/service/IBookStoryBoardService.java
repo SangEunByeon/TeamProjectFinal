@@ -13,6 +13,7 @@ import com.study.springboot.dto.BookStoryBoardReplyDto;
 import com.study.springboot.dto.MemberDto; 
 /*<!-- 1123수정 -->*/
 public interface IBookStoryBoardService {  
+	public List<BookStoryBoardDto> bookstory_search(HttpServletRequest request); //검색
 	public String uploadProfile(HttpServletRequest request, MultipartFile file, Model model);   
 	public MemberDto getProfile(HttpServletRequest request);
 	public int getMainProfile(HttpServletRequest request);
@@ -37,7 +38,10 @@ public interface IBookStoryBoardService {
 	    
 	public int bookstorylike_check(int idx, int like_check) throws Exception;//좋아요 표시
 	public int bookstorylike_check_cancle(int idx, int like_check) throws Exception;  //좋아요 취소 표시
-
+	public int bookstorylike_cntup(int idx,int like_cnt);//좋아요수 증가
+	public int bookstorylike_cntdown(int idx,int like_cnt);//좋아요수 감소
+	
+	
 	 
 	 
  

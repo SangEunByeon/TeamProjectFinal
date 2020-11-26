@@ -16,6 +16,7 @@ import com.study.springboot.dto.MemberDto;
 
 @Mapper
 public interface IBookStoryBoardDao {   
+	public List<BookStoryBoardDto> bookstory_searchDao(String keyword); //검색
 	public int uploadProfileDao(MemberDto memberDto);  // 이미지 업로드 
 	public MemberDto getProfileDao(MemberDto memberDto); //프로필 이미지 등록(수정)
 	public List<MemberDto> getMainfileDao(); //메인 프로필- 아이디,회원수  
@@ -43,6 +44,8 @@ public interface IBookStoryBoardDao {
  
 	public int bookstoryLike_checkDao(int idx,int like_check) throws Exception; //좋아요기능  
 	public int bookstorylike_check_cancleDao(int idx,int like_check)throws Exception;  //좋아요 취소
+	public int bookstorylike_cntupDao(int idx,int like_cnt);//좋아요수 증가
+	public int bookstorylike_cntdownDao(int idx,int like_cnt);//좋아요수 감소
 	
 	 
 }

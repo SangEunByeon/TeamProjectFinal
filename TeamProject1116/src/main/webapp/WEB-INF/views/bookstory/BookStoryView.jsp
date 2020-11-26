@@ -112,18 +112,18 @@
             	}
              	 %> 
                 <nav class="navbar navbar-light bg-light navbar_aside">
-                    <form class="form-inline aside_form_box">
-                        <input class="form-control mr-sm-2" type="search1" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-dark" type="submit">Search</button>
+                    <form class="form-inline aside_form_box" action="SearchBookStory">
+                        <input class="form-control mr-sm-2" type="search1" placeholder="내용을입력하세요" aria-label="Search" style="margin:0 auto" name="bookstory-search">
+                        <button class="btn btn-outline-dark" type="submit" style="margin:0 auto">검색하기</button>
                     </form>
-                </nav>
+                </nav> 
                 <div class="hr2"></div>
                 <div class="board">
                     <div class="board_box_category">
                         <a href="BookStoryAllList">전체글보기</a>
                     </div>
                     <hr />
-                <table>
+                 <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryCommunication"><span>북스토리,소통</span></a>
@@ -131,12 +131,12 @@
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReview"><span>한줄서평</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReview"><span>책읽고,리뷰남기기</span></a>
                             </td>
                         </tr>
                          <tr class="category_box">
@@ -171,7 +171,7 @@
             </aside> 
             <section> 
              
-             <input type="hidden" name="idx" value="${content_view_bookstory.idx}"> 
+             <input type="hidden" name="idx" value="${content_view_bookstory.idx}">
                 <div class="content_box">
                     <div class="category_text"> 
                     
@@ -205,9 +205,22 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <div>
+                                    <%
+                                    if(content_view_bookstory.getProfile_img()==null){
+                                    %>
+	                                    <div>
+	                                    
+	                                     	<img src="image/bookstory/user.png" width="50px" height="50px">
+                                     	</div>
+                                    <%	 
+                                    }else{
+                                	%>    
+                                		<div>
                                             <img id="img" src="../uploadPro3_bookstory/${content_view_bookstory.profile_img}" width="50px" height="50px">	
                                         </div> 
+                                    <%
+                                    } 
+                                    %>
                                     </td>
                                     <td>
                                         <td class="myinfo_box">
@@ -235,13 +248,13 @@
                                     <span class="heart_img"> 
                                     <img src="image/bookstory/like_cancle.png" width="30px" height="30px" alt="좋아요선클릭후" id="like_img" type="button" onclick="like_func()" > 
                                       
+                                      <input type="hidden" name="like_check" id="like_check" value="${content_view_bookstory.like_check}" />
+                                     <input type="hidden" name="idx" id="idx" value="${content_view_bookstory.idx}" /> 
+                                 <input type="hidden" name="like_cnt" id="like_cnt" value="0" /> 
                                      
-                                     <input type="hidden" name="like_check" id="like_check" value="${content_view_bookstory.like_check}" />
-                                     <input type="hidden" name="idx" id="idx" value="${content_view_bookstory.idx}" />
-                                    <%--  <input type="hidden" name="like_cnt" id="like_cnt" value="${content_view_bookstory.like_cnt}" /> --%>
                                      </span> 
                                    
-                                   <span class="heart_text">좋아요</span> <span class="heart_text">10</span> 
+                                   <span class="heart_text">좋아요</span> <span class="heart_text">0</span> 
                                         
                                     <span class="reply_img2"><img src="image/bookstory/reply.png" width="30" height="30" ><a name="reply_start"></a></span> 
                                     <a class="btn btn"  id="accordion"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">댓글</a>
@@ -262,12 +275,17 @@
                                   <div class="reply_content"> 
                                      <table> 
                                      <fmt:formatDate var="reg" value="${reply_view_bookstory.reg}"  pattern="yyyy.MM.dd HH:mm"/>
-                                         <tr>
-                                            <td>
-                                                <div class="myInfo_img"><img id="img" src="../uploadPro3_bookstory/${reply_view_bookstory.reply_profile}" width="80px" height="80px"></div> 
-                                            </td>
-                                            <td> 
-                                            <input type="hidden" name="idx" value="${reply_view_bookstory.idx}">
+	                                         <tr>
+	                                         
+	                                            <td>
+	                                            
+                                            	     <div class="myInfo_img"><img id="img" src="../uploadPro3_bookstory/${reply_view_bookstory.reply_profile}" width="80px" height="80px"></div> 
+                                            	           
+	                                           
+	                                            </td>
+	                                          
+	                                            <td> 
+                                            	<input type="hidden" name="idx" value="${reply_view_bookstory.idx}">
                                             	<input type="hidden" name="reply_no" value="${reply_view_bookstory.reply_no}">
                                                 <span style="font-weight: 800;">아이디 : </span><span>${reply_view_bookstory.reply_writer}</span><span class="reply_date">${reg}</span>
                                                 
@@ -278,7 +296,7 @@
                                                String reply_writer = dto.getReply_writer();
                                                System.out.println("reply_writer:"+reply_writer);
                                                 if(reply_writer.equals(sessionID2) && sessionID2!=null){
-                                                %>
+                                                 %>
                                                 <!-- 댓글삭제기능 -->
                                               	<a  href="bookStoryReplyDeleteAction?reply_no=${reply_view_bookstory.reply_no}&idx=${reply_view_bookstory.idx}"><img class="delete_reply" src="image/cancel.png" width="20px" height="15px" ></a>
                                                	<%
@@ -307,7 +325,17 @@
                                	%>
                                 <form action="replyAction" method="post" name="reply"> 
                                 <input type="hidden" name="idx" value="${content_view_bookstory.idx}">
-                                <input type="hidden" name="reply_profile" value="${memberDto.book_profile}">
+                                <% 
+                                if(memberDto.getBook_profile()==null){
+                                %>
+                                <input type="hidden" name="reply_profile" value="user.png" width="30px" height="30px">
+                                <%
+                                }else{
+                                %>
+                                 <input type="hidden" name="reply_profile" value="${memberDto.book_profile}">
+                                <%
+                                }
+                                %>
                                 <input type="hidden" name="reply_writer" value="${content_view_bookstory.bs_user_id}">
                                 <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}"> 
                                
@@ -331,7 +359,10 @@
                                	%> 
                                	
                                	<form action="replyAction" method="post" name="reply">
-                                <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
+                               	 
+                            	 <input type="hidden" name="reply_profile" value="${content_view_bookstory.profile_img}">
+                            	 
+                               
                                 <input type="hidden" name="idx" value="${content_view_bookstory.idx}"> 
                                 <input type="hidden" name="reply_category" value="${content_view_bookstory.bs_category}">
                                
@@ -424,34 +455,38 @@
   
     /* 좋아요 */
     function like_func(){
-        
-      alert('좋아요 클릭');
+        var like_cnt=$('#like_cnt').val();
+        console.log('like_cnt'+like_cnt);
+    
 		var like_check = $('#like_check').val(); 
-		console.log('like_check'); 
+		console.log('like_check'+like_check); 
 		var idx = $('#idx').val();  
-		
-		console.log('idx');
+ 
+		console.log('idx'+idx);
       	$.ajax({ 
       		url: 'http://localhost:8081/like_check?idx='+idx+'&like_check='+like_check,
       	  	cache: false,
       	    type: "GET", 
       	    success: function(data) { 
-          	console.log(data);
-          	 var like_img =document.getElementById("like_img");
-	      	if(data.like_check == 0){ 
-	      	  console.log("좋아요 취소");   
+          	    
+          	console.log(typeof(data));
+
+         	 var like_img =document.getElementById("like_img");
+	      	if(data == '0'){ 
+		      	  console.log("좋아요 취소");  
+		      	  alert('좋아요 취소'); 
 	      	 
 	      	 $('#like_img').attr('src','image/bookstory/like_cancle.png');
-	      
-		   	 	$('#like_img').load(window.location.href+'#like_img');
-		   	   $('#like_check').html(data.like_check); 
+	      	$('#like_check').val('0');
+	      	 
+	       
 	          } else  { 
-	        	  console.log("좋아요 클릭"); 
+	        	  console.log("좋아요 클릭");
+	        	  alert('좋아요 클릭'); 
 	        	  
 	        	  $('#like_img').attr('src','image/bookstory/like.png');
-	        	  
-	        	$('#like_img').load(window.location.href+'#like_img'); 
-	        	   $('#like_check').html(data.like_check);
+	        	  $('#like_check').val('1');
+	        	 
 	          }       
 
       	    }

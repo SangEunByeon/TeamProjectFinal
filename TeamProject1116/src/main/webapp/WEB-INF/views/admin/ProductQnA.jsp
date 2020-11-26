@@ -2,9 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- <%
-    String id = (String) session.getAttribute("sessionID");
- %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +54,18 @@
 	    }
 	    /* 사이드바 메인컨텐츠 기본양식 끝 */
 	</style>
+	<script>
+		function ChangeForm(){
+			location.href="NoAnswerQnA";
+			}
+		function checkValue()
+		{
+	    	if(document.o_search.check_category.value==0){
+	    		alert("검색유형을 지정해주세요");
+	    		return false;
+	        	}
+		}
+	</script>
 </head>
 <body>
  <!-- 헤더부분 -->
@@ -100,6 +110,33 @@
        <div class="contents">
        <h2>상품 문의</h2>
 		<hr>
+		
+		<div class="form-row align-items-center">
+	                 <input type="button" value="답변 없는 문의만 보기" style="width:150px;height:30px;"
+	                 onclick="ChangeForm()" />  
+	<form class="board_search" method="POST" action="qnaSearchAdmin" onsubmit="return checkValue()" name="o_search">
+	                     <table style="margin-left:200px;">
+	                         <tr>
+	                             <td>
+	                             <div class="col-auto my-1 search-text-form"> 
+	                                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="check_category">
+	                                   <option selected value="0">Choose...</option>
+	                                   <option value="1">상품번호</option>
+	                                   <option value="2">내용</option>
+	                                   <option value="3">작성자</option>
+	                              </select>  
+	                     		</div> 
+	                             </td>
+	                             <td>
+	                                 <input  name="keyword" class="form-control search-text" type="search-1" placeholder="Search" aria-label="Search">
+	                             </td>
+	                             <td>
+	                                 <button class="btn btn-secondary" type="submit">검색</button> 
+	                             </td> 
+	                         </tr>  
+	                     </table>
+	                     </form>
+	                 </div>  
 		<table class="table table-striped">
 		  <thead>
 		    <tr>
@@ -130,6 +167,20 @@
 		    </c:forEach>
 		    
 		   </table>
+		   
+		      	<nav aria-label="Page navigation example">
+			   <ul class="pagination justify-content-center">
+			    <%
+			    int allPageNum=(Integer)request.getAttribute("allPageNum");
+			    for(int i=1; i<=allPageNum; i++){
+   		    	   %>
+			     <li class="page-item"><a href="page16?no=<%=i%>" class="page-link"><%=i%></a></li>
+			       <%
+			     }
+			    %>    
+			  </ul> 
+			</nav> 
+		   
        </div>
       
       </div>  <!-- AdminWrapper2 -->

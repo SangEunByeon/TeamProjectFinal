@@ -3,7 +3,7 @@
 <html>
 <head> 
 <link rel="stylesheet" href="css/member/idcheck.css">
-  <title>아이디찾기완료</title> 
+  <title>아이디찾기</title> 
 </head>
 <body>
 <!-- 메인헤더 -->

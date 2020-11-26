@@ -99,12 +99,12 @@ String id = (String) session.getAttribute("sessionID");
                             </tr>
                                 </table>
                             </div>
-                        <div class="head_orderlist"> 
+                          <div class="head_orderlist"> 
                             <h4>상품문의게시판</h4>     
                                 <div class="form-row align-items-center">              
                                    <form action="SearchmyProductQnA" method="post" class="complain_form"> 
-                                    <table style="margin-left:200px;">
-                                              <p style="padding-top:30px;"><input type="button" class="btn btn-outline-secondary reply_no" value="답변 없는 문의만 보기" style="width:170px; height:40px;"onclick="ChangeForm()" /> </p>
+                                   <table style="margin-left:330px;">
+                                             <p class="noreply_view">  <input type="button" class="btn btn-outline-secondary reply_no" value="답변 없는 문의만 보기" style="width:170px; height:40px;"onclick="ChangeForm()" /> </p>
                                         <tr>
                                             <td>
                                             <div class="col-auto my-1 search-text-form"> 

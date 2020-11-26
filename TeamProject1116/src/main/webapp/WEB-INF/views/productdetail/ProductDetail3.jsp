@@ -180,7 +180,7 @@ display: inline;
 				      <th scope="col"><h3 style="font-size:1.5ch !important;"><strong>날짜</strong></h3></th>
 				      <th scope="col"><h3 style="font-size:1.5ch !important; width: 50px;"><strong>이미지</strong></h3></th>
 				      <th scope="col"><h3 style="font-size:1.5ch !important;"><strong>내용</strong></h3></th>
-				      <th scope="col"><h3 style="font-size:1.5ch !important;"><strong>아이디</strong></h3></th>    
+				      <th scope="col"><h3 style="font-size:1.5ch !important;"><strong>ID</strong></h3></th>    
 				    </tr>
 				  </thead>
 				  <tbody>

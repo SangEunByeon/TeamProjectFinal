@@ -53,9 +53,9 @@ public class OnetoOneBoardService implements IOnetoOneBoardService{
 		return oneBoardDao.boardDeleteDao(idx);
 	}
 	
-	public List<OnetoOneBoardDto> search_user(String category,String keyword,String user_id){
+	public List<OnetoOneBoardDto> search_user(String o_type,String user_id,String keyword){
 		
-		return oneBoardDao.search_userDao(category, keyword, user_id);
+		return oneBoardDao.search_userDao(o_type,user_id, keyword);
 	}
 	
 	@Override
@@ -100,6 +100,10 @@ public class OnetoOneBoardService implements IOnetoOneBoardService{
 		return oneBoardDao.countMemberDao(id);
 	}
 
-	
+	@Override
+	public int adminReplyDelete(int idx,String admin_id,String o_content_A,String o_ans_check) {
+		return oneBoardDao.adminReplyDeleteDao(idx,admin_id,o_content_A,o_ans_check);
+	}
+ 
 	
 }

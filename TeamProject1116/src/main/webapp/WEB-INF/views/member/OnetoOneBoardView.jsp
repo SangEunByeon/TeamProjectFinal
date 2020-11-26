@@ -26,7 +26,7 @@
                         <div class="section">
                             <div class="aside">
                                 <table  cellpadding="10px" cellspaing="10px">
-                                <p><a href="MyPageMain?id=<%=session.getAttribute("sessionID")%>" style="text-decoration:none; color:black;">마이페이지</a></p>> 
+                                <p><a href="MyPageMain?id=<%=session.getAttribute("sessionID")%>" style="text-decoration:none; color:black;">마이페이지</a></p> 
                                 <tr>
                                     <td>
                                         <div class="orderlist">
@@ -125,7 +125,7 @@
                                             <div class="input-group phone-num">
                                                 <span>휴대폰</span>   
                                             <div class="select-box"> 
-                                              <input class="form-control" type="text" name="o_phone" value="${content_view.o_phone}" disabled>                                 
+                                              <input class="form-control" type="text" name="o_phone" value="${content_view.o_phone}" >                                 
                                             </div> 
                                             </div>
                                         </td> 
@@ -135,7 +135,7 @@
                                             <div class="input-group o_title">
                                                 <span>제목</span> 
                                             <div class="select-box o_title_box">
-                                              <input class="form-control" type="text" name="o_title" value="${content_view.o_title}" disabled>      
+                                              <input class="form-control" type="text" name="o_title" value="${content_view.o_title}">      
                                             </div>
                                             </div>
                                         </td> 
@@ -145,7 +145,7 @@
                                             <div class="input-group content">
                                                 <span>내용</span> 
                                                 <div class="text-box"> 
-                                                <textarea name="o_content_Q" cols="75" rows="10" style="border: 1px solid rgb(206, 206, 206);" disabled>${content_view.o_content_Q}</textarea>
+                                                <textarea name="o_content_Q" cols="75" rows="10" style="border: 1px solid rgb(206, 206, 206);">${content_view.o_content_Q}</textarea>
                                                 
                                             </div>
                                             </div>

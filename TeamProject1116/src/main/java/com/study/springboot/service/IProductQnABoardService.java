@@ -30,4 +30,12 @@ public interface IProductQnABoardService {
 	public List<OnetoOneBoardDto> onetoonelistDao(HttpServletRequest request);
 	//1118 상품문의 삭제
 	public int DeleteMyProductQnA(HttpServletRequest request);
+	
+	//1124 상품문의 페이징
+	public List<Product_QnA_Board_Dto> viewAllProductQnAWithPaging(Criteria cri);
+	public int countPrductQnA();
+	public List<Product_QnA_Board_Dto> noAnswerQnAAdmin(HttpServletRequest request);
+	//1124 상품문의 검색
+	public List<Product_QnA_Board_Dto> searchProductQnAAdmin(HttpServletRequest request);
+	
 }

@@ -9,14 +9,15 @@
  } 
  body{
   font-family:'NanumBarunGothic';
+  
 }  
  /* 메인 */
  #main{ 
-     width: 70%; 
+     width: 1300px; 
      margin: 0 auto;   
-     height:2000px; 
-    }  
+     height:1800px;  
      
+ }
 aside{    
     width: 270px;
     position: absolute;
@@ -216,11 +217,12 @@ section{
    	padding-top:10px;
     font-size:13px;
 }
+
 .section_id{
 	width:190px;
 	text-align:center;
-    padding-top:5px;
-    font-size: 12px;
+    padding-top:8px;
+    font-size: 15px;
 }
 .section_title>a { 
 	
@@ -339,4 +341,6 @@ section{
 	width: 100%;
 	display: block;
 }
+
+ 
  

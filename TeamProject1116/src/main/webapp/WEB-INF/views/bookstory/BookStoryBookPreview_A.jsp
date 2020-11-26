@@ -114,11 +114,11 @@
             	}
              	 %> 
                 <nav class="navbar navbar-light bg-light navbar_aside">
-                    <form class="form-inline aside_form_box">
-                        <input class="form-control mr-sm-2" type="search1" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-dark" type="submit">Search</button>
+                    <form class="form-inline aside_form_box" action="SearchBookStory">
+                        <input class="form-control mr-sm-2" type="search1" placeholder="내용을입력하세요" aria-label="Search" style="margin:0 auto" name="bookstory-search">
+                        <button class="btn btn-outline-dark" type="submit" style="margin:0 auto">검색하기</button>
                     </form>
-                </nav> 
+                </nav>  
                 <div class="hr2"></div>
                 <div class="board">
                     <div class="board_box_category">
@@ -133,12 +133,12 @@
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReview"><span>한줄서평</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReview"><span>책읽고,리뷰남기기</span></a>
                             </td>
                         </tr>
                          <tr class="category_box">
@@ -207,16 +207,16 @@
           	      <nav aria-label="Page navigation example ">
 				  	<ul class="pagination  justify-content-center ">
 					  	<li class="page-item">
-					    	<a class="page-link"  href="BookStoryBookPrview?page=1">1</a>
+					    	<a class="page-link"  href="BookStoryBookPreview_A?page=1">1</a>
 					    </li>
 					  	<li class="page-item">
-					      	<a class="page-link" href="BookStoryBookPrview?page=2">2</a>
+					      	<a class="page-link" href="BookStoryBookPreview_A?page=2">2</a>
 					    </li>
 					    <li class="page-item">
-					    	<a class="page-link" href="BookStoryBookPrview?page=3">3</a>
+					    	<a class="page-link" href="BookStoryBookPreview_A?page=3">3</a>
 					    </li>
 					      <li class="page-item">
-					    	<a class="page-link" href="BookStoryBookPrview?page=4">4</a>
+					    	<a class="page-link" href="BookStoryBookPreview_A?page=4">4</a>
 					    </li>  
 			  		</ul>
 				  </nav> 

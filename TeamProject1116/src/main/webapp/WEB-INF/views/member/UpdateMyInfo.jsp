@@ -17,7 +17,7 @@
 	function deleteForm(){location.href="DeleteForm";} 
 
 
-	//보류
+ 
 	function updateActionCheck()
 		{  
 		 

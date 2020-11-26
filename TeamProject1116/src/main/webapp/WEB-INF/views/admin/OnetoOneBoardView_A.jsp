@@ -164,11 +164,7 @@
                         <div class="select-box"> 
                           <input class="form-control" type="text" name="o_phone" value="${content_view.o_phone}" disabled>                                 
                         </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1" disabled>
-                            <label class="form-check-label" for="exampleCheck1">휴대폰으로 알림받기</label>
-                          </div>
-                        </div>
+                       
                     </td> 
                 </tr>
                  <tr>
@@ -193,6 +189,41 @@
                     </td> 
                 </tr>
                 </table> 
+                
+                <%
+                	if(content_view.getO_content_A()!=null){
+                %> 
+                <form action="adminReplyDelete" method="post">
+                 <input type="hidden" name="idx" value="${content_view.idx}" >
+       		    <input type="hidden" name="admin_id" value="">
+       		    <input type="hidden" name="o_content_A" value="">
+       		    <input type="hidden" name="o_ans_check" value="미등록">
+                <table> 
+                <tr>
+                <td>  
+                <div class="input-group reply_answer">   
+               		<span>문의글 답변</span>   
+       		    </div>
+       		   
+       		    <div style="padding-top:10px;"> 
+			       <input type="submit" class="btn btn-secondary" value="삭제하기"> 
+			 
+			    </div>
+       		    </td>
+       		    
+                <td colspan="2">  
+			         <div class="text-box2"> 
+			            <textarea name="o_content_A" cols="75" rows="5" style="border: 1px solid rgb(206, 206, 206); ">${content_view.o_content_A}</textarea> 
+			        </div>
+			    </td>  
+			    </tr>    
+                </table> 
+                </form>
+                <%
+                	}
+                %>
+                 
+                
                 <!-- 글작성 -->
                 <form action="OnetoOneboard_A_Action" method="post" >    
                 <input type="hidden" name="idx" value="${content_view.idx}">
@@ -200,16 +231,16 @@
                 <table>    
                 <hr />
                	<tr> 
-               	
+                	
 				    <td rowspan="2">
 				        <div class="text-box_admin"> 
-				            <textarea name="o_content_A" cols="72" rows="5" style="border: 1px solid rgb(206, 206, 206);"></textarea> 
+				            <textarea name="o_content_A" cols="72" rows="5" style="border: 1px solid rgb(206, 206, 206); "></textarea> 
 				        </div>
 				    </td>  
 			        <td class="button_position">
 			        <div class="input-group content option_box"> 
 			        <select class="custom-select" id="inputGroupSelect04" name="o_ans_check">
-			            <option value="미등록" selected>미등록</option>
+			            <option value="미등록">미등록</option>
 			            <option value="답변완료">답변완료</option>  
 			            </select> 
 			        </div>  

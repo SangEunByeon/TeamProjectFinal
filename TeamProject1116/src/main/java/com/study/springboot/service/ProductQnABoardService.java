@@ -65,6 +65,19 @@ public class ProductQnABoardService implements IProductQnABoardService{
 	public List<Product_QnA_Board_Dto> viewAllProductQnA() {
 		return dao.viewAllProductQnABoardDao();
 	}
+	
+	//1124
+	@Override
+	public List<Product_QnA_Board_Dto> viewAllProductQnAWithPaging(Criteria cri){
+		return dao.getListWithPaging2Dao(cri);
+	}
+	
+	//1124
+	@Override
+	public int countPrductQnA() {
+		return dao.countProduct2Dao();
+	}
+	
 
 	@Override
 	public ProductDto viewProductInfo(int p_number) {
@@ -109,7 +122,9 @@ public class ProductQnABoardService implements IProductQnABoardService{
 	public List<Product_QnA_Board_Dto> SearchmyProductQnA(HttpServletRequest request) {
 		String category = request.getParameter("category");
 		String keyword = request.getParameter("keyword");
-		return dao.SearchmyProductQnADao(category, keyword);
+		HttpSession session =request.getSession();
+		String id = (String)session.getAttribute("sessionID");
+		return dao.SearchmyProductQnADao(category, keyword, id);
 	}
 
 	@Override
@@ -154,6 +169,21 @@ public class ProductQnABoardService implements IProductQnABoardService{
 		int idx = Integer.parseInt(s_idx);
 		dao.DeleteMyProductQnADao(idx);
 		return 0;
+	}
+
+	//1124
+	@Override
+	public List<Product_QnA_Board_Dto> noAnswerQnAAdmin(HttpServletRequest request) {
+		String check="미등록";
+		return dao.noAnswerProductQnaDao(check);
+	}
+
+	//1124
+	@Override
+	public List<Product_QnA_Board_Dto> searchProductQnAAdmin(HttpServletRequest request) {
+		String category = request.getParameter("check_category");
+		String keyword = request.getParameter("keyword");
+		return dao.searchProductQnAAdminDao(category, keyword);
 	}
 	
 	

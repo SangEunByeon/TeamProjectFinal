@@ -23,8 +23,7 @@
 <jsp:include page="/WEB-INF/views/BookStoryMainHeader.jsp"/>
 
 
-   <div id="main">
-
+   <div id="main"> 
             <aside>
                 <div class="hr"></div>
                 <div class="info_head">
@@ -103,9 +102,9 @@
             	}
              	 %> 
                 <nav class="navbar navbar-light bg-light navbar_aside">
-                    <form class="form-inline aside_form_box">
-                        <input class="form-control mr-sm-2" type="search1" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-dark" type="submit">Search</button>
+                    <form class="form-inline aside_form_box" action="SearchBookStory">
+                        <input class="form-control mr-sm-2" type="search1" placeholder="내용을입력하세요" aria-label="Search" style="margin:0 auto" name="bookstory-search">
+                        <button class="btn btn-outline-dark" type="submit" style="margin:0 auto">검색하기</button>
                     </form>
                 </nav> 
                 <div class="hr2"></div>
@@ -122,12 +121,12 @@
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReview"><span>한줄서평</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReview"><span>책읽고,리뷰남기기</span></a>
                             </td>
                         </tr>
                          <tr class="category_box">
@@ -165,7 +164,7 @@
                 	<img src="image/bookstory/bookmain.jpeg" width="990px" height="400px">   
                 </div>
               
-                <div class="all_view"><a href="#"><span>인기글</span></a></div>
+                <div class="all_view"><span>인기글</span></div>
                
                 
                 <div class="hr3"></div>
@@ -188,9 +187,9 @@
                         	</c:forEach>
                         	
                         	 <span><a href="BookStoryView?idx=${dto.idx}">${image}</a></span> 
-                            <div class="content_box">
-                                <div class="section_title"><a href="#"><span>${dto.bs_title}</span></a></div>
-                                <div class="section_id"><a href="#"><span>${dto.bs_user_id}</span></a></div>
+                            <div class="content_box" style="margin-top:15px; text-overflow: ellipsis; ">
+                                <div class="section_title"><a href="BookStoryView?idx=${dto.idx}"><span>${dto.bs_title}</span></a></div>
+                                <div class="section_id"><span>${dto.bs_user_id}</span></div>
                             </div>  
                             
                         </td>  
@@ -229,6 +228,7 @@
                 
             </section>   
         </div> 
+         
         <!-- 메인푸터 --> 
 	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>
      

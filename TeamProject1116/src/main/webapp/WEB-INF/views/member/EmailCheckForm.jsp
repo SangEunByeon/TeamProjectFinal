@@ -6,7 +6,7 @@
 <html>
 <head> 
 <link rel="stylesheet" href="css/member/idpwcheck.css">
-  <title>비밀번호찾기</title> 
+  <title>이메일찾기</title> 
 </head>
 <body>
 <!-- 메인헤더 -->

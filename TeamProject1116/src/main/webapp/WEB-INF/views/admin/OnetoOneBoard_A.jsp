@@ -131,14 +131,14 @@
 	                 <div class="form-row align-items-center">
 	                 <input type="button" value="답변 없는 문의만 보기" style="width:150px;height:30px;"
 	                 onclick="ChangeForm()" />  
-	<form class="board_search" method="POST" action="board_search" onsubmit="return checkValue()" name="o_search">
+						<form class="board_search" method="POST" action="board_search" onsubmit="return checkValue()" name="o_search">
 	                     <table style="margin-left:200px;">
 	                         <tr>
 	                             <td>
 	                             <div class="col-auto my-1 search-text-form"> 
 	                                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="check_category">
-	                                   <option selected value="0">Choose...</option>
-	                                   <option value="1">제목</option>
+	                                  
+	                                   <option selected value="1">제목</option>
 	                                   <option value="2">제목+내용</option>
 	                                   <option value="3">작성자</option>
 	                              </select>  
@@ -186,18 +186,18 @@
 			        	<c:if test = "${admin_id eq '관리자'}">
 			        	</c:if>
                 
-	             </table>  
+	             </table>   
 	             
 		          	<nav aria-label="Page navigation example">
-			   <ul class="pagination justify-content-center">
-			    <%
-			    int allPageNum=(Integer)request.getAttribute("allPageNum");
-			    for(int i=1; i<=allPageNum; i++){
-   		    	   %>
-			     <li class="page-item"><a href="page8?no=<%=i%>" class="page-link"><%=i%></a></li>
-			       <%
-			     }
-			    %>    
+			   		<ul class="pagination justify-content-center">
+			    	<%
+			    	int allPageNum=(Integer)request.getAttribute("allPageNum");
+			    	for(int i=1; i<=allPageNum; i++){
+   		    	   	%>
+			     	<li class="page-item"><a href="page8?no=<%=i%>" class="page-link"><%=i%></a></li>
+			        <%
+			     	}
+			   	    %>    
 			  </ul> 
 			</nav>       
 	         </div> 
@@ -206,7 +206,7 @@
     </div>  <!-- AdminWrapper2 --> 
 	</div>  <!-- AdminWrapper1 -->
 <!-- 푸터 부분  -->
-<jsp:include page="/WEB-INF/views/AdminFooter.jsp"/>
+<jsp:include page="/WEB-INF/views/AdminFooter.jsp"/> 
 
  <script src="js/jquery-2.2.4.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

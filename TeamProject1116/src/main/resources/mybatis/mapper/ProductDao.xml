@@ -113,14 +113,27 @@
  <select id="getListWithPaging" resultType="com.study.springboot.dto.ProductDto">
 
     <![CDATA[ 
-     select idx, p_number, p_filename, p_category, p_category2, p_title, p_writer, p_price 
-     from ( 
-     select 
-     rownum rn, idx, p_number, p_filename, p_category, p_category2, p_title, p_writer, p_price 
-     from book_product
-     where rownum <= (select count(*) from book_product)+5-#{pageNum} * #{amount} 
-     order by idx desc)  
-     where rn > (select count(*) from book_product)-#{pageNum} * #{amount}
+		SELECT
+		    *
+		FROM
+		    (
+		        SELECT
+		            A.*,
+		            ROWNUM AS RNUM
+		        FROM
+		            (
+		                SELECT
+		                    *
+		                FROM
+		                    book_product
+		                ORDER BY
+		                    idx desc
+		            ) A
+		        WHERE
+		            ROWNUM <= #{pageNum} * #{amount}
+		    )
+		WHERE
+		    RNUM > (#{pageNum} - 1 ) * #{amount}
      ]]>
 
     </select>
@@ -189,13 +202,13 @@
     select * from book_product_qna
     	<choose>
     	<when test='param1.equals("p_writer")'>
-    	where p_writer like '%'||#{param2}||'%' order by idx desc
+    	where p_writer like '%'||#{param2}||'%' and id=#{param3} order by idx desc
     	</when>
     	<when test='param1.equals("p_title")'>
-    	where p_title like '%'||#{param2}||'%' order by idx desc
+    	where p_title like '%'||#{param2}||'%' and id=#{param3} order by idx desc
     	</when>
     	<when test='param1.equals("p_content")'>
-    	where p_content like '%'||#{param2}||'%' order by idx desc
+    	where p_content like '%'||#{param2}||'%' and id=#{param3} order by idx desc
     	</when>
     	</choose>
     </select>
@@ -219,6 +232,44 @@
 	<delete id="DeleteMyProductQnADao">
 	delete from book_product_qna where idx=#{param1}
 	</delete>
+	
+	
+	
+	<select id="getListWithPaging2Dao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
+    <![CDATA[ 
+     select idx, p_number, p_content, id, reg, p_answer_state
+     from ( 
+     select 
+     rownum rn, idx, p_number, p_content, id, reg, p_answer_state
+     from book_product_qna
+     where rownum <= (select count(*) from book_product_qna)+7-#{pageNum} * #{amount} 
+     order by idx desc)  
+     where rn > (select count(*) from book_product_qna)-#{pageNum} * #{amount}
+     ]]>
+    </select>
+    
+    <select id="countProduct2Dao" resultType="int">
+    select count(*) from book_product_qna
+    </select>
+    
+    <select id="noAnswerProductQnaDao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
+    select * from book_product_qna where p_answer_state=#{param1} order by idx desc
+    </select>
+    
+    <select id="searchProductQnAAdminDao" resultType="com.study.springboot.dto.Product_QnA_Board_Dto">
+     select * from book_product_qna
+    	<choose>
+    	<when test='param1.equals("1")'>
+    	where p_number like '%'||#{param2}||'%' order by p_title desc
+    	</when>
+    	<when test='param1.equals("2")'>
+    	where p_content like '%'||#{param2}||'%' order by p_title desc
+    	</when>
+    	<when test='param1.equals("3")'>
+    	where id like '%'||#{param2}||'%' order by p_title desc
+    	</when>
+    	</choose>
+    </select>
    
    
 </mapper> 

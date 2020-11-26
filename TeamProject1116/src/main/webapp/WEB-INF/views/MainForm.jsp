@@ -34,7 +34,7 @@
 	<c:forEach items="${fn:split(string1,'>')}" var="item">
 	<c:if test="${fn:contains(item,'img')}">
 	<c:set var="string2" value="${fn:substringAfter(item,'style')}" />	
-	<c:set var="string3" value='=width:1209px;height:301px; " />' />
+	<c:set var="string3" value='=width:1210px;height:501px; " />' />
 	<c:set var="image" value="${fn:replace(item,string2,string3) }" />
 	<div class="carousel-cell"><a href="Board_view?idx=${event.idx}&hit=${event.n_hit}">${image}</a></div>
 	</c:if>
@@ -185,58 +185,65 @@
     </div> 
     <!-- 후기 -->
     <div class="flex container">
-    <section class="review_import" style="margin-right: 10px; overflow:hidden; height: 610px;">
+    <section class="review_import">
+    <div class="head_review">
+             <span style="padding:10px;">책 리뷰</span>     
+         
     <table class="table_review"cellpadding="30px" cellspacing="30px"> 
                 
-         	<div class="head_review">
-             <span>책 리뷰</span>     
-         	</div>   
-	        	<c:forEach var="review" items="${review}">
-	        <c:if test="${review.p_filename !=null}">
-         	
-         	<div class="pre_img">
-             <div class="pre_img_left" style="display:flex;">  
-             <fmt:formatDate value="${review.reg}" var="reg" pattern="yyyy.MM.dd" /> 
-                 <div class="review_box_width"><a href="ProductDetail3?p_number=${review.p_number}"><img src="${review.p_filename}" style="width: 130px; height: 120px;"></a></div> 
-                 <div class="review_box_width1" style="margin-top:3%;"><strong>[${review.p_title}]<br>[${review.rate}/${reg}]</strong><br><p class="multiline-ellipsis">${review.description}</p></div> 
-             </div>
-             </div>
-             </c:if>              
-	             </c:forEach>   
-	       
+         	 
      </table>    
+     
+         	<table>
+         	<tr class="review_box2">
+	        	<c:forEach var="review" items="${review}" begin="0" end="3" step="1">
+		        <c:if test="${review.p_filename !=null}">
+	         	 
+	         	<div class="pre_img">
+	             <div class="pre_img_left">  
+	             <fmt:formatDate value="${review.reg}" var="reg" pattern="yyyy.MM.dd" /> 
+	          
+	                 <div class="review_box_width"><a href="ProductDetail3?p_number=${review.p_number}"><img src="${review.p_filename}" style="width: 170px; height: 160px;"></a></div> 
+	                 <div class="review_box_width1" style="margin:3%;"><strong>[${review.p_title}]<br>[${review.rate}/${reg}]</strong><br><p class="multiline-ellipsis">${review.description}</p></div> 
+	             </div>
+	             </div>
+	             </c:if>   
+	             </c:forEach> 
+	        </tr>         
+	     	</table>
+	  	 </div>   	
      </section>   
    
       <!-- 공지사항 -->
       <section class="notice_import">
-      <span>공지사항</span>   
-              <span class="notice_box"><a href="Notice_board">더보기</a></span>     
+      
+      <div class="banner_img" style="padding-top:35px;">
+              <img src="image/banner.png" style="width: 380px; height: 150px;">
+             </div>  
+             <div class="banner_img" style="padding-top:35px;">
+              <img src="image/ddd.PNG" style="width: 380px; height: 150px;">
+             </div>  
+              
+             <div style="padding-top:60px;">
+      		<span>공지사항</span>   
+             <span class="notice_board"><a href="Notice_board">+</a></span>
               <div class="notice"  style="display: table; width: 100%;">
               <table class="table_review" cellpadding="30px" cellspacing="30px" style="width:100%; height:100%;"> 
-              	<tr style="border:1px solid black; text-align: center;">
-                      <th>작성자</th>  
-                      <th>제목</th>
-                      <th>작성일</th>
-                  </tr>
-                   <c:forEach var="notice" items= "${ notice }"  end="4" >
+              	 <div class="hr_line"></div>
+                   <c:forEach var="notice" items= "${ notice }"  end="6" >
                    <fmt:formatDate value="${notice.reg}" var="reg" pattern="yyyy.MM.dd" />
-                  <tr style=" text-align: center;">
-                      <td>${notice.n_writer}</td>  
+                  <tr>
+                      <td><li></li></td>  
                       <td><a href="Board_view?idx=${notice.idx}&hit=${notice.n_hit}" style="color: black">${notice.n_title}</a></td>
                       <td>${reg}</td>
                   </tr>
               </c:forEach> 
                </table> 
           	</div>  
-                   
+            </div>    
             
             
-             <div class="banner_img">
-              <img src="image/banner.png" style="width: 380px; height: 150px;">
-             </div>  
-             <div class="banner_img">
-              <img src="image/ddd.PNG" style="width: 380px; height: 150px;">
-             </div>  
+             
       </section>      
   </div>
   

@@ -92,7 +92,7 @@
                                     <th scope="col" style="width: 10%;" >이미지</th>
                                     <th scope="col" style="width: 50%;" >상품정보</th>
                                     <th scope="col" style="width: 15%;" >날짜</th>
-                                    <th scope="col" style="width: 8%;" >수량</th>
+                                    <th scope="col" style="width: 10%;" >수량</th>
                                     <th scope="col" style="width: 13%;" >상품금액</th>
                                     <th scope="col"  style="width: 20%;">주문여부</th> 
                                 </tr>

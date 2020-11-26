@@ -39,7 +39,7 @@ setTimeout(updateImage, 1000);
                     <%
 						if(book_img==null){
 					%>
-						<img src="https://placehold.it/200x200">
+					  <img src="image/bookstory/user.png" width="200px" height="200px">  
 					<%
 						}else{
 					%>
@@ -68,11 +68,7 @@ setTimeout(updateImage, 1000);
         </div>
         
     <!-- 메인푸터 -->
-	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>
-	
-     <!-- 메인푸터 --> 
-	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/>
-     
+	<jsp:include page="/WEB-INF/views/BookStoryMainFooter.jsp"/> 
  	<!-- 글쓰기  -->
      <script> 
       function writeReturn() {

@@ -87,13 +87,13 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 		
 		String bs_title=request.getParameter("bs_title");
 		String bs_content=request.getParameter("bs_content");
-		String profile_img=request.getParameter("profile_img"); 
+		String profile_img=request.getParameter("profile_img");  
 		bookstoryDto.setBs_category(bs_category);
 		bookstoryDto.setBs_title(bs_title);
 		bookstoryDto.setBs_content(bs_content);
 		bookstoryDto.setBs_user_id(bs_user_id);
 		bookstoryDto.setProfile_img(profile_img); 
-		bookstoryDto.setReg(new Date()); 
+		bookstoryDto.setReg(new Date());  
 		
 		int nResult=bookstoryDao.bookstoryWriteDao(bookstoryDto);
 		return nResult;
@@ -245,6 +245,25 @@ public class BookStoryBoardService implements IBookStoryBoardService {
 	public int bookstorylike_check_cancle(int idx,int like_check) throws Exception {
 		int like_cancle=bookstoryDao.bookstorylike_check_cancleDao(idx,like_check);
 		return like_cancle;
+	}
+
+	@Override
+	public int bookstorylike_cntup(int idx,int like_cnt) {
+		int like_cntup=bookstoryDao.bookstorylike_cntupDao(idx,like_cnt);
+		return like_cntup;
+	}
+
+	@Override
+	public int bookstorylike_cntdown(int idx,int like_cnt) {
+		int like_cntdown=bookstoryDao.bookstorylike_cntdownDao(idx,like_cnt);
+		return like_cntdown;
+	}
+
+	@Override
+	public List<BookStoryBoardDto> bookstory_search(HttpServletRequest request) {
+		String keyword = request.getParameter("bookstory-search");
+		List<BookStoryBoardDto> list=bookstoryDao.bookstory_searchDao(keyword);
+		return list;
 	}
  
   

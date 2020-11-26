@@ -83,7 +83,7 @@
                      <div class="head_orderlist"> 
                              <h4>후기쓰기</h4> 
                               
-                          <form action = "WriteReviewAction" name="review" method="post" enctype="multipart/form-data">
+                          <form action = "WriteReviewAction" name="review" method="post" enctype="multipart/form-data" onsubmit="return checkValue()">
                              <p> 만족도를 표현해주세요</p>
                              <div class="form-check form-check-inline">
                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="매우만족">
@@ -174,6 +174,7 @@
 <!-- 메인푸터 -->
 <jsp:include page="/WEB-INF/views/MainFooter.jsp"/>
  <script>
+ 
 function checkValue(){
 
 	if(!document.review.inlineRadioOptions.value){
@@ -184,7 +185,6 @@ function checkValue(){
 		alert("내용란을 기입해주세요.");
 		return false;
 	}
-
 	
 }
 

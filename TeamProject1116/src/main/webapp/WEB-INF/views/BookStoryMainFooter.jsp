@@ -6,11 +6,21 @@
 </head>
 <body>
   <!-- 푸터 --> 
-<!-- 1123수정 -->
-    <footer>  
-    <hr class="footer_border" />
-       <!-- 대표전화, 무통장입금 --> 
-        <div class="container footer_text">
+    <footer> 
+       <!-- 대표전화, 무통장입금 -->
+       <div style="height: 75px;"></div>
+       <hr />
+        <div class="company_self container">
+                    <span class="footer_compaine"><a href="#">구석책방 소개</a></span> 
+                    <span class="f-text1">|</span>
+                    <span><a href="TermOfUse">이용약관</a></span>
+                    <span class="f-text1">|</span>
+                    <span><a href="PrivacyPolicy">개인정보처리방침</a></span>
+                    <span class="f-text1">|</span>
+                    <span><a href="Notice_board">고객센터</a></span>
+                    </div>
+        <hr />
+        <div class="container footer_text" >
         <table style="border: none;"> 
             <tr>
                 <td>
@@ -25,42 +35,35 @@
                 </div>    
                 </td>   
                 <td>
-                    <div class="company_self">
-                    <span><a href="#">읽힘소개</a></span> 
-                    <span>|</span>
-                    <span><a href="#">이용약관</a></span>
-                    <span>|</span>
-                    <span><a href="#">개인정보처리방침</a></span>
-                    <span>|</span>
-                    <span><a href="#">고객센터</a></span>
-                    </div>
+                   
                     <br />
                     <div class="company_self2">
-                        <span>상호명 : 읽힘</span>
+                        <span>상호명 : 구석책방</span>
                         <span>|</span>
                         <span>사업자 등록번호 : 000-00-0000</span><br />
                         <span>통신판매업 신고번호 : 0000-서울노원-0000</span>
                         <span>|</span>
-                        <span>개인정보관리책임자 : 읽힘</span><br />
+                        <span>개인정보관리책임자 : 구석책방</span><br />
                         <span>주소 노원구 ○○○ ○○○</span>
                         <span>|</span>
-                        <span>대표자 : 읽힘</span><br />
+                        <span>대표자 : 구석책방</span><br />
                         <span>TEL : 070-0000-0000</span>
                         <span>|</span>
                         <span>FAX : 000-0000-0000</span>
                         <span>|</span>
                         <span>PowerofRead@readbook.com</span><br /> 
-                        <span>Copyright 2020 읽힘 Corp. All Rights Reserved</span>
+                        <span>Copyright 2020 구석책방 Corp. All Rights Reserved</span>
                         <br/><br/> 
                     </div>
                 </td> 
             </tr> 
         </table> 
-          
-            <p class="top_main" ><a href="#">TOP</a></p>
+            
+            <p class="top_main" ><a href="BookStoryMain">TOP</a></p>
         </div> 
     </footer>
-    
+ 
+
      <!-- jQuery first, then Popper.js, then Bootstrap JS -->  
     
      <script src="js/jquery-2.2.4.min.js"></script>
@@ -68,12 +71,12 @@
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     
      
-    
-      <!-- 헤더 -->
+    <!-- 헤더 -->
     <script type="text/javascript" src="js/headhesive.js"></script>
-  
+   
+    
 	<script>
-  	$(function(){
+    $(function(){
         $(window).scroll(function(){  //스크롤하면 아래 코드 실행
                 var num = $(this).scrollTop();  // 스크롤값
                 if( num > 36 ){  // 스크롤을 36이상 했을 때
@@ -84,6 +87,29 @@
             });
         });
     </script>
-     
+    
+
+    <!-- 메인 -->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="js/owl.carousel.js"></script>
+    <script src="js/owl.autoplay.js"></script>
+    <script src="js/owl.navigation.js"></script>
+
+    <script>
+        $(function(){
+            $('.owl-carousel').owlCarousel({
+              items:5,
+              margin:3,
+              loop:true,
+              nav:true,
+            //   navText:['Prev','Next'],
+              autoplay:true,
+              autoplayTimeout:3000,
+              autoplayHoverPause:false,
+              center:true,
+              autoplaySpeed:500
+            });
+        });
+    </script>
 </body>
 </html>

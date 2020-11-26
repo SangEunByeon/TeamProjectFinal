@@ -108,7 +108,6 @@
                     <td>
                     <div class="currentPointDiv"><img src="image/images.png" width="70px" height="70px"><h3>현재 <%=id%>님의 포인트는 ${userdto.point}점 입니다.</h3></div>
                     </td>
-                    
                     </tr>
                         <tr>
                             <td>

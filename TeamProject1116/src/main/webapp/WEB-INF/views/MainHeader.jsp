@@ -30,7 +30,7 @@
 </style>
 <body> 
      <div id="top"> 
-        <div class="banner">  
+        <div class="banner"> <a class="main-top"> </a>
             <div class="top_nav container">    
              <div class="login_before">
         

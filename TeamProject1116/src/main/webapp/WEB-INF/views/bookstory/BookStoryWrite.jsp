@@ -121,8 +121,22 @@ min-width: 1000px;
             <div class="write_box" id="pannel1">
             <div style="width: 60%; margin: auto;">
                 <form method="post" action="BookStoryWriteAction" name="write" onsubmit="return checkValue()"> 
-                    <input type="hidden" name="profile_img" value="${dto.book_profile}"> 
-                    <input type="hidden" name="reply_profile" value="${dto.book_profile}"> 
+                 
+              <% 
+	              if(memberDto.getBook_profile()==null){
+	              %>
+	               <input type="hidden" name="profile_img" value="user.png" width="30px" height="30px">
+	              <input type="hidden" name="reply_profile" value="user.png" width="30px" height="30px">
+	              <%
+	              }else{
+	              %> 
+                    <input type="hidden" name="profile_img" value="${dto.book_profile}" /> 
+                    <input type="hidden" name="reply_profile" value="${dto.book_profile}" />
+                  <%
+                    }
+                   %>  
+                    
+                    
                     <input type="hidden" name="id" value="${dto.id}">
                    
                 <br/>

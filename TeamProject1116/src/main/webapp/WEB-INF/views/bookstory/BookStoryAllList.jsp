@@ -115,9 +115,9 @@
             	}
              	 %> 
                 <nav class="navbar navbar-light bg-light navbar_aside">
-                    <form class="form-inline aside_form_box">
-                        <input class="form-control mr-sm-2" type="search1" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-dark" type="submit">Search</button>
+                    <form class="form-inline aside_form_box" action="SearchBookStory">
+                        <input class="form-control mr-sm-2" type="search1" placeholder="내용을입력하세요" aria-label="Search" style="margin:0 auto" name="bookstory-search">
+                        <button class="btn btn-outline-dark" type="submit" style="margin:0 auto">검색하기</button>
                     </form>
                 </nav> 
                 <div class="hr2"></div>
@@ -126,7 +126,7 @@
                         <a href="BookStoryAllList">전체글보기</a>
                     </div>
                     <hr />
-                    <table>
+               <table>
                         <tr class="category_box">
                             <td>
                                 <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryCommunication"><span>북스토리,소통</span></a>
@@ -134,12 +134,12 @@
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReivew"><span>한줄서평</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryOneLineReview"><span>한줄서평</span></a>
                             </td>
                         </tr>
                         <tr class="category_box">
                             <td>
-                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReivew"><span>책읽고,리뷰남기기</span></a>
+                                <img src="image/bookstory/book.png" width="20px" height="20px"><a href="BookStoryReadReview"><span>책읽고,리뷰남기기</span></a>
                             </td>
                         </tr>
                          <tr class="category_box">
@@ -213,6 +213,10 @@
 					      <li class="page-item">
 					    	<a class="page-link" href="BookStoryAllList?page=4">4</a>
 					    </li>  
+					    </li>
+					      <li class="page-item">
+					    	<a class="page-link" href="BookStoryAllList?page=5">5</a>
+					    </li>
 			  		</ul>
 				  </nav>
             </section>

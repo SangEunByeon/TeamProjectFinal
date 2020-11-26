@@ -92,15 +92,15 @@ String id = (String) session.getAttribute("sessionID");
                             <h4>1:1문의게시판</h4>     
                                 <div class="form-row align-items-center">              
                                    <form action="complain" method="post" class="complain_form"> 
-                                    <table style="margin-left:200px;">
+                                    <table style="margin-left:280px;">
                                     
-                                              <p style="padding-top:30px;">  <input type="button" class="btn btn-outline-secondary reply_no" value="답변 없는 문의만 보기" style="width:170px;height:40px;"onclick="ChangeForm()"  /> </p>
+                                              <p class="noreply_view">  <input type="button" class="btn btn-outline-secondary reply_no" value="답변 없는 문의만 보기" style="width:170px;height:40px;"onclick="ChangeForm()"  /> </p>
                            
                                         <tr>
                                             <td>
                                             <div class="col-auto my-1 search-text-form"> 
                                                
-                                                <select class="custom-select mr-sm-2 searchform" id="complian_search" name="category">
+                                                <select class="custom-select mr-sm-2 searchform" id="category" name="category">
                                                   <option selected value="배송지연/불만">배송지연/불만</option>
                                                   <option value="교환문의">교환문의</option>
                                                   <option value="반품문의">반품문의</option>
@@ -114,7 +114,7 @@ String id = (String) session.getAttribute("sessionID");
                                           </div> 
                                             </td> 
                                             <td>
-                                                <input class="form-control search-text" type="search-1" placeholder="Search" aria-label="Search"  name="keyword">
+                                                <input class="form-control search-text" type="search-1" placeholder="Search" aria-label="Search" name="keyword">
                                             </td>
                                             <td>
                                                 <button class="btn btn-danger" type="submit">검색</button> 
@@ -158,17 +158,17 @@ String id = (String) session.getAttribute("sessionID");
                               <input class="btn btn-danger" type="button" value="작성하기" onclick="goOnetoOneBoardWirte()">  
                             
                                 <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-             <%
-             int allPageNum=(Integer)request.getAttribute("allPageNum");
-             for(int i=1; i<=allPageNum; i++){
-                   %>
-              <li class="page-item"><a href="page13?no=<%=i%>" class="page-link"><%=i%></a></li>
-                <%
-              }
-             %>    
-           </ul> 
-         </nav>        
+					            <ul class="pagination justify-content-center">
+					             <%
+					             int allPageNum=(Integer)request.getAttribute("allPageNum");
+					             for(int i=1; i<=allPageNum; i++){
+					                   %>
+					              <li class="page-item"><a href="page13?no=<%=i%>" class="page-link"><%=i%></a></li>
+					                <%
+					              }
+					             %>    
+					           </ul> 
+					         </nav>        
                         </div> 
                     </div>
                     </td>

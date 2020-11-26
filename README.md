@@ -1,4 +1,4 @@
-## Shopping mall TeamProject
+## Shopping all TeamProject
 
 #### 프로젝트 이름 : 구석책방 Corner BookStore 
 
